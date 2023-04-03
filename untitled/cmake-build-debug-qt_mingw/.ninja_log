@@ -1,0 +1,12 @@
+# ninja log v5
+1	59	0	CMakeFiles/untitled_autogen	6b84f8b735fdd4fb
+1	59	0	untitled_autogen/mocs_compilation.cpp	6b84f8b735fdd4fb
+1	59	0	F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled_autogen	6b84f8b735fdd4fb
+1	59	0	F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/untitled_autogen/mocs_compilation.cpp	6b84f8b735fdd4fb
+60	92	7020596125374046	CMakeFiles/untitled.dir/untitled_autogen/mocs_compilation.cpp.obj	516b1cdff2f6c945
+61	1057	7020596135017640	CMakeFiles/untitled.dir/main.cpp.obj	cada674eb374eb3d
+1059	1152	7020596135927855	untitled.exe	f2d9a2447ab45845
+3	33	0	CMakeFiles/untitled_autogen	6b84f8b735fdd4fb
+3	33	0	untitled_autogen/mocs_compilation.cpp	6b84f8b735fdd4fb
+3	33	0	F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled_autogen	6b84f8b735fdd4fb
+3	33	0	F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/untitled_autogen/mocs_compilation.cpp	6b84f8b735fdd4fb

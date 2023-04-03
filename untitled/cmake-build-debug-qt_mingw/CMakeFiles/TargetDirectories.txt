@@ -1,0 +1,4 @@
+F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled.dir
+F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/CMakeFiles/edit_cache.dir
+F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/CMakeFiles/rebuild_cache.dir
+F:/code/c_code/about_qt/untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled_autogen.dir
