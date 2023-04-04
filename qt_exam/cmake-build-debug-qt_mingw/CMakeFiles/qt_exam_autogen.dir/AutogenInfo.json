@@ -70,7 +70,15 @@
 	"CMAKE_SOURCE_DIR" : "F:/code/c_code/about_qt/qt_exam",
 	"DEP_FILE" : "",
 	"DEP_FILE_RULE_NAME" : "",
-	"HEADERS" : [],
+	"HEADERS" : 
+	[
+		[
+			"F:/code/c_code/about_qt/qt_exam/src/function.h",
+			"MU",
+			"UVLADIE3JM/moc_function.cpp",
+			null
+		]
+	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "F:/code/c_code/about_qt/qt_exam/cmake-build-debug-qt_mingw/qt_exam_autogen/include",
 	"MOC_COMPILATION_FILE" : "F:/code/c_code/about_qt/qt_exam/cmake-build-debug-qt_mingw/qt_exam_autogen/mocs_compilation.cpp",
@@ -121,6 +129,7 @@
 	"SETTINGS_FILE" : "F:/code/c_code/about_qt/qt_exam/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "F:/code/c_code/about_qt/qt_exam/src/function.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/qt_exam/src/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

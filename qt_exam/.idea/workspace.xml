@@ -20,10 +20,24 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="1">
+      <change afterPath="$PROJECT_DIR$/../untitled/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/index-2023-04-03T09-42-48-0169.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myfirst.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myfirst.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myfirst.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/myfirst.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled.dir/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../untitled/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +72,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "F:/code/c_code/about_qt",
+    "last_opened_file_path": "F:/code/c_code/about_qt/qt_exam/cmake-build-debug-qt_mingw",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -78,9 +92,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="qt_exam" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qt_exam" TARGET_NAME="qt_exam" CONFIG_NAME="Debug-QT_MinGW" RUN_TARGET_PROJECT_NAME="qt_exam" RUN_TARGET_NAME="qt_exam">
@@ -110,7 +124,16 @@
       <workItem from="1680428846139" duration="1490000" />
       <workItem from="1680441809413" duration="5184000" />
       <workItem from="1680504921603" duration="7778000" />
+      <workItem from="1680514967672" duration="15349000" />
     </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1680514977165</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680514977165</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +144,27 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <option name="LAST_COMMIT_MESSAGE" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/myfirst.h</url>
+          <line>101</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="QDir(QCoreApplication::applicationDirPath()).absoluteFilePath(&quot;fig/wallhaven-3z32j3.jpg&quot;)" language="ObjectiveC" />
+        <watch expression="imagePath" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
