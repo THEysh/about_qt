@@ -20,6 +20,7 @@ using namespace  std;
 
 class ThreadReceiver : public QObject
 {
+    //这个类用于多线程信号通信，do_work_Something函数绘睡眠，睡眠完成后会
 Q_OBJECT
 signals:
     void signal_1(QString result);
