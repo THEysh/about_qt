@@ -19,7 +19,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -35,7 +35,7 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
-    QSpacerItem *verticalSpacer;
+    QTextBrowser *textBrowser;
     QFrame *frame_2;
     QVBoxLayout *verticalLayout_2;
     QLabel *label;
@@ -44,7 +44,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1020, 540);
+        MainWindow->resize(1035, 540);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
@@ -59,7 +59,7 @@ public:
         verticalLayout = new QVBoxLayout(frame_content);
         verticalLayout->setSpacing(40);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(20, 30, 20, 0);
+        verticalLayout->setContentsMargins(20, 30, 20, 20);
         pushButton = new QPushButton(frame_content);
         pushButton->setObjectName(QStringLiteral("pushButton"));
 
@@ -75,10 +75,10 @@ public:
 
         verticalLayout->addWidget(pushButton_3);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        textBrowser = new QTextBrowser(frame_content);
+        textBrowser->setObjectName(QStringLiteral("textBrowser"));
 
-        verticalLayout->addItem(verticalSpacer);
-
+        verticalLayout->addWidget(textBrowser);
 
         horizontalLayout->addWidget(frame_content);
 
