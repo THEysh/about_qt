@@ -100,7 +100,7 @@ public:
             QString str1 = ui_f.lineEdit1->text();
             QString str2 = ui_f.lineEdit2->text();
             ui_f.lineEdit3->clear();
-            QString re_text = QString("str1的长度计算：%1, str2的长度计算%2").arg(str1.size()).arg(str2.size());
+            QString re_text = QString("str1的长度计算： %1, str2的长度计算%2").arg(str1.size()).arg(str2.size());
             ui_f.lineEdit3->setText(re_text);
         });
     }
