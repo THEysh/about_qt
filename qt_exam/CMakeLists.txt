@@ -15,7 +15,7 @@ find_package(Qt5 COMPONENTS
 
         REQUIRED)
 
-add_executable(qt_exam src/main.cpp src/function.cpp src/function.h)
+add_executable(qt_exam src/main.cpp src/function.cpp src/function.h src/ui/Qstring_Interface_switching_ui.h)
 target_link_libraries(qt_exam
         Qt5::Core
         Qt5::Gui

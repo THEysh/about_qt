@@ -77,6 +77,12 @@
 			"MU",
 			"UVLADIE3JM/moc_function.cpp",
 			null
+		],
+		[
+			"F:/code/c_code/about_qt/qt_exam/src/ui/Qstring_Interface_switching_ui.h",
+			"MU",
+			"YPKJ5OE7LN/moc_Qstring_Interface_switching_ui.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],

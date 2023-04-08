@@ -21,23 +21,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/index-2023-04-03T09-42-48-0169.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/codemodel-v2-e5f6dbe8a814fa75d90d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/index-2023-04-04T06-23-09-0110.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/target-qt_exam-Debug-393bed81d7bb874dde9b.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/function.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/function.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/function.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/function.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/myfirst.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myfirst.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/myfirst.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/myfirst.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myfirst.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myfirst.ui" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +73,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "F:/code/c_code/about_qt/qt_exam/cmake-build-debug-qt_mingw",
+    "last_opened_file_path": "F:/code/c_code/about_c++/stl_模板",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -84,10 +85,12 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\code\c_code\about_qt\qt_exam\cmake-build-debug-qt_mingw" />
       <recent name="F:\code\c_code\about_qt\qt_exam\Qt59_cpp_dev_guide-master\samp2_1" />
       <recent name="F:\code\c_code\about_qt\qt_exam\Qt59_cpp_dev_guide-master\samp1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\code\c_code\about_qt\qt_exam\src\ui" />
       <recent name="F:\code\c_code\about_qt\qt_exam\src" />
     </key>
   </component>
@@ -124,7 +127,7 @@
       <workItem from="1680428846139" duration="1490000" />
       <workItem from="1680441809413" duration="5184000" />
       <workItem from="1680504921603" duration="7778000" />
-      <workItem from="1680514967672" duration="15349000" />
+      <workItem from="1680514967672" duration="109328000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
@@ -133,7 +136,35 @@
       <option name="project" value="LOCAL" />
       <updated>1680514977165</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="1">
+      <created>1680614241616</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680614241616</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1">
+      <created>1680614374435</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680614374435</updated>
+    </task>
+    <task id="LOCAL-00004" summary="1">
+      <created>1680614405867</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680614405867</updated>
+    </task>
+    <task id="LOCAL-00005" summary="1">
+      <created>1680798441509</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1680798441509</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,16 +184,34 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/myfirst.h</url>
-          <line>101</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/src/function.cpp</url>
+          <line>86</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/function.cpp</url>
+          <line>93</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/function.h</url>
+          <line>51</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/function.h</url>
+          <line>50</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
-        <watch expression="QDir(QCoreApplication::applicationDirPath()).absoluteFilePath(&quot;fig/wallhaven-3z32j3.jpg&quot;)" language="ObjectiveC" />
-        <watch expression="imagePath" language="ObjectiveC" />
+        <watch expression="&amp;QPushButton::clicked" language="ObjectiveC" />
+        <watch expression="sleep_time*1000" language="ObjectiveC" />
+        <watch expression="0.2*1000" language="ObjectiveC" />
+        <watch expression="ui_f.pushButton" language="ObjectiveC" />
+        <watch expression="this-&gt;ui_f.pushButton" language="ObjectiveC" />
       </configuration>
     </watches-manager>
   </component>

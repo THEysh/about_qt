@@ -5,3 +5,4 @@ F:/code/c_code/about_qt/qt_exam/src/input.h
 F:/code/c_code/about_qt/qt_exam/src/function.h
  mmc:Q_OBJECT
 F:/code/c_code/about_qt/qt_exam/src/function.cpp
+F:/code/c_code/about_qt/qt_exam/src/ui/Qstring_Interface_switching_ui.h
