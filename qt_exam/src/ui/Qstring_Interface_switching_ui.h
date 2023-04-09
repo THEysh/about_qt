@@ -63,19 +63,22 @@ public:
     QLabel *label_8;
     QStackedWidget *stackedWidget;
     QWidget *page;
+    QVBoxLayout *verticalLayout_3;
     QLabel *label_page1;
     QWidget *page_2;
-    QLabel *label_page2;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *label_9;
 
     void setupUi(QMainWindow *Interface_MainWindow)
     {
         if (Interface_MainWindow->objectName().isEmpty())
             Interface_MainWindow->setObjectName(QStringLiteral("Interface_MainWindow"));
-        Interface_MainWindow->resize(1585, 1533);
+        Interface_MainWindow->resize(1585, 1104);
         centralwidget = new QWidget(Interface_MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout_2 = new QVBoxLayout(centralwidget);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 10, 0, 0);
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
@@ -247,22 +250,39 @@ public:
         stackedWidget->setMinimumSize(QSize(0, 300));
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
+        verticalLayout_3 = new QVBoxLayout(page);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         label_page1 = new QLabel(page);
         label_page1->setObjectName(QStringLiteral("label_page1"));
-        label_page1->setGeometry(QRect(400, 80, 126, 27));
+        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_page1->sizePolicy().hasHeightForWidth());
+        label_page1->setSizePolicy(sizePolicy);
+        label_page1->setPixmap(QPixmap(QString::fromUtf8("../../cmake-build-debug-qt_mingw/fig/wallhaven-3z32j3.jpg")));
+        label_page1->setScaledContents(false);
+
+        verticalLayout_3->addWidget(label_page1);
+
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QStringLiteral("page_2"));
-        label_page2 = new QLabel(page_2);
-        label_page2->setObjectName(QStringLiteral("label_page2"));
-        label_page2->setGeometry(QRect(350, 120, 126, 27));
+        verticalLayout_4 = new QVBoxLayout(page_2);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        label_9 = new QLabel(page_2);
+        label_9->setObjectName(QStringLiteral("label_9"));
+        sizePolicy.setHeightForWidth(label_9->sizePolicy().hasHeightForWidth());
+        label_9->setSizePolicy(sizePolicy);
+        label_9->setPixmap(QPixmap(QString::fromUtf8("../../cmake-build-debug-qt_mingw/fig/wallhaven-j3mmdw.jpg")));
+
+        verticalLayout_4->addWidget(label_9);
+
         stackedWidget->addWidget(page_2);
 
         verticalLayout_2->addWidget(stackedWidget);
 
         verticalLayout_2->setStretch(0, 1);
         verticalLayout_2->setStretch(1, 4);
-        verticalLayout_2->setStretch(2, 6);
         Interface_MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(Interface_MainWindow);
@@ -301,8 +321,8 @@ public:
         pushButton_2_1->setText(QApplication::translate("Interface_MainWindow", "perpend()", Q_NULLPTR));
         label_7->setText(QApplication::translate("Interface_MainWindow", "\345\234\250\345\255\227\347\254\246\344\270\262\347\232\204\345\211\215\351\235\242\346\267\273\345\212\240\345\255\227\347\254\246\344\270\262", Q_NULLPTR));
         label_8->setText(QApplication::translate("Interface_MainWindow", "\350\277\224\345\233\236\345\255\227\347\254\246\344\270\262\346\225\260\347\233\256", Q_NULLPTR));
-        label_page1->setText(QApplication::translate("Interface_MainWindow", "\347\225\214\351\235\2421", Q_NULLPTR));
-        label_page2->setText(QApplication::translate("Interface_MainWindow", "\347\225\214\351\235\2422", Q_NULLPTR));
+        label_page1->setText(QString());
+        label_9->setText(QString());
     } // retranslateUi
 
 };

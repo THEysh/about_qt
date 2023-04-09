@@ -18,7 +18,7 @@
 #include <QPushButton>
 #include "ui/myfirst_ui.h"
 #include "ui/Qstring_Interface_switching_ui.h"
-
+#include "ui/QSlider_color_ui.h"
 using namespace  std;
 
 class ThreadReceiver : public QObject
@@ -180,5 +180,20 @@ public:
             ui_f.stackedWidget->setCurrentIndex(1);
         });
     }
+};
+
+class Slider_Color: public QObject{
+Q_OBJECT
+public slots:
+    // 定义槽函数
+    void onSetClolor(int value) const; // onworkFinished用于判断是否完成 doSomething 函数，
+
+public:
+    Ui_QSlider_Color  ui_f{};
+    Slider_Color(Ui_QSlider_Color &ui_f){
+        this->ui_f = ui_f;
+        this->connect_funtion();
+    }
+    void connect_funtion();
 };
 #endif //QT_EXAM_FUNCTION_H

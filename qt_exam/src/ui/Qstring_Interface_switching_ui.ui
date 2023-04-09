@@ -7,14 +7,26 @@
     <x>0</x>
     <y>0</y>
     <width>1585</width>
-    <height>1533</height>
+    <height>1104</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,4,6">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,4,0">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>10</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0" columnstretch="1,8">
       <property name="sizeConstraint">
@@ -229,34 +241,47 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="page">
-       <widget class="QLabel" name="label_page1">
-        <property name="geometry">
-         <rect>
-          <x>400</x>
-          <y>80</y>
-          <width>126</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>界面1</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_page1">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>../../cmake-build-debug-qt_mingw/fig/wallhaven-3z32j3.jpg</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="page_2">
-       <widget class="QLabel" name="label_page2">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>120</y>
-          <width>126</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>界面2</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLabel" name="label_9">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>../../cmake-build-debug-qt_mingw/fig/wallhaven-j3mmdw.jpg</pixmap>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>

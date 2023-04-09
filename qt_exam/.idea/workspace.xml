@@ -20,25 +20,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="1">
+    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="写了qstring 交互的 ui">
+      <change afterPath="$PROJECT_DIR$/QtExamples-master/QtQSliderEx/.idea/QtQSliderEx.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/codemodel-v2-e5f6dbe8a814fa75d90d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/index-2023-04-04T06-23-09-0110.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/target-qt_exam-Debug-393bed81d7bb874dde9b.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/function.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/function.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/UVLADIE3JM/moc_function.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/UVLADIE3JM/moc_function.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/function.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/function.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/function.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/function.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/myfirst.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/myfirst.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/ExQStringFun.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +125,7 @@
       <workItem from="1680428846139" duration="1490000" />
       <workItem from="1680441809413" duration="5184000" />
       <workItem from="1680504921603" duration="7778000" />
-      <workItem from="1680514967672" duration="109328000" />
+      <workItem from="1680514967672" duration="118284000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
@@ -164,7 +162,28 @@
       <option name="project" value="LOCAL" />
       <updated>1680798441509</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1">
+      <created>1680948496056</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1680948496056</updated>
+    </task>
+    <task id="LOCAL-00007" summary="写了qstring 交互的 ui">
+      <created>1680948547727</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680948547727</updated>
+    </task>
+    <task id="LOCAL-00008" summary="写了qstring 交互的 ui">
+      <created>1680948627646</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1680948627646</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,9 +195,21 @@
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="写了qstring 交互的 ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="写了qstring 交互的 ui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -192,16 +223,6 @@
           <url>file://$PROJECT_DIR$/src/function.cpp</url>
           <line>93</line>
           <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/function.h</url>
-          <line>51</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/function.h</url>
-          <line>50</line>
-          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

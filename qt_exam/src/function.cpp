@@ -106,8 +106,33 @@ void ThreadReceiver::button2_connect(QPushButton *button, double sleep_time, lon
 }
 
 
+void Slider_Color::connect_funtion() {
+    QObject::connect(ui_f.sliderRed,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
+    QObject::connect(ui_f.sliderGreen,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
+    QObject::connect(ui_f.sliderBlue,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
+    QObject::connect(ui_f.sliderAlpha,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
+    this->onSetClolor(0);
+}
+
+void Slider_Color::onSetClolor(int _ ) const {
+
+    int nRed = ui_f.sliderRed->value();             //获取红绿蓝(RGB)的Slider的数值
+    int nGreen = ui_f.sliderGreen->value();
+    int nBlue = ui_f.sliderBlue->value();
+    int nAlpha = ui_f.sliderAlpha->value();
+
+    ui_f.labRgbVal->setText(QString("RGB_Alpha(%1,%2,%3,%4)").arg(nRed).arg(nGreen).arg(nBlue).arg(nAlpha));
+
+    QColor mycolor;
+    mycolor.setRgb(nRed, nGreen, nBlue, nAlpha);
 
 
+    QPalette mypalette = ui_f.textColour->palette();
+    mypalette.setColor(QPalette::Base, mycolor); // 将Base颜色设置为红色
+    ui_f.textColour->setPalette(mypalette);
+
+
+}
 
 
 
