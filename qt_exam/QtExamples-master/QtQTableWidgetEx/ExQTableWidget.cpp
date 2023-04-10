@@ -44,9 +44,9 @@ void ExQTableWidget::createItemsARow(int row, QString name, QString sex, QDate b
     item = new QTableWidgetItem(sex, cellType::ctSex);              //性别
     QIcon icon;
     if (sex == "男")
-        icon.addFile(":/images/Image002.ico");
+        icon.addFile(":/pic/Image002.ico");
     else
-        icon.addFile(":/images/Image003.ico");
+        icon.addFile(":/pic/Image003.ico");
     item->setIcon(icon);
     item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     ui->tableWidget->setItem(row, fieldColNum::colSex, item);

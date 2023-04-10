@@ -6,20 +6,32 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+# 设置变量PROJECT_ROOT_DIR为项目根目录路径
+get_filename_component(PROJECT_ROOT_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
+
+# 将PROJECT_ROOT_DIR定义为预处理器宏
+add_definitions(-DPROJECT_ROOT_DIR="${PROJECT_ROOT_DIR}")
+
+
 set(CMAKE_PREFIX_PATH "F:\\QT5\\5.9.8\\mingw53_32")
 
 find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
-
+        Network
         REQUIRED)
+find_package(OpenSSL REQUIRED)
+include_directories(${OPENSSL_INCLUDE_DIR})
 
-add_executable(qt_exam src/main.cpp src/function.cpp src/function.h src/ui/Qstring_Interface_switching_ui.h)
+add_executable(qt_exam src/main.cpp src/function.cpp src/function.h src/ui/Qstring_Interface_switching_ui.h src/beautification.cpp src/beautification.h)
+
+target_link_libraries(${PROJECT_NAME} ${OPENSSL_LIBRARIES})
 target_link_libraries(qt_exam
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
+        Qt5::Network
         )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)

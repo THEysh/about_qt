@@ -26,7 +26,7 @@ ExQcomboBox::~ExQcomboBox()
 void ExQcomboBox::on_btnLeftInit_clicked()
 {
     QIcon ico;
-    ico.addFile(":/images/github.ico");
+    ico.addFile(":/pic/github.ico");
 
     ui->comBoxLeft->clear();
     for (int i = 0; i < 13; i++) {
@@ -54,7 +54,7 @@ void ExQcomboBox::on_checkBoxOnlyWrite_clicked()
 void ExQcomboBox::on_btnRightInit_clicked()
 {
     QIcon ico;
-    ico.addFile(":/images/gril.ico");
+    ico.addFile(":/pic/gril.ico");
 
     QMap<QString, QString> map;
     map.insert("张投", "16岁");
@@ -83,7 +83,7 @@ void ExQcomboBox::on_btnBottomAdd_clicked()
     QTextDocument* doc = ui->plainTextEdit->document();               //获取文本对象
     int cnt = doc->blockCount();                                      //回车符是一个block
     QIcon ico;
-    ico.addFile(":/images/github.ico");
+    ico.addFile(":/pic/github.ico");
     ui->comBoxLeft->clear();
     ui->comBoxRight->clear();
 

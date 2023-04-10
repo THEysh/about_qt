@@ -20,21 +20,95 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="写了qstring 交互的 ui">
-      <change afterPath="$PROJECT_DIR$/QtExamples-master/QtQSliderEx/.idea/QtQSliderEx.iml" afterDir="false" />
+    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment=" 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）">
+      <change afterPath="$PROJECT_DIR$/QtExamples-master/QtQSliderEx/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QtExamples-master/QtQSliderEx/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/QtExamples-master/QtQSliderEx/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/QSlider_color_ui.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/QSlider_color_ui.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQSlider.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQStringFun.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/ExQListWidget.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/QtQlistWidgetEx.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/List.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/TREE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/Table.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/clear.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/exit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/github.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/gril.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/init.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/insert.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/images/menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/qt.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/ExQlistwidget/resources.qrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/QtQdialQLCDEx/ExQdialQLCD.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/QtQdialQLCDEx/QtQdialQLCDEx.pro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/exmui/QtQdialQLCDEx/qt.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/fonts/Font Awesome 6 Brands-Regular-400.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/fonts/Font Awesome 6 Free-Regular-400.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/fonts/Font Awesome 6 Free-Solid-900.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/List.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/TREE.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/Table.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/clear.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/exit.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/github.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/gril.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/init.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/insert.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic_2d/wallhaven-j3m12w.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic_2d/wallhaven-p9lzke.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/pic_2d/wallhaven-x8j6jo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/images/wallhaven-3z32j3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/my_qrc.qrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/my_qrc.rcc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ui/myresource.rcc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtExamples-master/CustomQch/doxygen-qmi-style/qmi.css" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/CustomQch/doxygen-qmi-style/qmi.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtExamples-master/QtQTableWidgetEx/ExQTableWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/QtQTableWidgetEx/ExQTableWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/ExQTreeWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/ExQTreeWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtExamples-master/QtQcomboBoxEx/ExQcomboBox.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/QtQcomboBoxEx/ExQcomboBox.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QtExamples-master/QtQlistWidgetEx/ExQListWidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/QtQlistWidgetEx/ExQListWidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/cache-v2-8de9c8a7dceb34a25b83.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/cmakeFiles-v1-3740c70b3e3dffc1df93.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/codemodel-v2-0534b3a462d247fc7878.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/index-2023-04-07T13-32-34-0768.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/target-qt_exam-Debug-33752724b5954f1158c2.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdC/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdC/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdCXX/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdCXX/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/CMakeOutput.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/CMakeOutput.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/main.cpp.obj" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/function.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/function.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenUsed.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenUsed.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/rules.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/fig/wallhaven-3z32j3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/images/pic_2d/wallhaven-3z32j3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/my.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/my_autogen/moc_predefs.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/my_autogen/mocs_compilation.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/UVLADIE3JM/moc_function.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/UVLADIE3JM/moc_function.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/function.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/function.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/moc_predefs.h" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/moc_predefs.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/beautification.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/beautification.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/function.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/function.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ExQStringFun.ui" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Qstring_Interface_switching_ui.ui" afterDir="false" />
     </list>
@@ -47,6 +121,13 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug-QT_MinGW" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -65,13 +146,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "F:/code/c_code/about_c++/stl_模板",
+    "last_opened_file_path": "F:/code/c_code/about_qt/qt_exam/src/ui/font",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -83,21 +165,21 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\code\c_code\about_qt\qt_exam\src\ui\font" />
+      <recent name="F:\code\c_code\about_qt\qt_exam\src" />
+      <recent name="F:\code\c_code\about_qt\qt_exam\src\ui\images" />
+      <recent name="F:\code\c_code\about_qt\qt_exam\src\ui\images\pic_2d" />
       <recent name="F:\code\c_code\about_qt\qt_exam\cmake-build-debug-qt_mingw" />
-      <recent name="F:\code\c_code\about_qt\qt_exam\Qt59_cpp_dev_guide-master\samp2_1" />
-      <recent name="F:\code\c_code\about_qt\qt_exam\Qt59_cpp_dev_guide-master\samp1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\code\c_code\about_qt\qt_exam\src\ui\exmui\ExQlistwidget" />
+      <recent name="F:\code\c_code\about_qt\qt_exam\src\ui\images\pic_2d" />
+      <recent name="F:\code\c_code\about_qt\qt_exam\src\ui\images" />
       <recent name="F:\code\c_code\about_qt\qt_exam\src\ui" />
       <recent name="F:\code\c_code\about_qt\qt_exam\src" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="CMake Application.qt_exam">
     <configuration name="qt_exam" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="qt_exam" TARGET_NAME="qt_exam" CONFIG_NAME="Debug-QT_MinGW" RUN_TARGET_PROJECT_NAME="qt_exam" RUN_TARGET_NAME="qt_exam">
       <envs>
         <env name="PATH" value="F:\QT5\5.9.8\mingw53_32\bin" />
@@ -106,6 +188,14 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="a.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/qt_exam/qt_exam/src/ui/a.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.a.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -125,7 +215,8 @@
       <workItem from="1680428846139" duration="1490000" />
       <workItem from="1680441809413" duration="5184000" />
       <workItem from="1680504921603" duration="7778000" />
-      <workItem from="1680514967672" duration="118284000" />
+      <workItem from="1680514967672" duration="150195000" />
+      <workItem from="1681126046340" duration="4131000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
@@ -183,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680948627646</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="1">
+      <created>1681010310433</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681010310433</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -207,9 +305,10 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1" />
     <MESSAGE value="写了qstring 交互的 ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="写了qstring 交互的 ui" />
+    <MESSAGE value="1" />
+    <MESSAGE value=" 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）" />
+    <option name="LAST_COMMIT_MESSAGE" value=" 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

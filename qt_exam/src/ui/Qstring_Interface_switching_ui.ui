@@ -142,14 +142,14 @@
       <item row="4" column="2">
        <widget class="QPushButton" name="pushButton_9">
         <property name="text">
-         <string>startsWith</string>
+         <string>function_Upper</string>
         </property>
        </widget>
       </item>
       <item row="4" column="3">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>判断是否以某个字符串开头</string>
+         <string>写一个function_Upper函数实现str1首字符大写</string>
         </property>
        </widget>
       </item>

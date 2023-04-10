@@ -145,6 +145,7 @@
 #define __LDBL_EPSILON__ 1.08420217248550443401e-19L
 #define __UINTMAX_C(c) c ## ULL
 #define __SIG_ATOMIC_MAX__ 0x7fffffff
+#define PROJECT_ROOT_DIR "F:/code/c_code/about_qt/qt_exam"
 #define __GCC_ATOMIC_WCHAR_T_LOCK_FREE 2
 #define __SIZEOF_PTRDIFF_T__ 4
 #define __DEC32_SUBNORMAL_MIN__ 0.000001E-95DF
@@ -165,6 +166,7 @@
 #define __INT_LEAST16_MAX__ 0x7fff
 #define __DEC64_MANT_DIG__ 16
 #define __UINT_LEAST32_MAX__ 0xffffffffU
+#define QT_NETWORK_LIB 1
 #define __GCC_ATOMIC_LONG_LOCK_FREE 2
 #define __INT_LEAST64_TYPE__ long long int
 #define __INT16_TYPE__ short int

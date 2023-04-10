@@ -128,7 +128,7 @@ div.center img { border: 0px; }
 /* Link to reference (classes etc). */
 a.el { font-weight: bold; }
 
-/** Use normal font on the index page. */
+/** Use normal fonts on the index page. */
 .qindex + table a.el { font-weight: normal; }
 /* a.elRef {} */
 
@@ -261,7 +261,7 @@ span.legend {
 
 /*
 h3.version {
-        font-size: 90%;
+        fonts-size: 90%;
         text-align: center;
 }
 */
@@ -429,7 +429,7 @@ span.vhdllogic {
 /*
 .search {
         color: #003399;
-        font-weight: bold;
+        fonts-weight: bold;
 }
 
 form.search {
@@ -438,9 +438,9 @@ form.search {
 }
 
 input.search {
-        font-size: 75%;
+        fonts-size: 75%;
         color: #000080;
-        font-weight: normal;
+        fonts-weight: normal;
         background-color: #e8eef2;
 }
 */
@@ -557,7 +557,7 @@ table.memberdecls {
         /*-webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
         -webkit-border-top-right-radius: 8px;
         -webkit-border-top-left-radius: 8px;
-        background-image:url('nav_f.png');
+        background-pic:url('nav_f.png');
         background-repeat:repeat-x;*/
         background-color: #F6F6F6;
         border-color: #E6E6E6;
@@ -583,12 +583,12 @@ table.memberdecls {
         /*-moz-border-radius-bottomleft: 8px;
         -moz-border-radius-bottomright: 8px;
         -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
-        background-image: -moz-linear-gradient(center top, #FFFFFF 0%, #FFFFFF 60%, #F7F8FB 95%, #EEF1F7);*/
+        background-pic: -moz-linear-gradient(center top, #FFFFFF 0%, #FFFFFF 60%, #F7F8FB 95%, #EEF1F7);*/
         /* webkit specific markup */
         /*-webkit-border-bottom-left-radius: 8px;
         -webkit-border-bottom-right-radius: 8px;
         -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
-        background-image: -webkit-gradient(linear,center top,center bottom,from(#FFFFFF), color-stop(0.6,#FFFFFF), color-stop(0.60,#FFFFFF), color-stop(0.95,#F7F8FB), to(#EEF1F7));*/
+        background-pic: -webkit-gradient(linear,center top,center bottom,from(#FFFFFF), color-stop(0.6,#FFFFFF), color-stop(0.60,#FFFFFF), color-stop(0.95,#F7F8FB), to(#EEF1F7));*/
 }
 
 dl.reflist dt {
@@ -645,7 +645,7 @@ dl.reflist dd {
 /* for the tree view */
 
 .ftvtree {
-        /*font-family: sans-serif;*/
+        /*fonts-family: sans-serif;*/
         margin: 0px;
 }
 
@@ -665,16 +665,16 @@ dl.reflist dd {
 
 /*
 The following two styles can be used to replace the root node title
-with an image of your choice.  Simply uncomment the next two styles,
-specify the name of your image and be sure to set 'height' to the
-proper pixel height of your image.
+with an pic of your choice.  Simply uncomment the next two styles,
+specify the name of your pic and be sure to set 'height' to the
+proper pixel height of your pic.
 */
 
 /*
 .directory h3.swap {
         height: 61px;
         background-repeat: no-repeat;
-        background-image: url("yourimage.gif");
+        background-pic: url("yourimage.gif");
 }
 .directory h3.swap span {
         display: none;
@@ -827,7 +827,7 @@ table.fieldtable {
         padding:0px;
 }
 
-/** TODO: use image as marker. */
+/** TODO: use pic as marker. */
 .navpath li
 {
         list-style-type:disc;
@@ -892,7 +892,7 @@ div.ingroups a
 
 div.header
 {
-        /*background-image:url('nav_h.png');
+        /*background-pic:url('nav_h.png');
         background-repeat:repeat-x;
         background-color: #F9FAFC;*/
         margin-top:  10px;

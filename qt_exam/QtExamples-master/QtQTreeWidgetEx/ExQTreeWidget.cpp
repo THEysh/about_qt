@@ -28,7 +28,7 @@ void ExQTreeWidget::initTree()
     ui->treeFiles->clear();
     QString dataStr = "";
     QIcon icon;
-    icon.addFile(":/image/Image001.jpg");
+    icon.addFile(":/pic/Image001.jpg");
 
     //创建唯一root的节点
     QTreeWidgetItem* root = new QTreeWidgetItem(treeItemType::itemRoot);
@@ -47,7 +47,7 @@ void ExQTreeWidget::initTree()
 void ExQTreeWidget::addFolderItem(QTreeWidgetItem *parItem, QString dirName)
 {
     QIcon icon;
-    icon.addFile(":/image/Image006.jpg");
+    icon.addFile(":/pic/Image006.jpg");
 
     //添加一个新的节点
     QTreeWidgetItem* item = new QTreeWidgetItem(treeItemType::itemFile);
@@ -76,7 +76,7 @@ void ExQTreeWidget::addImageItem(QTreeWidgetItem *parItem, QString fileName)
         return;
 
     QIcon icon;
-    icon.addFile(":/image/Image014.jpg");
+    icon.addFile(":/pic/Image014.jpg");
 
     //添加一个新的节点
     QTreeWidgetItem* item = new QTreeWidgetItem(treeItemType::itemImage);

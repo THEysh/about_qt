@@ -19,6 +19,9 @@
 #include "ui/myfirst_ui.h"
 #include "ui/Qstring_Interface_switching_ui.h"
 #include "ui/QSlider_color_ui.h"
+#include <QResource>
+#include <QPixmap>
+
 using namespace  std;
 
 class ThreadReceiver : public QObject
@@ -169,10 +172,57 @@ public:
     void connect_but9(){
         QObject::connect(ui_f.pushButton_9, &QPushButton::clicked,[&](){
             QString str1 = ui_f.lineEdit1->text();
-            QString str2 = ui_f.lineEdit2->text();
+            QString& text = str1;
+            // 定义单词分隔符和忽略列表
+            const QRegExp wordSeparator(R"(\W+)");
+            const QStringList ignoreList = {"a", "an", "the", "and", "but", "or", "for", "nor", "on", "at", "to", "from",
+                                            "by", "up", "as", "in", "out", "off", "via", "per"};
+            // 定义结果字符串、单词列表和当前处理状态
+            QString result;
+            QStringList words = text.split(wordSeparator, QString::SkipEmptyParts);
+            bool inName = false;
+
+            for (int i = 0; i < words.length(); ++i) {
+                QString currentWord = words[i];
+
+                // 处理姓名
+                if (!inName && i < words.length() - 1 && words[i + 1].startsWith("'")) {
+                    inName = true;
+                } else if (inName && i > 0 && !words[i - 1].endsWith(",")) {
+                    inName = false;
+                }
+
+                // 根据当前处理状态和忽略列表判断是否应该处理当前单词
+                bool shouldCapitalize = true;
+                if (ignoreList.contains(currentWord.toLower())) {
+                    shouldCapitalize = false;
+                } else if (inName) {
+                    shouldCapitalize = true;
+                } else if (currentWord.contains("-")) {
+                    QStringList hyphenatedWords = currentWord.split("-");
+                    shouldCapitalize = std::all_of(hyphenatedWords.begin(), hyphenatedWords.end(),
+                                                   [](const QString& w){ return !w.isEmpty(); });
+                } else if (currentWord.length() <= 2 && i > 0) {
+                    shouldCapitalize = false;
+                }
+
+                // 处理当前单词
+                if (shouldCapitalize) {
+                    QChar firstChar = currentWord.at(0);
+                    result += firstChar.toUpper();
+                    result += currentWord.mid(1).toLower();
+                } else {
+                    result += currentWord.toLower();
+                }
+
+                // 将单词加入结果字符串中，并添加合适的分隔符
+                if (i < words.length() - 1) {
+                    result += " ";
+                }
+            }
             ui_f.lineEdit3->clear();
-            QString re_text = QString("str1是不是以str2开头(1表示true，0表示false):%1").arg(str1.startsWith(str2));
-            ui_f.lineEdit3->setText(re_text);
+            ui_f.lineEdit3->setText(result);
+
         });
     }
     void connect_but10 (){
@@ -196,4 +246,7 @@ public:
     }
     void connect_funtion();
 };
+
+
+
 #endif //QT_EXAM_FUNCTION_H

@@ -29,7 +29,7 @@ void ExQListWidget::on_actListInit_triggered()
 {
     QListWidgetItem* item;                                          //每一行都是一个QListWidgetItem
     QIcon icon;
-    icon.addFile(":/images/github.png");
+    icon.addFile(":/pic/github.png");
     bool chk = ui->checkBox->isChecked();                           //是否可编辑
 
     ui->listWidget->clear();
@@ -53,7 +53,7 @@ void ExQListWidget::on_actInsert_triggered()
 {
     QListWidgetItem* item;                                           //每一行都是一个QListWidgetItem
     QIcon icon;
-    icon.addFile(":/images/gril.png");
+    icon.addFile(":/pic/gril.png");
     bool chk = ui->checkBox->isChecked();                             //是否可编辑
 
     item = new QListWidgetItem();                                     //创建一个item
@@ -88,7 +88,7 @@ void ExQListWidget::on_actAdd_triggered()
 {
     QListWidgetItem* item;                                           //每一行都是一个QListWidgetItem
     QIcon icon;
-    icon.addFile(":/images/TREE.png");
+    icon.addFile(":/pic/TREE.png");
     bool chk = ui->checkBox->isChecked();                             //是否可编辑
 
     item = new QListWidgetItem();                                     //创建一个item

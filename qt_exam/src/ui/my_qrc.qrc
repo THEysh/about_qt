@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/wallhaven-3z32j3.jpg</file>
+        <file>images/pic_2d/wallhaven-j3m12w.jpg</file>
+        <file>images/pic/add.png</file>
+        <file>images/pic/clear.png</file>
+        <file>images/pic/delete.png</file>
+        <file>images/pic/init.png</file>
+        <file>images/pic/insert.png</file>
+        <file>images/pic/List.png</file>
+        <file>images/pic/Table.png</file>
+        <file>images/pic/TREE.png</file>
+        <file>images/pic/github.png</file>
+        <file>images/pic/gril.png</file>
+        <file>images/pic/exit.png</file>
+        <file>images/pic/menu.png</file>
+        <file>fonts/Font Awesome 6 Brands-Regular-400.otf</file>
+        <file>fonts/Font Awesome 6 Free-Solid-900.otf</file>
+        <file>fonts/Font Awesome 6 Free-Regular-400.otf</file>
+    </qresource>
+</RCC>

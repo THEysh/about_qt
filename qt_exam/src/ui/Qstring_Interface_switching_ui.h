@@ -309,8 +309,8 @@ public:
         label_4->setText(QApplication::translate("Interface_MainWindow", "\345\210\244\346\226\255\345\255\227\347\254\246\344\270\262\346\230\257\345\220\246\344\270\272\347\251\272.\357\274\210\350\213\245\346\230\257\345\217\252\346\234\211\342\200\234\\0\342\200\235\357\274\214isEmpty\350\277\224\345\233\236true\357\274\211", Q_NULLPTR));
         label_but3->setText(QApplication::translate("Interface_MainWindow", "\345\260\206\345\255\227\347\254\246\344\270\262\347\232\204\345\255\227\346\257\215\345\205\250\351\203\250\350\275\254\346\215\242\344\270\272\345\244\247\345\206\231\345\255\227\346\257\215", Q_NULLPTR));
         pushButton_4->setText(QApplication::translate("Interface_MainWindow", "toLower()", Q_NULLPTR));
-        pushButton_9->setText(QApplication::translate("Interface_MainWindow", "startsWith", Q_NULLPTR));
-        label_5->setText(QApplication::translate("Interface_MainWindow", "\345\210\244\346\226\255\346\230\257\345\220\246\344\273\245\346\237\220\344\270\252\345\255\227\347\254\246\344\270\262\345\274\200\345\244\264", Q_NULLPTR));
+        pushButton_9->setText(QApplication::translate("Interface_MainWindow", "function_Upper", Q_NULLPTR));
+        label_5->setText(QApplication::translate("Interface_MainWindow", "\345\206\231\344\270\200\344\270\252function_Upper\345\207\275\346\225\260\345\256\236\347\216\260str1\351\246\226\345\255\227\347\254\246\345\244\247\345\206\231", Q_NULLPTR));
         pushButton_5->setText(QApplication::translate("Interface_MainWindow", "PushButton", Q_NULLPTR));
         label_but4->setText(QApplication::translate("Interface_MainWindow", "\345\260\206\345\255\227\347\254\246\344\270\262\347\232\204\345\255\227\346\257\215\345\205\250\351\203\250\350\275\254\346\215\242\344\270\272\345\260\217\345\206\231\345\255\227\346\257\215", Q_NULLPTR));
         pushButton_7->setText(QApplication::translate("Interface_MainWindow", "isNull", Q_NULLPTR));
