@@ -7,6 +7,7 @@
 #include "ui/Qstring_Interface_switching_ui.h"
 #include "ui/QSlider_color_ui.h"
 #include "function.h"
+#include "beautification.h"
 #include <QResource>
 #include <QDir>
 #include <QApplication>
@@ -15,11 +16,11 @@
 #include <QNetworkReply>
 #include <QPixmap>
 #include <QFontDatabase>
+#include "QMovie"
+QString* Resource_Registration(){
+    auto *ProjectDir = new QString(PROJECT_ROOT_DIR);
 
-void Resource_Registration(){
-    QString ProjectDir = PROJECT_ROOT_DIR;
-    std::cout << "Project directory: " << ProjectDir.toStdString() << std::endl; //获取项目的绝对路径
-    QString path_rcc = QString(ProjectDir + "/src/ui/my_qrc.rcc"); //获取项目的.rcc路径
+    QString path_rcc = QString(*ProjectDir + "/src/ui/my_qrc.rcc"); //获取项目的.rcc路径
     QFile file(path_rcc);
     std::cout << "Project directory of .rcc: " <<  path_rcc.toStdString() << std::endl; //
     if (QResource::registerResource(path_rcc)) { //获取项目的资源文件
@@ -27,47 +28,15 @@ void Resource_Registration(){
     } else {
     qWarning() << "Failed to register resource file";
     }
+    return ProjectDir;
 }
 
-void net(QApplication &a){
-    // 使用网络编程，下载一个图片放在桌面
-    QString imageUrl = "https://w.wallhaven.cc/full/yx/wallhaven-yxemzd.jpg";
-    QUrl url(imageUrl);
-
-    QNetworkAccessManager manager;
-    QEventLoop loop;
-    QNetworkReply *reply = manager.get(QNetworkRequest(url));
-
-    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-
-    if(reply->error() != QNetworkReply::NoError)
-    {
-        qWarning() << "Failed to download image: " << reply->errorString();
-    }
-    else
-    {
-        QString desktopPath = QDir::homePath() + "/Desktop";
-        QFile file(desktopPath + "/wallpaper.jpg");
-        if(file.open(QIODevice::WriteOnly))
-        {
-            file.write(reply->readAll());
-            file.close();
-            qDebug() << "Image downloaded and saved to desktop.";
-        }
-        else
-        {
-            qWarning() << "Failed to save image to desktop.";
-        }
-    }
-
-    reply->deleteLater();
-}
 
 int main(int argc, char *argv[])
 {
 
-    Resource_Registration(); // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）
+    QString *ABProjectDir = Resource_Registration(); // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）,返回路径
+    std::cout << "Project directory: " << ABProjectDir->toStdString() << std::endl; //获取项目的绝对路径
     QApplication app(argc, argv);
     cout<<"------------------------------------------------------------------------------------------"<<endl;
 //    auto MainWindow = new QMainWindow();
@@ -88,24 +57,15 @@ int main(int argc, char *argv[])
 //    Slider_Color my_class_ui_color(ui_color);
 //    QWidget3->show();
 
+    Net_Image mynetimage;
+    QLabel *mybool = mynetimage.down_gif_show();
 
-    int fontId = QFontDatabase::addApplicationFont(":/fonts/Font Awesome 6 Brands-Regular-400.otf");
-    if (fontId == -1) {
-        qDebug() << "Failed to load font";
-        return 1;
-    }
 
-    qDebug() << "Font ID:" << fontId;
 
-    QFont fontAwesome("FontAwesome", 19);
-    https://fontawesome.com/v5/icons/sticky-note?f=classic&s=solid
-    // 创建Label，并设置样式和图标
-    QLabel label;
-    label.setStyleSheet("QLabel { color: #111; fonts-family: FontAwesome; }");
-    label.setFont(fontAwesome);
-    label.setText("\uf249"); // FontAwesome图标的Unicode码
-    label.show();
 
+
+
+    delete ABProjectDir; //清空内存指针
     return QApplication::exec();
 
 }

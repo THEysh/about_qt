@@ -245,6 +245,7 @@ public:
         this->connect_funtion();
     }
     void connect_funtion();
+
 };
 
 
