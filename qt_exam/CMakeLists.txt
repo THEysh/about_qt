@@ -20,6 +20,7 @@ find_package(Qt5 COMPONENTS
         Gui
         Widgets
         Network
+        Svg
         REQUIRED)
 find_package(OpenSSL REQUIRED)
 include_directories(${OPENSSL_INCLUDE_DIR})
@@ -32,6 +33,7 @@ target_link_libraries(qt_exam
         Qt5::Gui
         Qt5::Widgets
         Qt5::Network
+        Qt5::Svg
         )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)

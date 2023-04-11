@@ -80,7 +80,6 @@ public:
 
         verticalLayout->addWidget(textBrowser);
 
-
         horizontalLayout->addWidget(frame_content);
 
         frame_2 = new QFrame(centralwidget);
@@ -101,7 +100,7 @@ public:
         label->setObjectName(QStringLiteral("label"));
         sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
         label->setSizePolicy(sizePolicy);
-        label->setPixmap(QPixmap(QString::fromUtf8("../cmake-build-debug-qt_mingw/fig/wallhaven-3z32j3.jpg")));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/images/pic_2d/wallhaven-j3m12w.jpg")));
         label->setScaledContents(true);
 
         verticalLayout_2->addWidget(label);

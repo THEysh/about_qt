@@ -51,6 +51,7 @@ public:
     ThreadReceiver(Ui_MainWindow &ui_f, QObject* parent = nullptr) : QObject(parent){
         // 创建信号的连接
         this->ui_f = ui_f;
+        //在Qt中，signal的参数列表必须与slot的参数列表兼容，但不一定必须完全一致。一般来说，如果signal声明了参数，则slot也必须声明相同数量和类型的参数；否则，连接会失败。
         QObject::connect(this, &ThreadReceiver::signal_1, this, &ThreadReceiver::onworkFinished);
 
         this->button1_connect(ui_f.pushButton, sleep_time);
@@ -64,6 +65,8 @@ public:
     void print_meg(const QString& text) const;
 
 };
+
+
 
 class Interface_Class : public QObject{
 public:
@@ -232,21 +235,36 @@ public:
     }
 };
 
-class Slider_Color: public QObject{
+
+
+class Slider_Color_Class: public QObject{
 Q_OBJECT
+public: signals:
+
 public slots:
     // 定义槽函数
-    void onSetClolor(int value) const; // onworkFinished用于判断是否完成 doSomething 函数，
+    void onSetClolor(int val); // onworkFinished用于判断是否完成 doSomething 函数，
+    void random_color();
+    void on_radioButton(); //radioButton,发出一个2进制 或者 八进制 10进制信号
 
 public:
     Ui_QSlider_Color  ui_f{};
-    Slider_Color(Ui_QSlider_Color &ui_f){
+    Slider_Color_Class(Ui_QSlider_Color &ui_f){
         this->ui_f = ui_f;
         this->connect_funtion();
+        this->reset(); //初始设置
     }
     void connect_funtion();
 
+private:
+    int type_val = 10;
+    QString type_Slider_or_Dial = "QSlider";
+    QString* dispkay_lcdNumber(int num)const;
+    void reset();
+
 };
+
+
 
 
 

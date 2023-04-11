@@ -135,7 +135,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../../cmake-build-debug-qt_mingw/fig/wallhaven-3z32j3.jpg</pixmap>
+          <pixmap resource="my_qrc.qrc">:/images/pic_2d/wallhaven-j3m12w.jpg</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -148,6 +148,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="my_qrc.qrc"/>
+ </resources>
  <connections/>
 </ui>

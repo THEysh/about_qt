@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1475</width>
-    <height>989</height>
+    <width>1333</width>
+    <height>806</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -125,8 +125,8 @@
        <property name="spacing">
         <number>0</number>
        </property>
-       <item row="4" column="0">
-        <widget class="QPushButton" name="pushButton_2">
+       <item row="5" column="0">
+        <widget class="QPushButton" name="pushButton_random">
          <property name="text">
           <string>随机获取一种颜色</string>
          </property>
@@ -135,14 +135,14 @@
        <item row="2" column="0">
         <widget class="QRadioButton" name="radioButton_1">
          <property name="text">
-          <string>10进制</string>
+          <string>2进制</string>
          </property>
         </widget>
        </item>
        <item row="3" column="0">
         <widget class="QRadioButton" name="radioButton_2">
          <property name="text">
-          <string> 8进制</string>
+          <string>8进制</string>
          </property>
         </widget>
        </item>
@@ -157,16 +157,32 @@
           </attribute>
           <layout class="QGridLayout" name="gridLayout_5" columnstretch="1,6">
            <item row="1" column="1">
-            <widget class="QLCDNumber" name="lcdNumber_4"/>
+            <widget class="QLCDNumber" name="lcdNumber_4">
+             <property name="digitCount">
+              <number>8</number>
+             </property>
+            </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLCDNumber" name="lcdNumber"/>
+            <widget class="QLCDNumber" name="lcdNumber_1">
+             <property name="digitCount">
+              <number>8</number>
+             </property>
+            </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QLCDNumber" name="lcdNumber_3"/>
+            <widget class="QLCDNumber" name="lcdNumber_3">
+             <property name="digitCount">
+              <number>8</number>
+             </property>
+            </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLCDNumber" name="lcdNumber_2"/>
+            <widget class="QLCDNumber" name="lcdNumber_2">
+             <property name="digitCount">
+              <number>8</number>
+             </property>
+            </widget>
            </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_4">
@@ -207,34 +223,18 @@
             <widget class="QComboBox" name="comboBox">
              <item>
               <property name="text">
-               <string>test_1</string>
+               <string>测试组合框1</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>test_2</string>
+               <string>测试组合框2</string>
               </property>
              </item>
             </widget>
            </item>
            <item>
             <widget class="QListWidget" name="listWidget">
-             <item>
-              <property name="text">
-               <string>清空</string>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>11</pointsize>
-                <weight>50</weight>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="icon">
-               <iconset resource="my_qrc.qrc">
-                <normaloff>:/images/pic/delete.png</normaloff>:/images/pic/delete.png</iconset>
-              </property>
-             </item>
              <item>
               <property name="text">
                <string>云想衣裳花想容，春风拂槛露华浓</string>
@@ -259,7 +259,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="label_9">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -272,13 +272,20 @@
              <property name="pixmap">
               <pixmap resource="my_qrc.qrc">:/images/pic_2d/wallhaven-j3m12w.jpg</pixmap>
              </property>
-             <property name="scaledContents">
-              <bool>false</bool>
-             </property>
             </widget>
            </item>
           </layout>
          </widget>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QRadioButton" name="radioButton_3">
+         <property name="text">
+          <string>10进制</string>
+         </property>
+         <property name="autoRepeat">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
       </layout>
@@ -287,7 +294,7 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_3">
-     <item row="2" column="0">
+     <item row="1" column="0" colspan="2">
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="1" column="4">
         <widget class="QLabel" name="labRgbVal">
@@ -306,20 +313,36 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QDial" name="dial_2"/>
+        <widget class="QDial" name="dial_2">
+         <property name="maximum">
+          <number>255</number>
+         </property>
+        </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QDial" name="dial_3"/>
+        <widget class="QDial" name="dial_3">
+         <property name="maximum">
+          <number>255</number>
+         </property>
+        </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QDial" name="dial_4"/>
+        <widget class="QDial" name="dial_4">
+         <property name="maximum">
+          <number>255</number>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QDial" name="dial"/>
+        <widget class="QDial" name="dial_1">
+         <property name="maximum">
+          <number>255</number>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
-     <item row="0" column="0">
+     <item row="0" column="0" colspan="2">
       <widget class="QTextEdit" name="textColour">
        <property name="enabled">
         <bool>false</bool>

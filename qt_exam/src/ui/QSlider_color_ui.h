@@ -24,7 +24,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
@@ -46,14 +45,14 @@ public:
     QLabel *labBlue;
     QLabel *labGreen;
     QGridLayout *gridLayout_4;
-    QPushButton *pushButton_2;
+    QPushButton *pushButton_random;
     QRadioButton *radioButton_1;
     QRadioButton *radioButton_2;
     QTabWidget *tabWidget;
     QWidget *tab;
     QGridLayout *gridLayout_5;
     QLCDNumber *lcdNumber_4;
-    QLCDNumber *lcdNumber;
+    QLCDNumber *lcdNumber_1;
     QLCDNumber *lcdNumber_3;
     QLCDNumber *lcdNumber_2;
     QLabel *label_4;
@@ -64,23 +63,22 @@ public:
     QVBoxLayout *verticalLayout;
     QComboBox *comboBox;
     QListWidget *listWidget;
-    QLabel *label_6;
+    QLabel *label_9;
+    QRadioButton *radioButton_3;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout_2;
+    QLabel *labRgbVal;
     QDial *dial_2;
     QDial *dial_3;
-    QDial *dial;
-    QLabel *label_5;
-    QSpacerItem *horizontalSpacer;
     QDial *dial_4;
-    QLabel *labRgbVal;
+    QDial *dial_1;
     QTextEdit *textColour;
 
     void setupUi(QWidget *QSlider_Color)
     {
         if (QSlider_Color->objectName().isEmpty())
             QSlider_Color->setObjectName(QStringLiteral("QSlider_Color"));
-        QSlider_Color->resize(1429, 800);
+        QSlider_Color->resize(1333, 806);
         QSlider_Color->setMinimumSize(QSize(0, 800));
         horizontalLayout = new QHBoxLayout(QSlider_Color);
         horizontalLayout->setSpacing(6);
@@ -149,10 +147,10 @@ public:
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setSpacing(0);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        pushButton_2 = new QPushButton(QSlider_Color);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_random = new QPushButton(QSlider_Color);
+        pushButton_random->setObjectName(QStringLiteral("pushButton_random"));
 
-        gridLayout_4->addWidget(pushButton_2, 4, 0, 1, 1);
+        gridLayout_4->addWidget(pushButton_random, 5, 0, 1, 1);
 
         radioButton_1 = new QRadioButton(QSlider_Color);
         radioButton_1->setObjectName(QStringLiteral("radioButton_1"));
@@ -174,21 +172,25 @@ public:
         gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
         lcdNumber_4 = new QLCDNumber(tab);
         lcdNumber_4->setObjectName(QStringLiteral("lcdNumber_4"));
+        lcdNumber_4->setDigitCount(8);
 
         gridLayout_5->addWidget(lcdNumber_4, 1, 1, 1, 1);
 
-        lcdNumber = new QLCDNumber(tab);
-        lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
+        lcdNumber_1 = new QLCDNumber(tab);
+        lcdNumber_1->setObjectName(QStringLiteral("lcdNumber_1"));
+        lcdNumber_1->setDigitCount(8);
 
-        gridLayout_5->addWidget(lcdNumber, 0, 1, 1, 1);
+        gridLayout_5->addWidget(lcdNumber_1, 0, 1, 1, 1);
 
         lcdNumber_3 = new QLCDNumber(tab);
         lcdNumber_3->setObjectName(QStringLiteral("lcdNumber_3"));
+        lcdNumber_3->setDigitCount(8);
 
         gridLayout_5->addWidget(lcdNumber_3, 3, 1, 1, 1);
 
         lcdNumber_2 = new QLCDNumber(tab);
         lcdNumber_2->setObjectName(QStringLiteral("lcdNumber_2"));
+        lcdNumber_2->setDigitCount(8);
 
         gridLayout_5->addWidget(lcdNumber_2, 2, 1, 1, 1);
 
@@ -228,34 +230,39 @@ public:
 
         listWidget = new QListWidget(tab_2);
         QIcon icon;
-        icon.addFile(QStringLiteral(":/images/pic/delete.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/images/pic/github.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QFont font;
+        font.setFamily(QString::fromUtf8("\351\273\221\344\275\223"));
+        font.setPointSize(11);
         QListWidgetItem *__qlistwidgetitem = new QListWidgetItem(listWidget);
+        __qlistwidgetitem->setCheckState(Qt::Unchecked);
+        __qlistwidgetitem->setFont(font);
         __qlistwidgetitem->setIcon(icon);
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/images/pic/github.png"), QSize(), QIcon::Normal, QIcon::Off);
-        QListWidgetItem *__qlistwidgetitem1 = new QListWidgetItem(listWidget);
-        __qlistwidgetitem1->setCheckState(Qt::Unchecked);
-        __qlistwidgetitem1->setIcon(icon1);
-        __qlistwidgetitem1->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEditable|Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
+        __qlistwidgetitem->setFlags(Qt::ItemIsSelectable|Qt::ItemIsEditable|Qt::ItemIsDragEnabled|Qt::ItemIsUserCheckable|Qt::ItemIsEnabled);
         listWidget->setObjectName(QStringLiteral("listWidget"));
 
         verticalLayout->addWidget(listWidget);
 
-        label_6 = new QLabel(tab_2);
-        label_6->setObjectName(QStringLiteral("label_6"));
+        label_9 = new QLabel(tab_2);
+        label_9->setObjectName(QStringLiteral("label_9"));
         QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(label_6->sizePolicy().hasHeightForWidth());
-        label_6->setSizePolicy(sizePolicy);
-        label_6->setPixmap(QPixmap(QString::fromUtf8(":/images/pic_2d/wallhaven-j3m12w.jpg")));
-        label_6->setScaledContents(false);
+        sizePolicy.setHeightForWidth(label_9->sizePolicy().hasHeightForWidth());
+        label_9->setSizePolicy(sizePolicy);
+        label_9->setPixmap(QPixmap(QString::fromUtf8(":/images/pic_2d/wallhaven-j3m12w.jpg")));
 
-        verticalLayout->addWidget(label_6);
+        verticalLayout->addWidget(label_9);
 
         tabWidget->addTab(tab_2, QString());
 
         gridLayout_4->addWidget(tabWidget, 0, 0, 1, 1);
+
+        radioButton_3 = new QRadioButton(QSlider_Color);
+        radioButton_3->setObjectName(QStringLiteral("radioButton_3"));
+        radioButton_3->setAutoRepeat(false);
+
+        gridLayout_4->addWidget(radioButton_3, 4, 0, 1, 1);
 
 
         gridLayout->addLayout(gridLayout_4, 4, 0, 1, 2);
@@ -271,52 +278,47 @@ public:
         gridLayout_2 = new QGridLayout();
         gridLayout_2->setSpacing(6);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
-        dial_2 = new QDial(QSlider_Color);
-        dial_2->setObjectName(QStringLiteral("dial_2"));
-
-        gridLayout_2->addWidget(dial_2, 0, 1, 1, 1);
-
-        dial_3 = new QDial(QSlider_Color);
-        dial_3->setObjectName(QStringLiteral("dial_3"));
-
-        gridLayout_2->addWidget(dial_3, 0, 2, 1, 1);
-
-        dial = new QDial(QSlider_Color);
-        dial->setObjectName(QStringLiteral("dial"));
-
-        gridLayout_2->addWidget(dial, 0, 0, 1, 1);
-
-        label_5 = new QLabel(QSlider_Color);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        gridLayout_2->addWidget(label_5, 0, 4, 1, 1);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_2->addItem(horizontalSpacer, 0, 5, 1, 1);
-
-        dial_4 = new QDial(QSlider_Color);
-        dial_4->setObjectName(QStringLiteral("dial_4"));
-
-        gridLayout_2->addWidget(dial_4, 0, 3, 1, 1);
-
-
-        gridLayout_3->addLayout(gridLayout_2, 2, 0, 1, 1);
-
         labRgbVal = new QLabel(QSlider_Color);
         labRgbVal->setObjectName(QStringLiteral("labRgbVal"));
         labRgbVal->setEnabled(false);
         labRgbVal->setScaledContents(false);
         labRgbVal->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
-        gridLayout_3->addWidget(labRgbVal, 1, 0, 1, 1);
+        gridLayout_2->addWidget(labRgbVal, 1, 4, 1, 1);
+
+        dial_2 = new QDial(QSlider_Color);
+        dial_2->setObjectName(QStringLiteral("dial_2"));
+        dial_2->setMaximum(255);
+
+        gridLayout_2->addWidget(dial_2, 1, 1, 1, 1);
+
+        dial_3 = new QDial(QSlider_Color);
+        dial_3->setObjectName(QStringLiteral("dial_3"));
+        dial_3->setMaximum(255);
+
+        gridLayout_2->addWidget(dial_3, 1, 2, 1, 1);
+
+        dial_4 = new QDial(QSlider_Color);
+        dial_4->setObjectName(QStringLiteral("dial_4"));
+        dial_4->setMaximum(255);
+
+        gridLayout_2->addWidget(dial_4, 1, 3, 1, 1);
+
+        dial_1 = new QDial(QSlider_Color);
+        dial_1->setObjectName(QStringLiteral("dial_1"));
+        dial_1->setMaximum(255);
+
+        gridLayout_2->addWidget(dial_1, 1, 0, 1, 1);
+
+
+        gridLayout_3->addLayout(gridLayout_2, 1, 0, 1, 2);
 
         textColour = new QTextEdit(QSlider_Color);
         textColour->setObjectName(QStringLiteral("textColour"));
         textColour->setEnabled(false);
         textColour->setMinimumSize(QSize(200, 0));
 
-        gridLayout_3->addWidget(textColour, 0, 0, 1, 1);
+        gridLayout_3->addWidget(textColour, 0, 0, 1, 2);
 
 
         horizontalLayout->addLayout(gridLayout_3);
@@ -324,7 +326,7 @@ public:
 
         retranslateUi(QSlider_Color);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(QSlider_Color);
@@ -337,9 +339,9 @@ public:
         labAlpha->setText(QApplication::translate("QSlider_Color", "Alpha", Q_NULLPTR));
         labBlue->setText(QApplication::translate("QSlider_Color", "Blue", Q_NULLPTR));
         labGreen->setText(QApplication::translate("QSlider_Color", "Green", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("QSlider_Color", "\351\232\217\346\234\272\350\216\267\345\217\226\344\270\200\347\247\215\351\242\234\350\211\262", Q_NULLPTR));
-        radioButton_1->setText(QApplication::translate("QSlider_Color", "10\350\277\233\345\210\266", Q_NULLPTR));
-        radioButton_2->setText(QApplication::translate("QSlider_Color", " 8\350\277\233\345\210\266", Q_NULLPTR));
+        pushButton_random->setText(QApplication::translate("QSlider_Color", "\351\232\217\346\234\272\350\216\267\345\217\226\344\270\200\347\247\215\351\242\234\350\211\262", Q_NULLPTR));
+        radioButton_1->setText(QApplication::translate("QSlider_Color", "2\350\277\233\345\210\266", Q_NULLPTR));
+        radioButton_2->setText(QApplication::translate("QSlider_Color", "8\350\277\233\345\210\266", Q_NULLPTR));
         label_4->setText(QApplication::translate("QSlider_Color", "Green", Q_NULLPTR));
         label->setText(QApplication::translate("QSlider_Color", "Red", Q_NULLPTR));
         label_2->setText(QApplication::translate("QSlider_Color", "Blue", Q_NULLPTR));
@@ -347,21 +349,19 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("QSlider_Color", "Tab 1", Q_NULLPTR));
         comboBox->clear();
         comboBox->insertItems(0, QStringList()
-         << QApplication::translate("QSlider_Color", "test_1", Q_NULLPTR)
-         << QApplication::translate("QSlider_Color", "test_2", Q_NULLPTR)
+         << QApplication::translate("QSlider_Color", "\346\265\213\350\257\225\347\273\204\345\220\210\346\241\2061", Q_NULLPTR)
+         << QApplication::translate("QSlider_Color", "\346\265\213\350\257\225\347\273\204\345\220\210\346\241\2062", Q_NULLPTR)
         );
 
         const bool __sortingEnabled = listWidget->isSortingEnabled();
         listWidget->setSortingEnabled(false);
         QListWidgetItem *___qlistwidgetitem = listWidget->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("QSlider_Color", "\346\270\205\347\251\272", Q_NULLPTR));
-        QListWidgetItem *___qlistwidgetitem1 = listWidget->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("QSlider_Color", "\344\272\221\346\203\263\350\241\243\350\243\263\350\212\261\346\203\263\345\256\271\357\274\214\346\230\245\351\243\216\346\213\202\346\247\233\351\234\262\345\215\216\346\265\223", Q_NULLPTR));
+        ___qlistwidgetitem->setText(QApplication::translate("QSlider_Color", "\344\272\221\346\203\263\350\241\243\350\243\263\350\212\261\346\203\263\345\256\271\357\274\214\346\230\245\351\243\216\346\213\202\346\247\233\351\234\262\345\215\216\346\265\223", Q_NULLPTR));
         listWidget->setSortingEnabled(__sortingEnabled);
 
-        label_6->setText(QString());
+        label_9->setText(QString());
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("QSlider_Color", "Tab 2", Q_NULLPTR));
-        label_5->setText(QApplication::translate("QSlider_Color", "TextLabel", Q_NULLPTR));
+        radioButton_3->setText(QApplication::translate("QSlider_Color", "10\350\277\233\345\210\266", Q_NULLPTR));
         labRgbVal->setText(QApplication::translate("QSlider_Color", "RGB(145, 190, 251, 255)", Q_NULLPTR));
     } // retranslateUi
 

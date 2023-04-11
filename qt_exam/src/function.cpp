@@ -85,8 +85,6 @@ void ThreadReceiver::do_work_decimal_to_binary(QWidget *qw, double sleep_time, l
     this->print_meg(QString("sleep time: %1 s").arg(sleep_time));
     t->start();
 
-
-
 }
 
 void ThreadReceiver::button1_connect(QPushButton *button, double sleep_time)  {
@@ -106,33 +104,146 @@ void ThreadReceiver::button2_connect(QPushButton *button, double sleep_time, lon
 }
 
 
-void Slider_Color::connect_funtion() {
-    QObject::connect(ui_f.sliderRed,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
-    QObject::connect(ui_f.sliderGreen,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
-    QObject::connect(ui_f.sliderBlue,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
-    QObject::connect(ui_f.sliderAlpha,&QSlider::valueChanged,this,&Slider_Color::onSetClolor);
+
+
+void  Slider_Color_Class::connect_funtion(){
+
+    QObject::connect(ui_f.sliderRed,&QSlider::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QSlider";
+        this->onSetClolor(0);
+    });
+    QObject::connect(ui_f.sliderGreen,&QSlider::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QSlider";
+        this->onSetClolor(0);
+    });
+    QObject::connect(ui_f.sliderBlue,&QSlider::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QSlider";
+        this->onSetClolor(0);
+    });
+    QObject::connect(ui_f.sliderAlpha,&QSlider::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QSlider";
+        this->onSetClolor(0);
+    });
+
+    QObject::connect(ui_f.dial_1,&QDial::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QDial";
+        this->onSetClolor(0);
+    });
+    QObject::connect(ui_f.dial_2,&QDial::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QDial";
+        this->onSetClolor(0);
+    });
+    QObject::connect(ui_f.dial_3,&QDial::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QDial";
+        this->onSetClolor(0);
+    });
+    QObject::connect(ui_f.dial_4,&QDial::valueChanged,[this]{
+        this->type_Slider_or_Dial = "QDial";
+        this->onSetClolor(0);
+    });
+
+    QObject::connect(ui_f.pushButton_random,&QPushButton::clicked,this,& Slider_Color_Class::random_color);
+
+    QObject::connect(ui_f.radioButton_1,&QRadioButton::clicked,this,&Slider_Color_Class::on_radioButton);
+    QObject::connect(ui_f.radioButton_2,&QRadioButton::clicked,this,&Slider_Color_Class::on_radioButton);
+    QObject::connect(ui_f.radioButton_3,&QRadioButton::clicked,this,&Slider_Color_Class::on_radioButton);
+}
+
+void Slider_Color_Class::reset(){
+    onSetClolor(0);
+}
+void Slider_Color_Class::random_color(){
+    srand(time(nullptr)); // 设置随机数种子为当前时间
+    int num1, num2, num3;
+    for(int i = 0; i < 3; i++)
+    {
+        int random_num = rand() % 256; // 生成0-255之间的随机数
+        if(i == 0) num1 = random_num;
+        else if(i == 1) num2 = random_num;
+        else num3 = random_num;
+    }
+    ui_f.sliderRed->setValue(num1);
+    ui_f.sliderGreen->setValue(num2);
+    ui_f.sliderBlue->setValue(num3);
+}
+
+void  Slider_Color_Class::on_radioButton(){
+    // 激活type_num,显示几进制数字
+    QString str = dynamic_cast<QRadioButton*>(sender())->text();
+    // 发出自定义信号
+    int type_num = 10;
+    QRegularExpression re("\\d{1,3}"); //使用正则表达式从字符串中获取前3个数字
+    QRegularExpressionMatch match = re.match(str);
+    if (match.hasMatch()) {
+        QString numStr = match.captured(0);
+        type_num = numStr.toInt();
+    }
+    if (type_num==2){
+        this->type_val = 2;
+    } else if(type_num==8){
+        this->type_val = 8;;
+    } else{
+        this->type_val = 10;
+    }
     this->onSetClolor(0);
 }
 
-void Slider_Color::onSetClolor(int _ ) const {
+QString*  Slider_Color_Class::dispkay_lcdNumber(int num) const {
+    // 传入看显示 2进制还是 10进制
+    auto *ans = new QString;
+    if (this->type_val==2){
+        *ans = QString::number(num, 2); //显示2进制
+    } else if(this->type_val == 8){
+        *ans = QString::number(num, 8);
+    } else{
+        *ans = QString::number(num);
+    }
+    return ans;
 
-    int nRed = ui_f.sliderRed->value();             //获取红绿蓝(RGB)的Slider的数值
-    int nGreen = ui_f.sliderGreen->value();
-    int nBlue = ui_f.sliderBlue->value();
-    int nAlpha = ui_f.sliderAlpha->value();
+}
+
+void  Slider_Color_Class::onSetClolor(int _ ){
+
+    int nRed,nGreen,nBlue,nAlpha;
+    if (this->type_Slider_or_Dial == "QDial") {
+        nRed = ui_f.dial_1->value();             //获取红绿蓝(RGB)的Slider的数值，获取当前的滑块值
+        ui_f.sliderRed->setValue(nRed);
+        nGreen = ui_f.dial_2->value();
+        ui_f.sliderGreen->setValue(nGreen);
+        nBlue = ui_f.dial_3->value();
+        ui_f.sliderBlue->setValue(nBlue);
+        nAlpha = ui_f.dial_4->value();
+        ui_f.sliderAlpha->setValue(nAlpha);
+
+    } else{
+        nRed = ui_f.sliderRed->value();             //获取红绿蓝(RGB)的Slider的数值，获取当前的滑块值
+        nGreen = ui_f.sliderGreen->value();
+        nBlue = ui_f.sliderBlue->value();
+        nAlpha = ui_f.sliderAlpha->value();
+        ui_f.dial_1->setValue(nRed);
+        ui_f.dial_2->setValue(nGreen);
+        ui_f.dial_3->setValue(nBlue);
+        ui_f.dial_4->setValue(nAlpha);
+    }
+
+    ui_f.lcdNumber_1->display(dispkay_lcdNumber(nRed)->toInt());
+    ui_f.lcdNumber_2->display(dispkay_lcdNumber(nGreen)->toInt());
+    ui_f.lcdNumber_3->display(dispkay_lcdNumber(nBlue)->toInt());
+    ui_f.lcdNumber_4->display(dispkay_lcdNumber(nAlpha)->toInt());  //显示为数字
 
     ui_f.labRgbVal->setText(QString("RGB_Alpha(%1,%2,%3,%4)").arg(nRed).arg(nGreen).arg(nBlue).arg(nAlpha));
 
     QColor mycolor;
     mycolor.setRgb(nRed, nGreen, nBlue, nAlpha);
-
-
     QPalette mypalette = ui_f.textColour->palette();
     mypalette.setColor(QPalette::Base, mycolor); // 将Base颜色设置为红色
     ui_f.textColour->setPalette(mypalette);
 
 
 }
+
+
+
 
 
 
