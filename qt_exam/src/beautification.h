@@ -25,40 +25,13 @@
 #include <QFontDatabase>
 #include "QMovie"
 #include "QTimer"
-#include "string.h"
 #include <QSvgWidget>
+#include <QVector>
+
 class Net_Image : public QObject{
 public:
     QString *ABProjectDir = new QString(PROJECT_ROOT_DIR);
     Net_Image() = default;
-    void down() {
-        // 使用网络编程，下载一个图片放在桌面
-        QString imageUrl = "https://w.wallhaven.cc/full/5g/wallhaven-5g57w1.jpg";
-        QUrl url(imageUrl);
-
-        QNetworkAccessManager manager;
-        QEventLoop loop;
-        QNetworkReply *reply = manager.get(QNetworkRequest(url));
-
-        QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-        loop.exec();
-
-        if (reply->error() != QNetworkReply::NoError) {
-            qWarning() << "Failed to download image: " << reply->errorString();
-        } else {
-            QString desktopPath = QDir::homePath() + "/Desktop";
-            QFile file(desktopPath + "/wallpaper.jpg");
-            if (file.open(QIODevice::WriteOnly)) {
-                file.write(reply->readAll());
-                file.close();
-                qDebug() << "Image downloaded and saved to desktop.";
-            } else {
-                qWarning() << "Failed to save image to desktop.";
-            }
-        }
-
-        reply->deleteLater();
-    }
 
     pair<QLabel*,QMovie*> down_gif_show(){
         //下载一张gif 保存到temp_dir目录并加载到label里
@@ -134,8 +107,18 @@ public:
 
 class Net_Label_Class : public QObject{
 public:
-    Ui_Show_Label ui_f;
-    QString *ABProjectDir = new QString(PROJECT_ROOT_DIR);
+    Ui_Show_Label ui_f{};
+    QString *ABProjectDir = new QString(PROJECT_ROOT_DIR); //在堆创建一块内存空间，味着在程序运行时动态地分配一块内存空间给这个对象。
+    // 在堆上分配内存需要通过调用操作系统的API来完成，因为操作系统会维护一张内存使用情况表，记录哪些内存块已经被使用，哪些还没有被使用。
+    QString *temp_image_path = new QString(*ABProjectDir + "/src/temp_dir"); //temp_dir 目录路径
+    struct down_struct_inf {
+        QDateTime time;
+        QString name;
+        QString type;
+        QString path;
+    };
+    QVector<down_struct_inf> down_struct_list;
+
     Net_Label_Class(Ui_Show_Label& ui_f){
         this->ui_f = ui_f;
         load_and_show_label(ui_f.label_1, "https://simpleicons.org/icons/1001tracklists.svg");
@@ -144,32 +127,64 @@ public:
         load_and_show_label(ui_f.label_4,"https://simpleicons.org/icons/android.svg");
 
     }
-    void load_and_show_label(QLabel *mylabel, const QString& link_url){
-        auto *label = mylabel;
-        QNetworkAccessManager manager;
 
-        // Create a network request for the image
+    ~Net_Label_Class() override{
+        delete ABProjectDir; //析构函数释放内存，必须要手动释放
+        delete temp_image_path;
+    }
+    void down(const QString& link_url){
         QUrl url(link_url);
-        QNetworkRequest request(url);
 
-        // Send the request and wait for the response
-        QNetworkReply *reply = manager.get(request);
+        QNetworkAccessManager manager;
         QEventLoop loop;
-        QObject::connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
-        loop.exec();
+        QNetworkReply *reply = manager.get(QNetworkRequest(url));
 
+        QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+        loop.exec(); //检测下载是否完成的一个循环
+
+        down_struct_inf struct_temp;
+        struct_temp.time = QDateTime::currentDateTime();
+        struct_temp.name = struct_temp.time.toString("yyyyMMdd_hhmmss_zzz");
+
+        QRegularExpression pattern("\\.([A-Za-z0-9]+)$"); //qt的正则表达式获取 链接"."后面的类型
+        QRegularExpressionMatch match = pattern.match(link_url);
+        if (match.hasMatch()) {
+            QString fileExtension = match.captured(1);
+            qDebug() << fileExtension;
+            struct_temp.type = "."+ fileExtension;
+        }
+        struct_temp.path = *temp_image_path +"/"+ struct_temp.name + struct_temp.type;
+        down_struct_list.append(struct_temp);
+
+        //QString desktopPath = *ABProjectDir + "/src/temp_dir";
         // Check if the request was successful
         if (reply->error() != QNetworkReply::NoError) {
-            qWarning() << "Failed to download image:" << reply->errorString();
+            qWarning() << "Failed to download image: " << reply->errorString();
+        } else {
+            QFile file(struct_temp.path);
+
+            if (file.open(QIODevice::WriteOnly)) {
+                file.write(reply->readAll());
+                file.close();
+                qDebug() << "Image downloaded saved to: " + struct_temp.path;
+            } else {
+                qWarning() << "save failed and save path is:" + struct_temp.path;
+            }
         }
 
-        // Create a QPixmap from the downloaded image data
-        QPixmap pixmap;
+        reply->deleteLater();
+    }
 
-        pixmap.loadFromData(reply->readAll());
-        pixmap = pixmap.scaled(200, 200);
-        // Set the pixmap as the content of the label
-        label->setPixmap(pixmap);
+    void load_and_show_label(QLabel *mylabel, const QString& link_url){
+        auto *label = mylabel;
+        down(link_url);
+        //this->down(link_url);
+
+//        QSvgWidget* svgWidget = new QSvgWidget(desktopPath + "/abc.svg");
+//        layout.addWidget(svg_widget)
+//        svgWidget->show();
+        // Create a QPixmap from the downloaded image data
+
     }
 };
 
