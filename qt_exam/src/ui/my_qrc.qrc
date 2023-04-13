@@ -1,7 +1,13 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/wallhaven-3z32j3.jpg</file>
         <file>images/pic_2d/wallhaven-j3m12w.jpg</file>
+        <file>images/pic_2d/wallhaven-3z32j3.jpg</file>
+        <file>images/pic_2d/wallhaven-p9lzke.jpg</file>
+        <file>images/pic/file-solid.svg</file>
+        <file>images/pic/file-image-solid.svg</file>
+        <file>images/pic/file-lines-solid.svg</file>
+        <file>images/pic/folder-open-regular.svg</file>
+        <file>images/pic/folder-solid.svg</file>
         <file>images/pic/add.png</file>
         <file>images/pic/clear.png</file>
         <file>images/pic/delete.png</file>

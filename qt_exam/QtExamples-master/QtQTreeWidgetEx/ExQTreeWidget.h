@@ -56,7 +56,6 @@ private slots:
 
 private:
     Ui::ExQTreeWidget *ui;
-
     QLabel *m_labFlie;      //状态栏显示当前文件路径
     QPixmap m_curPixmap;    //显示当前文件图片
     float   m_ratio;        //图片缩放比例

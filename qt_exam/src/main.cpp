@@ -11,7 +11,6 @@
 #include "beautification.h"
 #include <QResource>
 #include <QDir>
-#include <QApplication>
 #include <QLabel>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -19,6 +18,11 @@
 #include <QFontDatabase>
 #include "QMovie"
 #include "QTimer"
+#include <QUrl>
+#include <QApplication>
+#include "QFileDialog"
+
+
 QString* Resource_Registration(){
     auto *ProjectDir = new QString(PROJECT_ROOT_DIR);
 
@@ -42,6 +46,7 @@ int main(int argc, char *argv[])
     cout<<"------------------------------------------------------------------------------------------"<<endl;
 
 //    auto MainWindow = new QMainWindow();
+//    //使用了C++11新特性中的列表初始化方式，将myqtree_ui对象以花括号包裹起来，表示使用默认构造函数进行初始化。这种方式可以保证在所有情况下都会进行零值初始化，即默认值或者空值。;
 //    Ui_MainWindow ui_f{};
 //    ui_f.setupUi(MainWindow);
 //    ThreadReceiver receiver_main(ui_f);
@@ -63,35 +68,18 @@ int main(int argc, char *argv[])
 //    pair<QLabel*,QMovie*> re = mynetimage.down_gif_show(); //加载一张网络的gif图片并显示在界面
 //    re.first->show();
 
-    auto QWidget4 = new QMainWindow();
-    Ui_Show_Label ui_label{};
-    ui_label.setupUi(QWidget4);
-    Net_Label_Class my_ui_f(ui_label);
-    QWidget4->show();
+//    auto QWidget4 = new QMainWindow();
+//    Ui_Show_Label ui_label{};
+//    ui_label.setupUi(QWidget4);
+//    Net_Class my_ui_f(ui_label);
+//    QWidget4->show();
+
+    auto *QWidget5 = new QMainWindow();
+    Ui_Qtree_Class_UI myqtree_ui{};
+    Qtree_Class myqtree_class(myqtree_ui,QWidget5);
+    QWidget5->show();
 
 
     delete ABProjectDir; //清空内存指针
     return QApplication::exec();
-
 }
-
-
-//    QApplication a(argc, argv);
-//
-//    // 创建一个QSvgWidget对象
-//    QSvgWidget* svgWidget = new QSvgWidget("F:\\code\\PYQT\\pyqt5_silverfox\\Copying_1017\\img\\buttom\\向下收起_expand-down-one.svg");
-//
-//    // 如果QSvgWidget库成功导入，则该对象应该被正确创建
-//    if (svgWidget)
-//    {
-//        // 显示QSvgWidget对象
-//        svgWidget->show();
-//
-//        // 返回Qt应用程序的执行结果
-//        return a.exec();
-//    }
-//    else
-//    {
-//        // 如果QSvgWidget库未能成功导入，则打印错误信息并退出应用程序
-//        qDebug("Failed to create QSvgWidget.");
-//        return -1;

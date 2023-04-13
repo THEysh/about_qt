@@ -13,7 +13,8 @@ get_filename_component(PROJECT_ROOT_DIR ${CMAKE_SOURCE_DIR} ABSOLUTE)
 add_definitions(-DPROJECT_ROOT_DIR="${PROJECT_ROOT_DIR}")
 
 
-set(CMAKE_PREFIX_PATH "F:\\QT5\\5.9.8\\mingw53_32")
+set(CMAKE_PREFIX_PATH "F:\\QT5_9_9\\5.9.9\\mingw53_32")
+
 
 find_package(Qt5 COMPONENTS
         Core
@@ -27,7 +28,7 @@ include_directories(${OPENSSL_INCLUDE_DIR})
 
 add_executable(qt_exam src/main.cpp src/function.cpp src/function.h src/ui/Qstring_Interface_switching_ui.h src/beautification.cpp src/beautification.h)
 
-target_link_libraries(${PROJECT_NAME} ${OPENSSL_LIBRARIES})
+
 target_link_libraries(qt_exam
         Qt5::Core
         Qt5::Gui
@@ -35,6 +36,8 @@ target_link_libraries(qt_exam
         Qt5::Network
         Qt5::Svg
         )
+
+
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     set(DEBUG_SUFFIX)

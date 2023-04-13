@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>WebChannel Example</title>
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+  <script>
+    var myObject;
+    new QWebChannel(qt.webChannelTransport, function(channel) {
+      myObject = channel.objects.myObject;
+
+      myObject.mySignal.connect(function(message) {
+        console.log(message);
+      });
+    });
+
+    function sendMessage() {
+      var message = document.getElementById("message").value;
+      myObject.myFunction(message);
+    }
+  </script>
+</head>
+<body>
+<input type="text" id="message">
+<button onclick="sendMessage()">Send</button>
+</body>
+</html>
