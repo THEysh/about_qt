@@ -20,133 +20,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="写了下载url的内容">
-      <change afterPath="$PROJECT_DIR$/../qt_6/untitled/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../qt_6/untitled/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../qt_6/untitled/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../qt_6/untitled/mainwindow.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../qt_6/untitled/untitled_zh_CN.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/.idea/QtQTreeWidgetEx.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/myhtml.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/file-image-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/file-lines-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/images/pic/folder-open-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/label_list_ui.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ui/label_list_ui.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled3/mainwindow.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled3/mainwindow.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CLion连接QT/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/../CLion连接QT/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/ExQTreeWidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/ExQTreeWidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/ExQTreeWidget.ui" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/ExQTreeWidget.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/QtExamples-master/QtQTreeWidgetEx/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/target-qt_exam_autogen-Debug-ca51a0bd2155c07f0d1e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/toolchains-v1-742ed4246b3411dbdf12.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeRCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdC/a.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdCXX/a.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/CMakeOutput.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/clean_additional.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/clion-Debug-QT_MinGW-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/beautification.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/function.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam.dir/src/main.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/AutogenUsed.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Qt5Core.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Qt5Gui.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Qt5Widgets.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/plugins/platforms/qwindows.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/UVLADIE3JM/moc_function.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/moc_predefs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-qt_mingw/qt_exam_autogen/mocs_compilation.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/beautification.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/beautification.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/function.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/function.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/images/pic_2d/wallhaven-x8j6jo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/images/wallhaven-3z32j3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/my_qrc.qrc" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/my_qrc.qrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/my_qrc.rcc" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/my_qrc.rcc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/untitled.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/CMakeLists.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/query/cache-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/cache-v2-7bae1b4828265982ca78.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/cmakeFiles-v1-e777e6df0955e8076a93.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/codemodel-v2-90399ffa665413994b2e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/directory-.-Debug-d0094a50bb2071803777.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/index-2023-04-01T13-40-10-0051.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/target-untitled-Debug-9338b89c5449e2376614.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/target-untitled_autogen-Debug-94bb8191f84fab3059c7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.cmake/api/v1/reply/toolchains-v1-742ed4246b3411dbdf12.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_deps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/.ninja_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeRCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdC/a.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/3.25.2/CompilerIdCXX/a.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/CMakeOutput.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/clean_additional.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/clion-Debug-QT_MinGW-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled.dir/main.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled.dir/untitled_autogen/mocs_compilation.cpp.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled_autogen.dir/AutogenInfo.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled_autogen.dir/AutogenUsed.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/CMakeFiles/untitled_autogen.dir/ParseCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/Testing/Temporary/LastTest.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled_autogen/include/main.moc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled_autogen/moc_predefs.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/cmake-build-debug-qt_mingw/untitled_autogen/mocs_compilation.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled3/mainwindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_6/untitled/mainwindow.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled3/mainwindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_6/untitled/mainwindow.h" afterDir="false" />
-    </list>
+    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="写了图片查看器的目录部分" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -261,7 +135,7 @@
       <workItem from="1681309432864" duration="605000" />
       <workItem from="1681310054433" duration="1316000" />
       <workItem from="1681311753712" duration="225000" />
-      <workItem from="1681312365948" duration="32899000" />
+      <workItem from="1681312365948" duration="33254000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
@@ -382,7 +256,8 @@
     <MESSAGE value=" 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）" />
     <MESSAGE value="1" />
     <MESSAGE value="写了下载url的内容" />
-    <option name="LAST_COMMIT_MESSAGE" value="写了下载url的内容" />
+    <MESSAGE value="写了图片查看器的目录部分" />
+    <option name="LAST_COMMIT_MESSAGE" value="写了图片查看器的目录部分" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

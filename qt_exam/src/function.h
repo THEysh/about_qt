@@ -25,6 +25,8 @@
 #include <QDesktopServices>
 #include <QTimer>
 #include <QDateTime>
+#include <QPainter>
+
 using namespace  std;
 
 class ThreadReceiver : public QObject
@@ -300,15 +302,15 @@ private:
         QObject::connect(timer, &QTimer::timeout, [=]() {
             emit photo_changed_signals1(ui_f.photo_label->geometry().width(),ui_f.photo_label->geometry().height());
         });
-        timer->start(400);
+        timer->start(50);
 
     }
-
 
     bool is_type(const QString& name, const QStringList& strlist){
         //输出 name，这个name 算法在包含 strlist内
         // 例：name = abc.jpg, strlist = {".jpg",".png"...}  返回true
         //name =F:/code/c_code/about_qt/qt_exam/src/ui/images/pic/delete.png , strlist = {".jpg",".png"...}  返回true
+
         QString type = this->_rag(name);
         for (const auto& imgtype :strlist){
             if (type.endsWith(imgtype)) {//判断是否是图片格式
@@ -339,8 +341,13 @@ private:
             //Qt::KeepAspectRatio保持比例
             bool is_img = is_type(activated_path,imageTypes);
             if (is_img){
+                //ui_f.photo_label->blockSignals(true); //切断label的所有连接
                 QPixmap new_pixmap = QPixmap(activated_path).scaled(w,h,Qt::KeepAspectRatio);
-                ui_f.photo_label->setPixmap(new_pixmap);
+                ui_f.photo_label->setPixmap(new_pixmap);// 将绘制后的QPixmap重新设置为QLabel的背景图片
+                //ui_f.photo_label->blockSignals(false); //label连接
+            }
+            else{
+                ui_f.photo_label->setPixmap(QPixmap());//设置一个空对象
             }
         });
     }
