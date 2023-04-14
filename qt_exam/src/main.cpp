@@ -3,11 +3,11 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include "iostream"
-#include "ui/myfirst_ui.h"
-#include "ui/Qstring_Interface_switching_ui.h"
-#include "ui/QSlider_color_ui.h"
+#include "ui/ui_file/myfirst_ui.h"
+#include "ui/ui_file/Qstring_Interface_switching_ui.h"
+#include "ui/ui_file/QSlider_color_ui.h"
 #include "function.h"
-#include "ui/label_list_ui.h"
+#include "ui/ui_file/label_list_ui.h"
 #include "beautification.h"
 #include <QResource>
 #include <QDir>

@@ -15,10 +15,10 @@
 #include <QSignalMapper>
 #include <QString>
 #include <QPushButton>
-#include "ui/myfirst_ui.h"
-#include "ui/Qstring_Interface_switching_ui.h"
-#include "ui/QSlider_color_ui.h"
-#include "ui/Qtree_ui.h"
+#include "ui/ui_file/myfirst_ui.h"
+#include "ui/ui_file/Qstring_Interface_switching_ui.h"
+#include "ui/ui_file/QSlider_color_ui.h"
+#include "ui/ui_file/Qtree_ui.h"
 #include <QResource>
 #include <QPixmap>
 #include "QDir"
@@ -268,7 +268,7 @@ private:
 };
 
 
-class Qtree_Class : public QObject{
+class Qtree_Class : public QWidget{
 Q_OBJECT
 
 signals:
@@ -276,12 +276,13 @@ signals:
 
 public slots:
 
-
 public:
     Qtree_Class(Ui_Qtree_Class_UI &ui_f, QMainWindow *Win){
         ui_f.setupUi(Win);
         this->ui_f = ui_f;
+        photo_label = ui_f.photo_label;  //这样是实现，ui_f.photo_label 和 这个类中的photo_label共用一个地址
 
+        cout<<"你好"<<endl;
         q_timer();
         this->_Qtree_dir();
         _photo_connect();
@@ -289,13 +290,16 @@ public:
 
     }
 public:
-    QString *ProjectDir = new QString(PROJECT_ROOT_DIR); //项目的目录
-    QStringList imageTypes {"bmp","jpg","png","tif","gif","fpx","svg","psd"};
+      QString ProjectDir =  QDir::homePath() + "/Desktop"; //项目的目录
+
 private:
     Ui_Qtree_Class_UI ui_f;
+    My_Photo_Label *photo_label;
     int photo_win_size_w;
     int photo_win_size_h;
     QString activated_path = nullptr; //当前图片激活的路径
+    QStringList imageTypes {"bmp","jpg","png","tif","gif","fpx","svg","psd"};
+
     void q_timer(){
 
         auto *timer = new QTimer();
@@ -320,15 +324,18 @@ private:
         return false;
     }
 
+    void paintEvent(QPaintEvent *event) override {
+
+    }
     void _Qtree_dir(){
         // 获取当前目录，并依次添加子目录和文件
         auto *rootNode = new QTreeWidgetItem(ui_f.treeWidget_1); //设置根节点信息
         rootNode->setText(0, "目录");
-        rootNode->setData(0, Qt::UserRole, *ProjectDir);
+        rootNode->setData(0, Qt::UserRole, ProjectDir);
         rootNode->setIcon(0, QIcon(":images/pic/folder-solid.svg"));
         _dir_connect(rootNode);
         // 传入的为：树，根节点，路径, 递归函数用于添加子目录及其子节点
-        _addSubDirs(ui_f.treeWidget_1, rootNode, *ProjectDir);
+        _addSubDirs(ui_f.treeWidget_1, rootNode, ProjectDir);
 
         ui_f.treeWidget_1->show();
     }
@@ -336,15 +343,14 @@ private:
     void _photo_connect(){
         // 更新label照片的尺寸
         QObject::connect(this,&Qtree_Class::photo_changed_signals1,[this](int w, int h){
-            this->photo_win_size_w = w;
-            this->photo_win_size_h = h;
+            photo_win_size_w = w;
+            photo_win_size_h = h;
             //Qt::KeepAspectRatio保持比例
             bool is_img = is_type(activated_path,imageTypes);
             if (is_img){
-                //ui_f.photo_label->blockSignals(true); //切断label的所有连接
-                QPixmap new_pixmap = QPixmap(activated_path).scaled(w,h,Qt::KeepAspectRatio);
-                ui_f.photo_label->setPixmap(new_pixmap);// 将绘制后的QPixmap重新设置为QLabel的背景图片
-                //ui_f.photo_label->blockSignals(false); //label连接
+                //更改尺寸时，从内存拿到原始的图片数据来更改尺寸
+                QPixmap new_pixmap = photo_label->activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio);
+                photo_label->activated_photo_pixmap = new_pixmap;
             }
             else{
                 ui_f.photo_label->setPixmap(QPixmap());//设置一个空对象
@@ -373,9 +379,12 @@ private:
         QObject::connect(ui_f.treeWidget_1, &QTreeWidget::itemClicked,[this](QTreeWidgetItem *item){
             QString img_path = item->data(0,Qt::UserRole).toString();
             activated_path = img_path;
+            cout<<activated_path.toStdString()<<endl;
             bool is_img = is_type(img_path, this->imageTypes);
             if (is_img){
-                ui_f.photo_label->setPixmap(img_path);
+                //注意，这个时候的this->photo_label 和 ui.photo_label共用一个地址
+                //将点击的照片数据给 photo_label->activated_photo_pixmap
+                photo_label->activated_photo_pixmap = QPixmap(img_path);
             }
 
             cout<<item->data(0,Qt::UserRole).toString().toStdString()<<endl;
@@ -402,6 +411,7 @@ private:
             //下面 设置节点的信息
             node->setText(0, fileName);
             node->setData(0, Qt::UserRole, fileInfo.filePath());
+            cout<<fileInfo.filePath().toStdString()<<endl;
             if (fileType == "files"){
 
                 bool is_img = is_type(fileName,imageTypes);

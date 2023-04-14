@@ -1,4 +1,0 @@
-F:/code/c_code/about_qt/qt_exam/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir
-F:/code/c_code/about_qt/qt_exam/cmake-build-debug-mingw-599/CMakeFiles/edit_cache.dir
-F:/code/c_code/about_qt/qt_exam/cmake-build-debug-mingw-599/CMakeFiles/rebuild_cache.dir
-F:/code/c_code/about_qt/qt_exam/cmake-build-debug-mingw-599/CMakeFiles/qt_exam_autogen.dir
