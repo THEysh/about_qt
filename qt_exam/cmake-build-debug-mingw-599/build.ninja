@@ -81,14 +81,6 @@ build CMakeFiles/qt_exam.dir/src/beautification.cpp.obj: CXX_COMPILER__qt_exam_D
   OBJECT_DIR = CMakeFiles\qt_exam.dir
   OBJECT_FILE_DIR = CMakeFiles\qt_exam.dir\src
 
-build CMakeFiles/qt_exam.dir/src/ui/cpp_class_function/My_Photo_Label.cpp.obj: CXX_COMPILER__qt_exam_Debug F$:/code/c_code/about_qt/qt_exam/src/ui/cpp_class_function/My_Photo_Label.cpp || cmake_object_order_depends_target_qt_exam
-  DEFINES = -DPROJECT_ROOT_DIR=\"F:/code/c_code/about_qt/qt_exam\" -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB
-  DEP_FILE = CMakeFiles\qt_exam.dir\src\ui\cpp_class_function\My_Photo_Label.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++1z
-  INCLUDES = -IF:/code/c_code/about_qt/qt_exam/cmake-build-debug-mingw-599/qt_exam_autogen/include -IC:/Strawberry/c/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtCore -isystem F:/QT5_9_9/5.9.9/mingw53_32/./mkspecs/win32-g++ -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtGui -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtANGLE -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtWidgets -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtNetwork -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtSvg
-  OBJECT_DIR = CMakeFiles\qt_exam.dir
-  OBJECT_FILE_DIR = CMakeFiles\qt_exam.dir\src\ui\cpp_class_function
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target qt_exam
@@ -97,7 +89,7 @@ build CMakeFiles/qt_exam.dir/src/ui/cpp_class_function/My_Photo_Label.cpp.obj: C
 #############################################
 # Link the executable qt_exam.exe
 
-build qt_exam.exe: CXX_EXECUTABLE_LINKER__qt_exam_Debug CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj CMakeFiles/qt_exam.dir/src/main.cpp.obj CMakeFiles/qt_exam.dir/src/function.cpp.obj CMakeFiles/qt_exam.dir/src/beautification.cpp.obj CMakeFiles/qt_exam.dir/src/ui/cpp_class_function/My_Photo_Label.cpp.obj | F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Networkd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a || qt_exam_autogen
+build qt_exam.exe: CXX_EXECUTABLE_LINKER__qt_exam_Debug CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj CMakeFiles/qt_exam.dir/src/main.cpp.obj CMakeFiles/qt_exam.dir/src/function.cpp.obj CMakeFiles/qt_exam.dir/src/beautification.cpp.obj | F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Networkd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a || qt_exam_autogen
   FLAGS = -g
   LINK_LIBRARIES = F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Networkd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\qt_exam.dir

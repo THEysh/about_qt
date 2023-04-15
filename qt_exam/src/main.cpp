@@ -1,3 +1,5 @@
+
+
 #include <QApplication>
 #include <QFrame>
 #include <QHBoxLayout>
@@ -45,39 +47,34 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     cout<<"------------------------------------------------------------------------------------------"<<endl;
 
-//    auto MainWindow = new QMainWindow();
-//    //使用了C++11新特性中的列表初始化方式，将myqtree_ui对象以花括号包裹起来，表示使用默认构造函数进行初始化。这种方式可以保证在所有情况下都会进行零值初始化，即默认值或者空值。;
-//    Ui_MainWindow ui_f{};
-//    ui_f.setupUi(MainWindow);
-//    ThreadReceiver receiver_main(ui_f);
-//    MainWindow->show();
+    auto MainWindow = new QMainWindow();
+    //使用了C++11新特性中的列表初始化方式，将myqtree_ui对象以花括号包裹起来，表示使用默认构造函数进行初始化。这种方式可以保证在所有情况下都会进行零值初始化，即默认值或者空值。;
+    Ui_MainWindow ui_f{};
+    ui_f.setupUi(MainWindow);
+    ThreadReceiver receiver_main(ui_f);
+    MainWindow->show();
 
-//    auto MainWindow2 = new QMainWindow();
-//    Ui_Interface_MainWindow ui_interface{};
-//    ui_interface.setupUi(MainWindow2);
-//    Interface_Class ui_interface_main(ui_interface);
-//    MainWindow2->show();
+    auto MainWindow2 = new QMainWindow();
+    Ui_Interface_MainWindow ui_interface{};
+    ui_interface.setupUi(MainWindow2);
+    Interface_Class ui_interface_main(ui_interface);
+    MainWindow2->show();
 
-//    auto QWidget3 = new QWidget();
-//    Ui_QSlider_Color ui_color{};
-//    ui_color.setupUi(QWidget3);
-//    Slider_Color_Class my_class_ui_color(ui_color);
-//    QWidget3->show();
+    auto QWidget3 = new QWidget();
+    Ui_QSlider_Color ui_color{};
+    ui_color.setupUi(QWidget3);
+    Slider_Color_Class my_class_ui_color(ui_color);
+    QWidget3->show();
 
-//    Net_Image mynetimage;
-//    pair<QLabel*,QMovie*> re = mynetimage.down_gif_show(); //加载一张网络的gif图片并显示在界面
-//    re.first->show();
+    Net_Image mynetimage;
+    pair<QLabel*,QMovie*> re = mynetimage.down_gif_show(); //加载一张网络的gif图片并显示在界面
+    re.first->show();
 
-//    auto QWidget4 = new QMainWindow();
-//    Ui_Show_Label ui_label{};
-//    ui_label.setupUi(QWidget4);
-//    Net_Class my_ui_f(ui_label);
-//    QWidget4->show();
-
-    auto *QWidget5 = new QMainWindow();
-    Ui_Qtree_Class_UI myqtree_ui{};
-    Qtree_Class myqtree_class(myqtree_ui,QWidget5);
-    QWidget5->show();
+    auto QWidget4 = new QMainWindow();
+    Ui_Show_Label ui_label{};
+    ui_label.setupUi(QWidget4);
+    Net_Class my_ui_f(ui_label);
+    QWidget4->show();
 
 
     delete ABProjectDir; //清空内存指针

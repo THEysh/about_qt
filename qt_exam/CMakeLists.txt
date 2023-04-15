@@ -32,8 +32,7 @@ add_executable(qt_exam src/main.cpp
         src/ui/ui_file/Qstring_Interface_switching_ui.h
         src/beautification.cpp
         src/beautification.h
-        src/ui/ui_file/Qtree_ui.h
-        src/ui/cpp_class_function/My_Photo_Label.cpp src/ui/cpp_class_function/My_Photo_Label.h)
+        )
 
 
 target_link_libraries(qt_exam
