@@ -33,7 +33,6 @@ class Qtree_Class : public QWidget{
 Q_OBJECT
 
 signals:
-    void photo_changed_signals1(int w, int h);
 
 public slots:
 
@@ -43,32 +42,17 @@ public:
         this->ui_f = ui_f;
         photo_label = ui_f.photo_label;  //这样是实现，ui_f.photo_label 和 这个类中的photo_label共用一个地址
 
-        q_timer();
         this->_Qtree_dir();
-        _photo_connect();
-        // 创建一个时钟，每x毫秒更新一次
 
     }
 public:
     QString *ProjectDir2 = new QString(PROJECT_ROOT_DIR);
-    QString ProjectDir = *ProjectDir2;
+    QString ProjectDir = *ProjectDir2 + R"(\src\ui\images)";
 private:
     Ui_Qtree_Class_UI ui_f;
     My_Photo_Label *photo_label;
-    int photo_win_size_w;
-    int photo_win_size_h;
     QString activated_path = nullptr; //当前图片激活的路径
     QStringList imageTypes {"bmp","jpg","png","tif","gif","fpx","svg","psd"};
-
-    void q_timer(){
-
-        auto *timer = new QTimer();
-        QObject::connect(timer, &QTimer::timeout, [=]() {
-            emit photo_changed_signals1(ui_f.photo_label->geometry().width(),ui_f.photo_label->geometry().height());
-        });
-        timer->start(50);
-
-    }
 
     bool is_type(const QString& name, const QStringList& strlist){
         //输出 name，这个name 算法在包含 strlist内
@@ -95,24 +79,6 @@ private:
         _addSubDirs(ui_f.treeWidget_1, rootNode, ProjectDir);
 
         ui_f.treeWidget_1->show();
-    }
-
-    void _photo_connect(){
-        // 更新label照片的尺寸
-        QObject::connect(this,&Qtree_Class::photo_changed_signals1,[this](int w, int h){
-            photo_win_size_w = w;
-            photo_win_size_h = h;
-            //Qt::KeepAspectRatio保持比例
-            bool is_img = is_type(activated_path,imageTypes);
-            if (is_img){
-                //更改尺寸时，从内存拿到原始的图片数据来更改尺寸
-                photo_label->activated_photo_pixmap = photo_label->or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio);
-
-            }
-            else{
-                ui_f.photo_label->setPixmap(QPixmap());//设置一个空对象
-            }
-        });
     }
 
     void _dir_connect(QTreeWidgetItem* rootNode){
@@ -143,6 +109,7 @@ private:
                 //将点击的照片数据给 photo_label->activated_photo_pixmap
                 //点击图片时，把这个图片数据保存到内存
                 photo_label->or_activated_photo_pixmap = QPixmap(img_path);
+                photo_label->click_show_photo();
             }
 
         });

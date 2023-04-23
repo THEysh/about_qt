@@ -1,0 +1,174 @@
+{
+	"BUILD_DIR" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen",
+	"CMAKE_BINARY_DIR" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "F:/code/c_code/about_qt/picture_viewer",
+	"CMAKE_EXECUTABLE" : "F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : 
+	[
+		"F:/code/c_code/about_qt/picture_viewer/CMakeLists.txt",
+		"F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/3.25.2/CMakeSystem.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInitialize.cmake",
+		"F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/3.25.2/CMakeCCompiler.cmake",
+		"F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/3.25.2/CMakeCXXCompiler.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeSystemSpecificInformation.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeGenericSystem.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeInitializeConfigs.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/WindowsPaths.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Compiler/GNU-C.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows-GNU-C.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows-GNU.cmake",
+		"F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/3.25.2/CMakeRCCompiler.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeRCInformation.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows-windres.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows-GNU-C-ABI.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeLanguageInformation.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Compiler/GNU-CXX.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Compiler/GNU.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows-GNU-CXX.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows-GNU.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/Platform/Windows-GNU-CXX-ABI.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5/Qt5ConfigVersion.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5/Qt5Config.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5/Qt5ModuleLocation.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfig.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Core/Qt5CoreMacros.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeParseArguments.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QVirtualKeyboardPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5Gui_QWindowsIntegrationPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeParseArguments.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Network/Qt5NetworkConfigVersion.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Network/Qt5NetworkConfig.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfigVersion.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfig.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgIconPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "F:/code/c_code/about_qt/picture_viewer",
+	"DEP_FILE" : "",
+	"DEP_FILE_RULE_NAME" : "",
+	"HEADERS" : 
+	[
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/My_Photo_Label.h",
+			"MU",
+			"UVLADIE3JM/moc_My_Photo_Label.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/function.h",
+			"MU",
+			"UVLADIE3JM/moc_function.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/ui/ui_file/Qtree_ui.h",
+			"MU",
+			"BWLLZGAE4L/moc_Qtree_ui.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/include",
+	"MOC_COMPILATION_FILE" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"PROJECT_ROOT_DIR=\"F:/code/c_code/about_qt/picture_viewer\"",
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NETWORK_LIB",
+		"QT_SVG_LIB",
+		"QT_WIDGETS_LIB"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"F:/QT5_9_9/5.9.9/mingw53_32/include",
+		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtCore",
+		"F:/QT5_9_9/5.9.9/mingw53_32/mkspecs/win32-g++",
+		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtGui",
+		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtANGLE",
+		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtWidgets",
+		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtNetwork",
+		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtSvg",
+		"F:/QT5_9_9/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include",
+		"F:/QT5_9_9/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed",
+		"F:/QT5_9_9/Tools/mingw530_32/i686-w64-mingw32/include",
+		"F:/QT5_9_9/Tools/mingw530_32/i686-w64-mingw32/include/c++",
+		"F:/QT5_9_9/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32",
+		"F:/QT5_9_9/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"F:/QT5_9_9/Tools/mingw530_32/bin/c++.exe",
+		"-dM",
+		"-E",
+		"-c",
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 8,
+	"PARSE_CACHE_FILE" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "F:/QT5_9_9/5.9.9/mingw53_32/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "F:/QT5_9_9/5.9.9/mingw53_32/bin/uic.exe",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 9,
+	"SETTINGS_FILE" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/My_Photo_Label.cpp",
+			"MU",
+			null
+		],
+		[ "F:/code/c_code/about_qt/picture_viewer/src/function.cpp", "MU", null ],
+		[ "F:/code/c_code/about_qt/picture_viewer/src/main.cpp", "MU", null ]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}

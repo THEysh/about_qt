@@ -1,30 +1,29 @@
-#include <QtCore/QCoreApplication>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkRequest>
-#include <QtNetwork/QNetworkReply>
+#include <QApplication>
+#include <QWidget>
+#include <QMouseEvent>
+#include <iostream>
+
+using namespace std;
+
+class MyWidget : public QWidget {
+public:
+    explicit MyWidget(QWidget *parent = nullptr) : QWidget(parent) {}
+
+protected:
+    void mouseMoveEvent(QMouseEvent* event) override {
+        if (event->buttons() == Qt::LeftButton){
+            cout << "1111: (" << event->pos().x() << ", " << event->pos().y() << ")" << endl;
+        }
+        cout << "Mouse position: (" << event->pos().x() << ", " << event->pos().y() << ")" << endl;
+    }
+};
 
 int main(int argc, char *argv[]) {
-    QCoreApplication app(argc, argv);
+    QApplication app(argc, argv);
 
-    QString url = "http://www.baidu.com";
+    MyWidget widget;
+    widget.setFixedSize(400, 300);
+    widget.show();
 
-    auto *manager = new QNetworkAccessManager(&app);
-    QNetworkRequest request;
-    request.setUrl(QUrl(url));
-
-    QNetworkReply *reply = manager->get(request);
-
-    QObject::connect(reply, &QNetworkReply::finished, &app, [&]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            QByteArray bytes = reply->readAll();
-            // 处理获取到的数据
-            qDebug() << bytes;
-        } else {
-            // 处理错误信息
-            qDebug() << reply->errorString();
-        }
-        app.quit(); // 退出事件循环
-    });
-
-    return app.exec(); // 进入事件循环
+    return QApplication::exec();
 }
