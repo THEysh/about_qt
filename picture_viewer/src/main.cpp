@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
     Qtree_Class myqtree_class(myqtree_ui,QWidget5);
     QWidget5->show();
 
-
     delete ABProjectDir; //清空内存指针
     return QApplication::exec();
 }

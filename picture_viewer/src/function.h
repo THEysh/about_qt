@@ -40,8 +40,7 @@ public:
     Qtree_Class(Ui_Qtree_Class_UI &ui_f, QMainWindow *Win){
         ui_f.setupUi(Win);
         this->ui_f = ui_f;
-        photo_label = ui_f.photo_label;  //这样是实现，ui_f.photo_label 和 这个类中的photo_label共用一个地址
-
+        photo_g = ui_f.graphicsView;  //这样是实现，ui_f.photo_label 和 这个类中的photo_label共用一个地址
         this->_Qtree_dir();
 
     }
@@ -50,7 +49,7 @@ public:
     QString ProjectDir = *ProjectDir2 + R"(\src\ui\images)";
 private:
     Ui_Qtree_Class_UI ui_f;
-    My_Photo_Label *photo_label;
+    My_Photo_Graphics *photo_g;
     QString activated_path = nullptr; //当前图片激活的路径
     QStringList imageTypes {"bmp","jpg","png","tif","gif","fpx","svg","psd"};
 
@@ -108,8 +107,8 @@ private:
                 //注意，这个时候的this->photo_label 和 ui.photo_label共用一个地址
                 //将点击的照片数据给 photo_label->activated_photo_pixmap
                 //点击图片时，把这个图片数据保存到内存
-                photo_label->or_activated_photo_pixmap = QPixmap(img_path);
-                photo_label->click_show_photo();
+                photo_g->or_activated_photo_pixmap = QPixmap(img_path);
+                photo_g->click_show_photo();
             }
 
         });

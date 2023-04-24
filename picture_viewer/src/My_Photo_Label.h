@@ -12,8 +12,8 @@
 #include <QMouseEvent>
 #include "qdebug.h"
 #include "Qtimer"
-using namespace std;
 
+using namespace std;
 class My_Photo_Label : public QLabel
 {
 Q_OBJECT
@@ -29,7 +29,6 @@ private:
     int mouse_x = 0;
     int mouse_y = 0;
     QTimer* timer_mousepress = new QTimer();
-
 
 public:
     void click_show_photo(){
@@ -136,8 +135,6 @@ protected:
         //cout<<"event->x():"<<event->x()<<"event->y():"<<event->y()<<endl;
         //cout<<"w:"<<w<<"h"<<h<<endl;
         //activated_photo_pixmap = or_activated_photo_pixmap.scaled(QSize(2800, 2800), Qt::KeepAspectRatio);
-
-
 
     }
 

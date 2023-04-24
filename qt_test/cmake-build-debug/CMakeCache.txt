@@ -245,6 +245,12 @@ Qt5Core_DIR:PATH=F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Core
 //The directory containing a CMake configuration file for Qt5Gui.
 Qt5Gui_DIR:PATH=F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Gui
 
+//The directory containing a CMake configuration file for Qt5Network.
+Qt5Network_DIR:PATH=F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Network
+
+//The directory containing a CMake configuration file for Qt5QNetwork.
+Qt5QNetwork_DIR:PATH=Qt5QNetwork_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for Qt5Widgets.
 Qt5Widgets_DIR:PATH=F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets
 

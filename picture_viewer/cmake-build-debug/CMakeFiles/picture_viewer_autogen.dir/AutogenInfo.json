@@ -92,6 +92,12 @@
 			null
 		],
 		[
+			"F:/code/c_code/about_qt/picture_viewer/src/my_photo_Graphics.h",
+			"MU",
+			"UVLADIE3JM/moc_my_photo_Graphics.cpp",
+			null
+		],
+		[
 			"F:/code/c_code/about_qt/picture_viewer/src/ui/ui_file/Qtree_ui.h",
 			"MU",
 			"BWLLZGAE4L/moc_Qtree_ui.cpp",
@@ -164,7 +170,12 @@
 			null
 		],
 		[ "F:/code/c_code/about_qt/picture_viewer/src/function.cpp", "MU", null ],
-		[ "F:/code/c_code/about_qt/picture_viewer/src/main.cpp", "MU", null ]
+		[ "F:/code/c_code/about_qt/picture_viewer/src/main.cpp", "MU", null ],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/my_photo_Graphics.cpp",
+			"MU",
+			null
+		]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

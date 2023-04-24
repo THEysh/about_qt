@@ -21,7 +21,7 @@
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
-#include "../../My_Photo_Label.h"
+#include "../../my_photo_Graphics.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -40,7 +40,7 @@ public:
     QPushButton *pushButton_3;
     QPushButton *pushButton_4;
     QPushButton *pushButton_5;
-    My_Photo_Label *photo_label;
+    My_Photo_Graphics *graphicsView;
 
     void setupUi(QMainWindow *Qtree_Class_UI)
     {
@@ -97,16 +97,10 @@ public:
 
         verticalLayout_3->addWidget(tabWidget);
 
-        photo_label = new My_Photo_Label(centralwidget);
-        photo_label->setObjectName(QStringLiteral("photo_label"));
-        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(photo_label->sizePolicy().hasHeightForWidth());
-        photo_label->setSizePolicy(sizePolicy);
-        photo_label->setScaledContents(false);
+        graphicsView = new My_Photo_Graphics(centralwidget);
+        graphicsView->setObjectName(QStringLiteral("graphicsView"));
 
-        verticalLayout_3->addWidget(photo_label);
+        verticalLayout_3->addWidget(graphicsView);
 
 
         horizontalLayout->addLayout(verticalLayout_3);
@@ -132,7 +126,6 @@ public:
         pushButton_4->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
         pushButton_5->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("Qtree_Class_UI", "\345\267\245\345\205\267\346\240\217", Q_NULLPTR));
-        photo_label->setText(QString());
     } // retranslateUi
 
 };

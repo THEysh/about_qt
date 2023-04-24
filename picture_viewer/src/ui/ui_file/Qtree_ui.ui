@@ -100,20 +100,7 @@
        </widget>
       </item>
       <item>
-       <widget class="My_Photo_Label" name="photo_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="scaledContents">
-         <bool>false</bool>
-        </property>
-       </widget>
+       <widget class="My_Photo_Graphics" name="graphicsView"/>
       </item>
      </layout>
     </item>
@@ -122,9 +109,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>My_Photo_Label</class>
-   <extends>QLabel</extends>
-   <header>../../My_Photo_Label.h</header>
+   <class>My_Photo_Graphics</class>
+   <extends>QGraphicsView</extends>
+   <header>my_photo_Graphics.h</header>
   </customwidget>
  </customwidgets>
  <resources>
