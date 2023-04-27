@@ -24,7 +24,6 @@ QString* Resource_Registration(){
     return ProjectDir;
 }
 
-
 int main(int argc, char *argv[])
 {
     system("chcp 65001"); //用于解决中文乱码
