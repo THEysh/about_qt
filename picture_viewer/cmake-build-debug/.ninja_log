@@ -83,3 +83,9 @@
 218	1618	7042128753605408	CMakeFiles/picture_viewer.dir/picture_viewer_autogen/mocs_compilation.cpp.obj	ae939330001451e8
 219	1707	7042128754491279	CMakeFiles/picture_viewer.dir/src/main.cpp.obj	bc0bd59311ff5a4f
 1707	1998	7042128756771815	picture_viewer.exe	8831273bae7ee167
+6	31	0	CMakeFiles/picture_viewer_autogen	540c747e9e7067a4
+6	31	0	picture_viewer_autogen/mocs_compilation.cpp	540c747e9e7067a4
+6	31	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen	540c747e9e7067a4
+6	31	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/mocs_compilation.cpp	540c747e9e7067a4
+32	1507	7042941552583946	CMakeFiles/picture_viewer.dir/src/main.cpp.obj	bc0bd59311ff5a4f
+1507	1802	7042941554914479	picture_viewer.exe	8831273bae7ee167
