@@ -21,73 +21,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="在写图片的居中">
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/.idea/picture_viewer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/My_Photo_Label.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/function.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/function.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/my_qrc.qrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/my_qrc.rcc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/fonts/Font Awesome 6 Brands-Regular-400.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/fonts/Font Awesome 6 Free-Regular-400.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/fonts/Font Awesome 6 Free-Solid-900.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/List.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/TREE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/Table.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/clear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/exit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/file-image-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/file-lines-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/file-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/folder-open-regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/folder-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/github.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/gril.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/init.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/insert.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic/menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic_2d/wallhaven-j3m12w.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic_2d/wallhaven-p9lzke.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.cmake/api/v1/reply/codemodel-v2-cdf3adc955537b4bd211.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.cmake/api/v1/reply/index-2023-04-14T07-22-58-0641.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.cmake/api/v1/reply/target-qt_exam-Debug-77057a7a3c05b2b2488d.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/qt_exam_autogen/mocs_compilation.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/beautification.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/beautification.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/function.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/function.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/ui/cpp_class_function/My_Photo_Label.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam.dir/src/ui/cpp_class_function/My_Photo_Label.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam_autogen.dir/AutogenInfo.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/CMakeFiles/qt_exam_autogen.dir/ParseCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/qt_exam.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/qt_exam.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/qt_exam_autogen/UVLADIE3JM/moc_function.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/qt_exam_autogen/UVLADIE3JM/moc_function.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/function.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/function.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/cpp_class_function/My_Photo_Label.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/My_Photo_Label.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/cpp_class_function/My_Photo_Label.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ui_file/Qtree_ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/ui_file/Qtree_ui.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ui_file/Qtree_ui.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/ui_file/Qtree_ui.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ui_file/myresource.rcc" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/ui/images/pic_2d/wallhaven-3z32j3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/CMakeFiles/qt_test.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug/CMakeFiles/qt_test.dir/main.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/qt_test.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qt_test/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,11 +91,6 @@
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.qt_5_9_9">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="qt_exam" type="CMakeListConfigurationType" factoryName="CMakeListConfigurationFactory" temporary="true">
       <method v="2" />
     </configuration>
@@ -206,6 +135,7 @@
       <workItem from="1681312365948" duration="50810000" />
       <workItem from="1681462018127" duration="6541000" />
       <workItem from="1681535858646" duration="96000" />
+      <workItem from="1682928402381" duration="2000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
