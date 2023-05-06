@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     QString *ABProjectDir = Resource_Registration(); // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）,返回路径
     std::cout << "Project directory: " << ABProjectDir->toStdString() << std::endl; //获取项目的绝对路径
     QApplication app(argc, argv);
-    cout<<"------------------------------------------------------------------------------------------"<<endl;
+    cout<<"---------------------------------------------------------------------------------"<<endl;
 
     auto *QWidget5 = new QMainWindow();
     Ui_Qtree_Class_UI myqtree_ui{};
