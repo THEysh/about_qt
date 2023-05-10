@@ -80,12 +80,6 @@
 	"HEADERS" : 
 	[
 		[
-			"F:/code/c_code/about_qt/picture_viewer/src/My_Photo_Label.h",
-			"MU",
-			"UVLADIE3JM/moc_My_Photo_Label.cpp",
-			null
-		],
-		[
 			"F:/code/c_code/about_qt/picture_viewer/src/function.h",
 			"MU",
 			"UVLADIE3JM/moc_function.cpp",
@@ -164,11 +158,6 @@
 	"SETTINGS_FILE" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[
-			"F:/code/c_code/about_qt/picture_viewer/src/My_Photo_Label.cpp",
-			"MU",
-			null
-		],
 		[ "F:/code/c_code/about_qt/picture_viewer/src/function.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/picture_viewer/src/main.cpp", "MU", null ],
 		[

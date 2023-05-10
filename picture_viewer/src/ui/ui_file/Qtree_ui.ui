@@ -111,7 +111,7 @@
   <customwidget>
    <class>My_Photo_Graphics</class>
    <extends>QGraphicsView</extends>
-   <header>my_photo_Graphics.h</header>
+   <header>../../my_photo_Graphics.h</header>
   </customwidget>
  </customwidgets>
  <resources>

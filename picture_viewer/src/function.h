@@ -23,7 +23,6 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QPainter>
-#include "My_Photo_Label.h"
 #include <QDesktopServices>
 using namespace  std;
 
@@ -57,7 +56,6 @@ private:
         //输出 name，这个name 算法在包含 strlist内
         //例：name = abc.jpg, strlist = {".jpg",".png"...}  返回true
         //name = F:/code/c_code/about_qt/picture_viewer/src/ui/images/pic/delete.png , strlist = {".jpg",".png"...}  返回true
-
         QString type = this->_rag(name);
         for (const auto& imgtype :strlist){
             if (type.endsWith(imgtype)) {//判断是否是图片格式

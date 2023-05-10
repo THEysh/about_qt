@@ -1,51 +1,41 @@
 #include <QApplication>
 #include <QGraphicsScene>
+#include <QGraphicsEllipseItem>
 #include <QGraphicsView>
-#include <QGraphicsPixmapItem>
-#include <QPixmap>
-#include <QUrl>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QEventLoop>
+#include <QWheelEvent>
 
-int main(int argc, char *argv[])
-{
+class MyGraphicsView : public QGraphicsView {
+public:
+    explicit MyGraphicsView(QWidget *parent = nullptr) : QGraphicsView(parent) {
+        // 将场景设置为滚动条跟随内容变化而自动调整大小
+//        setResizeAnchor(QGraphicsView::AnchorUnderMouse);
+//        setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+//        setRenderHint(QPainter::Antialiasing, true);
+//        setRenderHint(QPainter::TextAntialiasing, true);
+    }
+
+protected:
+    // 处理鼠标滚轮事件
+    void wheelEvent(QWheelEvent *event) override {
+        setTransformationAnchor(QGraphicsView::AnchorUnderMouse); // 设置变换锚点
+        double scaleFactor = 1.15;
+        if (event->delta() > 0) {  // 缩放
+            scale(scaleFactor, scaleFactor);
+        } else {  // 放大
+            scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+        }
+    }
+};
+
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-
-    // 创建场景和视图
-    QGraphicsScene scene;
-    QGraphicsView view(&scene);
-
-    // 加载网络图片
-    QUrl url("https://lmg.jj20.com/up/allimg/tp09/210H51R3313N3-0-lp.jpg");
-    QNetworkAccessManager manager;
-    QNetworkReply *reply = manager.get(QNetworkRequest(url));
-    QEventLoop loop;
-    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
-    QByteArray data = reply->readAll();
-    QPixmap pixmap;
-    pixmap.loadFromData(data);
-
-    // 创建PixmapItem并设置图片
-    QGraphicsPixmapItem pixmapItem(pixmap);
-    scene.addItem(&pixmapItem);
-
-
-    // 允许平移和缩放
-    view.setDragMode(QGraphicsView::ScrollHandDrag);
-    view.setInteractive(true);
-    view.setRenderHint(QPainter::SmoothPixmapTransform);
-    view.setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    view.setBackgroundBrush(Qt::white);
-    view.setRenderHint(QPainter::Antialiasing, true);
-    view.setRenderHint(QPainter::TextAntialiasing, true);
-    view.setRenderHint(QPainter::HighQualityAntialiasing, true);
-    view.setRenderHint(QPainter::SmoothPixmapTransform);
-    // 调整视图大小
-    view.fitInView(&pixmapItem, Qt::KeepAspectRatio);
-    // 显示视图
-    view.show();
-
+    QGraphicsScene scene;  // 新建一个场景
+    QGraphicsEllipseItem *ellipseItem = new QGraphicsEllipseItem(-50, -50, 100, 100);  // 创建一个圆形图元
+    ellipseItem->setBrush(QBrush(Qt::green));  // 设置图元的填充颜色
+    ellipseItem->setPos(50, 50);  // 设置图元位置
+    scene.addItem(ellipseItem);  // 将图元添加到场景中
+    MyGraphicsView view;  // 新建一个视图
+    view.setScene(&scene);  // 将场景设置为视图的场景
+    view.show();  // 显示视图
     return app.exec();
 }

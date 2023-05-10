@@ -26,8 +26,8 @@ add_executable(picture_viewer src/main.cpp
         src/function.cpp
         src/function.h
         src/ui/ui_file/Qtree_ui.h
-        src/My_Photo_Label.cpp
-        src/My_Photo_Label.h src/my_photo_Graphics.cpp src/my_photo_Graphics.h)
+        src/my_photo_Graphics.cpp  # 加上这一行
+        src/my_photo_Graphics.h)
 
 
 target_link_libraries(picture_viewer
