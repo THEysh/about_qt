@@ -23,5 +23,8 @@
         <file>ui/fonts/Font Awesome 6 Brands-Regular-400.otf</file>
         <file>ui/fonts/Font Awesome 6 Free-Solid-900.otf</file>
         <file>ui/fonts/Font Awesome 6 Free-Regular-400.otf</file>
+        <file>ui/qss/NeonButtons.qss</file>
+        <file>ui/qss/MacOS.qss</file>
+
     </qresource>
 </RCC>

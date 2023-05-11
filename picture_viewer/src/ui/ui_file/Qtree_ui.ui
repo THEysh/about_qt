@@ -6,32 +6,38 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>2415</width>
+    <width>2324</width>
     <height>1470</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
-     <widget class="QTreeWidget" name="treeWidget_1">
-      <property name="maximumSize">
-       <size>
-        <width>400</width>
-        <height>16777215</height>
-       </size>
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
+      <property name="spacing">
+       <number>10</number>
       </property>
-      <column>
-       <property name="text">
-        <string>文件列表</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="topMargin">
        <number>0</number>
       </property>
@@ -39,68 +45,29 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QTabWidget" name="tabWidget">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>80</height>
-         </size>
-        </property>
+       <widget class="My_Qtreewidget" name="treeWidget_1">
         <property name="maximumSize">
          <size>
-          <width>16777215</width>
-          <height>150</height>
+          <width>16777214</width>
+          <height>16777215</height>
          </size>
         </property>
-        <property name="currentIndex">
-         <number>0</number>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
-        <widget class="QWidget" name="tab">
-         <attribute name="title">
-          <string>工具栏</string>
-         </attribute>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QPushButton" name="pushButton_1">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_2">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_3">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_5">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
+        <column>
+         <property name="text">
+          <string>文件列表</string>
+         </property>
+        </column>
        </widget>
       </item>
       <item>
-       <widget class="My_Photo_Graphics" name="graphicsView"/>
+       <widget class="My_Photo_Graphics" name="graphicsView">
+        <property name="styleSheet">
+         <string notr="true">QGraphicsView {background-image:url(:/ui/images/pic_2d/wallhaven-3z32j3.jpg);}</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
@@ -111,7 +78,12 @@
   <customwidget>
    <class>My_Photo_Graphics</class>
    <extends>QGraphicsView</extends>
-   <header>../../my_photo_Graphics.h</header>
+   <header>../../some_function/my_photo_Graphics.h</header>
+  </customwidget>
+  <customwidget>
+   <class>My_Qtreewidget</class>
+   <extends>QTreeWidget</extends>
+   <header>../../some_function/my_qtreewidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

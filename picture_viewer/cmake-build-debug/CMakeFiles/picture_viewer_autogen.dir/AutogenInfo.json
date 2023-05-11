@@ -86,9 +86,15 @@
 			null
 		],
 		[
-			"F:/code/c_code/about_qt/picture_viewer/src/my_photo_Graphics.h",
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_Qtreewidget.h",
 			"MU",
-			"UVLADIE3JM/moc_my_photo_Graphics.cpp",
+			"UJXWR6GGJZ/moc_my_Qtreewidget.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_photo_Graphics.h",
+			"MU",
+			"UJXWR6GGJZ/moc_my_photo_Graphics.cpp",
 			null
 		],
 		[
@@ -161,7 +167,12 @@
 		[ "F:/code/c_code/about_qt/picture_viewer/src/function.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/picture_viewer/src/main.cpp", "MU", null ],
 		[
-			"F:/code/c_code/about_qt/picture_viewer/src/my_photo_Graphics.cpp",
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_Qtreewidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_photo_Graphics.cpp",
 			"MU",
 			null
 		]

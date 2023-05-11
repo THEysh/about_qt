@@ -1,5 +1,5 @@
 //
-// function.cpp
+// some_function.cpp
 //
 #include "iostream"
 #include "function.h"

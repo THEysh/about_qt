@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_Qtree_Class_t {
+struct qt_meta_stringdata_Inherit_UI_t {
     QByteArrayData data[1];
-    char stringdata0[12];
+    char stringdata0[11];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_Qtree_Class_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Inherit_UI_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_Qtree_Class_t qt_meta_stringdata_Qtree_Class = {
+static const qt_meta_stringdata_Inherit_UI_t qt_meta_stringdata_Inherit_UI = {
     {
-QT_MOC_LITERAL(0, 0, 11) // "Qtree_Class"
+QT_MOC_LITERAL(0, 0, 10) // "Inherit_UI"
 
     },
-    "Qtree_Class"
+    "Inherit_UI"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_Qtree_Class[] = {
+static const uint qt_meta_data_Inherit_UI[] = {
 
  // content:
        7,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_Qtree_Class[] = {
        0        // eod
 };
 
-void Qtree_Class::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Inherit_UI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,26 +62,26 @@ void Qtree_Class::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     Q_UNUSED(_a);
 }
 
-const QMetaObject Qtree_Class::staticMetaObject = {
-    { &QWidget::staticMetaObject, qt_meta_stringdata_Qtree_Class.data,
-      qt_meta_data_Qtree_Class,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject Inherit_UI::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_Inherit_UI.data,
+      qt_meta_data_Inherit_UI,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *Qtree_Class::metaObject() const
+const QMetaObject *Inherit_UI::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *Qtree_Class::qt_metacast(const char *_clname)
+void *Inherit_UI::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_Qtree_Class.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_Inherit_UI.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int Qtree_Class::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Inherit_UI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;

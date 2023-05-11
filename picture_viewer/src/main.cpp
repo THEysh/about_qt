@@ -33,10 +33,11 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     cout<<"---------------------------------------------------------------------------------"<<endl;
 
-    auto *QWidget5 = new QMainWindow();
-    Ui_Qtree_Class_UI myqtree_ui{};
-    Qtree_Class myqtree_class(myqtree_ui,QWidget5);
-    QWidget5->show();
+    auto *QWidget = new QMainWindow();
+
+    Ui_Qtree_Class_UI my_ui{};
+    Inherit_UI my_class(my_ui,QWidget);
+    QWidget->show();
 
     delete ABProjectDir; //清空内存指针
     return QApplication::exec();
