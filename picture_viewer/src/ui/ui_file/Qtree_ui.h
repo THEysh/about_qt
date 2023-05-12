@@ -56,7 +56,7 @@ public:
 
         graphicsView = new My_Photo_Graphics(centralwidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
-        graphicsView->setStyleSheet(QStringLiteral("QGraphicsView {background-image:url(:/ui/images/pic_2d/wallhaven-3z32j3.jpg);}"));
+        graphicsView->setStyleSheet(QStringLiteral(""));
 
         horizontalLayout_2->addWidget(graphicsView);
 

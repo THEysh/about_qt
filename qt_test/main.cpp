@@ -1,28 +1,35 @@
+
 #include <QApplication>
-#include <QSplitter>
-#include <QTreeView>
-#include <QTextEdit>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsPixmapItem>
+#include <QPixmap>
+#include <QGraphicsBlurEffect>
 
 int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
+    QGraphicsScene scene;
+    QGraphicsView view(&scene);
 
-    tree = QtWidgets.QTreeWidget()
-    tree.setColumnCount(2)
-    tree.setHeaderLabels(['列1', '列2'])
-
-
-    parent = QtWidgets.QTreeWidgetItem(tree)
-    parent.setText(0, '父节点')
-    child1 = QtWidgets.QTreeWidgetItem(parent)
-    child1.setText(0, '子节点1')
-    child2 = QtWidgets.QTreeWidgetItem(parent)
-    child2.setText(0, '子节点2')
+    QPixmap originalPixmap("F:\\code\\c_code\\about_qt\\picture_viewer\\src\\ui\\images\\pic_2d\\wallhaven-3z32j3.jpg");
 
 
-    new_text = '新的子节点1'
-    child_item = parent.child(0)
-    child_item.setText(0, new_text)
+    // 生成高斯模糊图片
+    QPixmap blurredPixmap = originalPixmap;
+    QGraphicsBlurEffect blurEffect;
+    blurEffect.setBlurRadius(150);
 
-    tree.show()
+    blurredPixmap = blurredPixmap.scaled(view.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    blurEffect.setBlurHints(QGraphicsBlurEffect::QualityHint);
 
+    QGraphicsPixmapItem *blurItem = new QGraphicsPixmapItem(blurredPixmap);
+    blurItem->setGraphicsEffect(&blurEffect);
+    scene.addItem(blurItem);
+
+    // 设置QGraphicsView的背景
+    view.setBackgroundBrush(blurItem->pixmap());
+
+    view.show();
+    return a.exec();
 }

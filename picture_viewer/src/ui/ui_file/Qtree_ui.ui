@@ -65,7 +65,7 @@
       <item>
        <widget class="My_Photo_Graphics" name="graphicsView">
         <property name="styleSheet">
-         <string notr="true">QGraphicsView {background-image:url(:/ui/images/pic_2d/wallhaven-3z32j3.jpg);}</string>
+         <string notr="true"/>
         </property>
        </widget>
       </item>

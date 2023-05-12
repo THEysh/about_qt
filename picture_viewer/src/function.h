@@ -44,11 +44,8 @@ public:
         this->ui_f = ui_f;
         photo_g = ui_f.graphicsView;  //这样是实现，ui_f.photo_label 和 这个类中的photo_label共用一个地址
         qtree_widget = ui_f.treeWidget_1;
-
         qtree_widget->click_photo_connect(*photo_g);
-
         this->Splitter();
-
     }
 
 private:

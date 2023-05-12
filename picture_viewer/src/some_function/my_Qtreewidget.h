@@ -42,7 +42,8 @@ public:
 private:
     My_Photo_Graphics *my_photo = nullptr;
     QTreeWidgetItem *active_item = nullptr; //当前图片激活的节点
-    QTreeWidgetItem *activated_path_parent= nullptr;//当前图片激活的路径的父节点
+    QTreeWidgetItem *activated_item_parent= nullptr;//当前图片激活的路径的父节点
+
     QStringList path_list ;
     int path_list_index ;
     QString activated_path = nullptr; //当前图片激活的路径
@@ -50,6 +51,10 @@ private:
 
 public:
     explicit My_Qtreewidget(QWidget *parent = nullptr) : QTreeWidget(parent) {
+        //设置背景图片
+        QString backgroundImage = ":/images/background.jpg";
+        QString styleSheet = QString("QTreeWidget { background-image: url(%1); }").arg(backgroundImage);
+
         this->_Qtree_dir();
     }
     // 实现单击显示图片
@@ -77,7 +82,6 @@ public:
     }
 
 
-
 private:
     void keyPressEvent(QKeyEvent *event) override
     { //
@@ -88,9 +92,9 @@ private:
                     path_list_index = path_list.size() - 1;
                 }
                 activated_path = path_list[path_list_index];
-                active_item.nextSibling();
                 my_photo->or_activated_photo_pixmap = QPixmap(activated_path);
                 my_photo->click_show_photo();
+                _updata_treewidgetItem(false);
             }
 
         } else if (event->key() == Qt::Key_Right) {
@@ -102,6 +106,7 @@ private:
                 activated_path = path_list[path_list_index];
                 my_photo->or_activated_photo_pixmap = QPixmap(activated_path);
                 my_photo->click_show_photo();
+                _updata_treewidgetItem(true);
             }
         } else {
             // 其他按键的事件处理
@@ -109,10 +114,10 @@ private:
     }
 
     void _updata_path_list(QTreeWidgetItem *parent){
-        if (parent!=activated_path_parent){
+        if (parent!=activated_item_parent){
             //指向的地址不一样，就重新获取父节点的所有文件路径，
             path_list.clear();
-            activated_path_parent = parent;
+            activated_item_parent = parent;
             if (parent != nullptr) { // 确保当前节点有父节点
                 int child_count = parent->childCount();
                 for (int i = 0; i < child_count; ++i) {
@@ -196,26 +201,32 @@ private:
             QFileInfo fileInfo = fileList.at(i);
             QString fileName = fileInfo.fileName();
             QString fileType = fileInfo.isFile() ? "files" : "folders";
-            // 创建节点
-            auto *node = new QTreeWidgetItem(parentNode);
-            //下面 设置节点的信息
-            node->setText(0, fileName);
-            node->setText(1, fileType);
-            // 获取文件目录
-            node->setData(0, Qt::UserRole, fileInfo.filePath());
-            if (fileType == "files"){
-                bool is_img = _is_type(fileName,imageTypes);
-                if (is_img){
-                    node->setIcon(0, QIcon(":ui/images//pic/file-image-solid.svg"));
-                }
-                else{
-                    node->setIcon(0, QIcon(":ui/images//pic/file-lines-solid.svg"));
-                }
+            // 如果是图片或者文件夹就创建节点
+            bool is_img = _is_type(fileName,imageTypes);
+            if (fileType=="files" && is_img){
+                //下面 设置节点的信息
+                auto *node = new QTreeWidgetItem(parentNode);
+                node->setText(0, fileName);
+                node->setText(1, fileType);
+                // 获取文件目录
+                node->setData(0, Qt::UserRole, fileInfo.filePath());
+                node->setIcon(0, QIcon(":ui/images//pic/file-image-solid.svg"));
             }
-            else{
+
+            else if (fileType=="folders"){
+                auto *node = new QTreeWidgetItem(parentNode);
+                node->setText(0, fileName);
+                node->setText(1, fileType);
+                // 获取文件目录
+                node->setData(0, Qt::UserRole, fileInfo.filePath());
                 node->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+
                 _addSubDirs(this, node, fileInfo.filePath());
             }
+            else{
+                continue;
+            }
+
         }
     }
 
@@ -232,7 +243,35 @@ private:
         }
     }
 
+    void _updata_treewidgetItem(bool is_next){
+        /*计算下一兄弟节点或者上一兄弟节点,is_next=true就是计算下一兄弟节点，否则计算上一个兄弟节点*/
 
+        QTreeWidgetItem *siblingItem = nullptr;
+        if (is_next && active_item && activated_item_parent && active_item->parent()->childCount() >= 1) {
+            int siblingIndex = activated_item_parent->indexOfChild(active_item); //返回当前节点的索引
+
+            if (siblingIndex < activated_item_parent->childCount() - 1) {
+                siblingItem = activated_item_parent->child(siblingIndex + 1);
+            }
+            else if(siblingIndex==activated_item_parent->childCount() - 1) {
+                siblingItem = activated_item_parent->child(0);
+            }
+        } else if( !is_next && active_item && activated_item_parent && active_item->parent()->childCount() >= 1){
+            int siblingIndex = activated_item_parent->indexOfChild(active_item); //返回当前节点的索引
+
+            if (siblingIndex > 0) {
+                siblingItem = activated_item_parent->child(siblingIndex - 1);
+            }
+            else if(siblingIndex==0) {
+                siblingItem = activated_item_parent->child(activated_item_parent->childCount()-1);
+            }
+        }
+
+        active_item->setSelected(false);
+        active_item = siblingItem;
+        active_item->setSelected(true);
+
+    }
 };
 
 
