@@ -20,7 +20,8 @@ public:
     QPixmap activated_photo_pixmap = QPixmap(); // 根据尺寸变化的缩放图
     QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
     QGraphicsPixmapItem *pixmapItem = new QGraphicsPixmapItem(activated_photo_pixmap); // 用于显示图片的场景
-    QPixmap background = QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"); // 设置背景
+    QPixmap *or_background = new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"); // 设置背景的副本
+    QPixmap *background = new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"); // 设置背景
     int p_width = or_activated_photo_pixmap.width();
     int p_height = or_activated_photo_pixmap.height();
     int pot_x = 0; int pot_y = 0;
@@ -32,10 +33,12 @@ public:
         // 设置为拖拽
         this->setDragMode(static_cast<DragMode>(QGraphicsView::ScrollHandDrag | QGraphicsView::RubberBandDrag));
     }
+
 private:
     int mouse_x = 0;
     int mouse_y = 0;
     QTimer* timer_mousepress = new QTimer();
+
 public:
     void click_show_photo(){
         scene->clear();
@@ -53,7 +56,6 @@ public:
             activated_photo_pixmap = or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio);
         }
         Q_pixmap_show();
-
     }
 
 protected:
@@ -69,9 +71,10 @@ protected:
         // 设置为拖拽
         pixmapItem->setFlags(QGraphicsItem::ItemIsMovable);
 
-        this->setBackgroundBrush(QBrush(background));
+        this->setBackgroundBrush(QBrush(*background));
         this->show();
     }
+
     void resizeEvent(QResizeEvent *event) override
     {
         scene->clear();
@@ -80,7 +83,7 @@ protected:
         // 设置场景的大小
         QRect new_rect(QPoint(0, 0), QSize(w, h));
         scene->setSceneRect(new_rect);
-        background = background.scaled(w,h);
+        *background = or_background->scaled(QSize(w, h), Qt::IgnoreAspectRatio);
         if (w>p_width && h>p_height){
             activated_photo_pixmap = or_activated_photo_pixmap;
         } else{
@@ -89,6 +92,7 @@ protected:
 
         Q_pixmap_show();
     }
+
     // 处理鼠标滚轮事件
     void wheelEvent(QWheelEvent *event) override {
         const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
@@ -111,4 +115,4 @@ protected:
 };
 
 
-#endif //PICTURE_VIEWER_MY_PHOTO_GRAPHICS_H
+#endif

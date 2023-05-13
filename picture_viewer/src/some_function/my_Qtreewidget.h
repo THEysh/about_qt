@@ -29,6 +29,12 @@
 #include <QDateTime>
 #include <QPainter>
 #include <QDesktopServices>
+#include <QFileDialog>
+#include <QQueue>
+#include <QMenu>
+#include <QInputDialog>
+#include <QPointer>
+#include <QClipboard>
 
 class My_Qtreewidget : public QTreeWidget{
 Q_OBJECT
@@ -37,9 +43,14 @@ signals:
 
 public slots:
 public:
-    QString *ProjectDir2 = new QString(PROJECT_ROOT_DIR);
-    QString ProjectDir = *ProjectDir2 + R"(\src\ui\images)";
+//    QString *ProjectDir2 = new QString(PROJECT_ROOT_DIR) ;
+//    QString ProjectDir = *ProjectDir2 + R"(\src\ui\images)";
+    QString ProjectDir = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation); //获取桌面目录
 private:
+    QTreeWidgetItem *rootNode = new QTreeWidgetItem(this); //设置根节点信息
+    const int MAX_NODE_COUNT = 1000;
+    int nodeCount = 0; // 定义静态变量存储当前已经创建的节点数
+
     My_Photo_Graphics *my_photo = nullptr;
     QTreeWidgetItem *active_item = nullptr; //当前图片激活的节点
     QTreeWidgetItem *activated_item_parent= nullptr;//当前图片激活的路径的父节点
@@ -52,9 +63,7 @@ private:
 public:
     explicit My_Qtreewidget(QWidget *parent = nullptr) : QTreeWidget(parent) {
         //设置背景图片
-        QString backgroundImage = ":/images/background.jpg";
-        QString styleSheet = QString("QTreeWidget { background-image: url(%1); }").arg(backgroundImage);
-
+        this->_dir_connect();
         this->_Qtree_dir();
     }
     // 实现单击显示图片
@@ -81,8 +90,58 @@ public:
 
     }
 
-
 private:
+
+    void _Qtree_dir(){
+        // 获取当前目录，并依次添加子目录和文件
+
+        rootNode->setText(0, "双击此处打开目录");
+        rootNode->setData(0, Qt::UserRole, ProjectDir);
+        rootNode->setIcon(0, QIcon(":ui/images/pic/folder-solid.svg"));
+        // 传入的为：树，根节点，路径, 递归函数用于添加子目录及其子节点
+        _addSubDirs( this, rootNode, ProjectDir);
+
+        this->show();
+
+    }
+
+    void _dir_connect(){
+
+        // 节点的文件夹的 图片开关设置
+        QObject::connect(this, &QTreeWidget::itemExpanded,[](QTreeWidgetItem *item){
+            item->setIcon(0, QIcon(":ui/images//pic/folder-open-regular.svg"));
+        });
+        QObject::connect(this, &QTreeWidget::itemDoubleClicked,[](QTreeWidgetItem *item){
+            item->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+        });
+        // 双击打开目录
+        QObject::connect(this, &QTreeWidget::itemDoubleClicked, [this](QTreeWidgetItem *item, int column){
+            if (item==rootNode){ //如果是根节点就打开文件，重新读目录
+                QString folderPath = QFileDialog::getExistingDirectory(nullptr, QObject::tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+                if (!folderPath.isEmpty()) {
+                    QDir folderDir(folderPath);
+                    QString absoluteFolderPath = folderDir.absolutePath();
+                    qDebug() << "Absolute folder path: " << absoluteFolderPath;
+                    ProjectDir = absoluteFolderPath;
+                    //更新目录，删除节点
+                    nodeCount = 0;
+                    while (rootNode->childCount() > 0){
+                        QTreeWidgetItem *child = rootNode->takeChild(0);
+                        delete child;
+                    }
+                    this->_Qtree_dir();
+                }
+            } else{
+                //双击打开路径
+                QString dirPath = item->data(0, Qt::UserRole).toString();
+                //以上代码将文件夹路径传递给 QUrl::fromLocalFile() 函数创建一个 QUrl 对象。该对象可以正确地处理包含非 ASCII 字符的文件路径，避免了出现乱码的问题
+                QUrl QUrl_path = QUrl::fromLocalFile(dirPath);
+                QDesktopServices::openUrl(QUrl_path);
+            }
+        });
+
+    }
+
     void keyPressEvent(QKeyEvent *event) override
     { //
         if (event->key() == Qt::Key_Left) {
@@ -154,79 +213,61 @@ private:
         return false;
     }
 
-    void _Qtree_dir(){
-        // 获取当前目录，并依次添加子目录和文件
-        auto *rootNode = new QTreeWidgetItem(this); //设置根节点信息
-        rootNode->setText(0, "目录");
-        rootNode->setData(0, Qt::UserRole, ProjectDir);
-        rootNode->setIcon(0, QIcon(":ui/images/pic/folder-solid.svg"));
-        // 传入的为：树，根节点，路径, 递归函数用于添加子目录及其子节点
-        _addSubDirs( this, rootNode, ProjectDir);
-
-        _dir_connect();
-        this->show();
-
-    }
-
-    void _dir_connect(){
-        // 连接目录的图片的信号
-
-        // 节点的文件夹的 图片开关设置
-        QObject::connect(this, &QTreeWidget::itemExpanded,[](QTreeWidgetItem *item){
-            item->setIcon(0, QIcon(":ui/images//pic/folder-open-regular.svg"));
-        });
-        QObject::connect(this, &QTreeWidget::itemCollapsed,[](QTreeWidgetItem *item){
-            item->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
-        });
-        //双击打开文件夹目录
-        QObject::connect(this, &QTreeWidget::itemDoubleClicked, [](QTreeWidgetItem *item, int column){
-            qDebug() << "Item double clicked:" << item->text(column);
-            QString dirPath = item->data(0, Qt::UserRole).toString();
-            qDebug() << "Item double clicked path:" << dirPath;
-            QDesktopServices::openUrl(QUrl(dirPath));
-        });
-
-
-    }
-
     void _addSubDirs(QTreeWidget *tree, QTreeWidgetItem *parentNode, const QString& path) {
+        //BFS
         QDir directory(path);
-        //具体地说，这个代码使用entryInfoList函数获取了directory目录下的所有文件和目录的信息，包括隐藏文件和当前目录以及父级目录（"."和".."），并将它们的QFileInfo对象添加到QFileInfoList列表中。
-        //参数QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot是用来设置entryInfoList函数的选项，其中：
-        //QDir::Files指示返回文件的信息
-        //QDir::AllDirs指示返回子目录的信息
-        //QDir::NoDotAndDotDot指示过滤掉"."和".."目录
-        QFileInfoList fileList = directory.entryInfoList(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
-        for (int i = 0; i < fileList.count(); ++i) {
-            QFileInfo fileInfo = fileList.at(i);
-            QString fileName = fileInfo.fileName();
-            QString fileType = fileInfo.isFile() ? "files" : "folders";
-            // 如果是图片或者文件夹就创建节点
-            bool is_img = _is_type(fileName,imageTypes);
-            if (fileType=="files" && is_img){
-                //下面 设置节点的信息
-                auto *node = new QTreeWidgetItem(parentNode);
-                node->setText(0, fileName);
-                node->setText(1, fileType);
-                // 获取文件目录
-                node->setData(0, Qt::UserRole, fileInfo.filePath());
-                node->setIcon(0, QIcon(":ui/images//pic/file-image-solid.svg"));
-            }
+        // QTreeWidgetItem *temp_parentNode = parentNode; //创建一个 QTreeWidgetItem指针，用于传值
+        QQueue<QTreeWidgetItem*> file_queue;
+        file_queue.enqueue(parentNode);
+        while (!file_queue.isEmpty()) {
+            if (nodeCount++>MAX_NODE_COUNT){return;}
+            // 取出队列中的第一个节点,构建树节点，同时也用作下一个节点的父类
+            QTreeWidgetItem *temp_parentNode = file_queue.front();
+            QDir temp_directory(temp_parentNode->data(0, Qt::UserRole).toString());
+            //具体地说，这个代码使用entryInfoList函数获取了directory目录下的所有文件和目录的信息，包括隐藏文件和当前目录以及父级目录（"."和".."），并将它们的QFileInfo对象添加到QFileInfoList列表中。
+            //参数QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot是用来设置entryInfoList函数的选项，其中：
+            //QDir::Files指示返回文件的信息
+            //QDir::AllDirs指示返回子目录的信息
+            //QDir::NoDotAndDotDot指示过滤掉"."和".."目录
+            QFileInfoList fileList = temp_directory.entryInfoList(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
+            int size = fileList.count();
+            // 队列中删除这个节点
+            file_queue.dequeue();
+            // 遍历与当前节点相连的所有节点
+            for (int i = 0; i < size; i++) {
+                QFileInfo fileInfo = fileList.at(i);
+                QString fileName = fileInfo.fileName();
+                QString fileType = fileInfo.isFile() ? "files" : "folders";
+                QDir dir(fileInfo.filePath());
+                dir.cdUp();
+                QString previousPath = dir.path(); //去掉文件名的路径
+                bool is_img = _is_type(fileName,imageTypes);
+                if (fileType=="files" && is_img){
+                    //下面 设置节点的信息
+                    nodeCount ++;
+                    auto *node = new QTreeWidgetItem(temp_parentNode);
+                    node->setText(0, fileName);
+                    node->setText(1, fileType);
+                    node->setText(2, previousPath);
+                    // 获取文件目录
+                    node->setData(0, Qt::UserRole, fileInfo.filePath());
+                    node->setIcon(0, QIcon(":ui/images//pic/file-image-solid.svg"));
 
-            else if (fileType=="folders"){
-                auto *node = new QTreeWidgetItem(parentNode);
-                node->setText(0, fileName);
-                node->setText(1, fileType);
-                // 获取文件目录
-                node->setData(0, Qt::UserRole, fileInfo.filePath());
-                node->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+                }
 
-                _addSubDirs(this, node, fileInfo.filePath());
+                else if (fileType=="folders"){
+                    nodeCount ++;
+                    auto *node = new QTreeWidgetItem(temp_parentNode);
+                    node->setText(0, fileName);
+                    node->setText(1, fileType);
+                    node->setText(2, previousPath);
+                    // 获取文件目录
+                    node->setData(0, Qt::UserRole, fileInfo.filePath());
+                    node->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+                    // 是目录，将其加入队列中
+                    file_queue.enqueue(node);
+                }
             }
-            else{
-                continue;
-            }
-
         }
     }
 
@@ -272,6 +313,62 @@ private:
         active_item->setSelected(true);
 
     }
+
+    void contextMenuEvent(QContextMenuEvent *event) override
+    {
+        // 右键菜单
+        QTreeWidget::contextMenuEvent(event);
+
+        QTreeWidgetItem* item = currentItem();
+
+        if (!item)
+            return;
+
+        // 创建右键菜单并添加动作
+        QMenu menu(this);
+        QAction* openAction = menu.addAction("打开");
+        QAction* copyAction = menu.addAction("复制路径");
+        QAction* removeAction = menu.addAction("永久删除");
+
+
+
+        // 显示右键菜单，并获取用户选择的动作
+        QAction* selectedItem = menu.exec(event->globalPos());
+
+        if (selectedItem == removeAction) {
+
+            QTreeWidgetItem *parent = item->parent();
+
+            if (parent!= nullptr){
+                // 有父类才可以删除
+                parent->takeChild(parent->indexOfChild(item));
+                // os 删除文件，文件夹
+                QString remove_Path = item->data(0, Qt::UserRole).toString();
+                QString filetype = item->text(1);
+                if (filetype=="files"){
+                    QFile file(remove_Path);
+                    file.remove();
+                }
+                else{
+                    QDir dir(remove_Path);
+                    dir.removeRecursively();
+                }
+            }
+        }
+        else if (selectedItem == openAction) {
+            QString path = item->data(0, Qt::UserRole).toString();
+            QDesktopServices::openUrl(QUrl::fromLocalFile(path));
+        }
+        else if (selectedItem == copyAction){
+            // 获取剪贴板
+            QClipboard *clipboard = QGuiApplication::clipboard();
+            // 要复制到剪贴板的文本
+            QString path = item->data(0, Qt::UserRole).toString();
+            // 将文本复制到剪贴板中
+            clipboard->setText(path);
+        }
+    }
+
 };
 
 
