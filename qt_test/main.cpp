@@ -1,21 +1,32 @@
-#include <QCoreApplication>
-#include <QFileSystemWatcher>
-#include <QDebug>
+#include <iostream>
+#include <functional>
+#include <vector>
 
-int main(int argc, char *argv[])
-{
-    QCoreApplication a(argc, argv);
+class Signal {
+public:
+    typedef std::function<int (float a)> Slot;
 
-    QString path = "C:\\Users\\Administrator\\Desktop\\新建文件夹\\images"; // 要监听的路径
+    void connect(const Slot& slot) {
+        m_slots.push_back(slot);
+    }
 
-    QFileSystemWatcher watcher;
-    watcher.addPath(path); // 添加要监听的路径
+    void emit(float a) {
+        for (const auto& slot : m_slots) {
+            slot(a);
+        }
+    }
+private:
+    std::vector<Slot> m_slots;
+};
 
-    qDebug() << "Watching directory: " << path;
+int main() {
+    Signal signal;
+    auto lambda = [](float a)->int { std::cout << "Lambda function called" << std::endl; return a;};
+    auto lambda2 = [](float a)->int { std::cout << "Lambda function called" << std::endl; return a;};
+    signal.connect(lambda);
+    signal.connect(lambda2);
 
-    QObject::connect(&watcher, &QFileSystemWatcher::directoryChanged, [&](const QString &changedPath){
-        qDebug() << "Directory changed:" << changedPath;
-    });
+    signal.emit(12.4);
 
-    return a.exec();
+    return 0;
 }
