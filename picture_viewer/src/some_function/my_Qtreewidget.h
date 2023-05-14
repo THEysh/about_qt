@@ -24,7 +24,6 @@
 #include <QResource>
 #include <QPixmap>
 #include "QDir"
-#include "my_photo_Graphics.h"
 #include <QTimer>
 #include <QDateTime>
 #include <QPainter>
@@ -37,41 +36,30 @@
 #include <QClipboard>
 #include <QCoreApplication>
 #include <QFileSystemWatcher>
+#include "my_photo_Graphics.h"
 
-class SignalEmitter : public QObject {
-Q_OBJECT
-public:
-    SignalEmitter(QObject *parent = nullptr) : QObject(parent) {}
-
-signals:
-    void mySignal(QTreeWidgetItem*);
-
-public slots:
-    void emitSignal(QTreeWidgetItem* sig) {
-        emit mySignal(sig);
-    }
-};
 
 class My_Qtreewidget : public QTreeWidget{
 Q_OBJECT
 signals:
-    void my_signal_1(QTreeWidgetItem *item);
+
 public slots:
+
 public:
 //    QString *ProjectDir2 = new QString(PROJECT_ROOT_DIR) ;
 //    QString ProjectDir = *ProjectDir2 + R"(\src\ui\images)";
     QString ProjectDir = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation); //获取桌面目录
+    My_Photo_Graphics *my_photo= nullptr;
+    QTreeWidgetItem *active_item = nullptr; //当前图片激活的节点
+
+    QFileSystemWatcher *my_watcher = new QFileSystemWatcher(); //监听文件的变化，然后更新目录
 
 private:
-    QFileSystemWatcher *my_watcher = new QFileSystemWatcher(); //监听文件的变化，然后更新目录
-    QTreeWidgetItem *rootNode = new QTreeWidgetItem(this); //设置根节点信息
 
     const int MAX_NODE_COUNT = 1000;
     int nodeCount = 0; // 定义静态变量存储当前已经创建的节点数
 
-    My_Photo_Graphics *my_photo = nullptr;
-    QTreeWidgetItem *active_item = nullptr; //当前图片激活的节点
-
+    QTreeWidgetItem *rootNode = new QTreeWidgetItem(this); //设置根节点信息
     QStringList imageTypes {"bmp","jpg","png","tif","gif","fpx","svg","psd"};
 
 public:
@@ -79,22 +67,6 @@ public:
         //设置背景图片
         this->_dir_connect();
         this->_updata_all_Qtree_dir();
-    }
-    // 实现单击显示图片
-    void click_photo_connect(My_Photo_Graphics &photo_g){
-        my_photo = &photo_g;
-        QObject::connect(this, &QTreeWidget::itemClicked,[this](QTreeWidgetItem *item){
-            QString img_path = item->data(0,Qt::UserRole).toString();
-            bool is_img = _is_type(img_path, this->imageTypes);
-            if (is_img) {
-                //注意，这个时候的this->photo_label 和 ui.photo_label共用一个地址
-                //将点击的照片数据给 photo_label->activated_photo_pixmap
-                //点击图片时，把这个图片数据保存到内存
-                my_photo->or_activated_photo_pixmap = QPixmap(img_path);
-                my_photo->click_show_photo();
-                active_item = item;
-            }
-        });
     }
 
 private:
@@ -127,13 +99,30 @@ private:
     }
 
     void _dir_connect(){
+        // 点击节点，显示图片
+        QObject::connect(this, &QTreeWidget::itemClicked,[this](QTreeWidgetItem *item){
+            QString img_path = item->data(0,Qt::UserRole).toString();
+            bool is_img = _is_type(img_path, this->imageTypes);
+            if (is_img) {
+                //注意，这个时候的this->photo_label 和 ui.photo_label共用一个地址
+                //将点击的照片数据给 photo_label->activated_photo_pixmap
+                //点击图片时，把这个图片数据保存到内存
+                my_photo->or_activated_photo_pixmap = QPixmap(img_path);
+                my_photo->click_show_photo();
+                active_item = item;
+            }
+        });
 
         // 节点的文件夹的 图片开关设置
         QObject::connect(this, &QTreeWidget::itemExpanded,[](QTreeWidgetItem *item){
             item->setIcon(0, QIcon(":ui/images//pic/folder-open-regular.svg"));
         });
+        //节点文件夹 关闭 图片开关设置collapsed(QTreeWidgetItem *item)
+        QObject::connect(this, &QTreeWidget::itemCollapsed,[](QTreeWidgetItem *item){
+            item->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+        });
+
         //文件节点变化的监控
-        // _updata_someone_QTreeWidgetItem(child,child->data(0,Qt::UserRole).toString());
         QObject::connect(my_watcher, &QFileSystemWatcher::directoryChanged, [this](const QString &changedPath){
             qDebug() << "Directory changed:" << changedPath;
             // 使用lambda函数，遍历所有的子节点, 检查到底是哪个节点发生变化
@@ -325,7 +314,7 @@ private:
         QMenu menu(this);
         QAction* openAction = menu.addAction("打开");
         QAction* copyAction = menu.addAction("复制路径");
-        QAction* RenameAction = menu.addAction("Rename");
+        QAction* RenameAction = menu.addAction("重命名");
         QAction* removeAction = menu.addAction("永久删除");
 
         // 显示右键菜单，并获取用户选择的动作
@@ -347,6 +336,7 @@ private:
                     QDir dir(remove_Path);
                     dir.removeRecursively();
                 }
+                // 删除文件夹后触发信号，自动更新节点
             }
         }
         else if (selectedItem == openAction) {
@@ -366,42 +356,32 @@ private:
             this->setItemWidget(item, 0, lineEdit);
             // 调用QTreeWidget的editItem()函数进入编辑模式
             this->editItem(item, 0);
-
             connect(lineEdit, &QLineEdit::editingFinished, this, [=]() {
-                item->setText(0, lineEdit->text());
-                item->setText(2, item->parent()->data(0,Qt::UserRole).toString()); //保存父类的路径
-                // 获取文件目录
-                QString new_path = item->parent()->data(0,Qt::UserRole).toString()+"/"+lineEdit->text();
-                qDebug()<<new_path;
-                item->setData(0, Qt::UserRole, new_path);//写入新的路径
-                _updata_someone_QTreeWidgetItem(item,new_path);
+                QString new_name = lineEdit->text();
+                //必须要先更改文件夹名字，才更新节点
+                if (!new_name.isEmpty()) {
+                    // os 重命名文件，文件夹
+                    QString oldPath = item->data(0, Qt::UserRole).toString();
+                    QString new_path = item->parent()->data(0,Qt::UserRole).toString()+"/"+ new_name;
+                    qDebug()<<"new:"<<new_path;
+                    qDebug()<<"old:"<<oldPath;
+                    QFile file(oldPath);
+                    QDir dir(oldPath);
+                    if (file.exists()){
+                        file.rename(new_path);
+                    }
+                    else{
+                        dir.rename(oldPath,new_path);
+                    }
+                    // 更改名字后触发信号，自动更新节点
+                }
                 // 这行代码是关闭当前的编辑器，第一个参数lineEdit是当前所在的编辑器，第二个参数QAbstractItemDelegate::NoHint表示不修改任何标志位。
                 this->closeEditor(lineEdit, QAbstractItemDelegate::NoHint);
                 // 这行代码是将QLineEdit从QTreeWidgetItem中删除，第一个参数item是当前正在编辑的树形结构中的项，
                 // 第二个参数0表示所在的列，第三个参数NULL表示移除该控件。
                 this->setItemWidget(item, 0, NULL);
             });
-
-//            if (!lineEdit->text().isEmpty()) {
-//                // 更新节点名称
-//                item->setText(0, lineEdit->text());
-//                // os 重命名文件，文件夹
-//                QString oldPath = item->data(0, Qt::UserRole).toString();
-//                QString newPath = oldPath;
-//                int index = newPath.lastIndexOf("/");
-//                newPath.remove(index+1, oldName.length());
-//                newPath += lineEdit->text();
-//                QFile file(oldPath);
-//                QDir dir(oldPath);
-//                if (file.exists()){
-//                    file.rename(newPath);
-//                }
-//                else{
-//                    dir.rename(oldPath,newPath);
-//                }
-//            }
         }
-
         else if (selectedItem == copyAction){
             // 获取剪贴板
             QClipboard *clipboard = QGuiApplication::clipboard();
@@ -410,6 +390,7 @@ private:
             // 将文本复制到剪贴板中
             clipboard->setText(path);
         }
+
     }
 
 };

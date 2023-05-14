@@ -11,20 +11,20 @@
 #include <iostream>
 #include <QWheelEvent>
 #include <QGraphicsBlurEffect>
+#include <QMessageBox>
+#include <QTreeWidgetItem>
+#include "QMenu"
+
 using namespace  std;
 class My_Photo_Graphics : public QGraphicsView {
 Q_OBJECT
 signals:
 public:
-    QGraphicsScene* scene = new QGraphicsScene();
+
+    QTreeWidgetItem **photo_actived_rootNode = nullptr; //这个指针永远指向active_item
     QPixmap activated_photo_pixmap = QPixmap(); // 根据尺寸变化的缩放图
     QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
-    QGraphicsPixmapItem *pixmapItem = new QGraphicsPixmapItem(activated_photo_pixmap); // 用于显示图片的场景
-    QPixmap *or_background = new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"); // 设置背景的副本
-    QPixmap *background = new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"); // 设置背景
-    int p_width = or_activated_photo_pixmap.width();
-    int p_height = or_activated_photo_pixmap.height();
-    int pot_x = 0; int pot_y = 0;
+
     explicit My_Photo_Graphics(QWidget *parent = nullptr) : QGraphicsView(parent) {
         this->setScene(scene);
         // 禁用滚轮
@@ -35,6 +35,13 @@ public:
     }
 
 private:
+    QGraphicsScene* scene = new QGraphicsScene();
+    QGraphicsPixmapItem *pixmapItem = new QGraphicsPixmapItem(activated_photo_pixmap); // 用于显示图片的场景
+    QPixmap *or_background = new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"); // 设置背景的副本
+    QPixmap *background = new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"); // 设置背景
+    int p_width = or_activated_photo_pixmap.width();
+    int p_height = or_activated_photo_pixmap.height();
+    int pot_x = 0; int pot_y = 0;
     int mouse_x = 0;
     int mouse_y = 0;
     QTimer* timer_mousepress = new QTimer();
@@ -112,6 +119,38 @@ protected:
         centerOn(viewPoint);
     }
 
+    // 右键菜单
+    void contextMenuEvent(QContextMenuEvent *event) override
+    {
+        QMenu menu(this);
+        QAction *right_rotate = menu.addAction("右旋转90°");
+        QAction *left_rotate = menu.addAction("左旋转90°");
+        QAction *properties = menu.addAction("查看图片属性");
+        connect(right_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
+            or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(90));  // 旋转90度
+            if (*photo_actived_rootNode!= nullptr){
+                QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
+                or_activated_photo_pixmap.save(save_path);
+            }
+            click_show_photo();
+        });
+        connect(left_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
+            or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(-90));  // 旋转90度
+            if (*photo_actived_rootNode!= nullptr){
+                QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
+                or_activated_photo_pixmap.save(save_path);
+            }
+            click_show_photo();
+        });
+
+        connect(properties, &QAction::triggered, [this]() {
+// 显示图片属性，例如宽度和高度
+                QString prop = "图片属性：\n" + QString("宽度：%1\n").arg(p_width) + QString("高度：%2").arg(p_height);
+                QMessageBox::information(this, "图片属性", prop);
+        });
+
+        menu.exec(event->globalPos());
+    }
 };
 
 

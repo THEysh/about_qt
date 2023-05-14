@@ -17,9 +17,9 @@ QString* Resource_Registration(){
     QFile file(path_rcc);
     std::cout << "Project directory of .rcc: " <<  path_rcc.toStdString() << std::endl; //
     if (QResource::registerResource(path_rcc)) { //获取项目的资源文件
-    qDebug() << "Resource file registered successfully!";
+        qDebug() << "Resource file registered successfully!";
     } else {
-    qWarning() << "Failed to register resource file";
+        qWarning() << "Failed to register resource file";
     }
     return ProjectDir;
 }

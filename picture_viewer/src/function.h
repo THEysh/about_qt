@@ -25,7 +25,8 @@
 #include <QPainter>
 #include <QDesktopServices>
 #include <QSplitter>
-#include "some_function/my_qtreewidget.h"
+
+
 using namespace  std;
 
 
@@ -44,17 +45,23 @@ public:
         this->ui_f = ui_f;
         photo_g = ui_f.graphicsView;  //这样是实现，ui_f.photo_label 和 这个类中的photo_label共用一个地址
         qtree_widget = ui_f.treeWidget_1;
-        qtree_widget->click_photo_connect(*photo_g);
+        this->connect_all();
         this->Splitter();
     }
 
 private:
     QMainWindow *Win;
     Ui_Qtree_Class_UI ui_f;
-    My_Qtreewidget *qtree_widget;
-    My_Photo_Graphics *photo_g;
+    My_Qtreewidget *qtree_widget = nullptr;
+    My_Photo_Graphics *photo_g = nullptr;
 private:
     //设置窗口之间的拖动
+    void connect_all(){
+
+        qtree_widget->my_photo = photo_g;
+        //这个指针永远指向active_item，photo_actived_rootNode指针指向activate_item所指向的地址
+        photo_g->photo_actived_rootNode = &(qtree_widget->active_item);
+    }
     void Splitter(){
         // 将树形控件和 photo_g 作为子控件添加到 QSplitter 中
         QSplitter* splitter = new QSplitter(Qt::Horizontal, Win);

@@ -27,13 +27,14 @@
       <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/function.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/function.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/main.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen.dir/ParseCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen.dir/ParseCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/picture_viewer.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/picture_viewer.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/picture_viewer_autogen/UJXWR6GGJZ/moc_my_Qtreewidget.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug/picture_viewer_autogen/UJXWR6GGJZ/moc_my_Qtreewidget.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/src/function.h" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/function.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../picture_viewer/src/some_function/my_Qtreewidget.h" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/some_function/my_Qtreewidget.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/src/some_function/my_photo_Graphics.h" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/some_function/my_photo_Graphics.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug/CMakeFiles/qt_test.dir/main.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug/CMakeFiles/qt_test.dir/main.cpp.obj" afterDir="false" />
@@ -154,7 +155,7 @@
       <workItem from="1681462018127" duration="6541000" />
       <workItem from="1681535858646" duration="96000" />
       <workItem from="1682928402381" duration="1189000" />
-      <workItem from="1683900077309" duration="4975000" />
+      <workItem from="1683900077309" duration="7019000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
