@@ -67,7 +67,6 @@ private:
         QSplitter* splitter = new QSplitter(Qt::Horizontal, Win);
         splitter->addWidget(qtree_widget);
         splitter->addWidget(photo_g);
-
         Win->setCentralWidget(splitter);
         // 使左侧 QWidget 的大小占比为 1，右侧 QWidget 的大小占比为 3
         splitter->setStretchFactor(1, 3);

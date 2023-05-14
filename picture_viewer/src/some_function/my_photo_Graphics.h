@@ -125,7 +125,6 @@ protected:
         QMenu menu(this);
         QAction *right_rotate = menu.addAction("右旋转90°");
         QAction *left_rotate = menu.addAction("左旋转90°");
-        QAction *properties = menu.addAction("查看图片属性");
         connect(right_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
             or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(90));  // 旋转90度
             if (*photo_actived_rootNode!= nullptr){
@@ -143,11 +142,6 @@ protected:
             click_show_photo();
         });
 
-        connect(properties, &QAction::triggered, [this]() {
-// 显示图片属性，例如宽度和高度
-                QString prop = "图片属性：\n" + QString("宽度：%1\n").arg(p_width) + QString("高度：%2").arg(p_height);
-                QMessageBox::information(this, "图片属性", prop);
-        });
 
         menu.exec(event->globalPos());
     }
