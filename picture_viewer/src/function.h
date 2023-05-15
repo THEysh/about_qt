@@ -68,6 +68,8 @@ private:
         splitter->addWidget(qtree_widget);
         splitter->addWidget(photo_g);
         Win->setCentralWidget(splitter);
+        //设置分隔条的宽度
+        splitter->setHandleWidth(1);
         // 使左侧 QWidget 的大小占比为 1，右侧 QWidget 的大小占比为 3
         splitter->setStretchFactor(1, 3);
 

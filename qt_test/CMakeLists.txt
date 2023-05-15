@@ -14,7 +14,7 @@ find_package(Qt5 COMPONENTS
         Network
         REQUIRED)
 
-add_executable(qt_test main.cpp)
+add_executable(qt_test main.cpp fr_win.cpp fr_win.h)
 target_link_libraries(qt_test
         Qt5::Core
         Qt5::Gui

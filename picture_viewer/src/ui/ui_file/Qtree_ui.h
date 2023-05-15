@@ -16,6 +16,9 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "../../some_function/my_photo_Graphics.h"
 #include "../../some_function/my_qtreewidget.h"
@@ -26,7 +29,12 @@ class Ui_Qtree_Class_UI
 {
 public:
     QWidget *centralwidget;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton;
     QHBoxLayout *horizontalLayout_2;
     My_Qtreewidget *treeWidget_1;
     My_Photo_Graphics *graphicsView;
@@ -35,16 +43,41 @@ public:
     {
         if (Qtree_Class_UI->objectName().isEmpty())
             Qtree_Class_UI->setObjectName(QStringLiteral("Qtree_Class_UI"));
-        Qtree_Class_UI->resize(2324, 1470);
+        Qtree_Class_UI->resize(2087, 1486);
         Qtree_Class_UI->setStyleSheet(QStringLiteral(""));
         centralwidget = new QWidget(Qtree_Class_UI);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        horizontalLayout = new QHBoxLayout(centralwidget);
-        horizontalLayout->setSpacing(0);
+        verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 20, 0, 0);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(10);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout->setContentsMargins(-1, 0, -1, -1);
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        pushButton_3 = new QPushButton(centralwidget);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+
+        horizontalLayout->addWidget(pushButton_3);
+
+        pushButton_2 = new QPushButton(centralwidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        horizontalLayout->addWidget(pushButton_2);
+
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        horizontalLayout->addWidget(pushButton);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(10);
+        horizontalLayout_2->setSpacing(0);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(-1, 0, -1, 0);
         treeWidget_1 = new My_Qtreewidget(centralwidget);
@@ -61,9 +94,9 @@ public:
         horizontalLayout_2->addWidget(graphicsView);
 
         horizontalLayout_2->setStretch(0, 1);
-        horizontalLayout_2->setStretch(1, 1);
+        horizontalLayout_2->setStretch(1, 4);
 
-        horizontalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(horizontalLayout_2);
 
         Qtree_Class_UI->setCentralWidget(centralwidget);
 
@@ -75,6 +108,9 @@ public:
     void retranslateUi(QMainWindow *Qtree_Class_UI)
     {
         Qtree_Class_UI->setWindowTitle(QApplication::translate("Qtree_Class_UI", "MainWindow", Q_NULLPTR));
+        pushButton_3->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem = treeWidget_1->headerItem();
         ___qtreewidgetitem->setText(0, QApplication::translate("Qtree_Class_UI", "\346\226\207\344\273\266\345\210\227\350\241\250", Q_NULLPTR));
     } // retranslateUi

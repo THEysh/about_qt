@@ -1,11 +1,10 @@
 <RCC>
     <qresource prefix="/">
+        <file>ui/images/pic/xmark-solid.svg</file>
         <file>ui/images/pic_2d/wallhaven-j3m12w.jpg</file>
         <file>ui/images/pic_2d/wallhaven-3z32j3.jpg</file>
         <file>ui/images/pic_2d/wallhaven-p9lzke.jpg</file>
         <file>ui/images/pic_b/wallhaven-nkqrgd.png</file>
-        <file>ui/images/pic_b/wallhaven-mpvgyk.png</file>
-        <file>ui/images/pic_b/wallhaven-eyv99l.jpg</file>
         <file>ui/images/pic/file-solid.svg</file>
         <file>ui/images/pic/file-image-solid.svg</file>
         <file>ui/images/pic/file-lines-solid.svg</file>
@@ -28,6 +27,5 @@
         <file>ui/fonts/Font Awesome 6 Free-Regular-400.otf</file>
         <file>ui/qss/NeonButtons.qss</file>
         <file>ui/qss/MacOS.qss</file>
-
     </qresource>
 </RCC>

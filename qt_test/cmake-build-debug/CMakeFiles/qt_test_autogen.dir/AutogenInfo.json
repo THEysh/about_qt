@@ -73,7 +73,15 @@
 	"CMAKE_SOURCE_DIR" : "F:/code/c_code/about_qt/qt_test",
 	"DEP_FILE" : "",
 	"DEP_FILE_RULE_NAME" : "",
-	"HEADERS" : [],
+	"HEADERS" : 
+	[
+		[
+			"F:/code/c_code/about_qt/qt_test/fr_win.h",
+			"MU",
+			"EWIEGA46WW/moc_fr_win.cpp",
+			null
+		]
+	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "F:/code/c_code/about_qt/qt_test/cmake-build-debug/qt_test_autogen/include",
 	"MOC_COMPILATION_FILE" : "F:/code/c_code/about_qt/qt_test/cmake-build-debug/qt_test_autogen/mocs_compilation.cpp",
@@ -125,6 +133,7 @@
 	"SETTINGS_FILE" : "F:/code/c_code/about_qt/qt_test/cmake-build-debug/CMakeFiles/qt_test_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "F:/code/c_code/about_qt/qt_test/fr_win.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/qt_test/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
