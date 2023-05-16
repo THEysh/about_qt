@@ -13,11 +13,10 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "../../some_function/my_photo_Graphics.h"
@@ -30,12 +29,10 @@ class Ui_Qtree_Class_UI
 public:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton;
-    QHBoxLayout *horizontalLayout_2;
+    QHBoxLayout *horizontalLayout_1;
+    QWidget *verticalWidget;
+    QVBoxLayout *v2;
+    QCheckBox *checkBox;
     My_Qtreewidget *treeWidget_1;
     My_Photo_Graphics *graphicsView;
 
@@ -43,60 +40,54 @@ public:
     {
         if (Qtree_Class_UI->objectName().isEmpty())
             Qtree_Class_UI->setObjectName(QStringLiteral("Qtree_Class_UI"));
-        Qtree_Class_UI->resize(2087, 1486);
+        Qtree_Class_UI->resize(1707, 1486);
         Qtree_Class_UI->setStyleSheet(QStringLiteral(""));
         centralwidget = new QWidget(Qtree_Class_UI);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setSpacing(0);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        verticalLayout->setContentsMargins(0, 20, 0, 0);
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(10);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(-1, 0, -1, -1);
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_1 = new QHBoxLayout();
+        horizontalLayout_1->setSpacing(0);
+        horizontalLayout_1->setObjectName(QStringLiteral("horizontalLayout_1"));
+        horizontalLayout_1->setContentsMargins(-1, 0, -1, 0);
+        verticalWidget = new QWidget(centralwidget);
+        verticalWidget->setObjectName(QStringLiteral("verticalWidget"));
+        v2 = new QVBoxLayout(verticalWidget);
+        v2->setSpacing(10);
+        v2->setObjectName(QStringLiteral("v2"));
+        v2->setContentsMargins(10, 10, 5, 10);
+        checkBox = new QCheckBox(verticalWidget);
+        checkBox->setObjectName(QStringLiteral("checkBox"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
+        checkBox->setSizePolicy(sizePolicy);
+        checkBox->setTristate(true);
 
-        horizontalLayout->addItem(horizontalSpacer);
+        v2->addWidget(checkBox);
 
-        pushButton_3 = new QPushButton(centralwidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-
-        horizontalLayout->addWidget(pushButton_3);
-
-        pushButton_2 = new QPushButton(centralwidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-
-        horizontalLayout->addWidget(pushButton_2);
-
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-
-        horizontalLayout->addWidget(pushButton);
-
-
-        verticalLayout->addLayout(horizontalLayout);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(0);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(-1, 0, -1, 0);
-        treeWidget_1 = new My_Qtreewidget(centralwidget);
+        treeWidget_1 = new My_Qtreewidget(verticalWidget);
         treeWidget_1->setObjectName(QStringLiteral("treeWidget_1"));
         treeWidget_1->setMaximumSize(QSize(16777214, 16777215));
         treeWidget_1->setStyleSheet(QStringLiteral(""));
 
-        horizontalLayout_2->addWidget(treeWidget_1);
+        v2->addWidget(treeWidget_1);
+
+
+        horizontalLayout_1->addWidget(verticalWidget);
 
         graphicsView = new My_Photo_Graphics(centralwidget);
         graphicsView->setObjectName(QStringLiteral("graphicsView"));
         graphicsView->setStyleSheet(QStringLiteral(""));
 
-        horizontalLayout_2->addWidget(graphicsView);
+        horizontalLayout_1->addWidget(graphicsView);
 
-        horizontalLayout_2->setStretch(0, 1);
-        horizontalLayout_2->setStretch(1, 4);
+        horizontalLayout_1->setStretch(1, 4);
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(horizontalLayout_1);
 
         Qtree_Class_UI->setCentralWidget(centralwidget);
 
@@ -108,9 +99,7 @@ public:
     void retranslateUi(QMainWindow *Qtree_Class_UI)
     {
         Qtree_Class_UI->setWindowTitle(QApplication::translate("Qtree_Class_UI", "MainWindow", Q_NULLPTR));
-        pushButton_3->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("Qtree_Class_UI", "PushButton", Q_NULLPTR));
+        checkBox->setText(QApplication::translate("Qtree_Class_UI", "\350\207\252\351\200\202\345\272\224\347\274\251\346\224\276", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem = treeWidget_1->headerItem();
         ___qtreewidgetitem->setText(0, QApplication::translate("Qtree_Class_UI", "\346\226\207\344\273\266\345\210\227\350\241\250", Q_NULLPTR));
     } // retranslateUi

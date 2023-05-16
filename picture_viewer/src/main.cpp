@@ -1,14 +1,15 @@
 
 
-#include <QApplication>
-#include "iostream"
-#include "function.h"
-#include <QResource>
-#include <QDir>
-#include <QFontDatabase>
-#include "QMovie"
-#include <QUrl>
 
+#include <QString>
+#include <QFile>
+#include <iostream>
+#include <QResource>
+#include <QApplication>
+#include <QMainWindow>
+#include "qdebug.h"
+#include "ui/ui_file/Qtree_ui.h"
+#include "function.h"
 
 QString* Resource_Registration(){
     auto *ProjectDir = new QString(PROJECT_ROOT_DIR);
@@ -31,7 +32,7 @@ int main(int argc, char *argv[])
     QString *ABProjectDir = Resource_Registration(); // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）,返回路径
     std::cout << "Project directory: " << ABProjectDir->toStdString() << std::endl; //获取项目的绝对路径
     QApplication app(argc, argv);
-    cout<<"---------------------------------------------------------------------------------"<<endl;
+
 
     auto *QWidget = new QMainWindow();
 

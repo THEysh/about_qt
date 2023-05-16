@@ -3,8 +3,6 @@
 
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
-#include <QStringList>
-#include <QStandardPaths>
 #include <QFile>
 #include <QFileDialog>
 #include <QDir>
@@ -16,8 +14,6 @@
 class My_Qtreewidget : public QTreeWidget {
 Q_OBJECT
 signals:
-
-public slots:
 
 public:
     explicit My_Qtreewidget(QWidget *parent = nullptr);

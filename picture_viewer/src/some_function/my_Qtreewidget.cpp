@@ -20,7 +20,7 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
     my_photo = nullptr;
     active_item = nullptr;
     my_watcher = new QFileSystemWatcher();
-
+    this->setHeaderHidden(true);
     rootNode->setText(0, "双击此处打开目录");
     rootNode->setData(0, Qt::UserRole, ProjectDir);
     rootNode->setIcon(0, QIcon(":ui/images/pic/folder-solid.svg"));
