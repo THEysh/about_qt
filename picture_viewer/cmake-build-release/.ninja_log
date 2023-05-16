@@ -9,7 +9,7 @@
 302	1614	7059269294061286	CMakeFiles/picture_viewer.dir/src/function.cpp.obj	8aa1b6db7e7ab1f6
 316	1498	7059415129451466	CMakeFiles/picture_viewer.dir/src/main.cpp.obj	fe971c0a4a95eed2
 11591	11830	7059415232738614	picture_viewer.exe	7a3be9e7bc18e8ae
-1	240	7059537945639931	build.ninja	6e3eb59dc281d078
+1	240	7059538665604499	build.ninja	6e3eb59dc281d078
 27	316	7059415117584903	picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp	fd126a01cd2f6314
 27	316	7059415117584903	F:/code/c_code/about_qt/picture_viewer/cmake-build-release/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp	fd126a01cd2f6314
 317	350	7059415117995126	CMakeFiles/picture_viewer.dir/src/ico.rc.obj	9aa37f3ae9bc9299

@@ -17,9 +17,8 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
         scaling(false),
         p_width(or_activated_photo_pixmap.width()),
-        p_height(or_activated_photo_pixmap.height()),
-        mouse_x(0),
-        mouse_y(0)
+        p_height(or_activated_photo_pixmap.height())
+
 {
     this->setScene(scene);
 

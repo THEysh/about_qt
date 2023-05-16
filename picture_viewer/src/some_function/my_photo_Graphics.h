@@ -63,10 +63,7 @@ public:
     void click_show_photo();
 
 private:
-    int p_width = or_activated_photo_pixmap.width();
-    int p_height = or_activated_photo_pixmap.height();
-    int mouse_x = 0;
-    int mouse_y = 0;
+    float Scale = 1.0; //比例
     void Q_pixmap_show();
     void resizeEvent(QResizeEvent *event);
     void wheelEvent(QWheelEvent *event);
@@ -79,9 +76,7 @@ public:
     C_SvgItem(QGraphicsSvgItem *parent = nullptr);
 
 private:
-    int mouse_x = 0;
-    int mouse_y = 0;
-    void Q_pixmap_show();
+    void Svg_show();
     void resizeEvent(QResizeEvent *event);
     void wheelEvent(QWheelEvent *event);
 };
