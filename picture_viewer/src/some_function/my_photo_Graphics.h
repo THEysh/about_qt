@@ -12,6 +12,8 @@
 #include <QMessageBox>
 #include <QTreeWidgetItem>
 #include "QMenu"
+#include <QSvgRenderer>
+#include <QGraphicsSvgItem>
 
 using namespace  std;
 class My_Photo_Graphics : public QGraphicsView {
@@ -37,7 +39,6 @@ private:
     int p_width = or_activated_photo_pixmap.width();
     int p_height = or_activated_photo_pixmap.height();
     bool scaling = false;
-    int pot_x = 0; int pot_y = 0;
     int mouse_x = 0;
     int mouse_y = 0;
 
@@ -51,5 +52,37 @@ private:
 
 };
 
+class C_QPixmapItem : public QGraphicsPixmapItem{
+public:
+    QPixmap activated_photo_pixmap = QPixmap(); // 根据尺寸变化的缩放图
+    QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
+    C_QPixmapItem(QGraphicsPixmapItem *parent = nullptr);
 
+public:
+    void connect_checkbox();
+    void click_show_photo();
+
+private:
+    int p_width = or_activated_photo_pixmap.width();
+    int p_height = or_activated_photo_pixmap.height();
+    int mouse_x = 0;
+    int mouse_y = 0;
+    void Q_pixmap_show();
+    void resizeEvent(QResizeEvent *event);
+    void wheelEvent(QWheelEvent *event);
+
+};
+
+class C_SvgItem : public QGraphicsSvgItem{
+public:
+    QSvgRenderer activated_svg;
+    C_SvgItem(QGraphicsSvgItem *parent = nullptr);
+
+private:
+    int mouse_x = 0;
+    int mouse_y = 0;
+    void Q_pixmap_show();
+    void resizeEvent(QResizeEvent *event);
+    void wheelEvent(QWheelEvent *event);
+};
 #endif

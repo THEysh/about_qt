@@ -18,8 +18,6 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         scaling(false),
         p_width(or_activated_photo_pixmap.width()),
         p_height(or_activated_photo_pixmap.height()),
-        pot_x(0),
-        pot_y(0),
         mouse_x(0),
         mouse_y(0)
 {
@@ -37,7 +35,7 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
     this->setDragMode(static_cast<DragMode>(QGraphicsView::ScrollHandDrag | QGraphicsView::RubberBandDrag));
 }
 
-void My_Photo_Graphics:: connect_checkbox() {
+void My_Photo_Graphics::connect_checkbox() {
     if (that_checkBox!= nullptr){
         that_checkBox->setTristate(false);
         connect(that_checkBox, &QCheckBox::toggled, [this](bool checked){

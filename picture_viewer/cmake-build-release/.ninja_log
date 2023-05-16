@@ -1,11 +1,16 @@
 # ninja log v5
-1	306	0	CMakeFiles/picture_viewer_autogen	f1295b2f45c792b3
-309	1824	7059158387409414	CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj	ff053de2a3eb1130
-310	2228	7059158391439553	CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj	6a54b44ed00a4508
-1	306	0	picture_viewer_autogen/mocs_compilation.cpp	f1295b2f45c792b3
-307	1781	7059158386959312	CMakeFiles/picture_viewer.dir/picture_viewer_autogen/mocs_compilation.cpp.obj	da8694be1e6ecbc
-1	306	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-release/CMakeFiles/picture_viewer_autogen	f1295b2f45c792b3
-1	306	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-release/picture_viewer_autogen/mocs_compilation.cpp	f1295b2f45c792b3
-308	1768	7059158386829285	CMakeFiles/picture_viewer.dir/src/function.cpp.obj	8aa1b6db7e7ab1f6
-306	1899	7059158388149585	CMakeFiles/picture_viewer.dir/src/main.cpp.obj	fe971c0a4a95eed2
-2228	2431	7059158392765233	picture_viewer.exe	8251154538c89c5a
+301	1696	7059269294881488	CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj	ff053de2a3eb1130
+4	27	0	CMakeFiles/picture_viewer_autogen	f1295b2f45c792b3
+300	1626	7059269294171316	CMakeFiles/picture_viewer.dir/picture_viewer_autogen/mocs_compilation.cpp.obj	da8694be1e6ecbc
+303	2026	7059269298183790	CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj	6a54b44ed00a4508
+4	27	0	picture_viewer_autogen/mocs_compilation.cpp	f1295b2f45c792b3
+4	27	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-release/CMakeFiles/picture_viewer_autogen	f1295b2f45c792b3
+4	27	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-release/picture_viewer_autogen/mocs_compilation.cpp	f1295b2f45c792b3
+302	1614	7059269294061286	CMakeFiles/picture_viewer.dir/src/function.cpp.obj	8aa1b6db7e7ab1f6
+316	1498	7059415129451466	CMakeFiles/picture_viewer.dir/src/main.cpp.obj	fe971c0a4a95eed2
+11591	11830	7059415232738614	picture_viewer.exe	7a3be9e7bc18e8ae
+1	240	7059537945639931	build.ninja	6e3eb59dc281d078
+27	316	7059415117584903	picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp	fd126a01cd2f6314
+27	316	7059415117584903	F:/code/c_code/about_qt/picture_viewer/cmake-build-release/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp	fd126a01cd2f6314
+317	350	7059415117995126	CMakeFiles/picture_viewer.dir/src/ico.rc.obj	9aa37f3ae9bc9299
+318	11591	7059415230338063	CMakeFiles/picture_viewer.dir/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp.obj	c3184ce9067b5a2b

@@ -12,6 +12,7 @@ find_package(Qt5 COMPONENTS
         Gui
         Widgets
         Network
+        Svg
         REQUIRED)
 
 add_executable(qt_test main.cpp fr_win.cpp fr_win.h)
@@ -20,6 +21,7 @@ target_link_libraries(qt_test
         Qt5::Gui
         Qt5::Widgets
         Qt5::Network
+        Qt5::Svg
         )
 
 if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)

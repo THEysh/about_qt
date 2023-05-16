@@ -48,7 +48,7 @@ private:
         photo_g->connect_checkbox();
 
         Win->setWindowTitle("image");
-        QIcon icon(":ui/images/pic_2d/icons-solid.svg");
+        QIcon icon(":ui/images/pic_2d/images-solid.svg");
         Win->setWindowIcon(icon);
     }
     //设置窗口之间的拖动

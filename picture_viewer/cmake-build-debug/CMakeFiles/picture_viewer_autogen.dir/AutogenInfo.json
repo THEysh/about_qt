@@ -65,7 +65,12 @@
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake",
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake",
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake",
-		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeParseArguments.cmake"
+		"F:/CLion/CLion 2022.3.3/bin/cmake/win/x64/share/cmake-3.25/Modules/CMakeParseArguments.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfigVersion.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfig.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgIconPlugin.cmake",
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake",
+		"F:/code/c_code/about_qt/picture_viewer/src/my_qrc.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "F:/code/c_code/about_qt/picture_viewer",
 	"DEP_FILE" : "",
@@ -105,6 +110,7 @@
 		"PROJECT_ROOT_DIR=\"F:/code/c_code/about_qt/picture_viewer\"",
 		"QT_CORE_LIB",
 		"QT_GUI_LIB",
+		"QT_SVG_LIB",
 		"QT_WIDGETS_LIB"
 	],
 	"MOC_DEPEND_FILTERS" : 
@@ -122,6 +128,7 @@
 		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtGui",
 		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtANGLE",
 		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtWidgets",
+		"F:/QT5_9_9/5.9.9/mingw53_32/include/QtSvg",
 		"F:/QT5_9_9/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include",
 		"F:/QT5_9_9/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed",
 		"F:/QT5_9_9/Tools/mingw530_32/i686-w64-mingw32/include",

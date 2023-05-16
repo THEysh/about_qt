@@ -1,0 +1,17 @@
+# ninja log v5
+586	2264	7059537777915395	CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj	850a5b6f9e064806
+4	260	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/mocs_compilation.cpp	540c747e9e7067a4
+4	260	0	CMakeFiles/picture_viewer_autogen	540c747e9e7067a4
+4	260	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen	540c747e9e7067a4
+583	2251	7059537777783181	CMakeFiles/picture_viewer.dir/picture_viewer_autogen/mocs_compilation.cpp.obj	1195baa7bc7f2b17
+588	2465	7059537779915239	CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj	2d0b42a95b6fa132
+4	260	0	picture_viewer_autogen/mocs_compilation.cpp	540c747e9e7067a4
+585	2234	7059537777612289	CMakeFiles/picture_viewer.dir/src/function.cpp.obj	c89bd95cae017b14
+584	2318	7059537778439981	CMakeFiles/picture_viewer.dir/src/main.cpp.obj	d43be3cdeb67ce7e
+12518	12846	7059537883711538	picture_viewer.exe	b224aaed2de6a253
+0	231	7059537945629922	build.ninja	4feab169db7550b0
+25	62	7059393954805823	CMakeFiles/picture_viewer.dir/ico.rc.obj	7db42b94002514d1
+583	618	7059533020262401	CMakeFiles/picture_viewer.dir/src/ico.rc.obj	ca58bc6194bd131d
+261	583	7059537761049545	picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp	ba791d86075bcd5b
+261	583	7059537761049545	F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp	ba791d86075bcd5b
+589	12518	7059537880420942	CMakeFiles/picture_viewer.dir/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp.obj	787af95f98cc5eac
