@@ -49,7 +49,6 @@ private:
     // 右键菜单
     void contextMenuEvent(QContextMenuEvent *event) override;
 
-
 };
 
 class C_QPixmapItem : public QGraphicsPixmapItem{
