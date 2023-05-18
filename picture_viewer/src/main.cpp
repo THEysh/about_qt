@@ -15,7 +15,7 @@ void Resource_Registration(){
     QString currentPath = QDir::currentPath();
     // 输出路径
     qDebug() << "Current path: " << currentPath;
-    QString path_rcc = QString(currentPath + "/src/ui/my_qrc.rcc"); //获取项目的.rcc路径
+    QString path_rcc = QString(currentPath + "/src/my_qrc.rcc"); //获取项目的.rcc路径
     qDebug() << "path_rcc: " << path_rcc;
 
     if (QResource::registerResource(path_rcc)) { //获取项目的资源文件
@@ -63,7 +63,7 @@ bool Generate_qrc(){
 int main(int argc, char *argv[])
 {
     system("chcp 65001"); //用于解决中文乱码
-    // Resource_Registration(); // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）,返回路径,
+    Resource_Registration(); // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）,返回路径,
     // 已经在cmake添加了add_executable(.qrc)的路径就可以不注册
     Generate_qrc(); // 生成一个.qrc的脚本
 

@@ -69,8 +69,7 @@
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfigVersion.cmake",
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfig.cmake",
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgIconPlugin.cmake",
-		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake",
-		"F:/code/c_code/about_qt/picture_viewer/src/my_qrc.qrc"
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "F:/code/c_code/about_qt/picture_viewer",
 	"DEP_FILE" : "",
@@ -81,12 +80,6 @@
 			"F:/code/c_code/about_qt/picture_viewer/src/function.h",
 			"MU",
 			"UVLADIE3JM/moc_function.cpp",
-			null
-		],
-		[
-			"F:/code/c_code/about_qt/picture_viewer/src/some_function/C_QPixmapItem.h",
-			"MU",
-			"UJXWR6GGJZ/moc_C_QPixmapItem.cpp",
 			null
 		],
 		[
@@ -175,11 +168,6 @@
 	[
 		[ "F:/code/c_code/about_qt/picture_viewer/src/function.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/picture_viewer/src/main.cpp", "MU", null ],
-		[
-			"F:/code/c_code/about_qt/picture_viewer/src/some_function/C_QPixmapItem.cpp",
-			"MU",
-			null
-		],
 		[
 			"F:/code/c_code/about_qt/picture_viewer/src/some_function/Item_Interface.cpp",
 			"MU",

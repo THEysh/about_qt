@@ -1,34 +1,85 @@
+
 #include <iostream>
+#include <vector>
 #include <QString>
-#include "qdebug.h"
-
+#include <QStringList>
 #include <QFileInfo>
-#include <QDebug>
-void callbackFunc(int result) {
-    std::cout << "Result: " << result << std::endl;
-}
+#include <QPixmap>
+#include <QGraphicsPixmapItem>
+#include <QLabel>
+#include <QApplication>
+#include "qdebug.h"
+#include "Item_Interface.h"
 
-void callbackFunc2(int result) {
-    std::cout << "Result: " << result << std::endl;
-}
-void doSomething(int a, int b, void (*callback)(int)) {
-    int result = a + b;
-    callback(result);
-}
+class Animal {
+public:
+    virtual void move() { std::cout << "Animal moving\n"; }
+};
 
-int main() {
-    doSomething(11, 2, callbackFunc2);
-    doSomething(1, 2, callbackFunc);
+class Car:Animal {
+public:
+    virtual void move() override{std::cout << "cat moving\n";}
+    virtual void start() { std::cout << "Car starting\n"; }
+    virtual void stop() { std::cout << "Car stopping\n"; }
+};
+class Blue_Car:Car{
+public:
+    void move() override{std::cout << "Blue_cat moving\n";}
+    void start() override{ std::cout << "Blue_Car starting\n"; }
+    void stop() override{ std::cout << "Blue_Car stopping\n"; }
+};
 
-    QString fileName = "/asd/das/example.sVg";
-    QFileInfo fileInfo(fileName);
+class Zoo {
+public:
+    virtual void moveAll() = 0;
+    virtual void startCar() = 0;
+    virtual void stopCar() = 0;
+};
+class ZooImpl : public Zoo {
+public:
+    std::vector<Animal*> animals;
+    std::vector<Car*> cars;
+    Blue_Car bulecar;
 
-    if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0) {
-        qDebug() << "The file is an SVG format file.";
-    } else {
-        qDebug() << "The file is not an SVG format file.";
+    virtual void moveAll() {
+        for (auto animal : animals) {
+            animal->move();
+        }
+        for (auto car : cars) {
+            car->move();
+        }
     }
-    int a = 3;
 
-    return 0;
+    virtual void startCar() {
+        bulecar.start();
+    }
+
+    virtual void stopCar() {
+        bulecar.stop();
+    }
+};
+int main(int argc, char* argv[]) {
+    QApplication app(argc, argv); // 创建 QApplication 对象
+    ZooImpl zoo;
+    zoo.cars.push_back(new Car());
+    zoo.animals.push_back(new Animal());
+    zoo.bulecar = Blue_Car();
+    zoo.moveAll();
+    zoo.startCar();
+    zoo.stopCar();
+    QString path = "asd.SVg";
+    QFileInfo fileInfo(path);
+    QStringList imageTypes = {"svg","jpg","png"};
+    qDebug()<<((fileInfo.suffix().compare("svg", Qt::CaseInsensitive))==0);
+    path = "C:\\Users\\Administrator\\Desktop\\新建文件夹\\Temp\\1684165169655.jpg";
+    QPixmap temp_pixmap(path, imageTypes.join(",").toUtf8().constData());
+    Item_Interface *image_items = nullptr;
+    if (!temp_pixmap.isNull()) {
+        qDebug() << "Image loaded successfully.";
+        auto* item_pixmap = new QGraphicsPixmapItem(temp_pixmap);
+        image_items = new C_QPixmapItem(item_pixmap);
+        qDebug()<<image_items<<"avc";
+        }
+
+    return app.exec(); // 运行 QT 应用程序事件循环
 }

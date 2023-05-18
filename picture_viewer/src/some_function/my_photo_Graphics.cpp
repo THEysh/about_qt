@@ -1,23 +1,24 @@
 //
 // Created by top on 2023-04-23.
 //
+
 #include "qdebug.h"
 #include <QLabel>
 #include <QGuiApplication>
-#include "QCheckBox"
 #include <QtGui/QClipboard>
+#include <QFileInfo>
+#include <iostream>
 #include "My_Photo_Graphics.h"
 #include "Item_Interface.h"
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
-        QGraphicsView(parent),
-        scene(new QGraphicsScene()),
-        or_background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
-        background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
-        interface_photo_graphics(new Item_Interface(this)) //初始化接口
+    // 定义初始化
+    QGraphicsView(parent),
+    image_item(new Item_Interface()),
+    background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
+    or_background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"))
 {
     this->setScene(scene);
-
     setRenderHint(QPainter::Antialiasing, true);
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     setResizeAnchor(QGraphicsView::AnchorUnderMouse);
@@ -27,38 +28,75 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     // 设置为拖拽
     this->setDragMode(static_cast<DragMode>(QGraphicsView::ScrollHandDrag | QGraphicsView::RubberBandDrag));
-}
-
-std::pair<int, int> My_Photo_Graphics::get_width_height(){
-    int width = this->width();
-    int height = this->height();
-    return std::make_pair(width, height);
-}
-
-
-void My_Photo_Graphics::click_element() {
-
-}
-
-void My_Photo_Graphics::show_photo() {
-    resetTransform(); // 重设位置
+    //初始化背景等等
+    show_image_item();
 }
 
 void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
+    show_image_item();
+
 }
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
+    show_image_item();
+
 }
 
-void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &type_img) {
-    if (interface_photo_graphics!= nullptr){
-        interface_photo_graphics->interface_load_image(path,type_img);
+void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
+    // 进行判断，是加入什么类型的图片
+    QFileInfo fileInfo(path);
+    qDebug() <<"path:"<<path;
+    qDebug() <<"imageTypes:"<<imageTypes;
+
+    if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
+        qDebug() << "The file is an SVG ,load....:";
+        //QSvgRenderer svgRenderer(fileInfo.path());
     }
-
+    else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
+        QPixmap temp_pixmap(path, imageTypes.join(",").toUtf8().constData());
+        if (!temp_pixmap.isNull()) {
+            qDebug() << "Image loaded successfully.";
+            auto* item_pixmap = new QGraphicsPixmapItem(temp_pixmap);
+            image_item = new C_QPixmapItem(item_pixmap);
+        } else {
+            qDebug() << "Failed to load image from" << path;
+        }
+    } else {
+        qDebug() << "Unsupported image format: " << path;
+    }
+    show_image_item();
 
 }
+
+void My_Photo_Graphics::show_image_item() {
+    /*初始化背景
+    QGraphicsView 组件的背景和场景是两个不同的概念，因此不同的代码片段可能会对它们的大小进行不同的调整。
+    前面两行代码设置场景大小与视图大小一致，即将场景矩形设置为 (0, 0, width, height)，其中 width 和 height 分别为视图的宽和高。
+    这样可以确保场景的大小与视图相同，从而使所有的图形项都能够完整地显示在视图中。如果不进行这个设置，场景的大小可能会被设置为默认值，
+    这可能导致某些图形项被裁剪或者部分显示。*/
+    QRect new_rect(QPoint(0, 0), this->size());
+    scene->setSceneRect(new_rect);
+    *background = or_background->scaled(this->size(), Qt::IgnoreAspectRatio);
+    this->setBackgroundBrush(QBrush(*background));
+
+    if ((scene!= nullptr)&&(image_item!= nullptr)){
+        image_item->show_photo(this,scene);
+    }
+    else{
+
+    }
+}
+
+My_Photo_Graphics::~My_Photo_Graphics() {
+    // delete other dynamically allocated resources if any
+    delete scene;
+    delete image_item;
+    delete background;
+
+}
+
 
 
 

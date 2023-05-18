@@ -14,12 +14,13 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
           MAX_NODE_COUNT(1000),
           nodeCount(0),
           rootNode(new QTreeWidgetItem(this)),
+          ProjectDir(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation)),
+          my_photo(nullptr),
+          my_watcher (new QFileSystemWatcher()),
+          active_item(nullptr),
           imageTypes({"bmp","jpg","png","tif","gif","fpx","svg","psd"})
+
 {
-    ProjectDir = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-    my_photo = nullptr;
-    active_item = nullptr;
-    my_watcher = new QFileSystemWatcher();
     this->setHeaderHidden(true);
     rootNode->setText(0, "双击此处打开目录");
     rootNode->setData(0, Qt::UserRole, ProjectDir);
@@ -27,6 +28,11 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
 
     _dir_connect();
     _updata_all_Qtree_dir();
+}
+
+void My_Qtreewidget::connect_photo(My_Photo_Graphics *name) {
+    // 运行之前必须要初始化类My_Photo_Graphics
+    my_photo = name;
 }
 
 void My_Qtreewidget::_updata_all_Qtree_dir()
@@ -319,3 +325,5 @@ void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item, int column)
         QDesktopServices::openUrl(QUrl_path);
     }
 }
+
+

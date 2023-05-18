@@ -14,9 +14,9 @@
 class My_Qtreewidget : public QTreeWidget {
 Q_OBJECT
 signals:
-
 public:
-    explicit My_Qtreewidget(QWidget *parent = nullptr);
+    explicit My_Qtreewidget(QWidget *name);
+    void connect_photo(My_Photo_Graphics* name);
     QString ProjectDir;
     My_Photo_Graphics* my_photo;
     QTreeWidgetItem* active_item;

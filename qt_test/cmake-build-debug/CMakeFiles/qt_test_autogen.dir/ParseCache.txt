@@ -6,3 +6,6 @@ F:/code/c_code/about_qt/qt_test/fr_win.cpp
 F:/code/c_code/about_qt/qt_test/B.h
 F:/code/c_code/about_qt/qt_test/main.cpp
 F:/code/c_code/about_qt/qt_test/B.cpp
+F:/code/c_code/about_qt/qt_test/Item_Interface.h
+ mmc:Q_OBJECT
+F:/code/c_code/about_qt/qt_test/Item_Interface.cpp

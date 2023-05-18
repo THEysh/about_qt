@@ -3,28 +3,35 @@
 #ifndef ITEM_INTERFACE_H
 #define ITEM_INTERFACE_H
 #include "QObject"
-#include "C_QPixmapItem.h"
-#include "My_Photo_Graphics.h"
+#include "my_photo_Graphics.h"
 
-// 这个地方不能继承My_Photo_Graphics 因为：
-/*在进行初始化时，需要首先创建 My_Photo_Graphics 的实例，然后将该实例传递给 Item_Interface 的构造函数。
-因此，在创建 My_Photo_Graphics 对象时，不能够通过将指向 Item_Interface 对象的指针作为参数传递来初始化接口。
-正确的做法是在 My_Photo_Graphics 的构造函数中，先创建 interface_photo_graphics 对象，然后将该对象的指针传递给 Item_Interface 的构造函数。*/
+// 把不同类型显示的图片抽样出来
 class Item_Interface : public QObject{
 Q_OBJECT
 public:
-    explicit Item_Interface(My_Photo_Graphics *parent = nullptr);
-    void interface_load_image(const QString &path, const QStringList &type_img);
-    QGraphicsScene *interface_scene = nullptr;
-protected:
-    // 重写父类的虚函数
+    explicit Item_Interface();
     virtual void click_element();
-    virtual void show_photo(void (*my_fun_Pointer)());
+    virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
 
-    const char *image_type_list; // 获取image的种类
+};
+
+class C_QPixmapItem : public Item_Interface{
+Q_OBJECT
+public:
+    explicit C_QPixmapItem(QGraphicsPixmapItem *pixmapItem);
+    void click_element() override;
+    void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
+
+protected:
+    QPixmap activated_photo_pixmap = QPixmap(); // 根据尺寸变化的缩放图
+    QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
 
 private:
-
+    void position_calculation(int w, int h);
+    QGraphicsPixmapItem *pixmapItem = nullptr;
+    int p_width = 0;
+    int p_height = 0;
+    bool scaling = false; //是否需要自适应缩放
 };
 
 

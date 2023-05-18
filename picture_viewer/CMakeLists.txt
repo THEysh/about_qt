@@ -24,9 +24,9 @@ find_package(Qt5 COMPONENTS
 
 # ico.rc 是为了修改程序的图标，其中ico.rc内容如下： IDI_ICON1 ICON "ui/images/pic_2d/images-solid.ico"
 # .qrc 是资源文件，包含一些图片，视频资源
+#         src/my_qrc.qrc
 add_executable(picture_viewer
         src/main.cpp
-        src/my_qrc.qrc
         src/ico.rc
         src/function.cpp
         src/function.h
@@ -36,7 +36,7 @@ add_executable(picture_viewer
         src/some_function/my_Qtreewidget.cpp
         src/some_function/my_Qtreewidget.h
         src/some_function/Item_Interface.cpp
-        src/some_function/Item_Interface.h src/some_function/C_QPixmapItem.cpp src/some_function/C_QPixmapItem.h)
+        src/some_function/Item_Interface.h)
 
 
 target_link_libraries(picture_viewer

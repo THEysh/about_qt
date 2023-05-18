@@ -90,6 +90,12 @@
 			"MU",
 			"EWIEGA46WW/moc_B.cpp",
 			null
+		],
+		[
+			"F:/code/c_code/about_qt/qt_test/Item_Interface.h",
+			"MU",
+			"EWIEGA46WW/moc_Item_Interface.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -153,6 +159,7 @@
 	[
 		[ "F:/code/c_code/about_qt/qt_test/A.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/qt_test/B.cpp", "MU", null ],
+		[ "F:/code/c_code/about_qt/qt_test/Item_Interface.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/qt_test/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
