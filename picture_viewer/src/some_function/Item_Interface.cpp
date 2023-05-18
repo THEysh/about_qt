@@ -26,6 +26,8 @@ C_QPixmapItem::C_QPixmapItem(QGraphicsPixmapItem *loadpixmap):
         pixmapItem(loadpixmap)
 {
     pixmapItem = loadpixmap;
+    or_activated_photo_pixmap = pixmapItem->pixmap();
+    activated_photo_pixmap = pixmapItem->pixmap();
 }
 void C_QPixmapItem::click_element() {
     Item_Interface::click_element();
@@ -37,8 +39,7 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     position_calculation(view->width(),view->height());
 
     // 查看是否需要自适应缩放:
-    if (scaling || (or_activated_photo_pixmap.size().width() < view->viewport()->rect().width() &&
-                    or_activated_photo_pixmap.size().height()<view->viewport()->rect().height())){
+    if (scaling || (or_activated_photo_pixmap.size().height()< view->viewport()->rect().height())){
         pixmapItem = new QGraphicsPixmapItem(activated_photo_pixmap);
         const QRectF &boundingRect = pixmapItem->boundingRect();
         QPointF center = view->viewport()->rect().center() - boundingRect.center();

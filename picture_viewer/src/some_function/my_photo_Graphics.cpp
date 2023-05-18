@@ -71,6 +71,7 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
 }
 
 void My_Photo_Graphics::show_image_item() {
+    scene->clear();
     /*初始化背景
     QGraphicsView 组件的背景和场景是两个不同的概念，因此不同的代码片段可能会对它们的大小进行不同的调整。
     前面两行代码设置场景大小与视图大小一致，即将场景矩形设置为 (0, 0, width, height)，其中 width 和 height 分别为视图的宽和高。
