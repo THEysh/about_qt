@@ -45,7 +45,7 @@ private:
         photo_g->photo_actived_rootNode = &(qtree_widget->active_item);
         //连接自适应缩放的信号
         photo_g->that_checkBox = ui_f.checkBox;
-        photo_g->connect_checkbox();
+        // photo_g->connect_checkbox();
 
         Win->setWindowTitle("image");
         QIcon icon(":ui/images/pic_2d/images-solid.svg");

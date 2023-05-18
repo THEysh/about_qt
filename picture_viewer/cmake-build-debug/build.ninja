@@ -96,6 +96,22 @@ build CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj: CX
   OBJECT_DIR = CMakeFiles\picture_viewer.dir
   OBJECT_FILE_DIR = CMakeFiles\picture_viewer.dir\src\some_function
 
+build CMakeFiles/picture_viewer.dir/src/some_function/Item_Interface.cpp.obj: CXX_COMPILER__picture_viewer_Debug F$:/code/c_code/about_qt/picture_viewer/src/some_function/Item_Interface.cpp || cmake_object_order_depends_target_picture_viewer
+  DEFINES = -DPROJECT_ROOT_DIR=\"F:/code/c_code/about_qt/picture_viewer\" -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles\picture_viewer.dir\src\some_function\Item_Interface.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IF:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtCore -isystem F:/QT5_9_9/5.9.9/mingw53_32/./mkspecs/win32-g++ -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtGui -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtANGLE -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtWidgets -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtSvg
+  OBJECT_DIR = CMakeFiles\picture_viewer.dir
+  OBJECT_FILE_DIR = CMakeFiles\picture_viewer.dir\src\some_function
+
+build CMakeFiles/picture_viewer.dir/src/some_function/C_QPixmapItem.cpp.obj: CXX_COMPILER__picture_viewer_Debug F$:/code/c_code/about_qt/picture_viewer/src/some_function/C_QPixmapItem.cpp || cmake_object_order_depends_target_picture_viewer
+  DEFINES = -DPROJECT_ROOT_DIR=\"F:/code/c_code/about_qt/picture_viewer\" -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles\picture_viewer.dir\src\some_function\C_QPixmapItem.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IF:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtCore -isystem F:/QT5_9_9/5.9.9/mingw53_32/./mkspecs/win32-g++ -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtGui -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtANGLE -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtWidgets -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtSvg
+  OBJECT_DIR = CMakeFiles\picture_viewer.dir
+  OBJECT_FILE_DIR = CMakeFiles\picture_viewer.dir\src\some_function
+
 build CMakeFiles/picture_viewer.dir/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp.obj: CXX_COMPILER__picture_viewer_Debug F$:/code/c_code/about_qt/picture_viewer/cmake-build-debug/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp || cmake_object_order_depends_target_picture_viewer
   DEFINES = -DPROJECT_ROOT_DIR=\"F:/code/c_code/about_qt/picture_viewer\" -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB
   DEP_FILE = CMakeFiles\picture_viewer.dir\picture_viewer_autogen\UVLADIE3JM\qrc_my_qrc.cpp.obj.d
@@ -112,7 +128,7 @@ build CMakeFiles/picture_viewer.dir/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc
 #############################################
 # Link the executable picture_viewer.exe
 
-build picture_viewer.exe: CXX_EXECUTABLE_LINKER__picture_viewer_Debug CMakeFiles/picture_viewer.dir/picture_viewer_autogen/mocs_compilation.cpp.obj CMakeFiles/picture_viewer.dir/src/main.cpp.obj CMakeFiles/picture_viewer.dir/src/ico.rc.obj CMakeFiles/picture_viewer.dir/src/function.cpp.obj CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj CMakeFiles/picture_viewer.dir/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp.obj | F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a || picture_viewer_autogen
+build picture_viewer.exe: CXX_EXECUTABLE_LINKER__picture_viewer_Debug CMakeFiles/picture_viewer.dir/picture_viewer_autogen/mocs_compilation.cpp.obj CMakeFiles/picture_viewer.dir/src/main.cpp.obj CMakeFiles/picture_viewer.dir/src/ico.rc.obj CMakeFiles/picture_viewer.dir/src/function.cpp.obj CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj CMakeFiles/picture_viewer.dir/src/some_function/Item_Interface.cpp.obj CMakeFiles/picture_viewer.dir/src/some_function/C_QPixmapItem.cpp.obj CMakeFiles/picture_viewer.dir/picture_viewer_autogen/UVLADIE3JM/qrc_my_qrc.cpp.obj | F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a || picture_viewer_autogen
   FLAGS = -g
   LINK_LIBRARIES = F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\picture_viewer.dir

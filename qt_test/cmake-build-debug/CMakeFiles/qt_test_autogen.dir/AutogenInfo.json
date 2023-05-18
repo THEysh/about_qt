@@ -80,9 +80,15 @@
 	"HEADERS" : 
 	[
 		[
-			"F:/code/c_code/about_qt/qt_test/fr_win.h",
+			"F:/code/c_code/about_qt/qt_test/A.h",
 			"MU",
-			"EWIEGA46WW/moc_fr_win.cpp",
+			"EWIEGA46WW/moc_A.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/qt_test/B.h",
+			"MU",
+			"EWIEGA46WW/moc_B.cpp",
 			null
 		]
 	],
@@ -145,7 +151,8 @@
 	"SETTINGS_FILE" : "F:/code/c_code/about_qt/qt_test/cmake-build-debug/CMakeFiles/qt_test_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[ "F:/code/c_code/about_qt/qt_test/fr_win.cpp", "MU", null ],
+		[ "F:/code/c_code/about_qt/qt_test/A.cpp", "MU", null ],
+		[ "F:/code/c_code/about_qt/qt_test/B.cpp", "MU", null ],
 		[ "F:/code/c_code/about_qt/qt_test/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

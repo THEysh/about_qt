@@ -15,7 +15,7 @@ find_package(Qt5 COMPONENTS
         Svg
         REQUIRED)
 
-add_executable(qt_test main.cpp fr_win.cpp fr_win.h)
+add_executable(qt_test main.cpp A.cpp A.h B.cpp B.h)
 target_link_libraries(qt_test
         Qt5::Core
         Qt5::Gui
