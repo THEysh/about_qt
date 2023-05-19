@@ -29,8 +29,6 @@ void Item_Interface::wheelEvent(QWheelEvent *event) {
 }
 
 
-
-
 //====================================================================================================
 
 C_QPixmapItem::C_QPixmapItem(QGraphicsPixmapItem *loadpixmap):
@@ -54,8 +52,7 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
 
     position_calculation(view->width(),view->height());
     // 先将pixmapItem释放，防止内存泄漏
-    delete pixmapItem;
-    pixmapItem = nullptr;
+
     // 查看是否需要自适应缩放:
     if (scaling || (or_activated_photo_pixmap.size().height()< view->viewport()->rect().height())){
         pixmapItem = new QGraphicsPixmapItem(activated_photo_pixmap);
@@ -98,8 +95,6 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event) {
     }
 }
 
-
-
 //====================================================================================================
 
 C_SvgItem::C_SvgItem(QGraphicsSvgItem *load_svgItem):
@@ -124,7 +119,8 @@ void C_SvgItem::click_element() {
 
 void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
-    delete svgItem; //防止内存泄漏
+
+
     svgItem = new QGraphicsSvgItem(); //必须要创建一个新的svgItem并显示
     svgItem->setSharedRenderer(svgRenderer);
 
