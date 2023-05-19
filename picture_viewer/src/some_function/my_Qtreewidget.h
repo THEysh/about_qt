@@ -1,6 +1,5 @@
 #ifndef MY_QTREEWIDGET_H
 #define MY_QTREEWIDGET_H
-
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 #include <QFile>
@@ -21,6 +20,7 @@ public:
     My_Photo_Graphics* my_photo;
     QTreeWidgetItem* active_item;
     QFileSystemWatcher* my_watcher;
+
 private slots:
     void on_itemClicked(QTreeWidgetItem *item);
     void on_itemExpanded(QTreeWidgetItem *item);

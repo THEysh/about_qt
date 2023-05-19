@@ -19,13 +19,17 @@ void Item_Interface::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
 
 }
 
+void Item_Interface::wheelEvent(QWheelEvent *event) {
+
+}
+
 
 //====================================================================================================
 
 C_QPixmapItem::C_QPixmapItem(QGraphicsPixmapItem *loadpixmap):
-        pixmapItem(loadpixmap)
+        pixmapItem(loadpixmap),
+        scaling(true)
 {
-    pixmapItem = loadpixmap;
     or_activated_photo_pixmap = pixmapItem->pixmap();
     activated_photo_pixmap = pixmapItem->pixmap();
 }
@@ -59,8 +63,6 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
 }
 
 void C_QPixmapItem::position_calculation(int w, int h) {
-    // 点击后修改图片的尺寸
-
     // 得到原始图片的宽和高
     p_width = or_activated_photo_pixmap.width();
     p_height = or_activated_photo_pixmap.height();
@@ -69,5 +71,57 @@ void C_QPixmapItem::position_calculation(int w, int h) {
         activated_photo_pixmap = or_activated_photo_pixmap;
     } else{
         activated_photo_pixmap = or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+    }
+}
+
+void C_QPixmapItem::wheelEvent(QWheelEvent *event) {
+    Item_Interface::wheelEvent(event);
+    if (event->delta() > 0) {  // 缩放
+        // 只对pixmapItem场景进行缩放
+        pixmapItem->setScale(pixmapItem->scale() * 1.15);
+    } else {  // 放大
+        pixmapItem->setScale(pixmapItem->scale() / 1.15);
+    }
+}
+
+//====================================================================================================
+
+C_SvgItem::C_SvgItem(QGraphicsSvgItem *load_svgItem):
+        svgItem(load_svgItem) //初始化
+{
+    if (svgItem != nullptr){
+        svgRenderer = svgItem->renderer();
+    }else{
+        qDebug()<<"svgItem is null";
+    }
+}
+
+void C_SvgItem::click_element() {
+    Item_Interface::click_element();
+}
+
+void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
+    Item_Interface::show_photo(view, scene);
+
+    svgItem = new QGraphicsSvgItem(); //必须要创建一个新的svgItem并显示
+    svgItem->setSharedRenderer(svgRenderer);
+
+    const QRectF &boundingRect = svgItem->boundingRect();
+    QPointF center = view->viewport()->rect().center() - boundingRect.center();
+    svgItem->setPos(center); // 计算尺寸，让svgItem保持中心位置
+
+    scene->addItem(svgItem); //将svg条目添加到场景中
+    // 设置为拖拽
+    svgItem->setFlags(QGraphicsItem::ItemIsMovable);
+    view->show();
+}
+
+void C_SvgItem::wheelEvent(QWheelEvent *event) {
+    Item_Interface::wheelEvent(event);
+    if (event->delta() > 0) {  // 缩放
+        // 只对pixmapItem场景进行缩放
+        svgItem->setScale(svgItem->scale() * 1.15);
+    } else {  // 放大
+        svgItem->setScale(svgItem->scale() / 1.15);
     }
 }

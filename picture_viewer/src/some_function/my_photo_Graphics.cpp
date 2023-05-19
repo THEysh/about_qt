@@ -12,11 +12,11 @@
 #include "Item_Interface.h"
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
-    // 定义初始化
-    QGraphicsView(parent),
-    image_item(new Item_Interface()),
-    background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
-    or_background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"))
+// 定义初始化
+        QGraphicsView(parent),
+        image_item(new Item_Interface()),
+        background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
+        or_background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"))
 {
     this->setScene(scene);
     setRenderHint(QPainter::Antialiasing, true);
@@ -34,8 +34,19 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 
 void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
-    show_image_item();
+    const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
+    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
 
+    if (image_item!= nullptr){
+        image_item->wheelEvent(event);
+    } else{
+        qDebug()<<"image_item is null";
+        return;
+    }
+    // 将场景坐标映射回视图坐标，以确保变换锚点正确(更新)
+    const QPointF viewPoint = mapFromScene(scenePos);
+    setTransformationAnchor(QGraphicsView::AnchorViewCenter);
+    centerOn(viewPoint);
 }
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
@@ -47,12 +58,21 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
-    qDebug() <<"path:"<<path;
-    qDebug() <<"imageTypes:"<<imageTypes;
 
     if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
-        qDebug() << "The file is an SVG ,load....:";
-        //QSvgRenderer svgRenderer(fileInfo.path());
+        qDebug() << "The file is an SVG ,load...";
+        QGraphicsSvgItem* temp_svgItem = new QGraphicsSvgItem();
+        QSvgRenderer* new_svgrender = new QSvgRenderer();
+        bool loadResult = new_svgrender ->load(path); // 加载 SVG 文件
+        if (loadResult){
+            temp_svgItem->setSharedRenderer(new_svgrender);
+            temp_svgItem->setScale(1);
+            image_item = new C_SvgItem(temp_svgItem);
+        }
+        else{
+            qDebug()<<"QSvgRenderer load fail";
+        }
+
     }
     else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
         QPixmap temp_pixmap(path, imageTypes.join(",").toUtf8().constData());
@@ -63,11 +83,11 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
         } else {
             qDebug() << "Failed to load image from" << path;
         }
-    } else {
+    }
+    else {
         qDebug() << "Unsupported image format: " << path;
     }
     show_image_item();
-
 }
 
 void My_Photo_Graphics::show_image_item() {
@@ -81,12 +101,11 @@ void My_Photo_Graphics::show_image_item() {
     scene->setSceneRect(new_rect);
     *background = or_background->scaled(this->size(), Qt::IgnoreAspectRatio);
     this->setBackgroundBrush(QBrush(*background));
-
     if ((scene!= nullptr)&&(image_item!= nullptr)){
         image_item->show_photo(this,scene);
     }
     else{
-
+        qDebug()<<"scence or image_item is nullpter";
     }
 }
 
@@ -122,24 +141,6 @@ My_Photo_Graphics::~My_Photo_Graphics() {
 //    Q_pixmap_show();
 //}
 //
-//void My_Photo_Graphics::wheelEvent(QWheelEvent *event)  {
-//
-//    const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
-//    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-//    double scaleFactor = 1.15;
-//    if (event->delta() > 0) {  // 缩放
-//        // 只对pixmapItem场景进行缩放
-//        pixmapItem->setScale(pixmapItem->scale() * scaleFactor);
-//    } else {  // 放大
-//        pixmapItem->setScale(pixmapItem->scale() / scaleFactor);
-//    }
-//    // 将场景坐标映射回视图坐标，以确保变换锚点正确(更新)
-//    const QPointF viewPoint = mapFromScene(scenePos);
-//    setTransformationAnchor(QGraphicsView::AnchorViewCenter);
-//    centerOn(viewPoint);
-//}
-//
-
 //void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event)
 //{
 //    QMenu menu(this);

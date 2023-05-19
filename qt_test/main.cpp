@@ -9,8 +9,14 @@
 #include <QLabel>
 #include <QApplication>
 #include "qdebug.h"
-#include "Item_Interface.h"
 
+#include <QApplication>
+#include <QGraphicsSvgItem>
+#include <QMainWindow>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QSvgRenderer>
+#include <QWheelEvent>
 class Animal {
 public:
     virtual void move() { std::cout << "Animal moving\n"; }
@@ -58,28 +64,54 @@ public:
         bulecar.stop();
     }
 };
-int main(int argc, char* argv[]) {
-    QApplication app(argc, argv); // 创建 QApplication 对象
-    ZooImpl zoo;
-    zoo.cars.push_back(new Car());
-    zoo.animals.push_back(new Animal());
-    zoo.bulecar = Blue_Car();
-    zoo.moveAll();
-    zoo.startCar();
-    zoo.stopCar();
-    QString path = "asd.SVg";
-    QFileInfo fileInfo(path);
-    QStringList imageTypes = {"svg","jpg","png"};
-    qDebug()<<((fileInfo.suffix().compare("svg", Qt::CaseInsensitive))==0);
-    path = "C:\\Users\\Administrator\\Desktop\\新建文件夹\\Temp\\1684165169655.jpg";
-    QPixmap temp_pixmap(path, imageTypes.join(",").toUtf8().constData());
-    Item_Interface *image_items = nullptr;
-    if (!temp_pixmap.isNull()) {
-        qDebug() << "Image loaded successfully.";
-        auto* item_pixmap = new QGraphicsPixmapItem(temp_pixmap);
-        image_items = new C_QPixmapItem(item_pixmap);
-        qDebug()<<image_items<<"avc";
-        }
 
-    return app.exec(); // 运行 QT 应用程序事件循环
+
+class GraphicsView : public QGraphicsView
+{
+public:
+    GraphicsView(QGraphicsScene* scene, QWidget* parent = nullptr)
+            : QGraphicsView(scene, parent)
+    {
+    }
+
+protected:
+    void wheelEvent(QWheelEvent* event) override
+    {
+        double scaleFactor = 1.15;
+        if (event->delta() > 0) {
+            // 放大
+            scale(scaleFactor, scaleFactor);
+        } else {
+            // 缩小
+            scale(1.0 / scaleFactor, 1.0 / scaleFactor);
+        }
+    }
+};
+
+
+int main(int argc, char* argv[])
+{
+    QApplication a(argc, argv);
+
+    QGraphicsScene scene; //创建场景
+
+    QGraphicsSvgItem* svgItem = new QGraphicsSvgItem();
+    svgItem->setSharedRenderer(new QSvgRenderer(QStringLiteral(
+                                                        "F:\\code\\c_code\\about_qt\\picture_viewer\\src\\ui\\images\\pic_2d\\images-solid.svg")));
+    svgItem->setScale(1);  // 缩放SVG图像为原图像的50%
+
+    scene.addItem(svgItem); //将svg条目添加到场景中
+
+    GraphicsView view(&scene); //创建自定义视图类并在场景中查看元素
+
+    view.setScene(&scene);
+    view.setRenderHint(QPainter::Antialiasing, true); //设置为抗锯齿渲染
+    view.setViewportUpdateMode(QGraphicsView::FullViewportUpdate); //设置视口更新模式
+    view.setMouseTracking(true); // 启用鼠标跟踪
+
+    QMainWindow mainWindow;
+    mainWindow.setCentralWidget(&view); //使用视图作为主窗口的中央小部件
+    mainWindow.show();
+
+    return a.exec();
 }

@@ -32,7 +32,9 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
 
 void My_Qtreewidget::connect_photo(My_Photo_Graphics *name) {
     // 运行之前必须要初始化类My_Photo_Graphics
-    my_photo = name;
+    if (name!= nullptr){ my_photo = name;}
+    else{qDebug()<<"connect_photo is nullpter";}
+
 }
 
 void My_Qtreewidget::_updata_all_Qtree_dir()
@@ -88,11 +90,16 @@ void My_Qtreewidget::keyPressEvent(QKeyEvent *event)
 {// 键盘切换上一张下一张图片
     if (event->key() == Qt::Key_Left) {
         _updata_treewidgetItem(false); //计算上一个节点,并更新
-        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);
+        if ((my_photo!= nullptr)&&(active_item!= nullptr)){
+            my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);}
+        else{qDebug()<<"my_photo is nullpter";}
+
     }
     else if (event->key() == Qt::Key_Right){
         _updata_treewidgetItem(true);
-        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(), imageTypes);
+        if ((my_photo!= nullptr)&&(active_item!= nullptr)){
+            my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);}
+        else{qDebug()<<"my_photo is nullpter";}
     }
 }
 
@@ -272,8 +279,12 @@ void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
     bool is_img = _is_type(img_path, this->imageTypes);
     if (is_img) {
         // imageTypes.join(",").toUtf8().constData() 用于解决用户手动改图片格式导致图片加载失败的情况
-        my_photo->graphics_load_image(img_path,imageTypes);
-        active_item = item;
+        if (my_photo != nullptr){
+            active_item = item;
+            my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);
+            }
+        else{qDebug()<<"my_photo is nullpter";}
+
     }
 }
 
