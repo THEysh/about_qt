@@ -28,7 +28,6 @@ private slots:
     void on_directoryChanged(const QString &changedPath);
     void on_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
-
 private:
 
     const int MAX_NODE_COUNT;
