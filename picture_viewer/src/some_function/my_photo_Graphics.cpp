@@ -12,9 +12,10 @@
 #include "Item_Interface.h"
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
-// 定义初始化
+        // 定义初始化
         QGraphicsView(parent),
         image_item(new Item_Interface()),
+        scene(new QGraphicsScene()),
         background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
         or_background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"))
 {
@@ -58,9 +59,12 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
-
+    // 先删除image_item防止内存泄漏。
+    delete image_item;
+    image_item = nullptr;
     if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
-        qDebug() << "The file is an SVG ,load...";
+        qDebug() << "The file is an SVG ,load ...";
+
         QGraphicsSvgItem* temp_svgItem = new QGraphicsSvgItem();
         QSvgRenderer* new_svgrender = new QSvgRenderer();
         bool loadResult = new_svgrender ->load(path); // 加载 SVG 文件
@@ -114,6 +118,7 @@ My_Photo_Graphics::~My_Photo_Graphics() {
     delete scene;
     delete image_item;
     delete background;
+    delete or_background;
 
 }
 

@@ -22,7 +22,7 @@ public:
 //    QCheckBox *that_checkBox = nullptr;
     explicit My_Photo_Graphics(QWidget *parent);
     ~My_Photo_Graphics() override;
-    QGraphicsScene *scene = new QGraphicsScene();
+    QGraphicsScene *scene = nullptr;
     void graphics_load_image(const QString &path, const QStringList &type_img);
 
 protected:

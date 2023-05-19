@@ -10,6 +10,7 @@ class Item_Interface : public QObject{
 Q_OBJECT
 public:
     explicit Item_Interface();
+    ~Item_Interface() override;
     virtual void click_element();
     virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
     virtual void wheelEvent(QWheelEvent *event);
@@ -19,6 +20,7 @@ class C_QPixmapItem : public Item_Interface{
 Q_OBJECT
 public:
     explicit C_QPixmapItem(QGraphicsPixmapItem *pixmapItem);
+    ~C_QPixmapItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
 
@@ -38,6 +40,7 @@ class C_SvgItem : public Item_Interface{
 Q_OBJECT
 public:
     explicit C_SvgItem(QGraphicsSvgItem* svgItem);
+    ~C_SvgItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
 protected:
