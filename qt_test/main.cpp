@@ -1,117 +1,57 @@
-
 #include <iostream>
-#include <vector>
-#include <QString>
-#include <QStringList>
-#include <QFileInfo>
-#include <QPixmap>
-#include <QGraphicsPixmapItem>
-#include <QLabel>
-#include <QApplication>
-#include "qdebug.h"
 
-#include <QApplication>
-#include <QGraphicsSvgItem>
-#include <QMainWindow>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QSvgRenderer>
-#include <QWheelEvent>
-class Animal {
-public:
-    virtual void move() { std::cout << "Animal moving\n"; }
-};
+void test1(); // 内存泄露
+void test2(); // 非法访问
+void test3(); // 未初始化读
+void test4(); // Heap 操作参数错误(Invalid Heap Argument)
 
-class Car:Animal {
-public:
-    virtual void move() override{std::cout << "cat moving\n";}
-    virtual void start() { std::cout << "Car starting\n"; }
-    virtual void stop() { std::cout << "Car stopping\n"; }
-};
-class Blue_Car:Car{
-public:
-    void move() override{std::cout << "Blue_cat moving\n";}
-    void start() override{ std::cout << "Blue_Car starting\n"; }
-    void stop() override{ std::cout << "Blue_Car stopping\n"; }
-};
-
-class Zoo {
-public:
-    virtual void moveAll() = 0;
-    virtual void startCar() = 0;
-    virtual void stopCar() = 0;
-};
-class ZooImpl : public Zoo {
-public:
-    std::vector<Animal*> animals;
-    std::vector<Car*> cars;
-    Blue_Car bulecar;
-
-    virtual void moveAll() {
-        for (auto animal : animals) {
-            animal->move();
-        }
-        for (auto car : cars) {
-            car->move();
-        }
-    }
-
-    virtual void startCar() {
-        bulecar.start();
-    }
-
-    virtual void stopCar() {
-        bulecar.stop();
-    }
-};
-
-
-class GraphicsView : public QGraphicsView
+int main()
 {
-public:
-    GraphicsView(QGraphicsScene* scene, QWidget* parent = nullptr)
-            : QGraphicsView(scene, parent)
-    {
-    }
+    // reference: http://www.ibm.com/developerworks/cn/linux/1309_liuming_drmemory/
+    test4();
 
-protected:
-    void wheelEvent(QWheelEvent* event) override
-    {
-        double scaleFactor = 1.15;
-        if (event->delta() > 0) {
-            // 放大
-            scale(scaleFactor, scaleFactor);
-        } else {
-            // 缩小
-            scale(1.0 / scaleFactor, 1.0 / scaleFactor);
-        }
-    }
-};
+    std::cout << "ok" << std::endl;
+    return 0;
+}
 
-
-int main(int argc, char* argv[])
+void test1()
 {
-    QApplication a(argc, argv);
+    char *ptr;
+    for (int i = 0; i<100; i++) {
+        ptr = (char*)malloc(i);
 
-    QGraphicsScene scene; //创建场景
+        if (i % 2) free(ptr);
+    }
+}
 
-    QGraphicsSvgItem* svgItem = new QGraphicsSvgItem();
-    svgItem->setSharedRenderer(new QSvgRenderer(QStringLiteral(
-                                                        "F:\\code\\c_code\\about_qt\\picture_viewer\\src\\ui\\images\\pic_2d\\images-solid.svg")));
-    svgItem->setScale(1);  // 缩放SVG图像为原图像的50%
+void test2()
+{
+    char *x = (char*)malloc(8);
+    char c = *(x + 8); // buffer overlow
+    free(x);
+    c = *x; // read free memory
+}
 
-    scene.addItem(svgItem); //将svg条目添加到场景中
+typedef struct T_ {
+    char a;
+    char b;
+}T;
 
-    GraphicsView view(&scene); //创建自定义视图类并在场景中查看元素
+void test3()
+{
+    T a, b;
+    char x;
+    a.a = 'a';
+    a.b = 'b';
+    b.a = x; // error C4700:使用了未初始化的局部变量x,若使vs2013能够正常编译，需将配置属性中的C/C++ SDL检查关闭
+    if (b.a == 10)
+        memcpy(&b, &a, sizeof(T));
+}
 
-    view.setScene(&scene);
-    view.setRenderHint(QPainter::Antialiasing, true); //设置为抗锯齿渲染
-    view.setViewportUpdateMode(QGraphicsView::FullViewportUpdate); //设置视口更新模式
-    view.setMouseTracking(true); // 启用鼠标跟踪
-
-    QMainWindow mainWindow;
-    mainWindow.setCentralWidget(&view); //使用视图作为主窗口的中央小部件
-    mainWindow.show();
-
-    return a.exec();
+void test4()
+{
+    char * ptr = NULL;
+    ptr = new char;
+    free(ptr);
+    free(ptr); //
 }

@@ -30,10 +30,8 @@ protected:
     QPixmap *or_background = nullptr; // 设置背景
     void show_image_item();
     Item_Interface *image_item = nullptr; //创建的图片对象还没被确定，先定义其父类
-
     void resizeEvent(QResizeEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
-
 };
 
 #endif // MY_PHOTO_GRAPHICS_H

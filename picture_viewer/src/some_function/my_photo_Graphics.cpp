@@ -10,6 +10,8 @@
 #include <iostream>
 #include "My_Photo_Graphics.h"
 #include "Item_Interface.h"
+#include "qdebug.h"
+#include <QSysInfo>
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         // 定义初始化
@@ -37,7 +39,6 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
     const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-
     if (image_item!= nullptr){
         image_item->wheelEvent(event);
     } else{
@@ -53,18 +54,18 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
     show_image_item();
-
 }
 
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
-    // 先删除image_item防止内存泄漏。
-    delete image_item;
-    image_item = nullptr;
+    // 加载一张新图片时，先删除image_item防止内存泄漏。
+    if (image_item != nullptr){
+        delete image_item;
+        image_item = nullptr;
+    }
     if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
         qDebug() << "The file is an SVG ,load ...";
-
         QGraphicsSvgItem* temp_svgItem = new QGraphicsSvgItem();
         QSvgRenderer* new_svgrender = new QSvgRenderer();
         bool loadResult = new_svgrender ->load(path); // 加载 SVG 文件
@@ -84,23 +85,32 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
             qDebug() << "Image loaded successfully.";
             auto* item_pixmap = new QGraphicsPixmapItem(temp_pixmap);
             image_item = new C_QPixmapItem(item_pixmap);
-        } else {
+        }
+        else {
             qDebug() << "Failed to load image from" << path;
         }
     }
     else {
         qDebug() << "Unsupported image format: " << path;
     }
+
     show_image_item();
+    qDebug()<<image_item;
 }
 
 void My_Photo_Graphics::show_image_item() {
-    scene->clear();
     /*初始化背景
     QGraphicsView 组件的背景和场景是两个不同的概念，因此不同的代码片段可能会对它们的大小进行不同的调整。
     前面两行代码设置场景大小与视图大小一致，即将场景矩形设置为 (0, 0, width, height)，其中 width 和 height 分别为视图的宽和高。
     这样可以确保场景的大小与视图相同，从而使所有的图形项都能够完整地显示在视图中。如果不进行这个设置，场景的大小可能会被设置为默认值，
     这可能导致某些图形项被裁剪或者部分显示。*/
+    // 删除场景中的所有项并清空指针
+    QList<QGraphicsItem *> allItems = scene->items();
+    for (QGraphicsItem *item : allItems) {
+        delete item;
+    }
+    scene->clear();
+
     QRect new_rect(QPoint(0, 0), this->size());
     scene->setSceneRect(new_rect);
     *background = or_background->scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -109,7 +119,7 @@ void My_Photo_Graphics::show_image_item() {
         image_item->show_photo(this,scene);
     }
     else{
-        qDebug()<<"scence or image_item is nullpter";
+        qDebug()<<"scence or image_item is nullpter,scene:"<<scene<<",image_item:"<<image_item;
     }
 }
 

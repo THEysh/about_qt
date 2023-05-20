@@ -15,6 +15,7 @@ Q_OBJECT
 signals:
 public:
     explicit My_Qtreewidget(QWidget *name);
+    ~My_Qtreewidget() override;
     void connect_photo(My_Photo_Graphics* name);
     QString ProjectDir;
     My_Photo_Graphics* my_photo;

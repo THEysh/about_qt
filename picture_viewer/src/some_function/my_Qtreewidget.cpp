@@ -250,10 +250,8 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
 
                 return;
             }
-
             QString oldPath = item->data(0, Qt::UserRole).toString();
             QString newPath = item->parent()->data(0,Qt::UserRole).toString()+"/"+ newName;
-
             QFile file(oldPath);
             QDir dir(oldPath);
             if (file.exists()){
@@ -334,6 +332,13 @@ void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item, int column)
         QUrl QUrl_path = QUrl::fromLocalFile(dirPath);
         QDesktopServices::openUrl(QUrl_path);
     }
+}
+
+My_Qtreewidget::~My_Qtreewidget(){
+    delete my_photo;
+    delete active_item;
+    delete my_watcher;
+    delete rootNode;
 }
 
 

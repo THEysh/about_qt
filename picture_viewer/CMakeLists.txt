@@ -14,7 +14,6 @@ set(CMAKE_PREFIX_PATH "F:\\QT5_9_9\\5.9.9\\mingw53_32")
 # 将PROJECT_ROOT_DIR定义为预处理器宏
 add_definitions(-DPROJECT_ROOT_DIR="${PROJECT_ROOT_DIR}")
 
-
 find_package(Qt5 COMPONENTS
         Core
         Gui
@@ -45,3 +44,4 @@ target_link_libraries(picture_viewer
         Qt5::Widgets
         Qt5::Svg
         )
+

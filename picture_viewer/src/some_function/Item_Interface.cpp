@@ -51,7 +51,6 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view,scene);
 
     position_calculation(view->width(),view->height());
-    // 先将pixmapItem释放，防止内存泄漏
 
     // 查看是否需要自适应缩放:
     if (scaling || (or_activated_photo_pixmap.size().height()< view->viewport()->rect().height())){
@@ -120,10 +119,8 @@ void C_SvgItem::click_element() {
 void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
 
-
     svgItem = new QGraphicsSvgItem(); //必须要创建一个新的svgItem并显示
     svgItem->setSharedRenderer(svgRenderer);
-
     const QRectF &boundingRect = svgItem->boundingRect();
     QPointF center = view->viewport()->rect().center() - boundingRect.center();
     svgItem->setPos(center); // 计算尺寸，让svgItem保持中心位置
