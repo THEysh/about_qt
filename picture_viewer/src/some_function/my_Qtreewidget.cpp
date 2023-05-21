@@ -84,9 +84,9 @@ bool My_Qtreewidget::_is_type(const QString& name, const QStringList& strlist){
     return false;
 }
 
-
 void My_Qtreewidget::keyPressEvent(QKeyEvent *event)
 {// 键盘切换上一张下一张图片
+
     if (event->key() == Qt::Key_Left) {
         _updata_treewidgetItem(false); //计算上一个节点,并更新
         if ((my_photo!= nullptr)&&(active_item!= nullptr)){

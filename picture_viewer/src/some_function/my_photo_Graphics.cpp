@@ -12,11 +12,12 @@
 #include "Item_Interface.h"
 #include "qdebug.h"
 #include <QSysInfo>
+#include <memory>
 #include "memory"
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         // 定义初始化
         QGraphicsView(parent),
-        image_item(new Item_Interface()),
+        graphics_Item_unique(new Item_Interface()),
         scene(new QGraphicsScene()),
         background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
         or_background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"))
@@ -39,10 +40,10 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
     const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    if (image_item!= nullptr){
-        image_item->wheelEvent(event);
+    if (graphics_Item_unique!= nullptr){
+        graphics_Item_unique->wheelEvent(event);
     } else{
-        qDebug()<<"image_item is null";
+        qDebug()<<"My_Photo_Graphics::wheelEvent";
         return;
     }
     // 将场景坐标映射回视图坐标，以确保变换锚点正确(更新)
@@ -53,49 +54,36 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
-    show_image_item();
+    if (graphics_Item_unique!= nullptr){
+        graphics_Item_unique->resizeEvent(event,this, scene);
+    }
+    else{
+        qDebug()<<"My_Photo_Graphics::resizeEvent bug!!";
+    }
 }
 
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
-    // 加载一张新图片时，先删除image_item防止内存泄漏。
-    if (image_item != nullptr){
-        delete image_item;
-        image_item = nullptr;
-    }
+
     if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
         qDebug() << "The file is an SVG ,load ...";
-        QGraphicsSvgItem* temp_svgItem = new QGraphicsSvgItem();
-        QSvgRenderer* new_svgrender = new QSvgRenderer();
-        bool loadResult = new_svgrender ->load(path); // 加载 SVG 文件
-        if (loadResult){
-            temp_svgItem->setSharedRenderer(new_svgrender);
-            temp_svgItem->setScale(1);
-            image_item = new C_SvgItem(temp_svgItem);
-        }
-        else{
-            qDebug()<<"QSvgRenderer load fail";
-        }
-
+        //这是一个使用C++11提供的智能指针模板函数std::make_unique()来创建一个指向C_SvgItem对象的unique_ptr，
+        // 其中path是作为构造函数参数传递给C_SvgItem的。std::make_unique()可以用于创建可以管理其生命周期的堆分配
+        //对象的std::unique_ptr。与直接使用 new 创建对象相比，使用std::make_unique()可以更加安全和方便.
+        graphics_Item_unique = std::make_unique<C_SvgItem>(path);
     }
     else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
-        QPixmap temp_pixmap(path, imageTypes.join(",").toUtf8().constData());
-        if (!temp_pixmap.isNull()) {
-            qDebug() << "Image loaded successfully.";
-            auto* item_pixmap = new QGraphicsPixmapItem(temp_pixmap);
-            image_item = new C_QPixmapItem(item_pixmap);
-        }
-        else {
-            qDebug() << "Failed to load image from" << path;
-        }
+        qDebug() << "The file is ipg,png...,load ...";
+        graphics_Item_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
     }
     else {
         qDebug() << "Unsupported image format: " << path;
+        return;
     }
 
     show_image_item();
-    qDebug()<<image_item;
+    // qDebug()<<image_item;
 }
 
 void My_Photo_Graphics::show_image_item() {
@@ -110,23 +98,22 @@ void My_Photo_Graphics::show_image_item() {
         delete item;
     }
     scene->clear();
-
     QRect new_rect(QPoint(0, 0), this->size());
     scene->setSceneRect(new_rect);
     *background = or_background->scaled(this->size(), Qt::IgnoreAspectRatio);
     this->setBackgroundBrush(QBrush(*background));
-    if ((scene!= nullptr)&&(image_item!= nullptr)){
-        image_item->show_photo(this,scene);
+    if ((scene!= nullptr)&&(graphics_Item_unique!= nullptr)){
+        graphics_Item_unique->show_photo(this,scene);
     }
     else{
-        qDebug()<<"scence or image_item is nullpter,scene:"<<scene<<",image_item:"<<image_item;
+        qDebug()<<"scence or image_item is nullpter,scene:"<<scene<<",image_item:"<<graphics_Item_unique.get();
     }
 }
 
 My_Photo_Graphics::~My_Photo_Graphics() {
     // delete other dynamically allocated resources if any
     delete scene;
-    delete image_item;
+    // delete image_item;
     delete background;
     delete or_background;
 
