@@ -15,13 +15,15 @@
 #include <memory>
 #include "memory"
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
-        // 定义初始化
+// 定义初始化
         QGraphicsView(parent),
         graphics_Item_unique(new Item_Interface()),
-        scene(new QGraphicsScene()),
-        background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png")),
-        or_background(new QPixmap(":ui/images/pic_b/wallhaven-nkqrgd.png"))
+        scene(new QGraphicsScene())
+
 {
+    background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
+    or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
+
     this->setScene(scene);
     setRenderHint(QPainter::Antialiasing, true);
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
@@ -54,6 +56,14 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
+    qDebug()<<"SIZE:"<<this->size();
+    // 更新背景的尺寸
+    QRect new_rect(QPoint(0, 0), this->size());
+    scene->setSceneRect(new_rect);
+    background = or_background.scaled(this->size(), Qt::IgnoreAspectRatio);
+    this->setBackgroundBrush(QBrush(background));
+
+    // 更新graphics_Item_unique尺寸
     if (graphics_Item_unique!= nullptr){
         graphics_Item_unique->resizeEvent(event,this, scene);
     }
@@ -92,79 +102,36 @@ void My_Photo_Graphics::show_image_item() {
     前面两行代码设置场景大小与视图大小一致，即将场景矩形设置为 (0, 0, width, height)，其中 width 和 height 分别为视图的宽和高。
     这样可以确保场景的大小与视图相同，从而使所有的图形项都能够完整地显示在视图中。如果不进行这个设置，场景的大小可能会被设置为默认值，
     这可能导致某些图形项被裁剪或者部分显示。*/
-    // 删除场景中的所有项并清空指针
-    QList<QGraphicsItem *> allItems = scene->items();
-    for (QGraphicsItem *item : allItems) {
-        delete item;
-    }
-    scene->clear();
-    QRect new_rect(QPoint(0, 0), this->size());
-    scene->setSceneRect(new_rect);
-    *background = or_background->scaled(this->size(), Qt::IgnoreAspectRatio);
-    this->setBackgroundBrush(QBrush(*background));
+    //scene->clear();
+
     if ((scene!= nullptr)&&(graphics_Item_unique!= nullptr)){
         graphics_Item_unique->show_photo(this,scene);
     }
     else{
-        qDebug()<<"scence or image_item is nullpter,scene:"<<scene<<",image_item:"<<graphics_Item_unique.get();
+        qDebug()<<"scene:"<<scene<<",image_item:"<<graphics_Item_unique.get();
     }
 }
 
 My_Photo_Graphics::~My_Photo_Graphics() {
     // delete other dynamically allocated resources if any
     delete scene;
-    // delete image_item;
-    delete background;
-    delete or_background;
+    qDebug() << "this is : ~My_Photo_Graphics";
 
 }
 
+void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
+    QMenu menu(this);
+    QAction *right_rotate = menu.addAction("右旋转90°");
+    QAction *left_rotate = menu.addAction("左旋转90°");
+    QAction *copy_dirpath = menu.addAction("复制图片路径");
+    //上面的被qt管理，不会内存泄漏
 
-
-
-
-//
-//
-//void My_Photo_Graphics::resizeEvent(QResizeEvent *event)
-//{
-//    scene->clear();
-//    int w = this->geometry().width();
-//    int h = this->geometry().height();
-//    // 设置场景的大小
-//    QRect new_rect(QPoint(0, 0), QSize(w, h));
-//    scene->setSceneRect(new_rect);
-//    *background = or_background->scaled(QSize(w, h), Qt::IgnoreAspectRatio);
-//    if (w>p_width && h>p_height){
-//        activated_photo_pixmap = or_activated_photo_pixmap;
-//    } else{
-//        activated_photo_pixmap = or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation);
-//    }
-//
-//    Q_pixmap_show();
-//}
-//
-//void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event)
-//{
-//    QMenu menu(this);
-//    QAction *right_rotate = menu.addAction("右旋转90°");
-//    QAction *left_rotate = menu.addAction("左旋转90°");
-//    QAction *copy_dirpath = menu.addAction("复制图片路径");
-//    connect(right_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
-//        or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(90));  // 旋转90度
-//        if (*photo_actived_rootNode!= nullptr){
-//            QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
-//            or_activated_photo_pixmap.save(save_path);
-//        }
-//        click_show_photo();
-//    });
-//    connect(left_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
-//        or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(-90));  // 旋转90度
-//        if (*photo_actived_rootNode!= nullptr){
-//            QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
-//            or_activated_photo_pixmap.save(save_path);
-//        }
-//        click_show_photo();
-//    });
+    connect(right_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
+        graphics_Item_unique->phot_rotate(true,this);
+    });
+    connect(left_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
+        graphics_Item_unique->phot_rotate(false,this);
+    });
 //
 //    connect(copy_dirpath,&QAction::triggered,[this](){
 //        if (*photo_actived_rootNode!= nullptr){
@@ -172,10 +139,10 @@ My_Photo_Graphics::~My_Photo_Graphics() {
 //            clipboard->setText((*photo_actived_rootNode)->data(0, Qt::UserRole).toString());
 //        }
 //    });
-//    menu.exec(event->globalPos());
-//}
-//
-//
+    menu.exec(event->globalPos());
+}
+
+
 
 //void My_Photo_Graphics::connect_checkbox() {
 //    if (that_checkBox!= nullptr){

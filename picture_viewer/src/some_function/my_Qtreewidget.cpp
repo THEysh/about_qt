@@ -86,19 +86,17 @@ bool My_Qtreewidget::_is_type(const QString& name, const QStringList& strlist){
 
 void My_Qtreewidget::keyPressEvent(QKeyEvent *event)
 {// 键盘切换上一张下一张图片
-
-    if (event->key() == Qt::Key_Left) {
-        _updata_treewidgetItem(false); //计算上一个节点,并更新
-        if ((my_photo!= nullptr)&&(active_item!= nullptr)){
-            my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);}
-        else{qDebug()<<"my_photo is nullpter";}
-
+    if ((my_photo == nullptr)||(active_item == nullptr)){
+        qDebug()<<"My_Qtreewidget::keyPressEvent:bug";
+        return;
     }
-    else if (event->key() == Qt::Key_Right){
+    if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Up) {
+        _updata_treewidgetItem(false); //计算上一个节点,并更新
+        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);
+    }
+    else if (event->key() == Qt::Key_Right || event->key() == Qt::Key_Down){
         _updata_treewidgetItem(true);
-        if ((my_photo!= nullptr)&&(active_item!= nullptr)){
-            my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);}
-        else{qDebug()<<"my_photo is nullpter";}
+        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);
     }
 }
 
@@ -272,16 +270,16 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
 
 void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
 {
+    if (active_item==item || my_photo == nullptr){
+        qDebug()<<"My_Qtreewidget::on_itemClicked:bug";
+        return;
+    }
+
     QString img_path = item->data(0,Qt::UserRole).toString();
     bool is_img = _is_type(img_path, this->imageTypes);
     if (is_img) {
-        // imageTypes.join(",").toUtf8().constData() 用于解决用户手动改图片格式导致图片加载失败的情况
-        if (my_photo != nullptr){
-            active_item = item;
-            my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);
-            }
-        else{qDebug()<<"my_photo is nullpter";}
-
+        active_item = item;
+        my_photo->graphics_load_image(active_item->data(0, Qt::UserRole).toString(), imageTypes);
     }
 }
 

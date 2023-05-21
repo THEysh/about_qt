@@ -33,14 +33,19 @@ void Item_Interface::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGrap
 
 }
 
+void Item_Interface::phot_rotate(bool is_right,QGraphicsView *view) {
+
+}
+
 //====================================================================================================
 
-C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes){
+C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes):
+    scaling(true)
+{
     or_activated_photo_pixmap.load(path, imageTypes.join(',').toUtf8().constData());
     p_width = or_activated_photo_pixmap.width();
     p_height = or_activated_photo_pixmap.height();
     activated_photo_pixmap = or_activated_photo_pixmap.scaled(p_width, p_height, Qt::KeepAspectRatio);
-
     if (!or_activated_photo_pixmap.isNull()) {
         qDebug() << "Image loaded successfully.";
         // 创建一个指向 QGraphicsPixmapItem 对象的指针，并将其传递给 C_QPixmapItem 类的构造函数
@@ -50,7 +55,6 @@ C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
     else {
         qDebug() << "Failed to load image from" << path;
     }
-
 }
 
 C_QPixmapItem::~C_QPixmapItem() {
@@ -109,28 +113,28 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event) {
 
 void C_QPixmapItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::resizeEvent(event, view, scene);
-    if (graphics_pixmapItem_unique!= nullptr){
-        position_calculation(view->width(),view->height(),view);
-        // 查看是否需要自适应缩放:
-        if (scaling || (or_activated_photo_pixmap.size().height()< view->viewport()->rect().height())){
-            // 这两个语句的效果是相同的，都会创建一个新的QGraphicsPixmapItem对象，并用std::unique_ptr对象管理该对象的内存
-            // graphics_pixmapItem_unique.reset(new QGraphicsPixmapItem()) ;
-            graphics_pixmapItem_unique->setPixmap(activated_photo_pixmap);
-            const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
-            QPointF center = view->viewport()->rect().center() - boundingRect.center();
-            graphics_pixmapItem_unique->setPos(center);
-        }
-        else{
-            // graphics_pixmapItem_unique.reset(new QGraphicsPixmapItem());
-            graphics_pixmapItem_unique->setPixmap(or_activated_photo_pixmap);
-            const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
-            graphics_pixmapItem_unique->setX((view->viewport()->rect().width()-boundingRect.width()) / 2);
-        }
-    } else{
-        qDebug()<<"C_QPixmapItem::resizeEvent,graphics_pixmapItem_unique:"<<graphics_pixmapItem_unique.get();
-    }
+    position_calculation(view->width(),view->height(),view); //位置更新
 }
 
+void C_QPixmapItem::phot_rotate(bool is_right,QGraphicsView *view){
+    Item_Interface::phot_rotate(is_right,view);
+    if ((graphics_pixmapItem_unique!= nullptr)&&is_right){
+        or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(90));  // 旋转90度
+    } else if((graphics_pixmapItem_unique!= nullptr)&&!is_right){
+        or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(-90));  // 旋转90度
+//        if (*photo_actived_rootNode!= nullptr){
+//            QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
+//            or_activated_photo_pixmap.save(save_path);
+//        }
+    } else{ return;}
+    position_calculation(view->width(),view->height(),view); //位置更新
+
+//    if (*photo_actived_rootNode!= nullptr){
+//        QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
+//        or_activated_photo_pixmap.save(save_path);
+//    }
+
+}
 
 //====================================================================================================
 
@@ -160,7 +164,6 @@ void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
     // 计算尺寸，让svgItem保持中心位置
     position_calculation(view);
-
     scene->addItem(graphics_svgItem_unique.get()); //将svg条目添加到场景中
     //     设置为拖拽
     graphics_svgItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
@@ -168,9 +171,11 @@ void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
 }
 
 void C_SvgItem::position_calculation(QGraphicsView *view) {
-    graphics_svgItem_unique->setSharedRenderer(svgrender_unique.get());
+
     const QRectF &boundingRect = graphics_svgItem_unique->boundingRect();
+    qDebug()<<"QRectF &boundingRect"<<boundingRect;
     QPointF center = view ->viewport()->rect().center() - boundingRect.center();
+    qDebug()<<"center:"<<center;
     graphics_svgItem_unique->setPos(center);
 }
 
@@ -189,5 +194,13 @@ void C_SvgItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsS
     position_calculation(view);
 }
 
-
+void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
+    Item_Interface::phot_rotate(is_right,view);
+    if ((graphics_svgItem_unique != nullptr)&&is_right) { // 检查指针是否为 nullptr
+        graphics_svgItem_unique->setTransform(QTransform().rotate(90), true);
+    } else if ((graphics_svgItem_unique != nullptr)&&!is_right){
+        graphics_svgItem_unique->setTransform(QTransform().rotate(-90), true);
+    } else{ return;}
+    position_calculation(view);
+}
 

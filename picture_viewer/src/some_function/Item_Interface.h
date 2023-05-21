@@ -15,6 +15,7 @@ public:
     virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
     virtual void wheelEvent(QWheelEvent *event);
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
+    virtual void phot_rotate(bool is_right, QGraphicsView *view);
 };
 
 
@@ -29,6 +30,8 @@ public:
 protected:
     void wheelEvent(QWheelEvent *event) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
+    void phot_rotate(bool is_right, QGraphicsView *view) override;
+
 private:
     void position_calculation(int w, int h, QGraphicsView *view);
 
@@ -41,8 +44,6 @@ private:
 };
 
 
-
-
 class C_SvgItem : public Item_Interface{
 Q_OBJECT
 public:
@@ -53,13 +54,12 @@ public:
 protected:
     void wheelEvent(QWheelEvent *event) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
+    void phot_rotate(bool is_right, QGraphicsView *view) override;
 private:
     void position_calculation(QGraphicsView *view);
     std::unique_ptr<QSvgRenderer> svgrender_unique = nullptr;
     std::unique_ptr<QGraphicsSvgItem> graphics_svgItem_unique = nullptr;
-    int p_width = 0;
-    int p_height = 0;
-    bool scaling = false; //是否需要自适应缩放
+
 };
 
 
