@@ -12,7 +12,7 @@
 #include "Item_Interface.h"
 #include "qdebug.h"
 #include <QSysInfo>
-
+#include "memory"
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         // 定义初始化
         QGraphicsView(parent),
