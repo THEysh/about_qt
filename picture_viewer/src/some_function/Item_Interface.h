@@ -18,7 +18,7 @@ public: //公共接口
     ~Item_Interface() override;
     virtual void click_element();
     virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
-    virtual void wheelEvent(QWheelEvent *event);
+    virtual void wheelEvent(QWheelEvent *event,QGraphicsView *view);
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
 protected:
@@ -35,7 +35,7 @@ public:
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
 
 protected:
-    void wheelEvent(QWheelEvent *event) override;
+    void wheelEvent(QWheelEvent *event,QGraphicsView *view) ;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
     void position_calculation(int w, int h, QGraphicsView *view);
@@ -58,7 +58,7 @@ public:
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
 protected:
-    void wheelEvent(QWheelEvent *event) override;
+    void wheelEvent(QWheelEvent *event,QGraphicsView *view) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
     void position_calculation(QGraphicsView *view) override;
@@ -76,7 +76,7 @@ public:
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
 protected:
-    void wheelEvent(QWheelEvent *event) override;
+    void wheelEvent(QWheelEvent *event,QGraphicsView *view) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
     void position_calculation(QGraphicsView *view) override;

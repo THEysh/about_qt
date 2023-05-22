@@ -26,7 +26,7 @@ void Item_Interface::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
 
 }
 
-void Item_Interface::wheelEvent(QWheelEvent *event) {
+void Item_Interface::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
 
 }
 
@@ -95,24 +95,22 @@ void C_QPixmapItem::position_calculation(int w, int h,QGraphicsView *view) {
         photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation));
     }
     // 查看是否需要自适应缩放:
-    if (scaling || (or_activated_photo_pixmap.size().height() < view->viewport()->rect().height())){
+    if (scaling || (or_activated_photo_pixmap.size().height() > view->viewport()->rect().height())){
         // 这两个语句的效果是相同的，都会创建一个新的QGraphicsPixmapItem对象，并用std::unique_ptr对象管理该对象的内存
         graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
         const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
         QPointF center = view->viewport()->rect().center() - boundingRect.center();
         graphics_pixmapItem_unique->setPos(center);
-
     }
     else{
         graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
         const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
         graphics_pixmapItem_unique->setX((view->viewport()->rect().width()-boundingRect.width()) / 2);
     }
-
 }
 
-void C_QPixmapItem::wheelEvent(QWheelEvent *event) {
-    Item_Interface::wheelEvent(event);
+void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
+    Item_Interface::wheelEvent(event,view);
     if (graphics_pixmapItem_unique== nullptr){
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
@@ -195,8 +193,8 @@ void C_SvgItem::position_calculation(QGraphicsView *view) {
     graphics_svgItem_unique->setPos(center);
 }
 
-void C_SvgItem::wheelEvent(QWheelEvent *event) {
-    Item_Interface::wheelEvent(event);
+void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
+    Item_Interface::wheelEvent(event,view);
     if (graphics_svgItem_unique== nullptr){
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
@@ -292,8 +290,8 @@ void C_GifItem::click_element() {
     Item_Interface::click_element();
 }
 
-void C_GifItem::wheelEvent(QWheelEvent *event) {
-    Item_Interface::wheelEvent(event);
+void C_GifItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
+    Item_Interface::wheelEvent(event, view);
     if (graphics_gifItem_unique == nullptr){
         qDebug()<<"C_GifItem::wheelEvent bug";
     }

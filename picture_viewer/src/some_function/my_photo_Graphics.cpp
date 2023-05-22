@@ -40,7 +40,7 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     if (graphics_Item_unique!= nullptr){
-        graphics_Item_unique->wheelEvent(event);
+        graphics_Item_unique->wheelEvent(event,this);
     } else{
         qDebug()<<"My_Photo_Graphics::wheelEvent";
         return;
