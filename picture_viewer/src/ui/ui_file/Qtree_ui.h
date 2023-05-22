@@ -40,7 +40,12 @@ public:
     {
         if (Qtree_Class_UI->objectName().isEmpty())
             Qtree_Class_UI->setObjectName(QStringLiteral("Qtree_Class_UI"));
-        Qtree_Class_UI->resize(1707, 1486);
+        Qtree_Class_UI->resize(1843, 1361);
+        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(Qtree_Class_UI->sizePolicy().hasHeightForWidth());
+        Qtree_Class_UI->setSizePolicy(sizePolicy);
         Qtree_Class_UI->setStyleSheet(QStringLiteral(""));
         centralwidget = new QWidget(Qtree_Class_UI);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
@@ -60,11 +65,11 @@ public:
         v2->setContentsMargins(10, 10, 5, 10);
         checkBox = new QCheckBox(verticalWidget);
         checkBox->setObjectName(QStringLiteral("checkBox"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
-        checkBox->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
+        checkBox->setSizePolicy(sizePolicy1);
         checkBox->setTristate(true);
 
         v2->addWidget(checkBox);

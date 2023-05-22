@@ -20,7 +20,6 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         scene(new QGraphicsScene())
 
 {
-    background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
     or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
     this->setScene(scene);
     setRenderHint(QPainter::Antialiasing, true);
@@ -83,7 +82,7 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
     }
     else if ((fileInfo.suffix().compare("gif", Qt::CaseInsensitive) == 0)){
         qDebug() << "The file is an gif,load ...";
-        return;
+        graphics_Item_unique = std::make_unique<C_GifItem>(path,this,scene);
     }
     else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
         qDebug() << "The file is ipg,png...,load ...";
@@ -103,7 +102,6 @@ void My_Photo_Graphics::show_image_item() {
     这样可以确保场景的大小与视图相同，从而使所有的图形项都能够完整地显示在视图中。如果不进行这个设置，场景的大小可能会被设置为默认值，
     这可能导致某些图形项被裁剪或者部分显示。*/
     //scene->clear();
-
     if ((scene!= nullptr)&&(graphics_Item_unique!= nullptr)){
         graphics_Item_unique->show_photo(this,scene);
     }
@@ -133,8 +131,6 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     });
     menu.exec(event->globalPos());
 }
-
-
 
 //void My_Photo_Graphics::connect_checkbox() {
 //    if (that_checkBox!= nullptr){

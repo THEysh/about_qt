@@ -125,17 +125,8 @@ void C_QPixmapItem::phot_rotate(bool is_right,QGraphicsView *view){
         or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(90));  // 旋转90度
     } else if((graphics_pixmapItem_unique!= nullptr)&&!is_right){
         or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(-90));  // 旋转90度
-//        if (*photo_actived_rootNode!= nullptr){
-//            QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
-//            or_activated_photo_pixmap.save(save_path);
-//        }
     } else{ return;}
     position_calculation(view->width(),view->height(),view); //位置更新
-
-//    if (*photo_actived_rootNode!= nullptr){
-//        QString save_path = (*photo_actived_rootNode)->data(0,Qt::UserRole).toString();
-//        or_activated_photo_pixmap.save(save_path);
-//    }
 
 }
 
@@ -210,60 +201,59 @@ void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
 // --------------------------------------------------------------------------
 C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene)
     {
-    mov_label = std::make_unique<QLabel>("", view);
-    au_movie = std::make_unique<QMovie>(path);
 
-    // 获取view的中心坐标
-    QPointF center = view->mapToScene(view->viewport()->rect().center());
-    // 调整label的位置
-    mov_label->move(center.toPoint() - QPoint(mov_label->width() / 2, mov_label->height() / 2));
-    // 表示该QWidget对象的内容应该水平和垂直居中显示。
-    mov_label->setAlignment(Qt::AlignCenter);
-    mov_label->setMovie(au_movie.get());
-    au_movie->start();
+        au_movie = std::make_unique<QMovie>(path);
+        au_movie->start();
 
-    // 这行代码的作用是将当前对象（this）添加到QGraphicsScene中，并返回对应的QGraphicsProxyWidget指针。
-    prxy_unique.reset(scene->addWidget(mov_label.get()));
-    prxy_unique->setPos(0, 0);
-    // 连接信号
-    _connect();
-
+        graphics_gifItem_unique = std::make_unique<QGraphicsPixmapItem>();
+        gif_pixmap = std::make_unique<QPixmap>(QPixmap::fromImage(au_movie->currentImage()));
+        graphics_gifItem_unique->setPixmap(*gif_pixmap);
+        // 设置为拖拽 ,要在不为nullpter设置拖拽
+        graphics_gifItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
+        // 将 QGraphicsPixmapItem 添加到 QGraphicsScene 中
+        scene->addItem(graphics_gifItem_unique.get());
+        // 定时器更新 QPixmap
+        timer.start(16); // 33ms 即约等于一秒钟的 30 帧
+        // 连接信号
+        _connect();
 }
 
 C_GifItem::~C_GifItem(){
     // 释放内存, 因为智能指针，就是不写，内存也会被释放
-    prxy_unique.reset();
-    au_movie.reset();
-    mov_label.reset();
 }
 void C_GifItem::_connect() {
     if (au_movie == nullptr){
         qDebug()<<"C_GifItem::_connect(),bug";
         return;
     }
+    // 异步更新画面
+    QObject::connect(&timer, &QTimer::timeout, [this](){
+        gif_pixmap = std::make_unique<QPixmap>(QPixmap::fromImage(au_movie->currentImage()));
+        graphics_gifItem_unique->setPixmap(*gif_pixmap);
+    });
     //使用 "this" 关键字引入它的作用域,
     QObject::connect(au_movie.get(), &QMovie::frameChanged, [this](int frameIndex){
-        QSize temp_size =  au_movie->currentPixmap().size();
+        QSize temp_size = au_movie->currentPixmap().size();
         qDebug() << "Current Frame Index: " << frameIndex;
         qDebug() << "Current Frame size: " << temp_size;
-        mov_label->setFixedSize(temp_size);
-        qDebug() << "label size: " <<temp_size;
-        prxy_unique->resize(temp_size);
-        qDebug() << "proxy->resize: " <<prxy_unique->size();
     });
-//    connect(movie, &QMovie::resized, [](const QSize& size){
-//        qDebug() << "Animation Resized to " << size;
-//    });
-//    connect(movie, &QMovie::started, [movie](){
-//        qDebug() << "Animation started " ;
-//    });
-}
-void C_GifItem::click_element() {
-    Item_Interface::click_element();
+    connect(au_movie.get(), &QMovie::resized, [](const QSize& size){
+        qDebug() << "Animation Resized to " << size;
+    });
+    connect(au_movie.get(), &QMovie::started, [](){
+        qDebug() << "Animation started, Animation started " ;
+    });
 }
 
 void C_GifItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
+    // 更新坐标
+    position_calculation(view);
+    view->show();
+}
+
+void C_GifItem::click_element() {
+    Item_Interface::click_element();
 }
 
 void C_GifItem::wheelEvent(QWheelEvent *event) {
@@ -279,7 +269,11 @@ void C_GifItem::phot_rotate(bool is_right, QGraphicsView *view) {
 }
 
 void C_GifItem::position_calculation(QGraphicsView *view) {
-
+    const QRectF &boundingRect = graphics_gifItem_unique->boundingRect();
+    qDebug()<<"QRectF &boundingRect"<<boundingRect;
+    QPointF center = view ->viewport()->rect().center() - boundingRect.center();
+    qDebug()<<"center:"<<center;
+    graphics_gifItem_unique->setPos(center);
 }
 
 

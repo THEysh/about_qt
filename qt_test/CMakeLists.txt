@@ -12,6 +12,8 @@ set(CMAKE_PREFIX_PATH "F:/QT5_9_9/5.9.9/mingw53_32")
 
 # 查找Qt的组件
 find_package(Qt5 COMPONENTS
+        Multimedia
+        MultimediaWidgets
         Core
         Gui
         Widgets
@@ -34,5 +36,7 @@ target_link_libraries(qt_test
         Qt5::Widgets
         Qt5::Network
         Qt5::Svg
+        Qt5::Multimedia
+        Qt5::MultimediaWidgets
         )
 

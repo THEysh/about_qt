@@ -4,6 +4,7 @@
 #define ITEM_INTERFACE_H
 
 #include <QLabel>
+#include <QTimer>
 #include "QObject"
 #include "my_photo_Graphics.h"
 #include "memory"
@@ -82,8 +83,9 @@ private:
     void position_calculation(QGraphicsView *view);
     void _connect();
     std::unique_ptr<QMovie> au_movie;
-    std::unique_ptr<QLabel> mov_label;
-    std::unique_ptr<QGraphicsProxyWidget> prxy_unique;
+    std::unique_ptr<QPixmap> gif_pixmap;
+    std::unique_ptr<QGraphicsPixmapItem> graphics_gifItem_unique;
+    QTimer timer;
 ////     创建一个 QLabel 对象
 
 
