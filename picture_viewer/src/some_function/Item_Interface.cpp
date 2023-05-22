@@ -38,6 +38,10 @@ void Item_Interface::phot_rotate(bool is_right,QGraphicsView *view) {
 
 }
 
+void Item_Interface::position_calculation(QGraphicsView *view) {
+
+}
+
 //====================================================================================================
 
 C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes):
@@ -258,17 +262,40 @@ void C_GifItem::click_element() {
 
 void C_GifItem::wheelEvent(QWheelEvent *event) {
     Item_Interface::wheelEvent(event);
+    if (graphics_gifItem_unique == nullptr){
+        qDebug()<<"C_GifItem::wheelEvent bug";
+    }
+    if (event->delta() > 0) {  // 缩放
+        // 只对pixmapItem场景进行缩放
+        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() * 1.15);
+    } else {  // 放大
+        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() / 1.15);
+    }
 }
 
 void C_GifItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::resizeEvent(event, view, scene);
+    position_calculation(view);
 }
 
 void C_GifItem::phot_rotate(bool is_right, QGraphicsView *view) {
     Item_Interface::phot_rotate(is_right, view);
+    if (graphics_gifItem_unique == nullptr){
+        qDebug()<<"C_GifItem::wheelEvent bug";
+    }
+    if ((graphics_gifItem_unique != nullptr)&&is_right) { // 检查指针是否为 nullptr
+        graphics_gifItem_unique->setTransform(QTransform().rotate(90), true);
+    } else if ((graphics_gifItem_unique != nullptr)&&!is_right){
+        graphics_gifItem_unique->setTransform(QTransform().rotate(-90), true);
+    } else{ return;}
+    position_calculation(view);
 }
 
 void C_GifItem::position_calculation(QGraphicsView *view) {
+    Item_Interface::position_calculation(view);
+    if (graphics_gifItem_unique == nullptr){
+        qDebug()<<"C_GifItem::wheelEvent bug";
+    }
     const QRectF &boundingRect = graphics_gifItem_unique->boundingRect();
     qDebug()<<"QRectF &boundingRect"<<boundingRect;
     QPointF center = view ->viewport()->rect().center() - boundingRect.center();

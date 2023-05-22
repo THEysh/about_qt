@@ -13,13 +13,14 @@
 // 把不同类型显示的图片抽样出来
 class Item_Interface : public QObject{
 Q_OBJECT
-public:
+public: //公共接口
     explicit Item_Interface();
     ~Item_Interface() override;
     virtual void click_element();
     virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
     virtual void wheelEvent(QWheelEvent *event);
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
+    virtual void position_calculation(QGraphicsView *view);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
 };
 
@@ -36,9 +37,9 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
+    void position_calculation(int w, int h, QGraphicsView *view);
 
 private:
-    void position_calculation(int w, int h, QGraphicsView *view);
 
     QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
     std::unique_ptr<QPixmap> photo_pixmap_unique;
@@ -60,8 +61,9 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
+    void position_calculation(QGraphicsView *view) override;
 private:
-    void position_calculation(QGraphicsView *view);
+
     std::unique_ptr<QSvgRenderer> svgrender_unique = nullptr;
     std::unique_ptr<QGraphicsSvgItem> graphics_svgItem_unique = nullptr;
 
@@ -79,16 +81,14 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
+    void position_calculation(QGraphicsView *view) override;
 private:
-    void position_calculation(QGraphicsView *view);
+
     void _connect();
     std::unique_ptr<QMovie> au_movie;
     std::unique_ptr<QPixmap> gif_pixmap;
     std::unique_ptr<QGraphicsPixmapItem> graphics_gifItem_unique;
     QTimer timer;
-////     创建一个 QLabel 对象
-
-
 };
 #endif // ITEM_INTERFACE_H
 

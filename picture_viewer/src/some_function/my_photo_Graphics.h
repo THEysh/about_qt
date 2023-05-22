@@ -34,7 +34,7 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event);
 private:
-    std::unique_ptr<Item_Interface> graphics_Item_unique = nullptr;
+    std::unique_ptr<Item_Interface> graphics_Item_unique;
 };
 
 #endif // MY_PHOTO_GRAPHICS_H
