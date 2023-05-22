@@ -15,7 +15,7 @@ void Resource_Registration(){
     QString currentPath = QDir::currentPath();
     // 输出路径
     qDebug() << "Current path: " << currentPath;
-    QString path_rcc = QString(currentPath + "/src/my_qrc.rcc"); //获取项目的.rcc路径
+    QString path_rcc = QString(currentPath + "/my_qrc.rcc"); //获取项目的.rcc路径
     qDebug() << "path_rcc: " << path_rcc;
 
     if (QResource::registerResource(path_rcc)) { //获取项目的资源文件

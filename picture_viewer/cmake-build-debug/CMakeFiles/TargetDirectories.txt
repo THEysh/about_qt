@@ -1,4 +1,0 @@
-F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer.dir
-F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/edit_cache.dir
-F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-F:/code/c_code/about_qt/picture_viewer/cmake-build-debug/CMakeFiles/picture_viewer_autogen.dir

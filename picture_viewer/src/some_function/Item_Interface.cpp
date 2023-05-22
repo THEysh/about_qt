@@ -4,6 +4,7 @@
 
 #include <QFileInfo>
 #include <memory>
+#include <QMovie>
 #include "my_photo_Graphics.h"
 #include "Item_Interface.h"
 #include "qDebug.h"
@@ -45,7 +46,8 @@ C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
     or_activated_photo_pixmap.load(path, imageTypes.join(',').toUtf8().constData());
     p_width = or_activated_photo_pixmap.width();
     p_height = or_activated_photo_pixmap.height();
-    activated_photo_pixmap = or_activated_photo_pixmap.scaled(p_width, p_height, Qt::KeepAspectRatio);
+    photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
+//    activated_photo_pixmap = or_activated_photo_pixmap.scaled(p_width, p_height, Qt::KeepAspectRatio);
     if (!or_activated_photo_pixmap.isNull()) {
         qDebug() << "Image loaded successfully.";
         // 创建一个指向 QGraphicsPixmapItem 对象的指针，并将其传递给 C_QPixmapItem 类的构造函数
@@ -80,22 +82,23 @@ void C_QPixmapItem::position_calculation(int w, int h,QGraphicsView *view) {
     // 得到原始图片的宽和高
     p_width = or_activated_photo_pixmap.width();
     p_height = or_activated_photo_pixmap.height();
-    activated_photo_pixmap = or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+    //activated_photo_pixmap = or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation);
     if (w>p_width && h>p_height){
-        activated_photo_pixmap = or_activated_photo_pixmap;
+        photo_pixmap_unique.reset(&or_activated_photo_pixmap);
+
     }else{
-        activated_photo_pixmap = or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation);
+        photo_pixmap_unique.reset(new QPixmap(or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation)));
     }
     // 查看是否需要自适应缩放:
     if (scaling || (or_activated_photo_pixmap.size().height()< view->viewport()->rect().height())){
         // 这两个语句的效果是相同的，都会创建一个新的QGraphicsPixmapItem对象，并用std::unique_ptr对象管理该对象的内存
-        graphics_pixmapItem_unique->setPixmap(activated_photo_pixmap);
+        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
         const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
         QPointF center = view->viewport()->rect().center() - boundingRect.center();
         graphics_pixmapItem_unique->setPos(center);
     }
     else{
-        graphics_pixmapItem_unique->setPixmap(or_activated_photo_pixmap);
+        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
         const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
         graphics_pixmapItem_unique->setX((view->viewport()->rect().width()-boundingRect.width()) / 2);
     }
@@ -203,4 +206,80 @@ void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
     } else{ return;}
     position_calculation(view);
 }
+
+// --------------------------------------------------------------------------
+C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene)
+    {
+    mov_label = std::make_unique<QLabel>("", view);
+    au_movie = std::make_unique<QMovie>(path);
+
+    // 获取view的中心坐标
+    QPointF center = view->mapToScene(view->viewport()->rect().center());
+    // 调整label的位置
+    mov_label->move(center.toPoint() - QPoint(mov_label->width() / 2, mov_label->height() / 2));
+    // 表示该QWidget对象的内容应该水平和垂直居中显示。
+    mov_label->setAlignment(Qt::AlignCenter);
+    mov_label->setMovie(au_movie.get());
+    au_movie->start();
+
+    // 这行代码的作用是将当前对象（this）添加到QGraphicsScene中，并返回对应的QGraphicsProxyWidget指针。
+    prxy_unique.reset(scene->addWidget(mov_label.get()));
+    prxy_unique->setPos(0, 0);
+    // 连接信号
+    _connect();
+
+}
+
+C_GifItem::~C_GifItem(){
+    // 释放内存, 因为智能指针，就是不写，内存也会被释放
+    prxy_unique.reset();
+    au_movie.reset();
+    mov_label.reset();
+}
+void C_GifItem::_connect() {
+    if (au_movie == nullptr){
+        qDebug()<<"C_GifItem::_connect(),bug";
+        return;
+    }
+    //使用 "this" 关键字引入它的作用域,
+    QObject::connect(au_movie.get(), &QMovie::frameChanged, [this](int frameIndex){
+        QSize temp_size =  au_movie->currentPixmap().size();
+        qDebug() << "Current Frame Index: " << frameIndex;
+        qDebug() << "Current Frame size: " << temp_size;
+        mov_label->setFixedSize(temp_size);
+        qDebug() << "label size: " <<temp_size;
+        prxy_unique->resize(temp_size);
+        qDebug() << "proxy->resize: " <<prxy_unique->size();
+    });
+//    connect(movie, &QMovie::resized, [](const QSize& size){
+//        qDebug() << "Animation Resized to " << size;
+//    });
+//    connect(movie, &QMovie::started, [movie](){
+//        qDebug() << "Animation started " ;
+//    });
+}
+void C_GifItem::click_element() {
+    Item_Interface::click_element();
+}
+
+void C_GifItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
+    Item_Interface::show_photo(view, scene);
+}
+
+void C_GifItem::wheelEvent(QWheelEvent *event) {
+    Item_Interface::wheelEvent(event);
+}
+
+void C_GifItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {
+    Item_Interface::resizeEvent(event, view, scene);
+}
+
+void C_GifItem::phot_rotate(bool is_right, QGraphicsView *view) {
+    Item_Interface::phot_rotate(is_right, view);
+}
+
+void C_GifItem::position_calculation(QGraphicsView *view) {
+
+}
+
 

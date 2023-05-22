@@ -2,9 +2,13 @@
 
 #ifndef ITEM_INTERFACE_H
 #define ITEM_INTERFACE_H
+
+#include <QLabel>
 #include "QObject"
 #include "my_photo_Graphics.h"
 #include "memory"
+#include "QGraphicsProxyWidget"
+
 // 把不同类型显示的图片抽样出来
 class Item_Interface : public QObject{
 Q_OBJECT
@@ -35,8 +39,8 @@ protected:
 private:
     void position_calculation(int w, int h, QGraphicsView *view);
 
-    QPixmap activated_photo_pixmap = QPixmap(); // 根据尺寸变化的缩放图
     QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
+    std::unique_ptr<QPixmap> photo_pixmap_unique;
     std::unique_ptr<QGraphicsPixmapItem> graphics_pixmapItem_unique;
     int p_width = 0;
     int p_height = 0;
@@ -63,5 +67,26 @@ private:
 };
 
 
+class C_GifItem : public Item_Interface{
+Q_OBJECT
+public:
+    C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene);
+    ~C_GifItem() override;
+    void click_element() override;
+    void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
+protected:
+    void wheelEvent(QWheelEvent *event) override;
+    void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
+    void phot_rotate(bool is_right, QGraphicsView *view) override;
+private:
+    void position_calculation(QGraphicsView *view);
+    void _connect();
+    std::unique_ptr<QMovie> au_movie;
+    std::unique_ptr<QLabel> mov_label;
+    std::unique_ptr<QGraphicsProxyWidget> prxy_unique;
+////     创建一个 QLabel 对象
+
+
+};
 #endif // ITEM_INTERFACE_H
 

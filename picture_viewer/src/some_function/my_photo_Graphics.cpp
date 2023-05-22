@@ -7,13 +7,12 @@
 #include <QGuiApplication>
 #include <QtGui/QClipboard>
 #include <QFileInfo>
-#include <iostream>
 #include "My_Photo_Graphics.h"
 #include "Item_Interface.h"
 #include "qdebug.h"
 #include <QSysInfo>
 #include <memory>
-#include "memory"
+
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 // 定义初始化
         QGraphicsView(parent),
@@ -23,7 +22,6 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 {
     background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
     or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
-
     this->setScene(scene);
     setRenderHint(QPainter::Antialiasing, true);
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
@@ -83,6 +81,10 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
         //对象的std::unique_ptr。与直接使用 new 创建对象相比，使用std::make_unique()可以更加安全和方便.
         graphics_Item_unique = std::make_unique<C_SvgItem>(path);
     }
+    else if ((fileInfo.suffix().compare("gif", Qt::CaseInsensitive) == 0)){
+        qDebug() << "The file is an gif,load ...";
+        return;
+    }
     else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
         qDebug() << "The file is ipg,png...,load ...";
         graphics_Item_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
@@ -91,9 +93,7 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
         qDebug() << "Unsupported image format: " << path;
         return;
     }
-
     show_image_item();
-    // qDebug()<<image_item;
 }
 
 void My_Photo_Graphics::show_image_item() {
@@ -123,7 +123,6 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     QMenu menu(this);
     QAction *right_rotate = menu.addAction("右旋转90°");
     QAction *left_rotate = menu.addAction("左旋转90°");
-    QAction *copy_dirpath = menu.addAction("复制图片路径");
     //上面的被qt管理，不会内存泄漏
 
     connect(right_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
@@ -132,13 +131,6 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     connect(left_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
         graphics_Item_unique->phot_rotate(false,this);
     });
-//
-//    connect(copy_dirpath,&QAction::triggered,[this](){
-//        if (*photo_actived_rootNode!= nullptr){
-//            QClipboard *clipboard = QGuiApplication::clipboard();
-//            clipboard->setText((*photo_actived_rootNode)->data(0, Qt::UserRole).toString());
-//        }
-//    });
     menu.exec(event->globalPos());
 }
 

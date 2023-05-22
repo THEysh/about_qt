@@ -1,57 +1,147 @@
-#include <iostream>
+#include <QApplication>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QMovie>
+#include <QLabel>
+#include <QTimeLine>
+#include "QGraphicsItem"
+#include "qdebug.h"
+#include "QGraphicsProxyWidget"
+#include "QObject"
 
-void test1(); // 内存泄露
-void test2(); // 非法访问
-void test3(); // 未初始化读
-void test4(); // Heap 操作参数错误(Invalid Heap Argument)
-
-int main()
+class MovieItem : public QObject, public QGraphicsItem
 {
-    // reference: http://www.ibm.com/developerworks/cn/linux/1309_liuming_drmemory/
-    test4();
+public:
+    MovieItem(const QString& fileName, int width = 0, int height = 0, QGraphicsItem* parent = nullptr)
+            : QObject(),
+            QGraphicsItem(parent),
+            m_movie(new QMovie(fileName, QByteArray(), this)),
+            m_transform()
+    {
+        if (width != 0 && height != 0) {
+            m_movie->setScaledSize(QSize(width, height));
+        }
+        qDebug()<<m_movie->speed();
+        m_movie->setSpeed(1);
+        m_movie->start();
+        qDebug()<<m_movie->speed();
 
-    std::cout << "ok" << std::endl;
-    return 0;
-}
-
-void test1()
-{
-    char *ptr;
-    for (int i = 0; i<100; i++) {
-        ptr = (char*)malloc(i);
-
-        if (i % 2) free(ptr);
     }
-}
 
-void test2()
+    QRectF boundingRect() const override
+    {
+        return QRectF(0, 0, m_movie->currentPixmap().width(), m_movie->currentPixmap().height());
+    }
+
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override
+    {
+        painter->setTransform(m_transform);
+        painter->drawPixmap(0, 0, m_movie->currentPixmap());
+        m_movie->jumpToNextFrame();
+        update();
+    }
+
+    int type() const override
+    {
+        return UserType + 1;
+    }
+
+    void setScale(qreal sx, qreal sy)
+    {
+        m_transform.scale(sx, sy);
+    }
+
+    void setRotation(qreal angle)
+    {
+        m_transform.rotate(angle);
+    }
+
+
+private:
+    QMovie* m_movie;
+    QTransform m_transform;
+};
+
+class MainWindow : public QLabel {
+
+
+public:
+    MainWindow(QWidget *parent = nullptr) : QLabel(parent) {
+        setWindowTitle("GIF Animation");
+        // 创建一个 QMovie 对象
+        QGraphicsScene* scene = new QGraphicsScene();
+        QGraphicsView* view = new QGraphicsView(scene);
+        QGraphicsProxyWidget* proxy = scene->addWidget(this);
+// 创建 QGraphicsProxyWidget 对象，并将 QLabel 控件设置为其窗口小部件
+        setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        setAlignment(Qt::AlignCenter);
+        QMovie *movie = new QMovie("C:\\Users\\Administrator\\Desktop\\新建文件夹\\6dd.gif", QByteArray(), this);
+        setMovie(movie);
+        movie->start();
+        proxy->setPos(0, 0);
+        view->show();
+        view->resize(1000,1000);
+        connect(movie, &QMovie::frameChanged, [proxy,movie,this](int frameIndex){
+            qDebug() << "Current Frame Index: " << frameIndex;
+            qDebug() << "Current Frame size: " << movie->currentPixmap().size();
+            this->setFixedSize(movie->currentPixmap().size());
+            qDebug() << "label size: " <<this->size();
+            proxy->resize(movie->currentPixmap().size());
+            qDebug() << "proxy->resize: " <<proxy->size();
+        });
+        connect(movie, &QMovie::resized, [](const QSize& size){
+            qDebug() << "Animation Resized to " << size;
+        });
+        connect(movie, &QMovie::started, [movie](){
+            qDebug() << "Animation started " ;
+        });
+
+    }
+
+};
+//
+//class MainWindow2 : public QLabel {
+//Q_OBJECT
+//
+//public:
+//    MainWindow2(QWidget *parent = nullptr) : QLabel(parent) {
+//        setWindowTitle("GIF Animation");
+//        setFixedSize(400, 400);
+//        setAlignment(Qt::AlignCenter);
+//        QMovie *movie = new QMovie("C:\\Users\\Administrator\\Desktop\\新建文件夹\\6dd.gif", QByteArray(), this);
+//        connect(movie, SIGNAL(frameChanged(int)), this, SLOT(onFrameChanged(int)));
+//        connect(movie, SIGNAL(stateChanged(QMovie::MovieState)), this, SLOT(onStateChanged(QMovie::MovieState)));
+//        connect(movie, SIGNAL(finished()), this, SLOT(onFinished()));
+//        connect(movie, SIGNAL(resized(const QSize&)), this, SLOT(onResized(const QSize&)));
+//        setMovie(movie);
+//        movie->start();
+//    }
+//
+//private slots:
+//    void onFrameChanged(int frameIndex) {
+//        qDebug() << "Current Frame Index: " << frameIndex;
+//    }
+//
+//    void onStateChanged(QMovie::MovieState state) {
+//        qDebug() << "Animation State Changed:" << state;
+//    }
+//
+//    void onFinished() {
+//        qDebug() << "Animation Finished";
+//    }
+//
+//    void onResized(const QSize &size) {
+//        qDebug() << "Animation Resized to " << size;
+//    }
+//};
+
+
+
+int main(int argc, char *argv[])
 {
-    char *x = (char*)malloc(8);
-    char c = *(x + 8); // buffer overlow
-    free(x);
-    c = *x; // read free memory
-}
+    QApplication app(argc, argv);
 
-typedef struct T_ {
-    char a;
-    char b;
-}T;
-
-void test3()
-{
-    T a, b;
-    char x;
-    a.a = 'a';
-    a.b = 'b';
-    b.a = x; // error C4700:使用了未初始化的局部变量x,若使vs2013能够正常编译，需将配置属性中的C/C++ SDL检查关闭
-    if (b.a == 10)
-        memcpy(&b, &a, sizeof(T));
-}
-
-void test4()
-{
-    char * ptr = NULL;
-    ptr = new char;
-    free(ptr);
-    free(ptr); //
+    MainWindow window;
+    window.show();
+    return app.exec();
 }

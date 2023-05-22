@@ -1,4 +1,0 @@
-F:/code/c_code/about_qt/qt_test/cmake-build-release/CMakeFiles/qt_test.dir
-F:/code/c_code/about_qt/qt_test/cmake-build-release/CMakeFiles/edit_cache.dir
-F:/code/c_code/about_qt/qt_test/cmake-build-release/CMakeFiles/rebuild_cache.dir
-F:/code/c_code/about_qt/qt_test/cmake-build-release/CMakeFiles/qt_test_autogen.dir

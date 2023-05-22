@@ -274,7 +274,6 @@ void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
         qDebug()<<"My_Qtreewidget::on_itemClicked:bug";
         return;
     }
-
     QString img_path = item->data(0,Qt::UserRole).toString();
     bool is_img = _is_type(img_path, this->imageTypes);
     if (is_img) {

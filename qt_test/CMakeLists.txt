@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.25)
-project(qt_test)
 
+cmake_minimum_required(VERSION 3.25)
+
+project(qt_test)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -19,13 +20,19 @@ find_package(Qt5 COMPONENTS
         REQUIRED)
 
 # 编译源代码
-add_executable(qt_test main.cpp A.cpp A.h B.cpp B.h)
-
-
+add_executable(qt_test
+        main.cpp
+        A.cpp
+        A.h
+        B.cpp
+        B.h
+        )
 # 链接Qt库
 target_link_libraries(qt_test
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
         Qt5::Network
-        Qt5::Svg)
+        Qt5::Svg
+        )
+
