@@ -20,8 +20,9 @@ public: //公共接口
     virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
     virtual void wheelEvent(QWheelEvent *event);
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
-    virtual void position_calculation(QGraphicsView *view);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
+protected:
+    virtual void position_calculation(QGraphicsView *view);
 };
 
 
@@ -40,7 +41,6 @@ protected:
     void position_calculation(int w, int h, QGraphicsView *view);
 
 private:
-
     QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
     std::unique_ptr<QPixmap> photo_pixmap_unique;
     std::unique_ptr<QGraphicsPixmapItem> graphics_pixmapItem_unique;
@@ -63,12 +63,10 @@ protected:
     void phot_rotate(bool is_right, QGraphicsView *view) override;
     void position_calculation(QGraphicsView *view) override;
 private:
-
     std::unique_ptr<QSvgRenderer> svgrender_unique = nullptr;
     std::unique_ptr<QGraphicsSvgItem> graphics_svgItem_unique = nullptr;
 
 };
-
 
 class C_GifItem : public Item_Interface{
 Q_OBJECT
@@ -83,7 +81,6 @@ protected:
     void phot_rotate(bool is_right, QGraphicsView *view) override;
     void position_calculation(QGraphicsView *view) override;
 private:
-
     void _connect();
     std::unique_ptr<QMovie> au_movie;
     std::unique_ptr<QPixmap> gif_pixmap;
