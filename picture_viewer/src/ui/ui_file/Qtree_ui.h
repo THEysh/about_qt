@@ -13,7 +13,6 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
@@ -32,7 +31,6 @@ public:
     QHBoxLayout *horizontalLayout_1;
     QWidget *verticalWidget;
     QVBoxLayout *v2;
-    QCheckBox *checkBox;
     My_Qtreewidget *treeWidget_1;
     My_Photo_Graphics *graphicsView;
 
@@ -63,17 +61,6 @@ public:
         v2->setSpacing(10);
         v2->setObjectName(QStringLiteral("v2"));
         v2->setContentsMargins(10, 10, 5, 10);
-        checkBox = new QCheckBox(verticalWidget);
-        checkBox->setObjectName(QStringLiteral("checkBox"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(checkBox->sizePolicy().hasHeightForWidth());
-        checkBox->setSizePolicy(sizePolicy1);
-        checkBox->setTristate(true);
-
-        v2->addWidget(checkBox);
-
         treeWidget_1 = new My_Qtreewidget(verticalWidget);
         treeWidget_1->setObjectName(QStringLiteral("treeWidget_1"));
         treeWidget_1->setMaximumSize(QSize(16777214, 16777215));
@@ -104,7 +91,6 @@ public:
     void retranslateUi(QMainWindow *Qtree_Class_UI)
     {
         Qtree_Class_UI->setWindowTitle(QApplication::translate("Qtree_Class_UI", "MainWindow", Q_NULLPTR));
-        checkBox->setText(QApplication::translate("Qtree_Class_UI", "\350\207\252\351\200\202\345\272\224\347\274\251\346\224\276", Q_NULLPTR));
         QTreeWidgetItem *___qtreewidgetitem = treeWidget_1->headerItem();
         ___qtreewidgetitem->setText(0, QApplication::translate("Qtree_Class_UI", "\346\226\207\344\273\266\345\210\227\350\241\250", Q_NULLPTR));
     } // retranslateUi

@@ -85,11 +85,13 @@ private:
     void _connect();
     std::unique_ptr<QMovie> au_movie;
     std::unique_ptr<QPixmap> gif_pixmap;
-    QPixmap or_gir_pixmap;
+    QPixmap or_pixmap;
     std::unique_ptr<QGraphicsPixmapItem> graphics_gifItem_unique;
     QRectF gif_rect;
     double roller_factor;
     QTimer timer;
+    bool state_change;
+
 };
 #endif // ITEM_INTERFACE_H
 

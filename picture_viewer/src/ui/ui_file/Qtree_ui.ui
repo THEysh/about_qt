@@ -69,22 +69,6 @@
           <number>10</number>
          </property>
          <item>
-          <widget class="QCheckBox" name="checkBox">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>自适应缩放</string>
-           </property>
-           <property name="tristate">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="My_Qtreewidget" name="treeWidget_1">
            <property name="maximumSize">
             <size>

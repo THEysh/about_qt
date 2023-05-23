@@ -72,7 +72,6 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
-
     if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
         qDebug() << "The file is an SVG ,load ...";
         //这是一个使用C++11提供的智能指针模板函数std::make_unique()来创建一个指向C_SvgItem对象的unique_ptr，
@@ -115,7 +114,6 @@ My_Photo_Graphics::~My_Photo_Graphics() {
     // delete other dynamically allocated resources if any
     delete scene;
     qDebug() << "this is : ~My_Photo_Graphics";
-
 }
 
 void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
@@ -132,20 +130,3 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     });
     menu.exec(event->globalPos());
 }
-
-//void My_Photo_Graphics::connect_checkbox() {
-//    if (that_checkBox!= nullptr){
-//        that_checkBox->setTristate(false);
-//        connect(that_checkBox, &QCheckBox::toggled, [this](bool checked){
-//            if (checked) {
-//                scaling = true;
-//                Q_pixmap_show();
-//                // 如果复选框被选中执行的操作
-//            } else {
-//                scaling = false;
-//                Q_pixmap_show();
-//                // 如果复选框未被选中执行的操作
-//            }
-//        });
-//    }
-//}
