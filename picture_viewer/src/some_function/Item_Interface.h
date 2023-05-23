@@ -18,7 +18,7 @@ public: //公共接口
     ~Item_Interface() override;
     virtual void click_element();
     virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
-    virtual void wheelEvent(QWheelEvent *event,QGraphicsView *view);
+    virtual void wheelEvent(QWheelEvent *event, QGraphicsView *view);
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
 protected:

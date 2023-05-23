@@ -59,3 +59,7 @@
 4	30	0	F:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/qt_test_autogen/mocs_compilation.cpp	32bb722412937225
 30	1360	7064668418212483	CMakeFiles/qt_test.dir/main.cpp.obj	7f6f15c134d2db70
 1360	1462	7064668419211089	qt_test.exe	9f04cae38c3a442d
+14	158	0	CMakeFiles/qt_test_autogen	32bb722412937225
+14	158	0	qt_test_autogen/mocs_compilation.cpp	32bb722412937225
+14	158	0	F:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/CMakeFiles/qt_test_autogen	32bb722412937225
+14	158	0	F:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/qt_test_autogen/mocs_compilation.cpp	32bb722412937225
