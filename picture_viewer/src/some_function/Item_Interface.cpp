@@ -45,22 +45,24 @@ void Item_Interface::position_calculation(QGraphicsView *view) {
 //====================================================================================================
 
 C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes):
-    scaling(true)
+    roller_factor(1.1)
 {
     or_activated_photo_pixmap.load(path, imageTypes.join(',').toUtf8().constData());
-    p_width = or_activated_photo_pixmap.width();
-    p_height = or_activated_photo_pixmap.height();
     photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
-//    activated_photo_pixmap = or_activated_photo_pixmap.scaled(p_width, p_height, Qt::KeepAspectRatio);
     if (!or_activated_photo_pixmap.isNull()) {
         qDebug() << "Image loaded successfully.";
         // 创建一个指向 QGraphicsPixmapItem 对象的指针，并将其传递给 C_QPixmapItem 类的构造函数
         graphics_pixmapItem_unique = std::make_unique<QGraphicsPixmapItem>();
         graphics_pixmapItem_unique->setPixmap(or_activated_photo_pixmap);
+        pixmap_rect = graphics_pixmapItem_unique->boundingRect();
+        // 设置为拖拽
+        graphics_pixmapItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
+
     }
     else {
         qDebug() << "Failed to load image from" << path;
     }
+
 }
 
 C_QPixmapItem::~C_QPixmapItem() {
@@ -73,40 +75,30 @@ void C_QPixmapItem::click_element() {
 void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view,scene);
     qDebug()<<"graphics_pixmapItem_unique->pixmap():"<<graphics_pixmapItem_unique->pixmap();
-    // 根据画面进行位置调整
-    position_calculation(view->width(),view->height(),view);
-
+    // 根据画面进行位置调整,自适应缩放，展示的一张新图片时候自适应一次
+    int p_width = or_activated_photo_pixmap.width();
+    int p_height = or_activated_photo_pixmap.height();
+    if ((view->width())>p_width && (view->height())>p_height){
+        // 视角大于图片的高
+        photo_pixmap_unique= std::make_unique<QPixmap>(or_activated_photo_pixmap);
+    }else{
+        // 自适应缩放
+        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(view->width() ,view->height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    }
+    graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
+    // 每当指针改变，记录尺寸信息
+    pixmap_rect = graphics_pixmapItem_unique->pixmap().rect();
+    // 位置更新
+    position_calculation(view);
     scene->addItem(graphics_pixmapItem_unique.get());
-    // 设置为拖拽
-    graphics_pixmapItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
     view->show();
 }
 
-void C_QPixmapItem::position_calculation(int w, int h,QGraphicsView *view) {
-    // 得到原始图片的宽和高
-
-    p_width = or_activated_photo_pixmap.width();
-    p_height = or_activated_photo_pixmap.height();
-    //activated_photo_pixmap = or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation);
-    if (w>p_width && h>p_height){
-        photo_pixmap_unique= std::make_unique<QPixmap>(or_activated_photo_pixmap);
-
-    }else{
-        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation));
-    }
-    // 查看是否需要自适应缩放:
-    if (scaling || (or_activated_photo_pixmap.size().height() > view->viewport()->rect().height())){
-        // 这两个语句的效果是相同的，都会创建一个新的QGraphicsPixmapItem对象，并用std::unique_ptr对象管理该对象的内存
-        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
-        const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
-        QPointF center = view->viewport()->rect().center() - boundingRect.center();
-        graphics_pixmapItem_unique->setPos(center);
-    }
-    else{
-        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
-        const QRectF &boundingRect = graphics_pixmapItem_unique->boundingRect();
-        graphics_pixmapItem_unique->setX((view->viewport()->rect().width()-boundingRect.width()) / 2);
-    }
+void C_QPixmapItem::position_calculation(QGraphicsView *view) {
+    // 位置更新
+    QPointF center = view ->viewport()->rect().center() - pixmap_rect.center();
+    qDebug()<<"pixmap Item center:"<<center;
+    graphics_pixmapItem_unique->setPos(center);
 }
 
 void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
@@ -115,17 +107,37 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
-    if (event->delta() > 0) {  // 缩放
-        // 只对pixmapItem场景进行缩放
-        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() * 1.15);
-    } else {  // 放大
-        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() / 1.15);
+    // 自适应后，图片尺寸会跟随场景大小，当用户使用滚轮，photo_pixmap的图片展示应该也顺着变大，不然场景的图片永远是模糊的，
+    // 为了放大后图片更清晰的显示，图片的尺寸因子设置比正常的大一些,设置为roller_factor*roller_factor*roller_factor
+    int old_wid = photo_pixmap_unique->width();
+    int old_height = photo_pixmap_unique->height();
+    int new_wid; int new_height;
+    // 下面只是view的缩放，不会影响rect
+    if (event->delta() > 0) {
+        // 放大，只对pixmapItem场景进行缩放
+        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() * roller_factor);
+        new_wid = int(old_wid*roller_factor*roller_factor*roller_factor);
+        new_height = int(old_height*roller_factor*roller_factor*roller_factor);
+    } else {
+        // 缩放
+        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() / roller_factor);
+        new_wid = int(old_wid/roller_factor);
+        new_height = int(old_height/roller_factor);
+    }
+    if ((new_wid < or_activated_photo_pixmap.width())&&(new_height < or_activated_photo_pixmap.height())){
+        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(new_wid,new_height,Qt::KeepAspectRatio));
+        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
+    } else if(photo_pixmap_unique->rect()==or_activated_photo_pixmap.rect()){
+        //尺寸相等
+    } else{
+        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
+        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
     }
 }
 
 void C_QPixmapItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::resizeEvent(event, view, scene);
-    position_calculation(view->width(),view->height(),view); //位置更新
+    position_calculation(view); //位置更新
 }
 
 void C_QPixmapItem::phot_rotate(bool is_right,QGraphicsView *view){
@@ -134,13 +146,18 @@ void C_QPixmapItem::phot_rotate(bool is_right,QGraphicsView *view){
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
+    QTransform transform;
     if ((graphics_pixmapItem_unique!= nullptr)&&is_right){
-        or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(90));  // 旋转90度
-    } else if((graphics_pixmapItem_unique!= nullptr)&&!is_right){
-        or_activated_photo_pixmap = or_activated_photo_pixmap.transformed(QTransform().rotate(-90));  // 旋转90度
+        graphics_pixmapItem_unique->setTransform(transform.rotate(90), true); //svg做旋转操作
+        // 计算rect信息，并更新
+        pixmap_rect = transform.mapRect(pixmap_rect).toRect();
+    }
+    else if((graphics_pixmapItem_unique!= nullptr)&&!is_right){
+        graphics_pixmapItem_unique->setTransform(transform.rotate(-90), true); //svg做旋转操作
+        // 计算rect信息，并更新
+        pixmap_rect = transform.mapRect(pixmap_rect).toRect();
     } else{ return;}
-    position_calculation(view->width(),view->height(),view); //位置更新
-
+    position_calculation(view); //位置更新
 }
 
 //====================================================================================================
@@ -153,6 +170,9 @@ C_SvgItem::C_SvgItem(const QString &path):
     if (loadResult){
         graphics_svgItem_unique->setSharedRenderer(svgrender_unique.get());
         graphics_svgItem_unique->setScale(1);
+        svg_Rect = graphics_svgItem_unique->boundingRect(); //用于计算位置信息
+        // 设置为拖拽
+        graphics_svgItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
     }
     else{
         qDebug()<<"QSvgRenderer load fail";
@@ -173,23 +193,19 @@ void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
-    // 计算尺寸，让svgItem保持中心位置
+    // 计算尺寸，让svgItem保持中心位置,SVG图不窗口自适应计算了，只计算中心位置
     position_calculation(view);
     scene->addItem(graphics_svgItem_unique.get()); //将svg条目添加到场景中
-    //     设置为拖拽
-    graphics_svgItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
     view->show();
 }
 
 void C_SvgItem::position_calculation(QGraphicsView *view) {
-    if (graphics_svgItem_unique== nullptr){
+    if (graphics_svgItem_unique == nullptr){
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
-    const QRectF &boundingRect = graphics_svgItem_unique->boundingRect();
-    qDebug()<<"QRectF &boundingRect"<<boundingRect;
-    QPointF center = view ->viewport()->rect().center() - boundingRect.center();
-    qDebug()<<"center:"<<center;
+    QPointF center = view ->viewport()->rect().center() - svg_Rect.center();
+    qDebug()<<"svgItem center:"<<center;
     graphics_svgItem_unique->setPos(center);
 }
 
@@ -199,6 +215,7 @@ void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
+    // svg 矢量图，不需要计算智适应清晰度
     if (event->delta() > 0) {  // 缩放
         // 只对pixmapItem场景进行缩放
         graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() * 1.15);
@@ -222,10 +239,18 @@ void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
+    QTransform transform;
     if ((graphics_svgItem_unique != nullptr)&&is_right) { // 检查指针是否为 nullptr
-        graphics_svgItem_unique->setTransform(QTransform().rotate(90), true);
+
+        graphics_svgItem_unique->setTransform(transform.rotate(90), true); //svg做旋转操作
+        // 计算rect信息，并更新
+        svg_Rect = transform.mapRect(svg_Rect).toRect();
+
     } else if ((graphics_svgItem_unique != nullptr)&&!is_right){
-        graphics_svgItem_unique->setTransform(QTransform().rotate(-90), true);
+        graphics_svgItem_unique->setTransform(transform.rotate(-90), true);
+        // 计算rect信息，并更新
+        svg_Rect = transform.mapRect(svg_Rect).toRect();
+
     } else{ return;}
     position_calculation(view);
 }
@@ -234,16 +259,19 @@ void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
 
 
 C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene)
+
     {
 
         au_movie = std::make_unique<QMovie>(path);
         au_movie->start();
-
         graphics_gifItem_unique = std::make_unique<QGraphicsPixmapItem>();
-        gif_pixmap = std::make_unique<QPixmap>(QPixmap::fromImage(au_movie->currentImage()));
+        or_gir_pixmap = QPixmap::fromImage(au_movie->currentImage());
+        gif_pixmap = std::make_unique<QPixmap>(or_gir_pixmap);
         graphics_gifItem_unique->setPixmap(*gif_pixmap);
         // 设置为拖拽 ,要在不为nullpter设置拖拽
         graphics_gifItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
+        // 计算rect
+        gif_rect = graphics_gifItem_unique->boundingRect();
         // 将 QGraphicsPixmapItem 添加到 QGraphicsScene 中
         scene->addItem(graphics_gifItem_unique.get());
         // 定时器更新 QPixmap
@@ -262,7 +290,8 @@ void C_GifItem::_connect() {
     }
     // 异步更新画面
     QObject::connect(&timer, &QTimer::timeout, [this](){
-        gif_pixmap = std::make_unique<QPixmap>(QPixmap::fromImage(au_movie->currentImage()));
+        or_gir_pixmap = QPixmap::fromImage(au_movie->currentImage());
+        gif_pixmap = std::make_unique<QPixmap>(or_gir_pixmap);
         graphics_gifItem_unique->setPixmap(*gif_pixmap);
     });
     //使用 "this" 关键字引入它的作用域,
@@ -283,6 +312,7 @@ void C_GifItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
     // 更新坐标
     position_calculation(view);
+    scene->addItem(graphics_gifItem_unique.get());
     view->show();
 }
 
@@ -295,12 +325,40 @@ void C_GifItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     if (graphics_gifItem_unique == nullptr){
         qDebug()<<"C_GifItem::wheelEvent bug";
     }
-    if (event->delta() > 0) {  // 缩放
-        // 只对pixmapItem场景进行缩放
-        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() * 1.15);
-    } else {  // 放大
-        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() / 1.15);
+//    if (event->delta() > 0) {  // 缩放
+//        // 只对pixmapItem场景进行缩放
+//        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() * 1.15);
+//    } else {  // 放大
+//        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() / 1.15);
+//    }
+
+    // 自适应后，图片尺寸会跟随场景大小，当用户使用滚轮，photo_pixmap的图片展示应该也顺着变大，不然场景的图片永远是模糊的，
+    // 为了放大后图片更清晰的显示，图片的尺寸因子设置比正常的大一些,设置为roller_factor*roller_factor*roller_factor
+    int old_wid = graphics_gifItem_unique->pixmap().width();
+    int old_height = graphics_gifItem_unique->pixmap().height();
+    int new_wid; int new_height;
+    // 下面只是view的缩放，不会影响rect
+    if (event->delta() > 0) {
+        // 放大，只对pixmapItem场景进行缩放
+        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() * roller_factor);
+        new_wid = int(old_wid*roller_factor*roller_factor*roller_factor);
+        new_height = int(old_height*roller_factor*roller_factor*roller_factor);
+    } else {
+        // 缩放
+        graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() / roller_factor);
+        new_wid = int(old_wid/roller_factor);
+        new_height = int(old_height/roller_factor);
     }
+    if ((new_wid < gif_pixmap->width())&&(new_height < gif_pixmap->height())){
+        gif_pixmap = std::make_unique<QPixmap>(or_gir_pixmap.scaled(new_wid,new_height,Qt::KeepAspectRatio));
+        graphics_gifItem_unique->setPixmap(*gif_pixmap);
+    } else if(gif_pixmap ->rect()==or_gir_pixmap.rect()){
+        //尺寸相等
+    } else{
+        gif_pixmap = std::make_unique<QPixmap>(or_gir_pixmap);
+        graphics_gifItem_unique->setPixmap(*gif_pixmap);
+    }
+
 }
 
 void C_GifItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {
@@ -326,10 +384,8 @@ void C_GifItem::position_calculation(QGraphicsView *view) {
     if (graphics_gifItem_unique == nullptr){
         qDebug()<<"C_GifItem::wheelEvent bug";
     }
-    int p_width = gif_pixmap->width();
-    int p_height = gif_pixmap->height();
-    graphics_gifItem_unique->setPixmap(*gif_pixmap);
 
+    graphics_gifItem_unique->setPixmap(*gif_pixmap);
     const QRectF &boundingRect = graphics_gifItem_unique->boundingRect();
     qDebug()<<"QRectF &boundingRect"<<boundingRect;
     QPointF center = view ->viewport()->rect().center() - boundingRect.center();

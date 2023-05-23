@@ -22,6 +22,7 @@ public: //公共接口
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
 protected:
+
     virtual void position_calculation(QGraphicsView *view);
 };
 
@@ -38,15 +39,14 @@ protected:
     void wheelEvent(QWheelEvent *event,QGraphicsView *view) ;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
-    void position_calculation(int w, int h, QGraphicsView *view);
+    void position_calculation(QGraphicsView *view);
 
 private:
     QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
     std::unique_ptr<QPixmap> photo_pixmap_unique;
     std::unique_ptr<QGraphicsPixmapItem> graphics_pixmapItem_unique;
-    int p_width = 0;
-    int p_height = 0;
-    bool scaling = false; //是否需要自适应缩放
+    double roller_factor = 1.1;
+    QRectF pixmap_rect;
 };
 
 
@@ -63,6 +63,7 @@ protected:
     void phot_rotate(bool is_right, QGraphicsView *view) override;
     void position_calculation(QGraphicsView *view) override;
 private:
+    QRectF svg_Rect;
     std::unique_ptr<QSvgRenderer> svgrender_unique = nullptr;
     std::unique_ptr<QGraphicsSvgItem> graphics_svgItem_unique = nullptr;
 
@@ -84,7 +85,10 @@ private:
     void _connect();
     std::unique_ptr<QMovie> au_movie;
     std::unique_ptr<QPixmap> gif_pixmap;
+    QPixmap or_gir_pixmap;
     std::unique_ptr<QGraphicsPixmapItem> graphics_gifItem_unique;
+    QRectF gif_rect;
+    double roller_factor;
     QTimer timer;
 };
 #endif // ITEM_INTERFACE_H

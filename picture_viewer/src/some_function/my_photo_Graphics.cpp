@@ -53,7 +53,7 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
-    qDebug()<<"SIZE:"<<this->size();
+    qDebug()<<"My_Photo_Graphics::resizeEvent:->view siez"<<this->size();
     // 更新背景的尺寸
     QRect new_rect(QPoint(0, 0), this->size());
     scene->setSceneRect(new_rect);
@@ -108,6 +108,7 @@ void My_Photo_Graphics::show_image_item() {
     else{
         qDebug()<<"scene:"<<scene<<",image_item:"<<graphics_Item_unique.get();
     }
+    this->show();
 }
 
 My_Photo_Graphics::~My_Photo_Graphics() {
