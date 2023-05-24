@@ -294,16 +294,6 @@ void C_GifItem::_connect(QGraphicsView *view) {
     }
     // 开始更新画面
     QObject::connect(&timer, &QTimer::timeout, [this,view](){
-        int movie_width = au_movie->currentImage().width();
-        int movie_height = au_movie->currentImage().height();
-        if (movie_height>view->height() && movie_width>view->width()){
-            double width_ratio = static_cast<double>(view->width()) / static_cast<double>(movie_width);
-            double height_ratio = static_cast<double>(view->height()) / static_cast<double>(movie_height);
-            double scale_ratio = qMin(width_ratio, height_ratio); // 取两个比例中较小的一个
-            QSize scaled_size(static_cast<int>(movie_width *scale_ratio), static_cast<int>(movie_height * scale_ratio));
-            au_movie->setScaledSize(scaled_size);
-        }
-
         or_pixmap = au_movie->currentPixmap();
         QRect or_rect = or_pixmap.rect();
         if((view->width()>or_rect.width()) && (view->height()>or_rect.height())){
@@ -313,7 +303,7 @@ void C_GifItem::_connect(QGraphicsView *view) {
         }
         // 画面更新
         graphics_gifItem_unique->setPixmap(*gif_pixmap);
-        // 检查尺寸是否改变, 更新帧数和
+        // 检查尺寸是否改变, 采用信号判断尺寸是否改变，改变就更新。只有这样写才能同步实现view的拖拽
         rect_sig->checkRect(graphics_gifItem_unique->pixmap().rect());
 //        qDebug()<<"view:"<<view->rect();
 //        qDebug()<<"graphics_gifItem_unique:"<<graphics_gifItem_unique->boundingRect();
@@ -341,6 +331,7 @@ void C_GifItem::_connect(QGraphicsView *view) {
 void C_GifItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
     // 更新画面 在写在初始化的连接里
+    position_calculation(view);
     scene->addItem(graphics_gifItem_unique.get());
     view->show();
 }
