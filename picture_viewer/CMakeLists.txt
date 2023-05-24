@@ -35,7 +35,9 @@ add_executable(picture_viewer
         src/some_function/my_Qtreewidget.cpp
         src/some_function/my_Qtreewidget.h
         src/some_function/Item_Interface.cpp
-        src/some_function/Item_Interface.h)
+        src/some_function/Item_Interface.h
+        src/some_function/Pic_Thread.cpp
+        src/some_function/Pic_Thread.h)
 
 
 target_link_libraries(picture_viewer

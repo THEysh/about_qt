@@ -8,7 +8,8 @@
 #include "my_photo_Graphics.h"
 #include "Item_Interface.h"
 #include "qDebug.h"
-#include "qdebug.h"
+#include "Pic_Thread.h"
+
 
 Item_Interface::Item_Interface(){
 
@@ -97,7 +98,8 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
 void C_QPixmapItem::position_calculation(QGraphicsView *view) {
     // 位置更新
     QPointF center = view ->viewport()->rect().center() - pixmap_rect.center();
-    qDebug()<<"pixmap Item center:"<<center;
+    qDebug()<<"view center:"<<view ->viewport()->rect().center()<<"pixmap_rect center"<<pixmap_rect.center();
+    qDebug()<<"view rect:"<<view ->rect()<<"pixmap_rect"<<pixmap_rect;
     graphics_pixmapItem_unique->setPos(center);
 }
 
@@ -259,8 +261,8 @@ void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
 
 
 C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene):
-        roller_factor(1.1),
-        state_change(false)
+        roller_factor(1.1)
+
     {
         au_movie = std::make_unique<QMovie>(path);
         au_movie->start();
@@ -269,30 +271,64 @@ C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *sce
         graphics_gifItem_unique->setPixmap(*gif_pixmap);
         // 设置为拖拽 ,要在不为nullpter设置拖拽
         graphics_gifItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
-        // 计算rect
-        gif_rect = graphics_gifItem_unique->boundingRect();
+        // 计算rect 设置rect变化的信号,
+        rect_sig = std::make_unique<Gif_Rect_Sig>(graphics_gifItem_unique->boundingRect().toRect());
+
         // 将 QGraphicsPixmapItem 添加到 QGraphicsScene 中
         scene->addItem(graphics_gifItem_unique.get());
         // 定时器更新 QPixmap
-        timer.start(16); // 33ms 即约等于一秒钟的 30 帧
+        timer.start(33); // 33ms 即约等于一秒钟的 30 帧
         // 连接信号
-        _connect();
+        _connect(view);
 
 }
 
 C_GifItem::~C_GifItem(){
     // 释放内存, 因为智能指针，就是不写，内存也会被释放
 }
-void C_GifItem::_connect() {
+
+void C_GifItem::_connect(QGraphicsView *view) {
     if (au_movie == nullptr){
         qDebug()<<"C_GifItem::_connect(),bug";
         return;
     }
+    // 开始更新画面
+    QObject::connect(&timer, &QTimer::timeout, [this,view](){
+        int movie_width = au_movie->currentImage().width();
+        int movie_height = au_movie->currentImage().height();
+        if (movie_height>view->height() && movie_width>view->width()){
+            double width_ratio = static_cast<double>(view->width()) / static_cast<double>(movie_width);
+            double height_ratio = static_cast<double>(view->height()) / static_cast<double>(movie_height);
+            double scale_ratio = qMin(width_ratio, height_ratio); // 取两个比例中较小的一个
+            QSize scaled_size(static_cast<int>(movie_width *scale_ratio), static_cast<int>(movie_height * scale_ratio));
+            au_movie->setScaledSize(scaled_size);
+        }
+
+        or_pixmap = au_movie->currentPixmap();
+        QRect or_rect = or_pixmap.rect();
+        if((view->width()>or_rect.width()) && (view->height()>or_rect.height())){
+            gif_pixmap = std::make_unique<QPixmap>(or_pixmap);
+        } else{
+            gif_pixmap = std::make_unique<QPixmap>(or_pixmap.scaled(view->width(),view->height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+        }
+        // 画面更新
+        graphics_gifItem_unique->setPixmap(*gif_pixmap);
+        // 检查尺寸是否改变, 更新帧数和
+        rect_sig->checkRect(graphics_gifItem_unique->pixmap().rect());
+//        qDebug()<<"view:"<<view->rect();
+//        qDebug()<<"graphics_gifItem_unique:"<<graphics_gifItem_unique->boundingRect();
+    });
+    // 检查尺寸是否变化，变化就更新位置:
+    QObject::connect(rect_sig.get(),&Gif_Rect_Sig::sizeChanged,[this,view](const QRect &rect){
+        position_calculation(view);
+        qDebug()<<"this:connect(rect_sig.get().....,view rect:"<<view->rect();
+        qDebug()<<"this:connect(rect_sig.get().....,graphics_gifItem_unique->boundingRect():"<<graphics_gifItem_unique->boundingRect();
+    });
     //使用 "this" 关键字引入它的作用域,
     QObject::connect(au_movie.get(), &QMovie::frameChanged, [this](int frameIndex){
         QSize temp_size = au_movie->currentPixmap().size();
-        qDebug() << "Current Frame Index: " << frameIndex;
-        qDebug() << "Current Frame size: " << temp_size;
+//        qDebug() << "Current Frame Index: " << frameIndex;
+//        qDebug() << "Current Frame size: " << temp_size;
     });
     connect(au_movie.get(), &QMovie::resized, [](const QSize& size){
         qDebug() << "Animation Resized to " << size;
@@ -304,26 +340,7 @@ void C_GifItem::_connect() {
 
 void C_GifItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
-    // 异步更新画面
-    QObject::connect(&timer, &QTimer::timeout, [this,view](){
-        // 记录上一次的rect
-        QRect pr_rect = gif_pixmap->rect();
-        or_pixmap = QPixmap::fromImage(au_movie->currentImage());
-        QRect or_rect = or_pixmap.rect();
-        if((view->width()>or_rect.width()) && (view->height()>or_rect.height())){
-            gif_pixmap = std::make_unique<QPixmap>(or_pixmap);
-        } else{
-            gif_pixmap = std::make_unique<QPixmap>(or_pixmap.scaled(view->width(),view->height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
-            qDebug()<<"view->rect()"<<view->rect();
-            qDebug()<<"gif"<<gif_pixmap->rect();
-        }
-        // 检测temp_pixmap尺寸是否改变
-        //position_calculation(view);
-        graphics_gifItem_unique->setPixmap(*gif_pixmap);
-        gif_rect = graphics_gifItem_unique->pixmap().rect();
-    });
-
-    position_calculation(view);
+    // 更新画面 在写在初始化的连接里
     scene->addItem(graphics_gifItem_unique.get());
     view->show();
 }
@@ -356,16 +373,19 @@ void C_GifItem::phot_rotate(bool is_right, QGraphicsView *view) {
         qDebug()<<"C_GifItem::wheelEvent bug";
     }
     QTransform transform;
-    qDebug()<<"gif_rect1:"<<gif_rect;
+    qDebug()<<"gif_rect1:"<<rect_sig->get_gif_rect();
     if ((graphics_gifItem_unique != nullptr)&&is_right) { // 检查指针是否为 nullptr
         graphics_gifItem_unique->setTransform(transform.rotate(90), true);
         // 计算rect信息，并更新
-        gif_rect = transform.mapRect(gif_rect).toRect();
-        qDebug()<<"gif_rect2:"<<gif_rect;
+        QRect temp_r = transform.mapRect(rect_sig->get_gif_rect());
+        rect_sig->set_gif_rect(temp_r);
+        qDebug()<<"gif_rect2:"<<rect_sig->get_gif_rect();
     } else if ((graphics_gifItem_unique != nullptr)&&!is_right){
         // 计算rect信息，并更新
         graphics_gifItem_unique->setTransform(transform.rotate(-90), true);
-        gif_rect = transform.mapRect(gif_rect).toRect();
+        // 计算rect信息，并更新
+        QRect temp_r = transform.mapRect(rect_sig->get_gif_rect());
+        rect_sig->set_gif_rect(temp_r);
     } else{ return;}
     position_calculation(view);
 }
@@ -375,7 +395,9 @@ void C_GifItem::position_calculation(QGraphicsView *view) {
     if (graphics_gifItem_unique == nullptr){
         qDebug()<<"C_GifItem::wheelEvent bug";
     }
-    QPointF center = view ->viewport()->rect().center() - gif_rect.center();
+    QPointF center = (view ->viewport()->rect().center()) - (rect_sig->get_gif_rect().center());
+    qDebug()<<"view center:"<<view ->viewport()->rect().center()<<"pixmap_rect center"<< rect_sig->get_gif_rect().center();
+    qDebug()<<"view rect:"<<view ->rect()<<"pixmap_rect"<< rect_sig->get_gif_rect();
     qDebug()<<"center:"<<center;
     graphics_gifItem_unique->setPos(center);
 }

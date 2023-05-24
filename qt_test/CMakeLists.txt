@@ -4,8 +4,7 @@ cmake_minimum_required(VERSION 3.25)
 project(qt_test)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
+
 
 # 设置Qt路径
 set(CMAKE_PREFIX_PATH "F:/QT5_9_9/5.9.9/mingw53_32")
@@ -28,6 +27,8 @@ add_executable(qt_test
         A.h
         B.cpp
         B.h
+        treadqt.cpp
+        treadqt.h
         )
 # 链接Qt库
 target_link_libraries(qt_test

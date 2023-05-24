@@ -9,7 +9,9 @@
 #include "my_photo_Graphics.h"
 #include "memory"
 #include "QGraphicsProxyWidget"
+#include "Pic_Thread.h"
 
+class Gif_Rect_Sig;
 // 把不同类型显示的图片抽样出来
 class Item_Interface : public QObject{
 Q_OBJECT
@@ -76,21 +78,22 @@ public:
     ~C_GifItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
+    void position_calculation(QGraphicsView *view) override;
 protected:
     void wheelEvent(QWheelEvent *event,QGraphicsView *view) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
     void phot_rotate(bool is_right, QGraphicsView *view) override;
-    void position_calculation(QGraphicsView *view) override;
+
 private:
-    void _connect();
+    void _connect(QGraphicsView *view);
     std::unique_ptr<QMovie> au_movie;
     std::unique_ptr<QPixmap> gif_pixmap;
     QPixmap or_pixmap;
     std::unique_ptr<QGraphicsPixmapItem> graphics_gifItem_unique;
-    QRectF gif_rect;
+    std::unique_ptr<Gif_Rect_Sig> rect_sig;
     double roller_factor;
     QTimer timer;
-    bool state_change;
+
 
 };
 #endif // ITEM_INTERFACE_H
