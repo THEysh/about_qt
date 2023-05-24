@@ -12,13 +12,15 @@
 #include "qdebug.h"
 #include <QSysInfo>
 #include <memory>
+#include <QMouseEvent>
+#include <QMimeData>
+#include "my_Qtreewidget.h"
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 // 定义初始化
         QGraphicsView(parent),
         graphics_Item_unique(new Item_Interface()),
         scene(new QGraphicsScene())
-
 {
     or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
     this->setScene(scene);
@@ -31,8 +33,16 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     // 设置为拖拽
     this->setDragMode(static_cast<DragMode>(QGraphicsView::ScrollHandDrag | QGraphicsView::RubberBandDrag));
+    // 允许文件的拖拽
+    setAcceptDrops(true);
     //初始化背景等等
     show_image_item();
+}
+
+My_Photo_Graphics::~My_Photo_Graphics() {
+    // delete other dynamically allocated resources if any
+    delete scene;
+    qDebug() << "this is : ~My_Photo_Graphics";
 }
 
 void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
@@ -110,12 +120,6 @@ void My_Photo_Graphics::show_image_item() {
     this->show();
 }
 
-My_Photo_Graphics::~My_Photo_Graphics() {
-    // delete other dynamically allocated resources if any
-    delete scene;
-    qDebug() << "this is : ~My_Photo_Graphics";
-}
-
 void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     QMenu menu(this);
     QAction *right_rotate = menu.addAction("右旋转90°");
@@ -130,3 +134,43 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     });
     menu.exec(event->globalPos());
 }
+
+void My_Photo_Graphics::mousePressEvent(QMouseEvent *event)
+{
+
+}
+
+void My_Photo_Graphics::dragEnterEvent(QDragEnterEvent *event) {
+    // 文件拖动被选中
+    if (event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+    }
+}
+
+void My_Photo_Graphics::dragMoveEvent(QDragMoveEvent *event) {
+    // 这个文件判断是否鼠标的拖动状况,只要选中文件，就能拖
+    event->acceptProposedAction();
+}
+
+void My_Photo_Graphics::dropEvent(QDropEvent *event) {
+    // 判断鼠标拖动到view中
+    const QMimeData *mimeData = event->mimeData();
+    // 获取拖动到view的path
+    if (mimeData->hasUrls()) {
+        QGraphicsView::dropEvent(event);
+        QList<QUrl> urls = mimeData->urls();
+        for (const QUrl &url : urls) {
+            QString filePath = url.toLocalFile();
+            qDebug() << "Dropped file path: " << filePath;
+
+        }
+        event->acceptProposedAction();
+    } else {
+        event->ignore();
+    }
+    qDebug() <<mimeData;
+}
+
+
+
+

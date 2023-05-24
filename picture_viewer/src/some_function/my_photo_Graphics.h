@@ -14,7 +14,7 @@
 #include <QSvgRenderer>
 #include <QGraphicsSvgItem>
 #include <memory>
-
+class My_Qtreewidget;
 class Item_Interface;
 class My_Photo_Graphics : public QGraphicsView {
 Q_OBJECT
@@ -24,7 +24,7 @@ public:
     ~My_Photo_Graphics() override;
     QGraphicsScene *scene = nullptr;
     void graphics_load_image(const QString &path, const QStringList &type_img);
-
+    My_Qtreewidget* photo_in_treewidget = nullptr;
 protected:
     QPixmap or_background;
     QPixmap background;
@@ -32,10 +32,14 @@ protected:
 
     void resizeEvent(QResizeEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
-    void contextMenuEvent(QContextMenuEvent *event);
+    void contextMenuEvent(QContextMenuEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    // 下面的3个函数表示为文件拖动函数
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
 private:
     std::unique_ptr<Item_Interface> graphics_Item_unique;
-
 
 };
 

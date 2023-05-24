@@ -30,11 +30,6 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
     _updata_all_Qtree_dir();
 }
 
-void My_Qtreewidget::connect_photo(My_Photo_Graphics *name) {
-    // 运行之前必须要初始化类My_Photo_Graphics
-    if (name!= nullptr){ my_photo = name;}
-    else{qDebug()<<"connect_photo is nullpter";}
-}
 
 void My_Qtreewidget::_updata_all_Qtree_dir()
 {
@@ -337,5 +332,6 @@ My_Qtreewidget::~My_Qtreewidget(){
     delete my_watcher;
     delete rootNode;
 }
+
 
 

@@ -16,12 +16,11 @@ signals:
 public:
     explicit My_Qtreewidget(QWidget *name);
     ~My_Qtreewidget() override;
-    void connect_photo(My_Photo_Graphics* name);
     QString ProjectDir;
     My_Photo_Graphics* my_photo;
     QTreeWidgetItem* active_item;
     QFileSystemWatcher* my_watcher;
-
+    QStringList imageTypes;
 private slots:
     void on_itemClicked(QTreeWidgetItem *item);
     void on_itemExpanded(QTreeWidgetItem *item);
@@ -34,7 +33,7 @@ private:
     const int MAX_NODE_COUNT;
     int nodeCount;
     QTreeWidgetItem* rootNode;
-    QStringList imageTypes;
+
 
     void _updata_all_Qtree_dir();
     void _updata_someone_QTreeWidgetItem(QTreeWidgetItem *parentNode, const QString& path);
