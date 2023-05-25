@@ -19,3 +19,15 @@
 42	1674	7066929411302023	CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj	9b6ec54a28228672
 44	1699	7066929411542078	CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj	78373525700d1408
 1699	2001	7066929414532762	picture_viewer.exe	1e6e9f9c8f3aa53b
+6	319	0	CMakeFiles/picture_viewer_autogen	9167d10b08ab00a
+6	319	0	picture_viewer_autogen/mocs_compilation.cpp	9167d10b08ab00a
+6	319	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-debug-mingw-599/CMakeFiles/picture_viewer_autogen	9167d10b08ab00a
+6	319	0	F:/code/c_code/about_qt/picture_viewer/cmake-build-debug-mingw-599/picture_viewer_autogen/mocs_compilation.cpp	9167d10b08ab00a
+333	2347	7066983319319836	CMakeFiles/picture_viewer.dir/src/some_function/Pic_Thread.cpp.obj	2a0666a7641d8b6b
+324	2358	7066983319419862	CMakeFiles/picture_viewer.dir/src/function.cpp.obj	469b6327b7c08343
+320	2492	7066983320760231	CMakeFiles/picture_viewer.dir/src/main.cpp.obj	5ed1ce63b2b73830
+322	2575	7066983321580970	CMakeFiles/picture_viewer.dir/picture_viewer_autogen/mocs_compilation.cpp.obj	f059955208280371
+328	2665	7066983322491225	CMakeFiles/picture_viewer.dir/src/some_function/my_photo_Graphics.cpp.obj	9b6ec54a28228672
+326	2707	7066983322921347	CMakeFiles/picture_viewer.dir/src/some_function/my_Qtreewidget.cpp.obj	78373525700d1408
+331	2779	7066983323631550	CMakeFiles/picture_viewer.dir/src/some_function/Item_Interface.cpp.obj	27713a02c47b884
+2780	3102	7066983326850544	picture_viewer.exe	1e6e9f9c8f3aa53b

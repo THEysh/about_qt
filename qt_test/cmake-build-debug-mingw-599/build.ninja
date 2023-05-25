@@ -89,6 +89,14 @@ build CMakeFiles/qt_test.dir/treadqt.cpp.obj: CXX_COMPILER__qt_test_Debug F$:/co
   OBJECT_DIR = CMakeFiles\qt_test.dir
   OBJECT_FILE_DIR = CMakeFiles\qt_test.dir
 
+build CMakeFiles/qt_test.dir/Item_Interface_Queue.cpp.obj: CXX_COMPILER__qt_test_Debug F$:/code/c_code/about_qt/qt_test/Item_Interface_Queue.cpp || cmake_object_order_depends_target_qt_test
+  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB
+  DEP_FILE = CMakeFiles\qt_test.dir\Item_Interface_Queue.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -IF:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/qt_test_autogen/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtCore -isystem F:/QT5_9_9/5.9.9/mingw53_32/./mkspecs/win32-g++ -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtGui -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtANGLE -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtWidgets -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtNetwork -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtSvg -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtMultimedia -isystem F:/QT5_9_9/5.9.9/mingw53_32/include/QtMultimediaWidgets
+  OBJECT_DIR = CMakeFiles\qt_test.dir
+  OBJECT_FILE_DIR = CMakeFiles\qt_test.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target qt_test
@@ -97,7 +105,7 @@ build CMakeFiles/qt_test.dir/treadqt.cpp.obj: CXX_COMPILER__qt_test_Debug F$:/co
 #############################################
 # Link the executable qt_test.exe
 
-build qt_test.exe: CXX_EXECUTABLE_LINKER__qt_test_Debug CMakeFiles/qt_test.dir/qt_test_autogen/mocs_compilation.cpp.obj CMakeFiles/qt_test.dir/main.cpp.obj CMakeFiles/qt_test.dir/A.cpp.obj CMakeFiles/qt_test.dir/B.cpp.obj CMakeFiles/qt_test.dir/treadqt.cpp.obj | F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5MultimediaWidgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Multimediad.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Networkd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a || qt_test_autogen
+build qt_test.exe: CXX_EXECUTABLE_LINKER__qt_test_Debug CMakeFiles/qt_test.dir/qt_test_autogen/mocs_compilation.cpp.obj CMakeFiles/qt_test.dir/main.cpp.obj CMakeFiles/qt_test.dir/A.cpp.obj CMakeFiles/qt_test.dir/B.cpp.obj CMakeFiles/qt_test.dir/treadqt.cpp.obj CMakeFiles/qt_test.dir/Item_Interface_Queue.cpp.obj | F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5MultimediaWidgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Multimediad.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Networkd.a F$:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a || qt_test_autogen
   FLAGS = -g
   LINK_LIBRARIES = F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Svgd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5MultimediaWidgetsd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Widgetsd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Multimediad.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Guid.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Networkd.a  F:/QT5_9_9/5.9.9/mingw53_32/lib/libQt5Cored.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\qt_test.dir

@@ -29,6 +29,8 @@ add_executable(qt_test
         B.h
         treadqt.cpp
         treadqt.h
+        Item_Interface_Queue.h
+        Item_Interface_Queue.cpp
         )
 # 链接Qt库
 target_link_libraries(qt_test

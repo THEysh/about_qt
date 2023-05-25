@@ -108,6 +108,12 @@
 			null
 		],
 		[
+			"F:/code/c_code/about_qt/qt_test/Item_Interface_Queue.h",
+			"Mu",
+			"EWIEGA46WW/moc_Item_Interface_Queue.cpp",
+			null
+		],
+		[
 			"F:/code/c_code/about_qt/qt_test/treadqt.h",
 			"Mu",
 			"EWIEGA46WW/moc_treadqt.cpp",
@@ -179,6 +185,11 @@
 	[
 		[ "F:/code/c_code/about_qt/qt_test/A.cpp", "Mu", null ],
 		[ "F:/code/c_code/about_qt/qt_test/B.cpp", "Mu", null ],
+		[
+			"F:/code/c_code/about_qt/qt_test/Item_Interface_Queue.cpp",
+			"Mu",
+			null
+		],
 		[ "F:/code/c_code/about_qt/qt_test/main.cpp", "Mu", null ],
 		[ "F:/code/c_code/about_qt/qt_test/treadqt.cpp", "Mu", null ]
 	],

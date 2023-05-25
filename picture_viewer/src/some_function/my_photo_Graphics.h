@@ -40,7 +40,6 @@ protected:
 private:
     std::unique_ptr<Item_Interface> graphics_Item_unique;
 
-
 };
 
 #endif // MY_PHOTO_GRAPHICS_H
