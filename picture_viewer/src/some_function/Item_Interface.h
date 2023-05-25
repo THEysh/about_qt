@@ -5,6 +5,8 @@
 
 #include <QLabel>
 #include <QTimer>
+#include <QSvgRenderer>
+#include <QGraphicsSvgItem>
 #include "QObject"
 #include "my_photo_Graphics.h"
 #include "memory"

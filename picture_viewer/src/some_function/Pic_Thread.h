@@ -56,21 +56,22 @@ private:
     QRect gif_rect;
 };
 
-
 class Item_Interface_Queue:public QObject {
 Q_OBJECT
 public:
-    Item_Interface_Queue(){};
+    explicit Item_Interface_Queue(int max_len=5){
+    max_len=max_len;
+};
+private:
+    int max_len = 5;
 public:
-    QQueue<Item_Interface *> item_data; // 存储数据的队列
+    QQueue< std::shared_ptr<Item_Interface> > item_data; // 存储数据的队列
     // 入队函数
-    void enqueue(Item_Interface *data) {
-        if (item_data.size() < 5) {
+    void enqueue(const std::shared_ptr<Item_Interface>& data) {
+        if (item_data.size() < max_len) {
             item_data.enqueue(data);
         } else{
-            Item_Interface *old_data = item_data.head();
             item_data.dequeue();
-            delete old_data;
             item_data.enqueue(data);
         }
     }
@@ -82,19 +83,17 @@ public:
     size_t size() const {
         return item_data.size();
     }
-
     void show_all(){
         if (item_data.isEmpty()){
             qDebug()<<"is empty";
             return;
         }
-        for (auto i : item_data){
-            qDebug()<<i<<",";
+        for (const std::shared_ptr<Item_Interface>& i : item_data){
+            qDebug()<<i.get()<<",";
         }
         qDebug()<<"----------------------------------";
     }
-
-    Item_Interface* at(int idx){
+    std::shared_ptr<Item_Interface> at(int idx){
         if (idx>item_data.size()){
             return item_data.back();
         } else{

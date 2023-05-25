@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QTreeWidgetItem>
 #include "QMenu"
+#include "Pic_Thread.h"
 #include <QSvgRenderer>
 #include <QGraphicsSvgItem>
 #include <memory>
@@ -39,6 +40,7 @@ protected:
     void dropEvent(QDropEvent *event) override;
 private:
     std::unique_ptr<Item_Interface> graphics_Item_unique;
+
 
 };
 
