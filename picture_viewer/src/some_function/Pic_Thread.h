@@ -68,8 +68,10 @@ public:
         if (item_data.size() < 5) {
             item_data.enqueue(data);
         } else{
-            item_data.enqueue(data);
+            Item_Interface *old_data = item_data.head();
             item_data.dequeue();
+            delete old_data;
+            item_data.enqueue(data);
         }
     }
     // 判断队列是否为空
@@ -92,6 +94,13 @@ public:
         qDebug()<<"----------------------------------";
     }
 
+    Item_Interface* at(int idx){
+        if (idx>item_data.size()){
+            return item_data.back();
+        } else{
+            return item_data.at(idx);
+        }
+    }
 };
 
 #endif //PICTURE_VIEWER_PIC_THREAD_H

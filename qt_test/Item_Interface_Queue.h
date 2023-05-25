@@ -13,18 +13,22 @@ class Item_Interface_Queue:public QObject {
     Q_OBJECT
 public:
 
-    Item_Interface_Queue(){
+    Item_Interface_Queue(int load_len=5){
+        max_len = load_len;
     };
+private:
+    int max_len;
 public:
     QQueue<int> m_data; // 存储数据的队列
     // 入队函数
     void enqueue(int data) {
-        if (m_data.size() < 5) {
+        if (m_data.size() < max_len) {
             m_data.enqueue(data);
         } else{
             m_data.enqueue(data);
             m_data.dequeue();
         }
+        qDebug()<<"m_data.size()"<<m_data.size();
     }
     // 判断队列是否为空
     bool empty() const {
@@ -44,6 +48,14 @@ public:
             qDebug()<<i<<",";
         }
         qDebug()<<"----------------------------------";
+    }
+
+    int at(int idx){
+        if (idx>m_data.size()){
+            return m_data.back();
+        } else{
+            return m_data.at(idx);
+        }
     }
 
 };

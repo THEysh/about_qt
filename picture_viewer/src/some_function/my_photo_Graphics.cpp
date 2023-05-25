@@ -78,6 +78,7 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
+
     if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
         qDebug() << "The file is an SVG ,load ...";
         //这是一个使用C++11提供的智能指针模板函数std::make_unique()来创建一个指向C_SvgItem对象的unique_ptr，
