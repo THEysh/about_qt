@@ -262,7 +262,6 @@ void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
 
 C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene):
         roller_factor(1.1)
-
     {
         au_movie = std::make_unique<QMovie>(path);
         au_movie->start();

@@ -2,7 +2,7 @@
 // Created by top on 2023-04-23.
 //
 
-#include "qdebug.h"
+
 #include <QLabel>
 #include <QGuiApplication>
 #include <QtGui/QClipboard>
@@ -10,8 +10,10 @@
 #include "My_Photo_Graphics.h"
 #include "Item_Interface.h"
 #include "qdebug.h"
-#include <QSysInfo>
 #include <memory>
+#include "QMouseEvent"
+#include "QMimeData"
+
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 // 定义初始化
@@ -29,6 +31,8 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
     // 禁用滚轮
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    // 允许文件的拖动
+    setAcceptDrops(true);
     // 设置为拖拽
     this->setDragMode(static_cast<DragMode>(QGraphicsView::ScrollHandDrag | QGraphicsView::RubberBandDrag));
     //初始化背景等等
@@ -130,3 +134,33 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     });
     menu.exec(event->globalPos());
 }
+
+void My_Photo_Graphics::dragEnterEvent(QDragEnterEvent *event) {
+    QGraphicsView::dragEnterEvent(event);
+    if (event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+    }
+    qDebug()<<"dragEnterEvent";
+}
+
+void My_Photo_Graphics::dragMoveEvent(QDragMoveEvent *event) {
+    QGraphicsView::dragMoveEvent(event);
+    event->acceptProposedAction();
+}
+
+void My_Photo_Graphics::dropEvent(QDropEvent *event) {
+    QGraphicsView::dropEvent(event);
+    const QMimeData *mimeData = event->mimeData();
+    if (mimeData->hasUrls()) {
+        QList<QUrl> urls = mimeData->urls();
+        for (const QUrl &url : urls) {
+            QString filePath = url.toLocalFile();
+            qDebug() << "Dropped file path: " << filePath;
+        }
+        event->acceptProposedAction();
+    } else {
+        event->ignore();
+    }
+    qDebug()<<"dropEvent";
+}
+
