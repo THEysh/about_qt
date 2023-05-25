@@ -13,15 +13,17 @@
 #include <memory>
 #include "QMouseEvent"
 #include "QMimeData"
-
+#include "My_Qtreewidget.h"
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 // 定义初始化
         QGraphicsView(parent),
         graphics_Item_unique(new Item_Interface()),
+        in_tree(nullptr),
         scene(new QGraphicsScene())
 
 {
+
     or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
     this->setScene(scene);
     setRenderHint(QPainter::Antialiasing, true);
@@ -117,6 +119,7 @@ void My_Photo_Graphics::show_image_item() {
 My_Photo_Graphics::~My_Photo_Graphics() {
     // delete other dynamically allocated resources if any
     delete scene;
+    delete in_tree;
     qDebug() << "this is : ~My_Photo_Graphics";
 }
 
@@ -150,12 +153,15 @@ void My_Photo_Graphics::dragMoveEvent(QDragMoveEvent *event) {
 
 void My_Photo_Graphics::dropEvent(QDropEvent *event) {
     QGraphicsView::dropEvent(event);
+    //3个drag事件实现了文件的拖动
     const QMimeData *mimeData = event->mimeData();
     if (mimeData->hasUrls()) {
         QList<QUrl> urls = mimeData->urls();
         for (const QUrl &url : urls) {
             QString filePath = url.toLocalFile();
             qDebug() << "Dropped file path: " << filePath;
+            graphics_load_image(filePath,in_tree->imageTypes);
+            break;
         }
         event->acceptProposedAction();
     } else {

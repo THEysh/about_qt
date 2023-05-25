@@ -15,6 +15,7 @@
 #include <QGraphicsSvgItem>
 #include <memory>
 
+class My_Qtreewidget;
 class Item_Interface;
 class My_Photo_Graphics : public QGraphicsView {
 Q_OBJECT
@@ -24,7 +25,7 @@ public:
     ~My_Photo_Graphics() override;
     QGraphicsScene *scene = nullptr;
     void graphics_load_image(const QString &path, const QStringList &type_img);
-
+    My_Qtreewidget *in_tree;
 protected:
     QPixmap or_background;
     QPixmap background;

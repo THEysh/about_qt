@@ -24,6 +24,7 @@ public:
         this->ui_f = ui_f;
         photo_g = ui_f.graphicsView;//这样是实现，ui_f.photo_label 和 这个类中的photo_label共用一个地址
         qtree_widget = ui_f.treeWidget_1;
+
         qtree_widget->connect_photo(photo_g); //初始化My_Photo_Graphics和My_Qtreewidget之间的连接
 
         this->connect_all();
@@ -37,11 +38,6 @@ private:
 private:
     void connect_all(){
 
-        //这个指针永远指向active_item，photo_actived_rootNode指针指向activate_item所指向的地址
-//        photo_g->photo_actived_rootNode = &(qtree_widget->active_item);
-//        //连接自适应缩放的信号
-//        photo_g->that_checkBox = ui_f.checkBox;
-        // photo_g->connect_checkbox();
         Win->setWindowTitle("image");
         QIcon icon(":ui/images/pic_2d/images-solid.svg");
         Win->setWindowIcon(icon);

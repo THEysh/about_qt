@@ -21,6 +21,7 @@ public:
     My_Photo_Graphics* my_photo;
     QTreeWidgetItem* active_item;
     QFileSystemWatcher* my_watcher;
+    QStringList imageTypes;
 
 private slots:
     void on_itemClicked(QTreeWidgetItem *item);
@@ -34,7 +35,7 @@ private:
     const int MAX_NODE_COUNT;
     int nodeCount;
     QTreeWidgetItem* rootNode;
-    QStringList imageTypes;
+
 
     void _updata_all_Qtree_dir();
     void _updata_someone_QTreeWidgetItem(QTreeWidgetItem *parentNode, const QString& path);
