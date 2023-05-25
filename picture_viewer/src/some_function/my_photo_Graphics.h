@@ -37,12 +37,14 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;
+    void mousePressEvent(QMouseEvent* event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 private:
-    std::unique_ptr<Item_Interface> graphics_Item_unique;
+//    std::unique_ptr<Item_Interface> graphics_Item_unique;
     Item_Interface_Queue item_queue;
+    int item_queue_idx = 0;
 
 };
 

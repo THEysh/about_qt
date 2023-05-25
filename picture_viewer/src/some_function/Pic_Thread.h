@@ -60,9 +60,9 @@ private:
 class Item_Interface_Queue:public QObject {
 Q_OBJECT
 public:
-    explicit Item_Interface_Queue(int max_len=5);
+    explicit Item_Interface_Queue(int max_len=2);
 private:
-    int max_len = 5;
+    int max_len;
 public:
     QQueue< std::shared_ptr<Item_Interface> > item_data; // 存储数据的队列
     // 入队函数
@@ -73,6 +73,7 @@ public:
     size_t size() const;
     void show_all();
     std::shared_ptr<Item_Interface> at(int idx);
+    int indexOf(std::shared_ptr<Item_Interface> ptr);
 };
 
 #endif //PICTURE_VIEWER_PIC_THREAD_H

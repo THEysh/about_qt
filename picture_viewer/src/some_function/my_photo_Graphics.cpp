@@ -16,14 +16,13 @@
 #include "My_Qtreewidget.h"
 
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
-// 定义初始化
+        // 定义初始化
         QGraphicsView(parent),
-        graphics_Item_unique(new Item_Interface()),
         in_tree(nullptr),
+        item_queue(2),
         scene(new QGraphicsScene())
 
 {
-
     or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
     this->setScene(scene);
     setRenderHint(QPainter::Antialiasing, true);
@@ -45,8 +44,9 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
     const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    if (graphics_Item_unique!= nullptr){
-        graphics_Item_unique->wheelEvent(event,this);
+
+    if (!item_queue.empty()){
+        item_queue.at(item_queue_idx)->wheelEvent(event,this);
     } else{
         qDebug()<<"My_Photo_Graphics::wheelEvent";
         return;
@@ -67,8 +67,8 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     this->setBackgroundBrush(QBrush(background));
 
     // 更新graphics_Item_unique尺寸
-    if (graphics_Item_unique!= nullptr){
-        graphics_Item_unique->resizeEvent(event,this, scene);
+    if (!item_queue.empty()){
+        item_queue.at(item_queue_idx)->resizeEvent(event,this, scene);
     }
     else{
         qDebug()<<"My_Photo_Graphics::resizeEvent bug!!";
@@ -78,26 +78,32 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
-
+    // 创建智能指针
+    std::shared_ptr<Item_Interface> temp_unique;
     if (fileInfo.suffix().compare("svg", Qt::CaseInsensitive) == 0){
         qDebug() << "The file is an SVG ,load ...";
         //这是一个使用C++11提供的智能指针模板函数std::make_unique()来创建一个指向C_SvgItem对象的unique_ptr，
         // 其中path是作为构造函数参数传递给C_SvgItem的。std::make_unique()可以用于创建可以管理其生命周期的堆分配
         //对象的std::unique_ptr。与直接使用 new 创建对象相比，使用std::make_unique()可以更加安全和方便.
-        graphics_Item_unique = std::make_unique<C_SvgItem>(path);
+        temp_unique = std::make_unique<C_SvgItem>(path);
+        item_queue.enqueue(temp_unique);
     }
     else if ((fileInfo.suffix().compare("gif", Qt::CaseInsensitive) == 0)){
         qDebug() << "The file is an gif,load ...";
-        graphics_Item_unique = std::make_unique<C_GifItem>(path,this,scene);
+        temp_unique = std::make_unique<C_GifItem>(path,this,scene);
+        item_queue.enqueue(temp_unique);
     }
     else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
         qDebug() << "The file is ipg,png...,load ...";
-        graphics_Item_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
+        temp_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
+        item_queue.enqueue(temp_unique);
     }
     else {
         qDebug() << "Unsupported image format: " << path;
         return;
     }
+    item_queue_idx = item_queue.size()-1;
+    qDebug()<<"size_item_queue"<<item_queue.size();
     show_image_item();
 }
 
@@ -108,11 +114,11 @@ void My_Photo_Graphics::show_image_item() {
     这样可以确保场景的大小与视图相同，从而使所有的图形项都能够完整地显示在视图中。如果不进行这个设置，场景的大小可能会被设置为默认值，
     这可能导致某些图形项被裁剪或者部分显示。*/
     //scene->clear();
-    if ((scene!= nullptr)&&(graphics_Item_unique!= nullptr)){
-        graphics_Item_unique->show_photo(this,scene);
+    if ((scene!= nullptr)&&(!item_queue.empty())){
+        item_queue.at(item_queue_idx)->show_photo(this,scene);
     }
     else{
-        qDebug()<<"scene:"<<scene<<",image_item:"<<graphics_Item_unique.get();
+        qDebug()<<"My_Photo_Graphics::show_image_item()";
     }
     this->show();
 }
@@ -129,12 +135,11 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     QAction *right_rotate = menu.addAction("右旋转90°");
     QAction *left_rotate = menu.addAction("左旋转90°");
     //上面的被qt管理，不会内存泄漏
-
     connect(right_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
-        graphics_Item_unique->phot_rotate(true,this);
+        item_queue.at(item_queue_idx)->phot_rotate(true,this);
     });
     connect(left_rotate, &QAction::triggered, [this]() {// 旋转图片，例如90度
-        graphics_Item_unique->phot_rotate(false,this);
+        item_queue.at(item_queue_idx)->phot_rotate(false,this);
     });
     menu.exec(event->globalPos());
 }
@@ -169,5 +174,37 @@ void My_Photo_Graphics::dropEvent(QDropEvent *event) {
         event->ignore();
     }
     qDebug()<<"dropEvent";
+}
+
+void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
+    QGraphicsView::mousePressEvent(event);
+    // 将鼠标事件转换为场景坐标系的位置
+    const QPointF scenePos = mapToScene(event->pos());
+    // 获取该位置所对应的图形项
+    auto *item = scene->itemAt(scenePos, transform());
+
+    if (item) {
+        // 可以使用 setZValue() 函数来设置项目的 Z 坐标值，从而控制项目的绘制顺序。Z 坐标值越大的项目会被绘制在 Z 坐标值小的项目的上面。
+        // 首先使用 foreach 循环遍历当前场景中所有的项目，并计算它们 Z 坐标值的最大值。然后，我们将需要移动到最顶层的项目的 Z 坐标值设置为 maxZValue + 1
+        qreal maxZValue = -std::numeric_limits<qreal>::max();
+                foreach (QGraphicsItem* item, scene->items()) {
+                maxZValue = qMax(maxZValue, item->zValue());
+            }
+        item->setZValue(maxZValue + 1);
+
+//        for (int i=0; i<item_queue.size(); i++){
+//            qDebug()<<item_queue.at(i)->uuid_symbol;
+//        }
+        // 点击了一个图形项
+        int type = item->type();
+        // GIF,TIF,ico,bmp -7
+        // svg - 13
+    } else {
+        // 点击了背景
+        qDebug() << "Clicked on background.";
+    }
+
+    // 传递鼠标事件以继续处理。
+    QGraphicsView::mousePressEvent(event);
 }
 

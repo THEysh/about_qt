@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QSvgRenderer>
 #include <QGraphicsSvgItem>
+#include <QUuid>
 #include "QObject"
 #include "my_photo_Graphics.h"
 #include "memory"
@@ -18,6 +19,8 @@ class Gif_Rect_Sig;
 class Item_Interface : public QObject{
 Q_OBJECT
 public: //公共接口
+    //生成一个唯一标识符号
+    QUuid uuid_symbol = QUuid::createUuid();
     explicit Item_Interface();
     ~Item_Interface() override;
     virtual void click_element();
@@ -30,10 +33,10 @@ protected:
     virtual void position_calculation(QGraphicsView *view);
 };
 
-
 class C_QPixmapItem : public Item_Interface{
 Q_OBJECT
 public:
+    QUuid uuid_symbol = QUuid::createUuid();
     explicit C_QPixmapItem(const QString &path, const QStringList &imageTypes);
     ~C_QPixmapItem() override;
     void click_element() override;
@@ -53,10 +56,10 @@ private:
     QRectF pixmap_rect;
 };
 
-
 class C_SvgItem : public Item_Interface{
 Q_OBJECT
 public:
+    QUuid uuid_symbol = QUuid::createUuid();
     explicit C_SvgItem(const QString &path);
     ~C_SvgItem() override;
     void click_element() override;
@@ -76,6 +79,7 @@ private:
 class C_GifItem : public Item_Interface{
 Q_OBJECT
 public:
+    QUuid uuid_symbol = QUuid::createUuid();
     C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene);
     ~C_GifItem() override;
     void click_element() override;

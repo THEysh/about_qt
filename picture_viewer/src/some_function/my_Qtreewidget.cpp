@@ -18,7 +18,7 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
           my_photo(nullptr),
           my_watcher (new QFileSystemWatcher()),
           active_item(nullptr),
-          imageTypes({"bmp","jpg","png","tif","gif","fpx","svg","psd"})
+          imageTypes({"bmp","jpg","png","tif","ico","gif","svg"})
 
 {
     this->setHeaderHidden(true);

@@ -20,9 +20,11 @@ void Item_Interface_Queue::enqueue(const std::shared_ptr<Item_Interface>& data) 
     if (item_data.size() < max_len) {
         item_data.enqueue(data);
     } else{
-        item_data.dequeue();
+        // 使用临时智能指针变量保存队首元素,用于删除，离开作用域，临时智能指针变量销毁，同时会自动释放管理的对象
+        std::shared_ptr<Item_Interface> temp_ptr = item_data.dequeue();
         item_data.enqueue(data);
     }
+    qDebug()<<"size,Item_Interface_Queue::enqueue:"<<item_data.size();
 }
 
 bool Item_Interface_Queue::empty() const {
@@ -50,4 +52,12 @@ std::shared_ptr<Item_Interface> Item_Interface_Queue::at(int idx){
     } else{
         return item_data.at(idx);
     }
+}
+int Item_Interface_Queue::indexOf(std::shared_ptr<Item_Interface> ptr){
+    int index = item_data.indexOf(ptr);
+    if (index<0){
+        qDebug()<<"Item_Interface_Queue::indexOf,idx<0";
+        return 0;
+    }
+    return index;
 }
