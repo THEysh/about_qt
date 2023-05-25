@@ -201,9 +201,8 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
         }
         if (old_idx!=item_queue_idx){
             // 只有索引改变了，才更新最大值！！
-            int temp_z = item_queue.max_z()+1;
-            item_queue.all_z_val.push_back(temp_z);
-            item->setZValue(temp_z);
+            item_queue.max_z_val = item_queue.max_z_val+1;
+            item->setZValue(item_queue.max_z_val);
         }
         qDebug()<<"------------------------"<<item->zValue();
 

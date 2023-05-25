@@ -64,7 +64,7 @@ public:
 private:
     int max_len;
 public:
-    QVector<int> all_z_val;
+    int max_z_val=0; //永远保存最大的y值
     QQueue< std::shared_ptr<Item_Interface> > item_data; // 存储数据的队列
     // 入队函数
     void enqueue(const std::shared_ptr<Item_Interface>& data);
