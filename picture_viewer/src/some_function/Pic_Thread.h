@@ -64,6 +64,7 @@ public:
 private:
     int max_len;
 public:
+    QVector<int> all_z_val;
     QQueue< std::shared_ptr<Item_Interface> > item_data; // 存储数据的队列
     // 入队函数
     void enqueue(const std::shared_ptr<Item_Interface>& data);
@@ -73,7 +74,7 @@ public:
     size_t size() const;
     void show_all();
     std::shared_ptr<Item_Interface> at(int idx);
-    int indexOf(std::shared_ptr<Item_Interface> ptr);
+    int max_z();
 };
 
 #endif //PICTURE_VIEWER_PIC_THREAD_H

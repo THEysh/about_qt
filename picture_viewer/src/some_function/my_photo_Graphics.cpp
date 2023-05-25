@@ -182,28 +182,35 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
     const QPointF scenePos = mapToScene(event->pos());
     // 获取该位置所对应的图形项
     auto *item = scene->itemAt(scenePos, transform());
-
     if (item) {
         // 可以使用 setZValue() 函数来设置项目的 Z 坐标值，从而控制项目的绘制顺序。Z 坐标值越大的项目会被绘制在 Z 坐标值小的项目的上面。
         // 首先使用 foreach 循环遍历当前场景中所有的项目，并计算它们 Z 坐标值的最大值。然后，我们将需要移动到最顶层的项目的 Z 坐标值设置为 maxZValue + 1
-        qreal maxZValue = -std::numeric_limits<qreal>::max();
-                foreach (QGraphicsItem* item, scene->items()) {
-                maxZValue = qMax(maxZValue, item->zValue());
+        qDebug()<<item->data(0).toString();
+        int max_z = 0;
+        int old_idx = item_queue_idx;
+        for (int i=0; i<item_queue.size(); i++){
+            max_z = qMax(max_z,int(item->zValue()));
+            auto uuid1 = item->data(0).toString();
+            auto uuid2 = item_queue.at(i)->uuidSymbol.toString();
+            bool isEqual = (uuid1==uuid2);
+            if (isEqual){
+                item_queue_idx = i;
+                qDebug()<<uuid1;
+                qDebug()<<uuid2;
             }
-        item->setZValue(maxZValue + 1);
+        }
+        if (old_idx!=item_queue_idx){
+            // 只有索引改变了，才更新最大值！！
+            int temp_z = item_queue.max_z()+1;
+            item_queue.all_z_val.push_back(temp_z);
+            item->setZValue(temp_z);
+        }
+        qDebug()<<"------------------------"<<item->zValue();
 
-//        for (int i=0; i<item_queue.size(); i++){
-//            qDebug()<<item_queue.at(i)->uuid_symbol;
-//        }
-        // 点击了一个图形项
-        int type = item->type();
-        // GIF,TIF,ico,bmp -7
-        // svg - 13
     } else {
         // 点击了背景
         qDebug() << "Clicked on background.";
     }
-
     // 传递鼠标事件以继续处理。
     QGraphicsView::mousePressEvent(event);
 }

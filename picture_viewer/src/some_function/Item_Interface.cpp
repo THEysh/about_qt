@@ -43,6 +43,10 @@ void Item_Interface::position_calculation(QGraphicsView *view) {
 
 }
 
+void Item_Interface::set_z_val(int num) {
+    //设置z轴高度
+}
+
 //====================================================================================================
 
 C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes):
@@ -54,6 +58,9 @@ C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
         qDebug() << "Image loaded successfully.";
         // 创建一个指向 QGraphicsPixmapItem 对象的指针，并将其传递给 C_QPixmapItem 类的构造函数
         graphics_pixmapItem_unique = std::make_unique<QGraphicsPixmapItem>();
+        //创建唯一标识符号
+        uuidSymbol = QUuid::createUuid();
+        graphics_pixmapItem_unique->setData(0, uuidSymbol);
         graphics_pixmapItem_unique->setPixmap(or_activated_photo_pixmap);
         pixmap_rect = graphics_pixmapItem_unique->boundingRect();
         // 设置为拖拽
@@ -162,6 +169,11 @@ void C_QPixmapItem::phot_rotate(bool is_right,QGraphicsView *view){
     position_calculation(view); //位置更新
 }
 
+void C_QPixmapItem::set_z_val(int num) {
+    Item_Interface::set_z_val(num);
+    graphics_pixmapItem_unique->setZValue(num);
+}
+
 //====================================================================================================
 
 C_SvgItem::C_SvgItem(const QString &path):
@@ -170,6 +182,9 @@ C_SvgItem::C_SvgItem(const QString &path):
 {
     bool loadResult = svgrender_unique ->load(path); // 加载 SVG 文件
     if (loadResult){
+        // 设置唯一标识符号
+        uuidSymbol = QUuid::createUuid();
+        graphics_svgItem_unique->setData(0,uuidSymbol);
         graphics_svgItem_unique->setSharedRenderer(svgrender_unique.get());
         graphics_svgItem_unique->setScale(1);
         svg_Rect = graphics_svgItem_unique->boundingRect(); //用于计算位置信息
@@ -213,7 +228,7 @@ void C_SvgItem::position_calculation(QGraphicsView *view) {
 
 void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     Item_Interface::wheelEvent(event,view);
-    if (graphics_svgItem_unique== nullptr){
+    if (graphics_svgItem_unique == nullptr){
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
@@ -257,6 +272,11 @@ void C_SvgItem::phot_rotate(bool is_right, QGraphicsView *view) {
     position_calculation(view);
 }
 
+void C_SvgItem::set_z_val(int num) {
+    Item_Interface::set_z_val(num);
+    graphics_svgItem_unique->setZValue(num);
+}
+
 //====================================================================================================
 
 
@@ -266,7 +286,11 @@ C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *sce
         au_movie = std::make_unique<QMovie>(path);
         au_movie->start();
         gif_pixmap = std::make_unique<QPixmap>(QPixmap::fromImage(au_movie->currentImage()));
+
         graphics_gifItem_unique = std::make_unique<QGraphicsPixmapItem>();
+        //创建唯一标识符号
+        uuidSymbol = QUuid::createUuid();
+        graphics_gifItem_unique->setData(0,uuidSymbol);
         graphics_gifItem_unique->setPixmap(*gif_pixmap);
         // 设置为拖拽 ,要在不为nullpter设置拖拽
         graphics_gifItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
@@ -390,6 +414,11 @@ void C_GifItem::position_calculation(QGraphicsView *view) {
     qDebug()<<"view rect:"<<view ->rect()<<"pixmap_rect"<< rect_sig->get_gif_rect();
     qDebug()<<"center:"<<center;
     graphics_gifItem_unique->setPos(center);
+}
+
+void C_GifItem::set_z_val(int num) {
+    Item_Interface::set_z_val(num);
+    graphics_gifItem_unique->setZValue(num);
 }
 
 

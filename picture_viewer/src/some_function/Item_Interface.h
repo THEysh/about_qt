@@ -19,8 +19,8 @@ class Gif_Rect_Sig;
 class Item_Interface : public QObject{
 Q_OBJECT
 public: //公共接口
-    //生成一个唯一标识符号
-    QUuid uuid_symbol = QUuid::createUuid();
+    //唯一标识符号
+    QUuid uuidSymbol = nullptr;
     explicit Item_Interface();
     ~Item_Interface() override;
     virtual void click_element();
@@ -28,6 +28,7 @@ public: //公共接口
     virtual void wheelEvent(QWheelEvent *event, QGraphicsView *view);
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
+    virtual void set_z_val(int num);
 protected:
 
     virtual void position_calculation(QGraphicsView *view);
@@ -36,12 +37,11 @@ protected:
 class C_QPixmapItem : public Item_Interface{
 Q_OBJECT
 public:
-    QUuid uuid_symbol = QUuid::createUuid();
     explicit C_QPixmapItem(const QString &path, const QStringList &imageTypes);
     ~C_QPixmapItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
-
+    void set_z_val(int num) override;
 protected:
     void wheelEvent(QWheelEvent *event,QGraphicsView *view) ;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
@@ -59,11 +59,11 @@ private:
 class C_SvgItem : public Item_Interface{
 Q_OBJECT
 public:
-    QUuid uuid_symbol = QUuid::createUuid();
     explicit C_SvgItem(const QString &path);
     ~C_SvgItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
+    void set_z_val(int num) override;
 protected:
     void wheelEvent(QWheelEvent *event,QGraphicsView *view) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
@@ -79,12 +79,12 @@ private:
 class C_GifItem : public Item_Interface{
 Q_OBJECT
 public:
-    QUuid uuid_symbol = QUuid::createUuid();
     C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene);
     ~C_GifItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
     void position_calculation(QGraphicsView *view) override;
+    void set_z_val(int num) override;
 protected:
     void wheelEvent(QWheelEvent *event,QGraphicsView *view) override;
     void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) override;
