@@ -5,12 +5,13 @@
 #ifndef PICTURE_VIEWER_PIC_THREAD_H
 #define PICTURE_VIEWER_PIC_THREAD_H
 #include <QThread>
-#include "Item_Interface.h"
 #include <QGraphicsView>
 #include <QMutex>
 #include <QQueue>
 #include "memory"
 #include "qdebug.h"
+
+class  Item_Interface;
 
 class Gif_WorkerThread : public QThread {
 Q_OBJECT
@@ -59,47 +60,19 @@ private:
 class Item_Interface_Queue:public QObject {
 Q_OBJECT
 public:
-    explicit Item_Interface_Queue(int max_len=5){
-    max_len=max_len;
-};
+    explicit Item_Interface_Queue(int max_len=5);
 private:
     int max_len = 5;
 public:
     QQueue< std::shared_ptr<Item_Interface> > item_data; // 存储数据的队列
     // 入队函数
-    void enqueue(const std::shared_ptr<Item_Interface>& data) {
-        if (item_data.size() < max_len) {
-            item_data.enqueue(data);
-        } else{
-            item_data.dequeue();
-            item_data.enqueue(data);
-        }
-    }
+    void enqueue(const std::shared_ptr<Item_Interface>& data);
     // 判断队列是否为空
-    bool empty() const {
-        return item_data.isEmpty();
-    }
+    bool empty() const;
     // 获取队列中元素数量
-    size_t size() const {
-        return item_data.size();
-    }
-    void show_all(){
-        if (item_data.isEmpty()){
-            qDebug()<<"is empty";
-            return;
-        }
-        for (const std::shared_ptr<Item_Interface>& i : item_data){
-            qDebug()<<i.get()<<",";
-        }
-        qDebug()<<"----------------------------------";
-    }
-    std::shared_ptr<Item_Interface> at(int idx){
-        if (idx>item_data.size()){
-            return item_data.back();
-        } else{
-            return item_data.at(idx);
-        }
-    }
+    size_t size() const;
+    void show_all();
+    std::shared_ptr<Item_Interface> at(int idx);
 };
 
 #endif //PICTURE_VIEWER_PIC_THREAD_H

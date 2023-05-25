@@ -11,7 +11,7 @@
 #include "my_photo_Graphics.h"
 #include "memory"
 #include "QGraphicsProxyWidget"
-#include "Pic_Thread.h"
+
 
 class Gif_Rect_Sig;
 // 把不同类型显示的图片抽样出来

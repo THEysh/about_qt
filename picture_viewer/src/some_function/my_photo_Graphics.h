@@ -16,8 +16,10 @@
 #include <QGraphicsSvgItem>
 #include <memory>
 
+
 class My_Qtreewidget;
 class Item_Interface;
+
 class My_Photo_Graphics : public QGraphicsView {
 Q_OBJECT
 public:
@@ -40,7 +42,7 @@ protected:
     void dropEvent(QDropEvent *event) override;
 private:
     std::unique_ptr<Item_Interface> graphics_Item_unique;
-
+    Item_Interface_Queue item_queue;
 
 };
 
