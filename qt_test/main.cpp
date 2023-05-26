@@ -1,27 +1,26 @@
-#include <QQueue>
-#include <memory>
-#include <QPixmap>
-#include <QLabel>
-#include <QApplication>
-#include "QDebug"
-#include "QObject"
-#include "Item_Interface_Queue.h"
-#include "QUuid"
+#include <QCoreApplication>
+#include <QDebug>
+#include <QMutex>
+#include <QThreadPool>
+#include <QRunnable>
+#include "treadqt.h"
 
-int main(int argc, char *argv[]){
-    Item_Interface_Queue q1s(3);
 
-    for (int i = 0; i < 10; ++i) {
-        q1s.enqueue(i);
-        q1s.show_all();
-    }
-    qDebug()<<q1s.at(80);
+int main(int argc, char *argv[])
+{
+    QCoreApplication a(argc, argv);
 
-    QUuid uuid = QUuid::createUuid();
+    // 创建线程池
+    QThreadPool* pool = QThreadPool::globalInstance();
 
-    qDebug() << "随机字符串：" << uuid;
-    QApplication app(argc, argv);
+    // 设置线程池最大线程数
+    pool->setMaxThreadCount(2);
+    QMutex mutex;
+    // 创建2个自定义任务并添加到线程池中
+    auto task1 = new Task1(1,&mutex);
+    auto task2 = new Task2(2,mutex);
+    pool->start(task1);
+    pool->start(task2);
 
-    return app.exec();
-    return 0;
+    return a.exec();
 }

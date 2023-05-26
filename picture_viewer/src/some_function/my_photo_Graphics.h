@@ -23,7 +23,6 @@ class Item_Interface;
 class My_Photo_Graphics : public QGraphicsView {
 Q_OBJECT
 public:
-//    QTreeWidgetItem **photo_actived_rootNode = nullptr; //这个指针永远指向active_item
     explicit My_Photo_Graphics(QWidget *parent);
     ~My_Photo_Graphics() override;
     QGraphicsScene *scene = nullptr;

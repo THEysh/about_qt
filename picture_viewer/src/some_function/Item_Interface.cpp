@@ -49,8 +49,7 @@ void Item_Interface::set_z_val(int num) {
 
 //====================================================================================================
 
-C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes):
-    roller_factor(1.1)
+C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
 {
     or_activated_photo_pixmap.load(path, imageTypes.join(',').toUtf8().constData());
     photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
@@ -87,8 +86,8 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     int p_width = or_activated_photo_pixmap.width();
     int p_height = or_activated_photo_pixmap.height();
     if ((view->width())>p_width && (view->height())>p_height){
-        // 视角大于图片的高
-        photo_pixmap_unique= std::make_unique<QPixmap>(or_activated_photo_pixmap);
+        // 视角大于图片的高, 保持默认
+        // photo_pixmap_unique= std::make_unique<QPixmap>(or_activated_photo_pixmap);
     }else{
         // 自适应缩放
         photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(view->width() ,view->height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
@@ -235,9 +234,9 @@ void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     // svg 矢量图，不需要计算智适应清晰度
     if (event->delta() > 0) {  // 缩放
         // 只对pixmapItem场景进行缩放
-        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() * 1.15);
+        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() * roller_factor);
     } else {  // 放大
-        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() / 1.15);
+        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() / roller_factor);
     }
 }
 
@@ -280,9 +279,8 @@ void C_SvgItem::set_z_val(int num) {
 //====================================================================================================
 
 
-C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene):
-        roller_factor(1.1)
-    {
+C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene)
+{
         au_movie = std::make_unique<QMovie>(path);
         au_movie->start();
         gif_pixmap = std::make_unique<QPixmap>(QPixmap::fromImage(au_movie->currentImage()));

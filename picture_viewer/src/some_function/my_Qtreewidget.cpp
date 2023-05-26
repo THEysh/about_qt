@@ -271,7 +271,6 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
     }
 }
 
-
 void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
 {
     if (active_item==item || my_photo == nullptr){
@@ -318,7 +317,7 @@ void My_Qtreewidget::on_directoryChanged(const QString &changedPath)
     }
 }
 
-void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item, int column)
+void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item)
 {
     if (item == rootNode) {
         QString folderPath = QFileDialog::getExistingDirectory(nullptr, QObject::tr("Open Directory"), "/home", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
@@ -329,9 +328,13 @@ void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item, int column)
             _updata_all_Qtree_dir();
         }
     } else {
-        QString dirPath = item->data(0, Qt::UserRole).toString();
-        QUrl QUrl_path = QUrl::fromLocalFile(dirPath);
-        QDesktopServices::openUrl(QUrl_path);
+        // 是文件夹双击打开
+        if (item->text(1)=="folders"){
+            QString dirPath = item->data(0, Qt::UserRole).toString();
+            QUrl QUrl_path = QUrl::fromLocalFile(dirPath);
+            QDesktopServices::openUrl(QUrl_path);
+        }
+
     }
 }
 

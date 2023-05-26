@@ -102,7 +102,12 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
         qDebug() << "Unsupported image format: " << path;
         return;
     }
-    item_queue_idx = item_queue.size()-1;
+    if (!item_queue.empty()){
+        item_queue_idx = item_queue.size() - 1;
+    } else{
+        item_queue_idx = 0;
+    }
+
     qDebug()<<"size_item_queue"<<item_queue.size();
     show_image_item();
 }
@@ -205,7 +210,6 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
             item->setZValue(item_queue.max_z_val);
         }
         qDebug()<<"------------------------"<<item->zValue();
-
     } else {
         // 点击了背景
         qDebug() << "Clicked on background.";

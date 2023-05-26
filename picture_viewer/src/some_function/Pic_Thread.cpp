@@ -5,11 +5,8 @@
 #include "Pic_Thread.h"
 #include "Item_Interface.h"
 
-Gif_WorkerThread::Gif_WorkerThread() {
 
-}
-
-void Gif_WorkerThread::run() {}
+// ==========================================================================
 
 Item_Interface_Queue::Item_Interface_Queue(int load_max):
     max_len(load_max){
@@ -38,17 +35,6 @@ size_t Item_Interface_Queue::size() const {
     return item_data.size();
 }
 
-void Item_Interface_Queue::show_all(){
-    if (item_data.isEmpty()){
-        qDebug()<<"is empty";
-        return;
-    }
-    for (const std::shared_ptr<Item_Interface>& i : item_data){
-        qDebug()<<i.get()<<",";
-    }
-    qDebug()<<"----------------------------------";
-}
-
 std::shared_ptr<Item_Interface> Item_Interface_Queue::at(int idx){
     if (idx>item_data.size()){
         return item_data.back();
@@ -57,4 +43,24 @@ std::shared_ptr<Item_Interface> Item_Interface_Queue::at(int idx){
     }
 }
 
+// =====================================================================================
+
+Gif_Rect_Sig::Gif_Rect_Sig(const QRect &rect){
+    gif_rect = rect;
+}
+
+void Gif_Rect_Sig::checkRect(const QRect &rect){
+    if ((rect.size().width() != gif_rect.size().width())||(rect.size().height() != gif_rect.size().height())) {
+        gif_rect = rect;
+        emit sizeChanged(rect);
+    }
+}
+
+QRect Gif_Rect_Sig::get_gif_rect(){
+    return gif_rect;
+}
+
+void Gif_Rect_Sig::set_gif_rect(const QRect &rect){
+    gif_rect = rect;
+}
 

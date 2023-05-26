@@ -1,4 +1,0 @@
-F:/code/c_code/about_qt/qt_test/cmake-build-release-mingw-599/CMakeFiles/qt_test.dir
-F:/code/c_code/about_qt/qt_test/cmake-build-release-mingw-599/CMakeFiles/edit_cache.dir
-F:/code/c_code/about_qt/qt_test/cmake-build-release-mingw-599/CMakeFiles/rebuild_cache.dir
-F:/code/c_code/about_qt/qt_test/cmake-build-release-mingw-599/CMakeFiles/qt_test_autogen.dir

@@ -29,8 +29,9 @@ public: //公共接口
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
     virtual void set_z_val(int num);
-protected:
 
+protected:
+    double roller_factor = 1.1;
     virtual void position_calculation(QGraphicsView *view);
 };
 
@@ -52,7 +53,6 @@ private:
     QPixmap or_activated_photo_pixmap = QPixmap(); //原始图片
     std::unique_ptr<QPixmap> photo_pixmap_unique;
     std::unique_ptr<QGraphicsPixmapItem> graphics_pixmapItem_unique;
-    double roller_factor = 1.1;
     QRectF pixmap_rect;
 };
 
@@ -97,7 +97,6 @@ private:
     QPixmap or_pixmap;
     std::unique_ptr<QGraphicsPixmapItem> graphics_gifItem_unique;
     std::unique_ptr<Gif_Rect_Sig> rect_sig;
-    double roller_factor;
     QTimer timer;
 
 

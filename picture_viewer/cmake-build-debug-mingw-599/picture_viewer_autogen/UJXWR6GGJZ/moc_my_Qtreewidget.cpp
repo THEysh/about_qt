@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_My_Qtreewidget_t {
-    QByteArrayData data[11];
-    char stringdata0[146];
+    QByteArrayData data[10];
+    char stringdata0[139];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,15 +40,13 @@ QT_MOC_LITERAL(5, 53, 15), // "on_itemExpanded"
 QT_MOC_LITERAL(6, 69, 16), // "on_itemCollapsed"
 QT_MOC_LITERAL(7, 86, 19), // "on_directoryChanged"
 QT_MOC_LITERAL(8, 106, 11), // "changedPath"
-QT_MOC_LITERAL(9, 118, 20), // "on_itemDoubleClicked"
-QT_MOC_LITERAL(10, 139, 6) // "column"
+QT_MOC_LITERAL(9, 118, 20) // "on_itemDoubleClicked"
 
     },
     "My_Qtreewidget\0on_itemClicked\0\0"
     "QTreeWidgetItem*\0item\0on_itemExpanded\0"
     "on_itemCollapsed\0on_directoryChanged\0"
-    "changedPath\0on_itemDoubleClicked\0"
-    "column"
+    "changedPath\0on_itemDoubleClicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -70,14 +68,14 @@ static const uint qt_meta_data_My_Qtreewidget[] = {
        5,    1,   42,    2, 0x08 /* Private */,
        6,    1,   45,    2, 0x08 /* Private */,
        7,    1,   48,    2, 0x08 /* Private */,
-       9,    2,   51,    2, 0x08 /* Private */,
+       9,    1,   51,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, QMetaType::QString,    8,
-    QMetaType::Void, 0x80000000 | 3, QMetaType::Int,    4,   10,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
@@ -92,7 +90,7 @@ void My_Qtreewidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 1: _t->on_itemExpanded((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
         case 2: _t->on_itemCollapsed((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
         case 3: _t->on_directoryChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 4: _t->on_itemDoubleClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 4: _t->on_itemDoubleClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
         default: ;
         }
     }

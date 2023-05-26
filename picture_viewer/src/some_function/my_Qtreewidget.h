@@ -28,7 +28,7 @@ private slots:
     void on_itemExpanded(QTreeWidgetItem *item);
     void on_itemCollapsed(QTreeWidgetItem *item);
     void on_directoryChanged(const QString &changedPath);
-    void on_itemDoubleClicked(QTreeWidgetItem *item, int column);
+    void on_itemDoubleClicked(QTreeWidgetItem *item);
 
 private:
 

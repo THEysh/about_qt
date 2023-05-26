@@ -8,54 +8,49 @@
 #include <QGraphicsView>
 #include <QMutex>
 #include <QQueue>
+#include <QRunnable>
 #include "memory"
 #include "qdebug.h"
 
 class  Item_Interface;
 
-class Gif_WorkerThread : public QThread {
+class Load_Image_Intf : public QObject, public QRunnable {
 Q_OBJECT
 public:
-    Gif_WorkerThread();
-    void run();
+    explicit Load_Image_Intf(int i) :id_(i){}
+    signals:
+    //信号，不是函数
+    void End_of_loading(const QString &result);
+protected:
+    int id_ = 0;
+    void run() override{}
 
-private:
-    QMutex mutex;
-signals:
-    void resultReady(const QString &result); //信号
 };
+// =====================================================================
 
-class Gif_Rect_Sig : public QObject
-{
-Q_OBJECT
-public:
-    Gif_Rect_Sig(const QRect &rect){
-        gif_rect = rect;
-    }
-signals:
-    void sizeChanged(const QRect &rect);
+//
+//class load_pixmap : public Load_Image {
+//public:
+//    QString path;
+//    QStringList imageTypes;
+//    explicit load_pixmap(int id, const QString &path, const QStringList &imageTypes):
+//        Load_Image(id),
+//        path(path),
+//        imageTypes(imageTypes)
+//    {
+//
+//    }
+//    void run() override {
+//        qInfo() << "Task " << id_ << " started!";
+////        mutex.lock();
+////        std::shared_ptr<Item_Interface> temp_unique;
+////        temp_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
+////        mutex.unlock();
+//        qInfo() << "Task " << id_ << " finished!";
+//    }
+//};
 
-public slots:
-    void checkRect(const QRect &rect)
-    {
-        if ((rect.size().width() != gif_rect.size().width())||(rect.size().height() != gif_rect.size().height())) {
-            gif_rect = rect;
-            emit sizeChanged(rect);
-        }
-    }
-
-public:
-    void set_gif_rect(const QRect &rect){
-        gif_rect = rect;
-    }
-
-    QRect get_gif_rect(){
-        return gif_rect;
-}
-
-private:
-    QRect gif_rect;
-};
+// =====================================================================
 
 class Item_Interface_Queue:public QObject {
 Q_OBJECT
@@ -72,9 +67,28 @@ public:
     bool empty() const;
     // 获取队列中元素数量
     size_t size() const;
-    void show_all();
     std::shared_ptr<Item_Interface> at(int idx);
-    int max_z();
+};
+
+// =====================================================================
+
+class Gif_Rect_Sig : public QObject
+{
+Q_OBJECT
+public:
+    Gif_Rect_Sig(const QRect &rect);
+signals:
+    //信号不用实例化
+    void sizeChanged(const QRect &rect);
+
+public slots:
+    void checkRect(const QRect &rect);
+
+public:
+    void set_gif_rect(const QRect &rect);
+    QRect get_gif_rect();
+private:
+    QRect gif_rect;
 };
 
 #endif //PICTURE_VIEWER_PIC_THREAD_H

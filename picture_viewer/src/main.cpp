@@ -11,6 +11,7 @@
 #include "ui/ui_file/Qtree_ui.h"
 #include "function.h"
 
+
 void Resource_Registration(){
     QString currentPath = QDir::currentPath();
     // 输出路径
