@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Load_Image_Intf_t {
-    QByteArrayData data[4];
-    char stringdata0[39];
+    QByteArrayData data[5];
+    char stringdata0[55];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,12 +32,14 @@ struct qt_meta_stringdata_Load_Image_Intf_t {
 static const qt_meta_stringdata_Load_Image_Intf_t qt_meta_stringdata_Load_Image_Intf = {
     {
 QT_MOC_LITERAL(0, 0, 15), // "Load_Image_Intf"
-QT_MOC_LITERAL(1, 16, 14), // "End_of_loading"
+QT_MOC_LITERAL(1, 16, 14), // "end_of_loading"
 QT_MOC_LITERAL(2, 31, 0), // ""
-QT_MOC_LITERAL(3, 32, 6) // "result"
+QT_MOC_LITERAL(3, 32, 15), // "Item_Interface*"
+QT_MOC_LITERAL(4, 48, 6) // "unique"
 
     },
-    "Load_Image_Intf\0End_of_loading\0\0result"
+    "Load_Image_Intf\0end_of_loading\0\0"
+    "Item_Interface*\0unique"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +60,7 @@ static const uint qt_meta_data_Load_Image_Intf[] = {
        1,    1,   19,    2, 0x06 /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
@@ -69,14 +71,14 @@ void Load_Image_Intf::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         Load_Image_Intf *_t = static_cast<Load_Image_Intf *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->End_of_loading((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 0: _t->end_of_loading((*reinterpret_cast< Item_Interface*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            typedef void (Load_Image_Intf::*_t)(const QString & );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Load_Image_Intf::End_of_loading)) {
+            typedef void (Load_Image_Intf::*_t)(Item_Interface * );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Load_Image_Intf::end_of_loading)) {
                 *result = 0;
                 return;
             }
@@ -100,8 +102,6 @@ void *Load_Image_Intf::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_Load_Image_Intf.stringdata0))
         return static_cast<void*>(this);
-    if (!strcmp(_clname, "QRunnable"))
-        return static_cast< QRunnable*>(this);
     return QObject::qt_metacast(_clname);
 }
 
@@ -123,7 +123,7 @@ int Load_Image_Intf::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Load_Image_Intf::End_of_loading(const QString & _t1)
+void Load_Image_Intf::end_of_loading(Item_Interface * _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

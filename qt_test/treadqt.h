@@ -5,6 +5,7 @@
 #include <QThreadPool>
 #include <QRunnable>
 #include <QThread>
+#include <utility>
 #include "QObject"
 
 
@@ -21,6 +22,8 @@ signals:
 
 class C_CustomTask :  public QObject,public QRunnable {
 Q_OBJECT //要继承2个才能找到宏
+signals:
+    void emit_sig(QString str);
 public:
     int id_ = 0;
 
@@ -30,6 +33,7 @@ public:
 
 class Task1 : public C_CustomTask {
 Q_OBJECT
+
 public:
     QMutex *mutex;
     explicit Task1(int id,QMutex *mutex): C_CustomTask(id), mutex(mutex) {}
@@ -37,9 +41,7 @@ public:
         mutex->lock();
         qInfo() << "Task " << id_ << " started!";
         for (int i = 3000; i > 0; i--) {
-
             qDebug() << "Task " << id_ << ": " << i;
-
         }
         qInfo() << "Task " << id_ << " finished!";
         mutex->unlock();
@@ -48,9 +50,11 @@ public:
 
 class Task2 : public C_CustomTask {
 Q_OBJECT
+
 public:
     QMutex &mutex;
-    explicit Task2(int id,QMutex &mutex): C_CustomTask(id), mutex(mutex) {}
+    const QString *end_text;
+    explicit Task2(int id,QMutex &mutex,const QString *text): C_CustomTask(id), mutex(mutex),end_text(text) {}
     void run() override {
         mutex.lock();
         qInfo() << "Task " << id_ << " started!";
@@ -60,7 +64,8 @@ public:
 
         }
         mutex.unlock();
-        qInfo() << "Task " << id_ << " finished!";
+        qInfo() << "Task " << id_ << end_text;
+        emit emit_sig("OK");
     }
 };
 #endif // WORKERTHREAD_H

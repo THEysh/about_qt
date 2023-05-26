@@ -11,44 +11,32 @@
 #include <QRunnable>
 #include "memory"
 #include "qdebug.h"
-
 class  Item_Interface;
 
-class Load_Image_Intf : public QObject, public QRunnable {
+// =====================================================================
+class Load_Image_Intf : public QObject{
 Q_OBJECT
 public:
-    explicit Load_Image_Intf(int i) :id_(i){}
+    explicit Load_Image_Intf(QMutex &mutex);
+    virtual void thredrun(){}
     signals:
-    //信号，不是函数
-    void End_of_loading(const QString &result);
+    //这是信号，不是函数
+    void end_of_loading(Item_Interface *unique);
+
 protected:
+    QMutex &mutex;
     int id_ = 0;
-    void run() override{}
 
 };
 // =====================================================================
 
-//
-//class load_pixmap : public Load_Image {
-//public:
-//    QString path;
-//    QStringList imageTypes;
-//    explicit load_pixmap(int id, const QString &path, const QStringList &imageTypes):
-//        Load_Image(id),
-//        path(path),
-//        imageTypes(imageTypes)
-//    {
-//
-//    }
-//    void run() override {
-//        qInfo() << "Task " << id_ << " started!";
-////        mutex.lock();
-////        std::shared_ptr<Item_Interface> temp_unique;
-////        temp_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
-////        mutex.unlock();
-//        qInfo() << "Task " << id_ << " finished!";
-//    }
-//};
+class Load_Pixmap : public Load_Image_Intf {
+public:
+    const QString path;
+    const QStringList imageTypes;
+    explicit Load_Pixmap(QMutex &mutex,const QString &path, const QStringList &imageTypes);
+    void thredrun() override;
+};
 
 // =====================================================================
 

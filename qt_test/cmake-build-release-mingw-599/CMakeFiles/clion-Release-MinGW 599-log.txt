@@ -1,0 +1,16 @@
+"F:\CLion\CLion 2022.3.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Release "-DCMAKE_MAKE_PROGRAM=F:/CLion/CLion 2022.3.3/bin/ninja/win/x64/ninja.exe" -G Ninja -S F:\code\c_code\about_qt\qt_test -B F:\code\c_code\about_qt\qt_test\cmake-build-release-mingw-599
+-- The C compiler identification is GNU 5.3.0
+-- The CXX compiler identification is GNU 5.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: F:/QT5_9_9/Tools/mingw530_32/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: F:/QT5_9_9/Tools/mingw530_32/bin/c++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: F:/code/c_code/about_qt/qt_test/cmake-build-release-mingw-599

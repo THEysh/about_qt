@@ -15,7 +15,8 @@
 #include <QSvgRenderer>
 #include <QGraphicsSvgItem>
 #include <memory>
-
+#include <QThreadPool>
+#include <QTimer>
 
 class My_Qtreewidget;
 class Item_Interface;
@@ -32,7 +33,6 @@ protected:
     QPixmap or_background;
     QPixmap background;
     void show_image_item();
-
     void resizeEvent(QResizeEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -41,10 +41,13 @@ protected:
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 private:
-//    std::unique_ptr<Item_Interface> graphics_Item_unique;
-    Item_Interface_Queue item_queue;
+    void connect_loadphoto();
+    Item_Interface_Queue item_queue; //存放智能指针的队列（所有图片的指向）
     int item_queue_idx = 0;
-
+    // 创建并启动后台线程
+    QThread thread;
+    QMutex mutex;
+    std::shared_ptr<Load_Image_Intf> arload_image;
 };
 
 #endif // MY_PHOTO_GRAPHICS_H

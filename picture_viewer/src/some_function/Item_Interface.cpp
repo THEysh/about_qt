@@ -47,6 +47,10 @@ void Item_Interface::set_z_val(int num) {
     //设置z轴高度
 }
 
+QGraphicsItem *Item_Interface::get_Item() {
+    return nullptr;
+}
+
 //====================================================================================================
 
 C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
@@ -69,7 +73,6 @@ C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
     else {
         qDebug() << "Failed to load image from" << path;
     }
-
 }
 
 C_QPixmapItem::~C_QPixmapItem() {
@@ -98,7 +101,7 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     // 位置更新
     position_calculation(view);
     scene->addItem(graphics_pixmapItem_unique.get());
-    view->show();
+
 }
 
 void C_QPixmapItem::position_calculation(QGraphicsView *view) {
@@ -173,6 +176,14 @@ void C_QPixmapItem::set_z_val(int num) {
     graphics_pixmapItem_unique->setZValue(num);
 }
 
+QGraphicsPixmapItem* C_QPixmapItem::get_Item() {
+    if (graphics_pixmapItem_unique!= nullptr){
+        return graphics_pixmapItem_unique.get();
+    } else{
+        qDebug()<<"C_QPixmapItem::get_QGraphicsPixmapItem() bug";
+    }
+}
+
 //====================================================================================================
 
 C_SvgItem::C_SvgItem(const QString &path):
@@ -212,7 +223,7 @@ void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     // 计算尺寸，让svgItem保持中心位置,SVG图不窗口自适应计算了，只计算中心位置
     position_calculation(view);
     scene->addItem(graphics_svgItem_unique.get()); //将svg条目添加到场景中
-    view->show();
+
 }
 
 void C_SvgItem::position_calculation(QGraphicsView *view) {
@@ -354,7 +365,7 @@ void C_GifItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     // 更新画面 在写在初始化的连接里
     position_calculation(view);
     scene->addItem(graphics_gifItem_unique.get());
-    view->show();
+
 }
 
 void C_GifItem::click_element() {

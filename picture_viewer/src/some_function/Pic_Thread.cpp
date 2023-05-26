@@ -63,4 +63,24 @@ QRect Gif_Rect_Sig::get_gif_rect(){
 void Gif_Rect_Sig::set_gif_rect(const QRect &rect){
     gif_rect = rect;
 }
+//=================================================
 
+Load_Image_Intf::Load_Image_Intf(QMutex &mutex) :mutex(mutex){}
+
+
+//=============================================================================
+Load_Pixmap::Load_Pixmap(QMutex &mutex, const QString &path, const QStringList &imageTypes) :
+        Load_Image_Intf(mutex),
+        path(path),
+        imageTypes(imageTypes){}
+
+
+void Load_Pixmap::thredrun() {
+    qInfo() << "Task started!";
+        mutex.lock();
+        Item_Interface *temp_unique;
+        temp_unique = new C_QPixmapItem(path,imageTypes);
+        mutex.unlock();
+        emit end_of_loading(temp_unique);
+    qInfo() << "Task finished!";
+}
