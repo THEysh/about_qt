@@ -44,10 +44,9 @@ class Item_Interface_Queue:public QObject {
 Q_OBJECT
 public:
     explicit Item_Interface_Queue(int max_len=2);
-private:
-    int max_len;
 public:
     int max_z_val=0; //永远保存最大的y值
+    int max_len;
     QQueue< std::shared_ptr<Item_Interface> > item_data; // 存储数据的队列
     // 入队函数
     void enqueue(const std::shared_ptr<Item_Interface>& data);

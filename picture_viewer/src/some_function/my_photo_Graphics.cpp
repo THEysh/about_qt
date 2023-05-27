@@ -17,7 +17,7 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         // 定义初始化
         QGraphicsView(parent),
         in_tree(nullptr),
-        item_queue(2),
+        item_queue(1),
         mutex(),
         arload_image(nullptr),
         scene(new QGraphicsScene()){
@@ -43,19 +43,14 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 
 void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
-    const QPointF scenePos = mapToScene(event->pos()); // 获取滚轮事件发生的场景坐标
-    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+
     if (!item_queue.empty()){
         item_queue.at(item_queue_idx)->wheelEvent(event,this);
     } else{
         qDebug()<<"My_Photo_Graphics::wheelEvent";
         return;
     }
-    qDebug()<<scenePos;
-    const QPointF viewPoint = mapFromScene(scenePos); // 将场景坐标映射回视图坐标，以确保变换锚点正确(更新)
-    centerOn(viewPoint); // 将场景定位到鼠标所在位置
 }
-
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
@@ -95,24 +90,8 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
     }
     else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
         qDebug() << "The file is ipg,png...,load ...";
-
         temp_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
         item_queue.enqueue(temp_unique);
-//        arload_image = std::make_unique<Load_Pixmap>(mutex, path,imageTypes);
-//        arload_image->moveToThread(&thread);
-//        thread.start();
-//        QObject::connect(arload_image.get(), &Load_Image_Intf::end_of_loading,[this](Item_Interface *unique){
-//            qDebug()<<"+++++++++++++++++++++++++++++++++++++++++++++++++My_Photo_Graphics::connect_loadphoto()";
-//            std::shared_ptr<Item_Interface> temp_unique;
-//            temp_unique.reset(unique);
-//            item_queue.enqueue(temp_unique);
-//            qDebug()<<"+++++++++++++++++size"<<item_queue.size()<<item_queue_idx;
-//
-//        });
-//        QObject::connect(&thread, &QThread::started, [this]() {
-//            qDebug()<<"threadthreadthreadthreadthreadthreadthreadthread";
-//            arload_image->thredrun();
-//        });
     }
     else {
         qDebug() << "Unsupported image format: " << path;
@@ -139,7 +118,6 @@ void My_Photo_Graphics::show_image_item() {
         item_queue.at(item_queue_idx)->show_photo(this,scene);
         this->show();
     }
-
 }
 
 My_Photo_Graphics::~My_Photo_Graphics() {
@@ -192,6 +170,13 @@ void My_Photo_Graphics::dropEvent(QDropEvent *event) {
     } else {
         event->ignore();
     }
+    if (mimeData->hasFormat("application/x-qabstractitemmodeldatalist")){
+        QByteArray encoded = mimeData->data("application/x-qabstractitemmodeldatalist");
+        QDataStream stream(&encoded, QIODevice::ReadOnly);
+        qDebug()<<"event->mimeData()"<<event->mimeData()->formats();
+        qDebug()<<"event->mimeData()"<<encoded;
+        qDebug()<<"event->mimeData()"<<stream;
+    }
     qDebug()<<"dropEvent";
 }
 
@@ -214,8 +199,6 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
             bool isEqual = (uuid1==uuid2);
             if (isEqual){
                 item_queue_idx = i;
-                qDebug()<<uuid1;
-                qDebug()<<uuid2;
             }
         }
         if (old_idx!=item_queue_idx){

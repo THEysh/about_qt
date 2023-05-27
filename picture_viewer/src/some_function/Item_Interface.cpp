@@ -9,7 +9,7 @@
 #include "Item_Interface.h"
 #include "qDebug.h"
 #include "Pic_Thread.h"
-
+#include "QMouseEvent"
 
 Item_Interface::Item_Interface(){
 
@@ -238,17 +238,19 @@ void C_SvgItem::position_calculation(QGraphicsView *view) {
 
 void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     Item_Interface::wheelEvent(event,view);
-    if (graphics_svgItem_unique == nullptr){
-        qDebug()<<"C_SvgItem::show_photo bug";
+    if (graphics_svgItem_unique == nullptr) {
+        qDebug() << "C_SvgItem::show_photo bug";
         return;
     }
-    // svg 矢量图，不需要计算智适应清晰度
-    if (event->delta() > 0) {  // 缩放
+    if (event->delta() > 0) {
         // 只对pixmapItem场景进行缩放
         graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() * roller_factor);
-    } else {  // 放大
+        qDebug()<<"graphics_svgItem_unique->scale();"<<graphics_svgItem_unique->scale();
+    } else {
         graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() / roller_factor);
+        qDebug()<<"graphics_svgItem_unique->scale();"<<graphics_svgItem_unique->scale();
     }
+
 }
 
 void C_SvgItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {

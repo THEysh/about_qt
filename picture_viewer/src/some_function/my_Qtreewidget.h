@@ -22,7 +22,7 @@ public:
     QTreeWidgetItem* active_item;
     QFileSystemWatcher* my_watcher;
     QStringList imageTypes;
-
+    void dropEvent(QDropEvent* event) override;
 private slots:
     void on_itemClicked(QTreeWidgetItem *item);
     void on_itemExpanded(QTreeWidgetItem *item);

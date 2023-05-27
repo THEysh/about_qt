@@ -22,6 +22,7 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
 
 {
     this->setHeaderHidden(true);
+    this->setDragEnabled(true);
     rootNode->setText(0, "双击此处打开目录");
     rootNode->setData(0, Qt::UserRole, ProjectDir);
     rootNode->setIcon(0, QIcon(":ui/images/pic/folder-solid.svg"));
@@ -73,6 +74,7 @@ void My_Qtreewidget::_dir_connect()
     QObject::connect(this, &QTreeWidget::itemCollapsed, this, &My_Qtreewidget::on_itemCollapsed);
     QObject::connect(my_watcher, &QFileSystemWatcher::directoryChanged, this, &My_Qtreewidget::on_directoryChanged);
     QObject::connect(this, &QTreeWidget::itemDoubleClicked, this, &My_Qtreewidget::on_itemDoubleClicked);
+//    QObject::connect(this,&QTreeWidget::)
 }
 
 bool My_Qtreewidget::_is_type(const QString& name, const QStringList& strlist){
@@ -349,6 +351,10 @@ My_Qtreewidget::~My_Qtreewidget(){
     }
 
 
+}
+
+void My_Qtreewidget::dropEvent(QDropEvent *event) {
+    qDebug()<<"eventeventevent";
 }
 
 

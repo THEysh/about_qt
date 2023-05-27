@@ -1,42 +1,86 @@
-#include <QApplication>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QWheelEvent>
-#include "QtMath"
-class MyGraphicsView : public QGraphicsView
-{
+#include <QtWidgets>
+
+class MyTreeWidget : public QTreeWidget {
 public:
-    MyGraphicsView(QGraphicsScene* scene) : QGraphicsView(scene) {}
-
+    MyTreeWidget(QWidget *parent = nullptr) : QTreeWidget(parent) {
+        setDragEnabled(true);
+        setSelectionMode(QAbstractItemView::MultiSelection);
+    }
 protected:
-    void wheelEvent(QWheelEvent* event) override
-    {
-        QPoint mousePos = mapFromGlobal(QCursor::pos()); // 获取鼠标在视图中的坐标
-        QPointF scenePos = mapToScene(mousePos); // 获取鼠标在场景中的坐标
-
-        setTransformationAnchor(QGraphicsView::AnchorUnderMouse); // 以鼠标位置为中心缩放
-        qreal scaleFactor = qPow(qreal(2), event->delta() / 240.0); // 计算缩放比例
-        scale(scaleFactor, scaleFactor); // 对视图进行缩放操作
-
-        QPointF newScenePos = mapToScene(mousePos); // 获取缩放后鼠标在场景中的坐标
-        QPointF delta = scenePos - newScenePos; // 计算缩放后场景偏移量
-        translate(delta.x(), delta.y()); // 对视图进行偏移操作
+    QMimeData *mimeData(const QList<QTreeWidgetItem *> items) const override {
+        QMimeData *mimeData = new QMimeData;
+        QByteArray encodedData;
+        QDataStream stream(&encodedData, QIODevice::WriteOnly);
+        for (auto item : items) {
+            QString text = item->text(0);
+            stream << text;
+        }
+        mimeData->setData("application/x-qtreewidget-values", encodedData);
+        return mimeData;
     }
 };
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
+class MyGraphicsView : public QGraphicsView {
+public:
+    MyGraphicsView(QWidget *parent = nullptr) : QGraphicsView(parent), scene(new QGraphicsScene) {
+        setScene(scene);
+        setAcceptDrops(true);
+    }
+protected:
+    void dragEnterEvent(QDragEnterEvent *event) override {
+        if (event->mimeData()->hasFormat("application/x-qtreewidget-values")) {
+            event->acceptProposedAction();
+        } else {
+            event->ignore();
+        }
+    }
 
-    QPixmap pix("C:\\Users\\Administrator\\Desktop\\新建文件夹\\image.jpg","bmp"); // 加载图片
-    QGraphicsScene scene;
-    scene.addPixmap(pix); // 在场景中添加图片
+    void dragMoveEvent(QDragMoveEvent *event) override {
+        if (event->mimeData()->hasFormat("application/x-qtreewidget-values")) {
+            event->acceptProposedAction();
+        } else {
+            event->ignore();
+        }
+    }
 
-    MyGraphicsView view(&scene); // 创建视图并设置场景
-    view.setRenderHint(QPainter::Antialiasing); // 开启抗锯齿
-    view.setViewportUpdateMode(QGraphicsView::FullViewportUpdate); // 设置视图刷新模式
+    void dropEvent(QDropEvent *event) override {
+        if (event->mimeData()->hasFormat("application/x-qtreewidget-values")) {
+            QByteArray encodedData = event->mimeData()->data("application/x-qtreewidget-values");
+            QDataStream stream(&encodedData, QIODevice::ReadOnly);
+            int i = 0;
+            while (!stream.atEnd()) {
+                QString text;
+                stream >> text;
+                auto item = new QGraphicsTextItem(text);
+                item->setPos(event->pos() + QPointF(i * 20, i * 20));
+                scene->addItem(item);
+                i++;
+            }
+            event->acceptProposedAction();
+        } else {
+            event->ignore();
+        }
+    }
 
-    view.show(); // 显示视图
+private:
+    QGraphicsScene *scene = nullptr;
+};
 
-    return a.exec();
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
+    MyTreeWidget treeWidget;
+    treeWidget.setColumnCount(1);
+    treeWidget.setHeaderLabels({ "Values" });
+    for (int i = 1; i <= 10; i++) {
+        auto item = new QTreeWidgetItem(&treeWidget, { QString("Item %1").arg(i) });
+        item->setData(0, Qt::UserRole, i * 10);
+    }
+    treeWidget.show();
+
+    MyGraphicsView graphicsView;
+    graphicsView.resize(400, 300);
+    graphicsView.show();
+
+    return app.exec();
 }
