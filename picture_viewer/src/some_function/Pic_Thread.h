@@ -50,6 +50,8 @@ public:
     QQueue< std::shared_ptr<Item_Interface> > item_data; // 存储数据的队列
     // 入队函数
     void enqueue(const std::shared_ptr<Item_Interface>& data);
+    //清空到只剩下1个
+    void clearn_item_keep_one();
     // 判断队列是否为空
     bool empty() const;
     // 获取队列中元素数量

@@ -31,7 +31,7 @@ public: //公共接口
     virtual void set_z_val(int num);
     virtual QGraphicsItem* get_Item();
 protected:
-    double roller_factor = 1.1;
+    double roller_factor = 1.05;
     virtual void position_calculation(QGraphicsView *view);
 };
 

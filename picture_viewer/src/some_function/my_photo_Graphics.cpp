@@ -54,6 +54,10 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
+    if (is_comparison){
+        qDebug()<<"is_comparison"<<is_comparison;
+        return;
+    }
     qDebug()<<"My_Photo_Graphics::resizeEvent:->view siez"<<this->size();
     // 更新背景的尺寸
     QRect new_rect(QPoint(0, 0), this->size());
@@ -71,6 +75,9 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
 }
 
 void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringList &imageTypes) {
+    if (!is_comparison){
+        item_queue.clearn_item_keep_one();
+    }
     // 进行判断，是加入什么类型的图片
     QFileInfo fileInfo(path);
     // 创建智能指针
@@ -170,14 +177,35 @@ void My_Photo_Graphics::dropEvent(QDropEvent *event) {
     } else {
         event->ignore();
     }
-    if (mimeData->hasFormat("application/x-qabstractitemmodeldatalist")){
-        QByteArray encoded = mimeData->data("application/x-qabstractitemmodeldatalist");
-        QDataStream stream(&encoded, QIODevice::ReadOnly);
-        qDebug()<<"event->mimeData()"<<event->mimeData()->formats();
-        qDebug()<<"event->mimeData()"<<encoded;
-        qDebug()<<"event->mimeData()"<<stream;
+    // 这里是左边的节点拖动至view
+    if (event->mimeData()->hasFormat("application/x-qtreewidget-values")) {
+        QByteArray encodedData = event->mimeData()->data("application/x-qtreewidget-values");
+        QDataStream stream(&encodedData, QIODevice::ReadOnly);
+
+        if (!stream.atEnd()) { // 检查数据流是否结束
+
+            while (!stream.atEnd()) {
+                QString filetype, filename, path;
+                stream >> filetype >> filename >> path;
+                qDebug() << "stream1" << filetype;
+                qDebug() << "stream2" << filename;
+                qDebug() << "stream3" << path;
+                if (filetype== "files"){
+                    // 在视角加一张图片，开启对比模式。结束后关闭
+                    item_queue.max_len = item_queue.max_len + 1;
+                    is_comparison = true;
+                    graphics_load_image(path, in_tree->imageTypes);
+                    is_comparison = false;
+                } else{
+                    break;
+                }
+            }
+            event->acceptProposedAction();
+        }
     }
+
     qDebug()<<"dropEvent";
+
 }
 
 void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {

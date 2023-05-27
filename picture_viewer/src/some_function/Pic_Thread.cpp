@@ -10,7 +10,6 @@
 
 Item_Interface_Queue::Item_Interface_Queue(int load_max):
     max_len(load_max){
-
 }
 
 void Item_Interface_Queue::enqueue(const std::shared_ptr<Item_Interface>& data) {
@@ -25,6 +24,14 @@ void Item_Interface_Queue::enqueue(const std::shared_ptr<Item_Interface>& data) 
     max_z_val = max_z_val+1;
     data->set_z_val(max_z_val);
     qDebug()<<"size,Item_Interface_Queue::enqueue:"<<item_data.size();
+}
+
+void Item_Interface_Queue:: clearn_item_keep_one(){
+    max_len = 1;
+    while (item_data.size()>1){
+        // 使用临时智能指针变量保存队首元素,用于删除，离开作用域，临时智能指针变量销毁，同时会自动释放管理的对象
+        std::shared_ptr<Item_Interface> temp_ptr = item_data.dequeue();
+    }
 }
 
 bool Item_Interface_Queue::empty() const {
@@ -63,6 +70,8 @@ QRect Gif_Rect_Sig::get_gif_rect(){
 void Gif_Rect_Sig::set_gif_rect(const QRect &rect){
     gif_rect = rect;
 }
+
+
 //=================================================
 
 Load_Image_Intf::Load_Image_Intf(QMutex &mutex) :mutex(mutex){}

@@ -13,7 +13,8 @@ protected:
         QDataStream stream(&encodedData, QIODevice::WriteOnly);
         for (auto item : items) {
             QString text = item->text(0);
-            stream << text;
+            auto text2 = item->data(0,Qt::UserRole);
+            stream << text<< text2.toString();
         }
         mimeData->setData("application/x-qtreewidget-values", encodedData);
         return mimeData;
@@ -51,6 +52,7 @@ protected:
             while (!stream.atEnd()) {
                 QString text;
                 stream >> text;
+                qDebug()<<"stream"<<text;
                 auto item = new QGraphicsTextItem(text);
                 item->setPos(event->pos() + QPointF(i * 20, i * 20));
                 scene->addItem(item);
@@ -74,7 +76,7 @@ int main(int argc, char *argv[]) {
     treeWidget.setHeaderLabels({ "Values" });
     for (int i = 1; i <= 10; i++) {
         auto item = new QTreeWidgetItem(&treeWidget, { QString("Item %1").arg(i) });
-        item->setData(0, Qt::UserRole, i * 10);
+        item->setData(0, Qt::UserRole, "i * 10");
     }
     treeWidget.show();
 

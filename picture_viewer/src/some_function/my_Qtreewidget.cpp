@@ -8,7 +8,7 @@
 #include "QClipboard"
 #include "My_Qtreewidget.h"
 #include "qdebug.h"
-
+#include "QMimeData"
 My_Qtreewidget::My_Qtreewidget(QWidget *parent)
         : QTreeWidget(parent),
           MAX_NODE_COUNT(1000),
@@ -350,11 +350,22 @@ My_Qtreewidget::~My_Qtreewidget(){
         delete child;
     }
 
-
 }
 
-void My_Qtreewidget::dropEvent(QDropEvent *event) {
-    qDebug()<<"eventeventevent";
+QMimeData* My_Qtreewidget::mimeData(const QList<QTreeWidgetItem *> items) const{
+    // 拖动节点会自动调这个函数
+    QMimeData *mimeData = new QMimeData;
+    QByteArray encodedData;
+    QDataStream stream(&encodedData, QIODevice::WriteOnly);
+    for (auto item : items) {
+        auto filetype = item->text(1);
+        auto filename = item->text(0);
+        auto path = item->data(0,Qt::UserRole);
+        stream << filetype<<filename<<path.toString();
+    }
+    mimeData->setData("application/x-qtreewidget-values", encodedData);
+    return mimeData;
 }
+
 
 
