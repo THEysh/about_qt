@@ -1,12 +1,18 @@
 <RCC>
 <qresource prefix="/">
+<file>ui/images/pic/bmp.svg</file>
 <file>ui/images/pic/file-image-solid.svg</file>
 <file>ui/images/pic/file-lines-solid.svg</file>
 <file>ui/images/pic/file-solid.svg</file>
 <file>ui/images/pic/folder-open-regular.svg</file>
 <file>ui/images/pic/folder-solid.svg</file>
+<file>ui/images/pic/gif.svg</file>
 <file>ui/images/pic/github.png</file>
-<file>ui/images/pic/xmark-solid.svg</file>
+<file>ui/images/pic/ico.svg</file>
+<file>ui/images/pic/jpg.svg</file>
+<file>ui/images/pic/png.svg</file>
+<file>ui/images/pic/svg.svg</file>
+<file>ui/images/pic/tif.svg</file>
 <file>ui/images/pic_2d/a.ico</file>
 <file>ui/images/pic_2d/icons-solid.svg</file>
 <file>ui/images/pic_2d/images-solid.ico</file>

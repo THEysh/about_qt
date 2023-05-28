@@ -9,15 +9,18 @@
 #include "My_Qtreewidget.h"
 #include "qdebug.h"
 #include "QMimeData"
+#include <QtConcurrent/QtConcurrent>
 My_Qtreewidget::My_Qtreewidget(QWidget *parent)
         : QTreeWidget(parent),
-          MAX_NODE_COUNT(1000),
+          MAX_NODE_COUNT(1000000),
           nodeCount(0),
           rootNode(new QTreeWidgetItem(this)),
           ProjectDir(QStandardPaths::writableLocation(QStandardPaths::DesktopLocation)),
           my_photo(nullptr),
           my_watcher (new QFileSystemWatcher()),
           active_item(nullptr),
+          lineEdit(nullptr),
+          hash_temp_root(nullptr),
           imageTypes({"bmp","jpg","png","tif","ico","gif","svg"})
 
 {
@@ -52,18 +55,22 @@ void My_Qtreewidget::_updata_all_Qtree_dir()
     rootNode->setData(0, Qt::UserRole, ProjectDir);
     rootNode->setIcon(0, QIcon(":ui/images/pic/folder-solid.svg"));
     my_watcher->addPath(rootNode->data(0,Qt::UserRole).toString());
-    _addSubDirs(rootNode, ProjectDir);
+    hash_item.insert(rootNode->data(0,Qt::UserRole).toString(),rootNode);
+    // 创建一个异步线程，更新目录
+    QFuture<void> future = QtConcurrent::run([=]() {
+        _addSubDirs(rootNode, ProjectDir);
+    });
+
 }
 
 void My_Qtreewidget::_updata_someone_QTreeWidgetItem(QTreeWidgetItem *parentNode, const QString& path)
 {
-    nodeCount = rootNode->childCount();
-    while (parentNode->childCount() > 0) {
-        QTreeWidgetItem *child = parentNode->takeChild(0);
-        delete child;
-    }
-    if (path!= nullptr){
-        _addSubDirs(parentNode, path);}
+//    nodeCount = rootNode->childCount();
+//    while (parentNode->childCount() > 0) {
+//        QTreeWidgetItem *child = parentNode->takeChild(0);
+//        delete child;
+//    }
+//    _addSubDirs(parentNode, path);
 
 }
 
@@ -73,8 +80,10 @@ void My_Qtreewidget::_dir_connect()
     QObject::connect(this, &QTreeWidget::itemExpanded, this, &My_Qtreewidget::on_itemExpanded);
     QObject::connect(this, &QTreeWidget::itemCollapsed, this, &My_Qtreewidget::on_itemCollapsed);
     QObject::connect(my_watcher, &QFileSystemWatcher::directoryChanged, this, &My_Qtreewidget::on_directoryChanged);
+    QObject::connect(my_watcher, &QFileSystemWatcher::fileChanged, this, &My_Qtreewidget::on_fileChanged);
+
     QObject::connect(this, &QTreeWidget::itemDoubleClicked, this, &My_Qtreewidget::on_itemDoubleClicked);
-//    QObject::connect(this,&QTreeWidget::)
+
 }
 
 bool My_Qtreewidget::_is_type(const QString& name, const QStringList& strlist){
@@ -149,6 +158,7 @@ QString My_Qtreewidget::_rag(const QString& name){
 }
 
 void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& path) {
+    qDebug()<<"RUN:_addSubDirs";
     //BFS
     QDir directory(path);
     // QTreeWidgetItem *temp_parentNode = parentNode; //创建一个 QTreeWidgetItem指针，用于传值
@@ -183,8 +193,19 @@ void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& pat
                 node->setText(2, temp_parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
                 // 获取文件目录
                 node->setData(0, Qt::UserRole, fileInfo.filePath());
-                node->setIcon(0, QIcon(":ui/images//pic/file-image-solid.svg"));
-
+                QString item_type = fileInfo.suffix();
+                // 添加文件监控
+                my_watcher->addPath(fileInfo.filePath());
+                // 添加hash
+                hash_item.insert(fileInfo.filePath(),node);
+                // 设置图标
+                for(auto t: imageTypes){
+                    if (item_type==t){
+                        QString qicon = ":ui/images/pic/"+ t +".svg";
+                        node->setIcon(0, QIcon(qicon));
+                        break;
+                    }
+                }
             }
             else if (fileType=="folders"){
                 nodeCount ++;
@@ -195,7 +216,10 @@ void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& pat
                 // 获取文件目录
                 node->setData(0, Qt::UserRole, fileInfo.filePath());
                 node->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
-                my_watcher->addPath(node->data(0,Qt::UserRole).toString()); //添加监控，文件夹路径下的变化监控
+                // 添加文件监控
+                my_watcher->addPath(fileInfo.filePath()); //添加监控，文件夹路径下的变化监控
+                // 添加hash
+                hash_item.insert(fileInfo.filePath(),node);
                 // 是目录，将其加入队列中
                 file_queue.enqueue(node);
             }
@@ -244,15 +268,22 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     }
     else if (selectedItem == renameAction){
-        QLineEdit *lineEdit = new QLineEdit(this);
+
+        lineEdit = new QLineEdit(item->text(0),this);
         item->setFlags(item->flags() | Qt::ItemIsEditable);
         this->setItemWidget(item, 0, lineEdit);
         this->editItem(item, 0);
-        connect(lineEdit, &QLineEdit::editingFinished, this, [=]() {
-            QString newName = lineEdit->text();
-            if (newName.isEmpty()){
 
-                return;
+        connect(lineEdit, &QLineEdit::editingFinished, this, [this,item]() {
+            qDebug()<<"rename";
+            QString newName = lineEdit->text();
+            qDebug()<<"newName"<<item->text(0);
+            if (newName.isEmpty()){
+                qDebug()<<item->text(0);
+                qDebug()<<"newName"<<item->text(0);
+                newName = item->text(0);
+                lineEdit->setText(newName);
+                lineEdit = nullptr;
             }
             QString oldPath = item->data(0, Qt::UserRole).toString();
             QString newPath = item->parent()->data(0,Qt::UserRole).toString()+"/"+ newName;
@@ -264,7 +295,8 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
             else{
                 dir.rename(oldPath,newPath);
             }
-            // 更改完成后自动更新节点
+            _updata_someone_QTreeWidgetItem(item->parent(),item->data(0,Qt::UserRole).toString());
+
         });
     }
     else if (selectedItem == copyAction){
@@ -299,24 +331,82 @@ void My_Qtreewidget::on_itemCollapsed(QTreeWidgetItem *item)
 
 void My_Qtreewidget::on_directoryChanged(const QString &changedPath)
 {
-    std::function<QTreeWidgetItem*(QTreeWidgetItem*)> lambda_traverseTreeItems = [&](QTreeWidgetItem *item) -> QTreeWidgetItem* {
-        if(item->data(0,Qt::UserRole).toString() == changedPath) {
-            return item;
-        }
-        int childCount = item->childCount();
-        for (int i = 0; i < childCount; i++) {
-            QTreeWidgetItem *child = item->child(i);
-            QTreeWidgetItem *result = lambda_traverseTreeItems(child);
-            if(result != nullptr) {
-                return result;
+    qDebug()<<"on_directoryChanged"<<changedPath;
+    qDebug()<<"=========================================";
+//    std::function<QTreeWidgetItem*(QTreeWidgetItem*)> lambda_traverseTreeItems = [&](QTreeWidgetItem *item) -> QTreeWidgetItem* {
+//        if(item->data(0,Qt::UserRole).toString() == changedPath) {
+//            return item;
+//        }
+//        int childCount = item->childCount();
+//        for (int i = 0; i < childCount; i++) {
+//            QTreeWidgetItem *child = item->child(i);
+//            QTreeWidgetItem *result = lambda_traverseTreeItems(child);
+//            if(result != nullptr) {
+//                return result;
+//            }
+//        }
+//        return nullptr;
+//    };
+//    auto *child = lambda_traverseTreeItems(rootNode);
+//    if (child != nullptr) {
+//        _updata_someone_QTreeWidgetItem(child, child->data(0, Qt::UserRole).toString());
+//    }
+}
+
+void My_Qtreewidget::on_fileChanged(const QString &filedPath) {
+    // 这里是文件监控，当监控文件被改变，遍历这个当前文件目录。
+    // 根据哈希表增减键值，修改文件目录节点和哈希表
+    qDebug()<<"on_fileChanged"<<filedPath;
+
+    hash_temp_root = hash_item.value(filedPath);
+    // 获取父亲节点
+    if (hash_temp_root->parent()== nullptr) {
+        return;
+    } else{
+        // 父亲节点是个文件夹或者是空，遍历节点看看有没有变化，新的节点添加，旧的跳过
+        // 获取父类文件夹
+        QDir temp_directory(hash_temp_root->parent()->data(0, Qt::UserRole).toString());
+        QFileInfoList fileList = temp_directory.entryInfoList(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
+        int size = fileList.count();
+        for (int i = 0; i < size; i++) {
+            QFileInfo fileInfo = fileList.at(i);
+            QString fileName = fileInfo.fileName();
+            QString fileType = fileInfo.isFile() ? "files" : "folders";
+            bool is_img = _is_type(fileName,imageTypes);
+            if (fileType=="files" && is_img){
+                // 查看哈希表 path 有没有变化。
+                QTreeWidgetItem *temp_child = hash_item.value(fileInfo.filePath());
+                if(temp_child== nullptr){
+                    // 添加这个节点
+                    nodeCount ++;
+                    auto *node = new QTreeWidgetItem(hash_temp_root->parent()); // 这里填父类节点
+                    node->setText(0, fileName);
+                    node->setText(1, fileType);
+                    node->setText(2, hash_temp_root->parent()->data(0,Qt::UserRole).toString()); //保存父类的路径
+                    // 获取文件目录
+                    node->setData(0, Qt::UserRole, fileInfo.filePath());
+                    QString item_type = fileInfo.suffix();
+                    // 添加文件监控
+                    my_watcher->addPath(fileInfo.filePath());
+                    // 添加hash
+                    hash_item.insert(fileInfo.filePath(),node);
+                    // 设置图标
+                    for(auto t: imageTypes){
+                        if (item_type==t){
+                            QString qicon = ":ui/images/pic/"+ t +".svg";
+                            node->setIcon(0, QIcon(qicon));
+                            break;
+                        }
+                    }
+                }
             }
         }
-        return nullptr;
-    };
-    auto *child = lambda_traverseTreeItems(rootNode);
-    if (child != nullptr) {
-        _updata_someone_QTreeWidgetItem(child, child->data(0, Qt::UserRole).toString());
+        // 删除被修改的键值和节点,删除文件监控
+        hash_item.remove(filedPath);
+        my_watcher->removePath(filedPath);
+        delete hash_temp_root;
     }
+
 }
 
 void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item)
@@ -366,6 +456,7 @@ QMimeData* My_Qtreewidget::mimeData(const QList<QTreeWidgetItem *> items) const{
     mimeData->setData("application/x-qtreewidget-values", encodedData);
     return mimeData;
 }
+
 
 
 
