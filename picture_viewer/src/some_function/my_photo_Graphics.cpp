@@ -54,10 +54,7 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
-    if (is_comparison){
-        qDebug()<<"is_comparison"<<is_comparison;
-        return;
-    }
+
     qDebug()<<"My_Photo_Graphics::resizeEvent:->view siez"<<this->size();
     // 更新背景的尺寸
     QRect new_rect(QPoint(0, 0), this->size());
@@ -65,6 +62,10 @@ void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     background = or_background.scaled(this->size(), Qt::IgnoreAspectRatio);
     this->setBackgroundBrush(QBrush(background));
 
+    if (item_queue.size()>1){
+        qDebug()<<"size大于1是对比模式，不更新图片";
+        return;
+    }
     // 更新graphics_Item_unique尺寸
     if (!item_queue.empty()){
         item_queue.at(item_queue_idx)->resizeEvent(event,this, scene);
