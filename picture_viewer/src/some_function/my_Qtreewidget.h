@@ -28,19 +28,14 @@ private slots:
     void on_itemClicked(QTreeWidgetItem *item);
     void on_itemExpanded(QTreeWidgetItem *item);
     void on_itemCollapsed(QTreeWidgetItem *item);
-    void on_directoryChanged(const QString &changedPath);
     void on_itemDoubleClicked(QTreeWidgetItem *item);
     void on_fileChanged(const QString &filedPath);
 private:
-
     const int MAX_NODE_COUNT;
     int nodeCount;
     QTreeWidgetItem* rootNode;
     QLineEdit *lineEdit = nullptr;
-    QTreeWidgetItem* hash_temp_root = nullptr ; //用于查键值使用的指针
-
     void _updata_all_Qtree_dir();
-    void _updata_someone_QTreeWidgetItem(QTreeWidgetItem *parentNode, const QString& path);
     void _dir_connect();
     void _addSubDirs(QTreeWidgetItem *parentNode, const QString& path);
     void keyPressEvent(QKeyEvent *event) override;
@@ -48,6 +43,7 @@ private:
     void contextMenuEvent(QContextMenuEvent *event) override;
     QString _rag(const QString &qString);
     bool _is_type(const QString &name, const QStringList &strlist);
+
 };
 
 #endif // MY_QTREEWIDGET_H
