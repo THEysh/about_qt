@@ -71,22 +71,13 @@ void My_Qtreewidget::_dir_connect()
     QObject::connect(this, &QTreeWidget::itemDoubleClicked, this, &My_Qtreewidget::on_itemDoubleClicked);
 }
 
-void My_Qtreewidget::_add_a_layerDirs(QTreeWidgetItem *parentNode,bool is_execute= false) {
-// 默认初始值为true 表示，如果线程在运行。那么我将等待,随后运行这段代码
+void My_Qtreewidget::_add_a_layerDirs(QTreeWidgetItem *parentNode) {
+
     // 把文件夹的更新包装为匿名函数 用于异步更新文件节点
     auto add_layerDirs = [this,parentNode](){
-        // 先删除节点在继续
-        while (parentNode->childCount() > 0) {
-            QTreeWidgetItem *child = parentNode->takeChild(0);
-            // 如果不为空
-            if (!child->data(0,Qt::UserRole).toString().isEmpty()){
-                my_watcher->removePath(child->data(0,Qt::UserRole).toString());
-                hash_item.remove(child->data(0,Qt::UserRole).toString());
-                nodeCount--;
-            }
-            delete child;
+        if (parentNode== nullptr){
+            return;
         }
-
         QDir temp_directory(parentNode->data(0, Qt::UserRole).toString());
         QFileInfoList fileList = temp_directory.entryInfoList(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
         int size = fileList.count();
@@ -138,27 +129,19 @@ void My_Qtreewidget::_add_a_layerDirs(QTreeWidgetItem *parentNode,bool is_execut
             }
         }
     };
-    if (ar_future.isRunning()) {
-        ar_future.waitForFinished();
-    }
-    if(is_execute){
-        ar_future = QtConcurrent::run(add_layerDirs);
-    } else{
-        if (!ar_future.isRunning()){
-            qDebug()<<"LOAD";
-            ar_future = QtConcurrent::run(add_layerDirs);
-        }
-    }
+
+    ar_future= QtConcurrent::run(add_layerDirs);
+
 }
 
 void My_Qtreewidget::delete_roots(QTreeWidgetItem *item) {
     // 默认初始值为true 表示，如果线程在运行。那么我将等待,随后运行这段代码
     // 定义一个删除节点的匿名函数
     auto deleteChildren = [this](QTreeWidgetItem *item) {
+        if (item == nullptr){return ;}
         while (item->childCount() > 0) {
             QTreeWidgetItem *child = item->takeChild(0);
-            // 如果不为空
-            if (!child->data(0,Qt::UserRole).toString().isEmpty()){
+            if (child!= nullptr){
                 my_watcher->removePath(child->data(0,Qt::UserRole).toString());
                 hash_item.remove(child->data(0,Qt::UserRole).toString());
                 nodeCount--;
@@ -166,7 +149,10 @@ void My_Qtreewidget::delete_roots(QTreeWidgetItem *item) {
             delete child;
         }
     };
+
     ar_future = QtConcurrent::run(deleteChildren, item);
+
+
 }
 
 bool My_Qtreewidget::_is_type(const QString& name, const QStringList& strlist){
@@ -309,7 +295,7 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
                 dir.rename(oldPath,newPath);
             }
             // 如果是重命名的是文件夹的话 需要手动更新节点,删除节点并更新
-            _add_a_layerDirs(item->parent(), true);
+            _add_a_layerDirs(item->parent());
         });
     }
     else if (selectedItem == copyAction){
@@ -334,26 +320,21 @@ void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
 
 void My_Qtreewidget::on_itemExpanded(QTreeWidgetItem *item)
 {
-    item->setIcon(0, QIcon(":ui/images//pic/folder-open-regular.svg"));
-    if(item->text(1)=="folders"){
+    item->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+    if(item->text(1)=="folders"&& !ar_future.isRunning()){
         _add_a_layerDirs(item);
-    } else{
-        return;
+        item->setIcon(0, QIcon(":ui/images//pic/folder-open-regular.svg"));
     }
-
 }
 
 void My_Qtreewidget::on_itemCollapsed(QTreeWidgetItem *item)
 {
     item->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
     // 删除所有节点，每次展开的时候更新
-    if(item->text(1)=="folders"){
+    if(item->text(1)=="folders"&&!ar_future.isRunning()){
         // 遍历删除所有子节点,异步线程
         delete_roots(item);
-    } else{
-        return;
     }
-
 }
 
 void My_Qtreewidget::on_fileChanged(const QString &filedPath) {

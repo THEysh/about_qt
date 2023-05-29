@@ -40,7 +40,7 @@ private:
     QFuture<void> ar_future;
     void _updata_all_Qtree_dir();
     void _dir_connect();
-    void _add_a_layerDirs(QTreeWidgetItem *parentNode,bool is_execute);
+    void _add_a_layerDirs(QTreeWidgetItem *parentNode);
     void delete_roots(QTreeWidgetItem *parentNode);
     void keyPressEvent(QKeyEvent *event) override;
     void _updata_treewidgetItem(bool is_next);
