@@ -57,7 +57,6 @@ void My_Qtreewidget::_updata_all_Qtree_dir()
     hash_item.insert(rootNode->data(0,Qt::UserRole).toString(),rootNode);
     // 这里表示这个节点可以展开
     rootNode->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-
 }
 
 void My_Qtreewidget::_dir_connect()
@@ -164,11 +163,11 @@ void My_Qtreewidget::keyPressEvent(QKeyEvent *event)
     }
     if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Up) {
         _updata_treewidgetItem(false); //计算上一个节点,并更新
-        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);
+        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes,active_item);
     }
     else if (event->key() == Qt::Key_Right || event->key() == Qt::Key_Down){
         _updata_treewidgetItem(true);
-        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes);
+        my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes,active_item);
     }
 }
 
@@ -220,9 +219,11 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
     if (!item){return;}
     QMenu menu(this);
     QAction* openAction = menu.addAction("打开");
+    QAction* copyElements = menu.addAction("复制");
     QAction* copyAction = menu.addAction("复制路径");
     QAction* renameAction = menu.addAction("重命名");
     QAction* removeAction = menu.addAction("永久删除");
+
     QAction* selectedItem = menu.exec(event->globalPos());
     if (!selectedItem)
         return;
@@ -246,10 +247,26 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
         }
         // 删除完成后自动更新节点
     }
+
+    else if (selectedItem == copyElements){
+        QUrl url = QUrl::fromLocalFile(item->data(0, Qt::UserRole).toString());
+        // 将 QUrl 对象添加到 QList<QUrl> 中
+        QList<QUrl> copyFiles;
+        copyFiles.push_back(url);
+        // 创建一个 QMimeData 对象，并将 QList<QUrl> 对象设置为它的数据
+        auto *mimeData = new QMimeData;
+        mimeData->setUrls(copyFiles);
+        // 将 QMimeData 对象设置到剪贴板中
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        clipboard->setMimeData(mimeData);
+        // 输出成功提示信息
+        qDebug() << "The file has been copied to the clipboard.";
+    }
     else if (selectedItem == openAction) {
         QString path = item->data(0, Qt::UserRole).toString();
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
     }
+
     else if (selectedItem == renameAction){
         lineEdit = new QLineEdit(item->text(0),this);
         item->setFlags(item->flags() | Qt::ItemIsEditable);
@@ -279,6 +296,7 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
             _updata_one_item(item, newPath);
         });
     }
+
     else if (selectedItem == copyAction){
         QClipboard *clipboard = QGuiApplication::clipboard();
         clipboard->setText(item->data(0, Qt::UserRole).toString());
@@ -295,7 +313,7 @@ void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
     bool is_img = _is_type(img_path, this->imageTypes);
     if (is_img) {
         active_item = item;
-        my_photo->graphics_load_image(active_item->data(0, Qt::UserRole).toString(), imageTypes);
+        my_photo->graphics_load_image(active_item->data(0, Qt::UserRole).toString(), imageTypes,active_item);
     }
 }
 

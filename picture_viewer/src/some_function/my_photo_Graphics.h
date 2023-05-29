@@ -27,7 +27,7 @@ public:
     explicit My_Photo_Graphics(QWidget *parent);
     ~My_Photo_Graphics() override;
     QGraphicsScene *scene = nullptr;
-    void graphics_load_image(const QString &path, const QStringList &type_img);
+    void graphics_load_image(const QString &path, const QStringList &type_img,QTreeWidgetItem* item);
     My_Qtreewidget *in_tree;
 protected:
     QPixmap or_background;
@@ -42,6 +42,7 @@ protected:
     void dropEvent(QDropEvent *event) override;
 private:
     void connect_loadphoto();
+    void add_image_information(std::shared_ptr<Item_Interface> temp_unique, const QString photo_path, QTreeWidgetItem* item);
     Item_Interface_Queue item_queue; //存放智能指针的队列（所有图片的指向）
     int item_queue_idx = 0;
     bool is_comparison = false; //对比模式

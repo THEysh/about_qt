@@ -21,6 +21,8 @@ Q_OBJECT
 public: //公共接口
     //唯一标识符号
     QUuid uuidSymbol = nullptr;
+    QString photo_path = nullptr; //路径
+    QTreeWidgetItem* photo_item;
     explicit Item_Interface();
     ~Item_Interface() override;
     virtual void click_element();
@@ -29,7 +31,7 @@ public: //公共接口
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
     virtual void set_z_val(int num);
-    virtual QGraphicsItem* get_Item();
+
 protected:
     double roller_factor = 1.05;
     virtual void position_calculation(QGraphicsView *view);
@@ -43,7 +45,7 @@ public:
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
     void set_z_val(int num) override;
-    QGraphicsPixmapItem*  get_Item();
+
 
 protected:
     void wheelEvent(QWheelEvent *event,QGraphicsView *view) ;

@@ -47,9 +47,6 @@ void Item_Interface::set_z_val(int num) {
     //设置z轴高度
 }
 
-QGraphicsItem *Item_Interface::get_Item() {
-    return nullptr;
-}
 
 //====================================================================================================
 
@@ -176,13 +173,6 @@ void C_QPixmapItem::set_z_val(int num) {
     graphics_pixmapItem_unique->setZValue(num);
 }
 
-QGraphicsPixmapItem* C_QPixmapItem::get_Item() {
-    if (graphics_pixmapItem_unique!= nullptr){
-        return graphics_pixmapItem_unique.get();
-    } else{
-        qDebug()<<"C_QPixmapItem::get_QGraphicsPixmapItem() bug";
-    }
-}
 
 //====================================================================================================
 

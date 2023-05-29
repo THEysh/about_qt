@@ -18,6 +18,7 @@ public:
     explicit My_Qtreewidget(QWidget *name);
     ~My_Qtreewidget() override;
     void connect_photo(My_Photo_Graphics* name);
+    bool _is_type(const QString &name, const QStringList &strlist);
     QString ProjectDir;
     My_Photo_Graphics* my_photo;
     QTreeWidgetItem* active_item;
@@ -47,7 +48,6 @@ private:
     void _updata_treewidgetItem(bool is_next);
     void contextMenuEvent(QContextMenuEvent *event) override;
     QString _rag(const QString &qString);
-    bool _is_type(const QString &name, const QStringList &strlist);
     void _addSubDirs(QTreeWidgetItem *parentNode, const QString& path);
 
 };
