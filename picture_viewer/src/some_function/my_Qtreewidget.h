@@ -8,6 +8,7 @@
 #include <QUrl>
 #include <QDesktopServices>
 #include <QFileSystemWatcher>
+#include <QFuture>
 #include "My_Photo_Graphics.h"
 
 class My_Qtreewidget : public QTreeWidget {
@@ -35,14 +36,18 @@ private:
     int nodeCount;
     QTreeWidgetItem* rootNode;
     QLineEdit *lineEdit = nullptr;
+    // QFuture<void> future_load_dir; //用于异步加载文件的函数
+    QFuture<void> ar_future;
     void _updata_all_Qtree_dir();
     void _dir_connect();
-    void _addSubDirs(QTreeWidgetItem *parentNode, const QString& path);
+    void _add_a_layerDirs(QTreeWidgetItem *parentNode,bool is_execute);
+    void delete_roots(QTreeWidgetItem *parentNode);
     void keyPressEvent(QKeyEvent *event) override;
     void _updata_treewidgetItem(bool is_next);
     void contextMenuEvent(QContextMenuEvent *event) override;
     QString _rag(const QString &qString);
     bool _is_type(const QString &name, const QStringList &strlist);
+    void _addSubDirs(QTreeWidgetItem *parentNode, const QString& path);
 
 };
 

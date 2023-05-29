@@ -23,7 +23,7 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
           imageTypes({"bmp","jpg","png","tif","ico","gif","svg"})
 
 {
-    // 写一个动态加载 图片
+
     this->setHeaderHidden(true);
     this->setDragEnabled(true);
     rootNode->setText(0, "双击此处打开目录");
@@ -47,56 +47,51 @@ void My_Qtreewidget::connect_photo(My_Photo_Graphics *name) {
 void My_Qtreewidget::_updata_all_Qtree_dir()
 {
     nodeCount = 0;
-    while (rootNode->childCount() > 0) {
-        QTreeWidgetItem *child = rootNode->takeChild(0);
-        delete child;
-    }
+    // 异步删除节点
+    delete_roots(rootNode);
     rootNode->setText(0, "双击此处打开目录");
+    rootNode->setText(1, "folders");
     rootNode->setData(0, Qt::UserRole, ProjectDir);
     rootNode->setIcon(0, QIcon(":ui/images/pic/folder-solid.svg"));
     my_watcher->addPath(rootNode->data(0,Qt::UserRole).toString());
     hash_item.insert(rootNode->data(0,Qt::UserRole).toString(),rootNode);
-    // 创建一个异步线程，更新目录
-    QFuture<void> future = QtConcurrent::run([=]() {
-        _addSubDirs(rootNode, ProjectDir);
-    });
+    // 这里表示这个节点可以展开
+    rootNode->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
 
 }
 
 void My_Qtreewidget::_dir_connect()
 {
-
     QObject::connect(this, &QTreeWidget::itemClicked, this, &My_Qtreewidget::on_itemClicked);
+    // 动态显示节点，展开的时候加载
+    // 收拢的时候删除，在一次展开时候重新加载
     QObject::connect(this, &QTreeWidget::itemExpanded, this, &My_Qtreewidget::on_itemExpanded);
     QObject::connect(this, &QTreeWidget::itemCollapsed, this, &My_Qtreewidget::on_itemCollapsed);
     QObject::connect(my_watcher, &QFileSystemWatcher::fileChanged, this, &My_Qtreewidget::on_fileChanged);
     QObject::connect(this, &QTreeWidget::itemDoubleClicked, this, &My_Qtreewidget::on_itemDoubleClicked);
-
 }
 
-void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& path) {
-    qDebug()<<"RUN:_addSubDirs";
-    //BFS
-    QDir directory(path);
-    // QTreeWidgetItem *temp_parentNode = parentNode; //创建一个 QTreeWidgetItem指针，用于传值
-    QQueue<QTreeWidgetItem*> file_queue;
-    file_queue.enqueue(parentNode);
-    while (!file_queue.isEmpty()) {
-        if (nodeCount++>MAX_NODE_COUNT){return;}
-        // 取出队列中的第一个节点,构建树节点，同时也用作下一个节点的父类
-        QTreeWidgetItem *temp_parentNode = file_queue.front();
-        QDir temp_directory(temp_parentNode->data(0, Qt::UserRole).toString());
-        //具体地说，这个代码使用entryInfoList函数获取了directory目录下的所有文件和目录的信息，包括隐藏文件和当前目录以及父级目录（"."和".."），并将它们的QFileInfo对象添加到QFileInfoList列表中。
-        //参数QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot是用来设置entryInfoList函数的选项，其中：
-        //QDir::Files指示返回文件的信息
-        //QDir::AllDirs指示返回子目录的信息
-        //QDir::NoDotAndDotDot指示过滤掉"."和".."目录
+void My_Qtreewidget::_add_a_layerDirs(QTreeWidgetItem *parentNode,bool is_execute= false) {
+// 默认初始值为true 表示，如果线程在运行。那么我将等待,随后运行这段代码
+    // 把文件夹的更新包装为匿名函数 用于异步更新文件节点
+    auto add_layerDirs = [this,parentNode](){
+        // 先删除节点在继续
+        while (parentNode->childCount() > 0) {
+            QTreeWidgetItem *child = parentNode->takeChild(0);
+            // 如果不为空
+            if (!child->data(0,Qt::UserRole).toString().isEmpty()){
+                my_watcher->removePath(child->data(0,Qt::UserRole).toString());
+                hash_item.remove(child->data(0,Qt::UserRole).toString());
+                nodeCount--;
+            }
+            delete child;
+        }
+
+        QDir temp_directory(parentNode->data(0, Qt::UserRole).toString());
         QFileInfoList fileList = temp_directory.entryInfoList(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
         int size = fileList.count();
-        // 队列中删除这个节点
-        file_queue.dequeue();
-        // 遍历与当前节点相连的所有节点
         for (int i = 0; i < size; i++) {
+            if (nodeCount++>MAX_NODE_COUNT){ break;}
             QFileInfo fileInfo = fileList.at(i);
             QString fileName = fileInfo.fileName();
             QString fileType = fileInfo.isFile() ? "files" : "folders";
@@ -104,10 +99,10 @@ void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& pat
             if (fileType=="files" && is_img){
                 //下面 设置节点的信息
                 nodeCount ++;
-                auto *node = new QTreeWidgetItem(temp_parentNode);
+                auto *node = new QTreeWidgetItem(parentNode);
                 node->setText(0, fileName);
                 node->setText(1, fileType);
-                node->setText(2, temp_parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
+                node->setText(2, parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
                 // 获取文件目录
                 node->setData(0, Qt::UserRole, fileInfo.filePath());
                 QString item_type = fileInfo.suffix();
@@ -125,11 +120,14 @@ void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& pat
                 }
             }
             else if (fileType=="folders"){
+                // 如果是文件夹就创建一个空节点表示其可以展开
                 nodeCount ++;
-                auto *node = new QTreeWidgetItem(temp_parentNode);
+                auto *node = new QTreeWidgetItem(parentNode);
+                // 表示可以展开
+                node->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
                 node->setText(0, fileName);
                 node->setText(1, fileType);
-                node->setText(2, temp_parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
+                node->setText(2, parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
                 // 获取文件目录
                 node->setData(0, Qt::UserRole, fileInfo.filePath());
                 node->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
@@ -137,11 +135,38 @@ void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& pat
                 my_watcher->addPath(fileInfo.filePath()); //添加监控，文件夹路径下的变化监控
                 // 添加hash
                 hash_item.insert(fileInfo.filePath(),node);
-                // 是目录，将其加入队列中
-                file_queue.enqueue(node);
             }
         }
+    };
+    if (ar_future.isRunning()) {
+        ar_future.waitForFinished();
     }
+    if(is_execute){
+        ar_future = QtConcurrent::run(add_layerDirs);
+    } else{
+        if (!ar_future.isRunning()){
+            qDebug()<<"LOAD";
+            ar_future = QtConcurrent::run(add_layerDirs);
+        }
+    }
+}
+
+void My_Qtreewidget::delete_roots(QTreeWidgetItem *item) {
+    // 默认初始值为true 表示，如果线程在运行。那么我将等待,随后运行这段代码
+    // 定义一个删除节点的匿名函数
+    auto deleteChildren = [this](QTreeWidgetItem *item) {
+        while (item->childCount() > 0) {
+            QTreeWidgetItem *child = item->takeChild(0);
+            // 如果不为空
+            if (!child->data(0,Qt::UserRole).toString().isEmpty()){
+                my_watcher->removePath(child->data(0,Qt::UserRole).toString());
+                hash_item.remove(child->data(0,Qt::UserRole).toString());
+                nodeCount--;
+            }
+            delete child;
+        }
+    };
+    ar_future = QtConcurrent::run(deleteChildren, item);
 }
 
 bool My_Qtreewidget::_is_type(const QString& name, const QStringList& strlist){
@@ -283,6 +308,8 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
             else{
                 dir.rename(oldPath,newPath);
             }
+            // 如果是重命名的是文件夹的话 需要手动更新节点,删除节点并更新
+            _add_a_layerDirs(item->parent(), true);
         });
     }
     else if (selectedItem == copyAction){
@@ -308,11 +335,25 @@ void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
 void My_Qtreewidget::on_itemExpanded(QTreeWidgetItem *item)
 {
     item->setIcon(0, QIcon(":ui/images//pic/folder-open-regular.svg"));
+    if(item->text(1)=="folders"){
+        _add_a_layerDirs(item);
+    } else{
+        return;
+    }
+
 }
 
 void My_Qtreewidget::on_itemCollapsed(QTreeWidgetItem *item)
 {
     item->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+    // 删除所有节点，每次展开的时候更新
+    if(item->text(1)=="folders"){
+        // 遍历删除所有子节点,异步线程
+        delete_roots(item);
+    } else{
+        return;
+    }
+
 }
 
 void My_Qtreewidget::on_fileChanged(const QString &filedPath) {
@@ -372,6 +413,7 @@ void My_Qtreewidget::on_fileChanged(const QString &filedPath) {
         }
         // 删除被修改的键值,节点,删除旧文件监控
         if (!is_oldroot){
+            // 只删除一个节点
             hash_item.remove(filedPath);
             my_watcher->removePath(filedPath);
             delete hash_temp_root;
@@ -403,15 +445,11 @@ void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item)
 }
 
 My_Qtreewidget::~My_Qtreewidget(){
+    // 遍历删除所有子节点
+    delete_roots(rootNode);
     delete my_photo;
     delete active_item;
     delete my_watcher;
-// 遍历删除所有子节点
-    while (rootNode->childCount() > 0) {
-        QTreeWidgetItem *child = rootNode->takeChild(0);
-        delete child;
-    }
-
 }
 
 QMimeData* My_Qtreewidget::mimeData(const QList<QTreeWidgetItem *> items) const{
@@ -429,7 +467,76 @@ QMimeData* My_Qtreewidget::mimeData(const QList<QTreeWidgetItem *> items) const{
     return mimeData;
 }
 
-
+//void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& path) {
+//    qDebug()<<"RUN:_addSubDirs";
+//    //BFS 添加全部节点
+//    QDir directory(path);
+//    // QTreeWidgetItem *temp_parentNode = parentNode; //创建一个 QTreeWidgetItem指针，用于传值
+//    QQueue<QTreeWidgetItem*> file_queue;
+//    file_queue.enqueue(parentNode);
+//    while (!file_queue.isEmpty()) {
+//        if (nodeCount++>MAX_NODE_COUNT){return;}
+//        // 取出队列中的第一个节点,构建树节点，同时也用作下一个节点的父类
+//        QTreeWidgetItem *temp_parentNode = file_queue.front();
+//        QDir temp_directory(temp_parentNode->data(0, Qt::UserRole).toString());
+//        //具体地说，这个代码使用entryInfoList函数获取了directory目录下的所有文件和目录的信息，包括隐藏文件和当前目录以及父级目录（"."和".."），并将它们的QFileInfo对象添加到QFileInfoList列表中。
+//        //参数QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot是用来设置entryInfoList函数的选项，其中：
+//        //QDir::Files指示返回文件的信息
+//        //QDir::AllDirs指示返回子目录的信息
+//        //QDir::NoDotAndDotDot指示过滤掉"."和".."目录
+//        QFileInfoList fileList = temp_directory.entryInfoList(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
+//        int size = fileList.count();
+//        // 队列中删除这个节点
+//        file_queue.dequeue();
+//        // 遍历与当前节点相连的所有节点
+//        for (int i = 0; i < size; i++) {
+//            QFileInfo fileInfo = fileList.at(i);
+//            QString fileName = fileInfo.fileName();
+//            QString fileType = fileInfo.isFile() ? "files" : "folders";
+//            bool is_img = _is_type(fileName,imageTypes);
+//            if (fileType=="files" && is_img){
+//                //下面 设置节点的信息
+//                nodeCount ++;
+//                auto *node = new QTreeWidgetItem(temp_parentNode);
+//                node->setText(0, fileName);
+//                node->setText(1, fileType);
+//                node->setText(2, temp_parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
+//                // 获取文件目录
+//                node->setData(0, Qt::UserRole, fileInfo.filePath());
+//                QString item_type = fileInfo.suffix();
+//                // 添加文件监控
+//                my_watcher->addPath(fileInfo.filePath());
+//                // 添加hash
+//                hash_item.insert(fileInfo.filePath(),node);
+//                // 设置图标
+//                for(auto t: imageTypes){
+//                    if (item_type==t){
+//                        QString qicon = ":ui/images/pic/"+ t +".svg";
+//                        node->setIcon(0, QIcon(qicon));
+//                        break;
+//                    }
+//                }
+//            }
+//            else if (fileType=="folders"){
+//                nodeCount ++;
+//                auto *node = new QTreeWidgetItem(temp_parentNode);
+//                node->setText(0, fileName);
+//                node->setText(1, fileType);
+//                node->setText(2, temp_parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
+//                // 获取文件目录
+//                node->setData(0, Qt::UserRole, fileInfo.filePath());
+//                node->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
+//                // 添加文件监控
+//                my_watcher->addPath(fileInfo.filePath()); //添加监控，文件夹路径下的变化监控
+//                // 添加hash
+//                hash_item.insert(fileInfo.filePath(),node);
+//                // 是目录，将其加入队列中
+//                file_queue.enqueue(node);
+//            }
+//        }
+//    }
+//}
+//
 
 
 
