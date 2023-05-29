@@ -36,8 +36,9 @@ private:
     int nodeCount;
     QTreeWidgetItem* rootNode;
     QLineEdit *lineEdit = nullptr;
-    // QFuture<void> future_load_dir; //用于异步加载文件的函数
+
     QFuture<void> ar_future;
+    void _updata_one_item(QTreeWidgetItem* item, const QString& path);
     void _updata_all_Qtree_dir();
     void _dir_connect();
     void _add_a_layerDirs(QTreeWidgetItem *parentNode);
