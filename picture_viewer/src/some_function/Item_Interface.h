@@ -22,8 +22,8 @@ public: //公共接口
     //唯一标识符号
     QUuid uuidSymbol = nullptr;
     QString photo_path = nullptr; //路径
-    QTreeWidgetItem* photo_item;
-    explicit Item_Interface();
+    QTreeWidgetItem* photo_tree_item;
+    explicit Item_Interface(const QString &interface_load_path = nullptr, QTreeWidgetItem* interface_load_item= nullptr);
     ~Item_Interface() override;
     virtual void click_element();
     virtual void show_photo(QGraphicsView *view, QGraphicsScene *scene);
@@ -40,12 +40,11 @@ protected:
 class C_QPixmapItem : public Item_Interface{
 Q_OBJECT
 public:
-    explicit C_QPixmapItem(const QString &path, const QStringList &imageTypes);
+    explicit C_QPixmapItem(const QString &path, const QStringList &imageTypes, QTreeWidgetItem* item);
     ~C_QPixmapItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
     void set_z_val(int num) override;
-
 
 protected:
     void wheelEvent(QWheelEvent *event,QGraphicsView *view) ;
@@ -63,7 +62,7 @@ private:
 class C_SvgItem : public Item_Interface{
 Q_OBJECT
 public:
-    explicit C_SvgItem(const QString &path);
+    explicit C_SvgItem(const QString &path,QTreeWidgetItem* item);
     ~C_SvgItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小
@@ -84,7 +83,7 @@ private:
 class C_GifItem : public Item_Interface{
 Q_OBJECT
 public:
-    C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene);
+    C_GifItem(const QString &path, QTreeWidgetItem* item);
     ~C_GifItem() override;
     void click_element() override;
     void show_photo(QGraphicsView *view, QGraphicsScene *scene); //传入当前的场景，更新图片大小

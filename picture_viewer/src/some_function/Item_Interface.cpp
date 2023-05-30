@@ -11,8 +11,10 @@
 #include "Pic_Thread.h"
 #include "QMouseEvent"
 
-Item_Interface::Item_Interface(){
-
+Item_Interface::Item_Interface(const QString &interface_load_path, QTreeWidgetItem* interface_load_item){
+    photo_path = interface_load_path;
+    photo_tree_item = interface_load_item;
+    uuidSymbol = QUuid::createUuid();
 }
 
 Item_Interface::~Item_Interface() {
@@ -50,7 +52,8 @@ void Item_Interface::set_z_val(int num) {
 
 //====================================================================================================
 
-C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
+C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes,QTreeWidgetItem* item):
+        Item_Interface(path,item) //初始化父类
 {
     or_activated_photo_pixmap.load(path, imageTypes.join(',').toUtf8().constData());
     photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
@@ -58,14 +61,14 @@ C_QPixmapItem::C_QPixmapItem(const QString &path, const QStringList &imageTypes)
         qDebug() << "Image loaded successfully.";
         // 创建一个指向 QGraphicsPixmapItem 对象的指针，并将其传递给 C_QPixmapItem 类的构造函数
         graphics_pixmapItem_unique = std::make_unique<QGraphicsPixmapItem>();
-        //创建唯一标识符号
-        uuidSymbol = QUuid::createUuid();
+        // 创建唯一标识符号
         graphics_pixmapItem_unique->setData(0, uuidSymbol);
+        // 给tree的节点做标识符
+
         graphics_pixmapItem_unique->setPixmap(or_activated_photo_pixmap);
         pixmap_rect = graphics_pixmapItem_unique->boundingRect();
         // 设置为拖拽
         graphics_pixmapItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
-
     }
     else {
         qDebug() << "Failed to load image from" << path;
@@ -173,17 +176,16 @@ void C_QPixmapItem::set_z_val(int num) {
     graphics_pixmapItem_unique->setZValue(num);
 }
 
-
 //====================================================================================================
 
-C_SvgItem::C_SvgItem(const QString &path):
+C_SvgItem::C_SvgItem(const QString &path,QTreeWidgetItem* item):
+        Item_Interface(path,item),
         svgrender_unique(new QSvgRenderer()),
         graphics_svgItem_unique(new QGraphicsSvgItem())
 {
     bool loadResult = svgrender_unique ->load(path); // 加载 SVG 文件
     if (loadResult){
         // 设置唯一标识符号
-        uuidSymbol = QUuid::createUuid();
         graphics_svgItem_unique->setData(0,uuidSymbol);
         graphics_svgItem_unique->setSharedRenderer(svgrender_unique.get());
         graphics_svgItem_unique->setScale(1);
@@ -282,7 +284,8 @@ void C_SvgItem::set_z_val(int num) {
 //====================================================================================================
 
 
-C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *scene)
+C_GifItem::C_GifItem(const QString &path, QTreeWidgetItem* item):
+        Item_Interface(path,item)
 {
         au_movie = std::make_unique<QMovie>(path);
         au_movie->start();
@@ -290,21 +293,13 @@ C_GifItem::C_GifItem(const QString &path,QGraphicsView *view,QGraphicsScene *sce
 
         graphics_gifItem_unique = std::make_unique<QGraphicsPixmapItem>();
         //创建唯一标识符号
-        uuidSymbol = QUuid::createUuid();
         graphics_gifItem_unique->setData(0,uuidSymbol);
+
         graphics_gifItem_unique->setPixmap(*gif_pixmap);
         // 设置为拖拽 ,要在不为nullpter设置拖拽
         graphics_gifItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
         // 计算rect 设置rect变化的信号,
         rect_sig = std::make_unique<Gif_Rect_Sig>(graphics_gifItem_unique->boundingRect().toRect());
-
-        // 将 QGraphicsPixmapItem 添加到 QGraphicsScene 中
-        scene->addItem(graphics_gifItem_unique.get());
-        // 定时器更新 QPixmap
-        timer.start(33); // 33ms 即约等于一秒钟的 30 帧
-        // 连接信号
-        _connect(view);
-
 }
 
 C_GifItem::~C_GifItem(){
@@ -355,6 +350,13 @@ void C_GifItem::_connect(QGraphicsView *view) {
 void C_GifItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view, scene);
     // 更新画面 在写在初始化的连接里
+    // 将 QGraphicsPixmapItem 添加到 QGraphicsScene 中
+    scene->addItem(graphics_gifItem_unique.get());
+    // 连接信号
+    _connect(view);
+    // 定时器更新 QPixmap
+    timer.start(33); // 33ms 即约等于一秒钟的 30 帧
+
     position_calculation(view);
     scene->addItem(graphics_gifItem_unique.get());
 

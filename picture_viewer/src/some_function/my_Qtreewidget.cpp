@@ -8,8 +8,9 @@
 #include "QClipboard"
 #include "My_Qtreewidget.h"
 #include "qdebug.h"
-#include "QMimeData"
 #include <QtConcurrent/QtConcurrent>
+#include <QMimeData>
+
 My_Qtreewidget::My_Qtreewidget(QWidget *parent)
         : QTreeWidget(parent),
           MAX_NODE_COUNT(1000000),
@@ -23,7 +24,7 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
           imageTypes({"bmp","jpg","png","tif","ico","gif","svg"})
 
 {
-
+    setAcceptDrops(true); // 设置支持接收拖拽事件
     this->setHeaderHidden(true);
     this->setDragEnabled(true);
     rootNode->setText(0, "双击此处打开目录");
@@ -47,7 +48,7 @@ void My_Qtreewidget::connect_photo(My_Photo_Graphics *name) {
 void My_Qtreewidget::_updata_all_Qtree_dir()
 {
     nodeCount = 0;
-    // 异步删除节点
+    // 删除节点
     ar_future = QtConcurrent::run(this,&My_Qtreewidget::delete_roots,rootNode);
     rootNode->setText(0, "双击此处打开目录");
     rootNode->setText(1, "folders");
@@ -57,6 +58,8 @@ void My_Qtreewidget::_updata_all_Qtree_dir()
     hash_item.insert(rootNode->data(0,Qt::UserRole).toString(),rootNode);
     // 这里表示这个节点可以展开
     rootNode->setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    on_itemExpanded(rootNode);// 仿照根节点被手动打开，并展开根节点
+    this->expandItem(rootNode);// 展开根节点
 }
 
 void My_Qtreewidget::_dir_connect()
@@ -156,11 +159,31 @@ bool My_Qtreewidget::_is_type(const QString& name, const QStringList& strlist){
 }
 
 void My_Qtreewidget::keyPressEvent(QKeyEvent *event)
-{   // 键盘切换上一张下一张图片
+{
+    // 键盘切换上一张下一张图片
     if ((my_photo == nullptr)||(active_item == nullptr)){
         qDebug()<<"My_Qtreewidget::keyPressEvent:bug";
         return;
     }
+    // 如果用户按下了 Ctrl+C 键，则执行复制操作
+    if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_C) {
+        // 执行复制操作
+        QString copy_path = active_item->data(0, Qt::UserRole).toString();
+        qDebug()<<"COPYPATH"<<copy_path;
+        QUrl url = QUrl::fromLocalFile(copy_path);
+        // 将 QUrl 对象添加到 QList<QUrl> 中
+        QList<QUrl> copyFiles;
+        copyFiles.push_back(url);
+        // 创建一个 QMimeData 对象，并将 QList<QUrl> 对象设置为它的数据
+        auto *mimeData = new QMimeData;
+        mimeData->setUrls(copyFiles);
+        // 将 QMimeData 对象设置到剪贴板中
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        clipboard->setMimeData(mimeData);
+        // 输出成功提示信息
+        qDebug() << "The file has been copied to the clipboard.";
+    }
+
     if (event->key() == Qt::Key_Left || event->key() == Qt::Key_Up) {
         _updata_treewidgetItem(false); //计算上一个节点,并更新
         my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes,active_item);
@@ -169,11 +192,13 @@ void My_Qtreewidget::keyPressEvent(QKeyEvent *event)
         _updata_treewidgetItem(true);
         my_photo->graphics_load_image(active_item->data(0,Qt::UserRole).toString(),imageTypes,active_item);
     }
+
+
+
 }
 
 void My_Qtreewidget::_updata_treewidgetItem(bool is_next){
     /*计算下一兄弟节点或者上一兄弟节点,is_next=true就是计算下一兄弟节点，否则计算上一个兄弟节点*/
-
     QTreeWidgetItem *siblingItem = nullptr;
     if (is_next && active_item && active_item->parent() && active_item->parent()->childCount() >= 1) {
         int siblingIndex = active_item->parent()->indexOfChild(active_item); //返回当前节点的索引
@@ -232,9 +257,7 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
         QTreeWidgetItem *parent = item->parent();
         if (!parent)
             return;
-
         parent->takeChild(parent->indexOfChild(item));
-
         QString removePath = item->data(0, Qt::UserRole).toString();
         QString fileType = item->text(1);
         if (fileType == "files"){
@@ -262,6 +285,7 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
         // 输出成功提示信息
         qDebug() << "The file has been copied to the clipboard.";
     }
+
     else if (selectedItem == openAction) {
         QString path = item->data(0, Qt::UserRole).toString();
         QDesktopServices::openUrl(QUrl::fromLocalFile(path));
@@ -305,14 +329,14 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
 
 void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
 {
-    if (active_item==item || my_photo == nullptr){
-        qDebug()<<"My_Qtreewidget::on_itemClicked:bug";
-        return;
+    if (active_item!= nullptr){
+        active_item->setSelected(false);
     }
+    active_item = item;
+    // 如果是图片就激活节点
     QString img_path = item->data(0,Qt::UserRole).toString();
     bool is_img = _is_type(img_path, this->imageTypes);
     if (is_img) {
-        active_item = item;
         my_photo->graphics_load_image(active_item->data(0, Qt::UserRole).toString(), imageTypes,active_item);
     }
 }
@@ -345,7 +369,6 @@ void My_Qtreewidget::_updata_one_item(QTreeWidgetItem *item, const QString& path
     QFileInfo fileInfo( path);
     my_watcher->removePath(item->data(0,Qt::UserRole).toString());
     hash_item.remove(item->data(0,Qt::UserRole).toString());
-
     QString fileType = fileInfo.isFile() ? "files" : "folders";
     QString fileName = fileInfo.fileName();
     if (fileType =="files"){
@@ -403,14 +426,6 @@ void My_Qtreewidget::on_itemDoubleClicked(QTreeWidgetItem *item)
     }
 }
 
-My_Qtreewidget::~My_Qtreewidget(){
-    // 遍历删除所有子节点
-    delete_roots(rootNode);
-    delete my_photo;
-    delete active_item;
-    delete my_watcher;
-}
-
 QMimeData* My_Qtreewidget::mimeData(const QList<QTreeWidgetItem *> items) const{
     // 拖动节点会自动调这个函数
     QMimeData *mimeData = new QMimeData;
@@ -426,80 +441,48 @@ QMimeData* My_Qtreewidget::mimeData(const QList<QTreeWidgetItem *> items) const{
     return mimeData;
 }
 
+My_Qtreewidget::~My_Qtreewidget(){
+    // 遍历删除所有子节点
+    delete_roots(rootNode);
+    delete my_photo;
+    delete active_item;
+    delete my_watcher;
+}
 
+void My_Qtreewidget::dragEnterEvent(QDragEnterEvent *event) {
 
+    if (event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+    }
+    qDebug()<<"My_Qtreewidget::dragEnterEvent";
+}
 
-//void My_Qtreewidget::_addSubDirs(QTreeWidgetItem *parentNode, const QString& path) {
-//    qDebug()<<"RUN:_addSubDirs";
-//    //BFS 添加全部节点
-//    QDir directory(path);
-//    // QTreeWidgetItem *temp_parentNode = parentNode; //创建一个 QTreeWidgetItem指针，用于传值
-//    QQueue<QTreeWidgetItem*> file_queue;
-//    file_queue.enqueue(parentNode);
-//    while (!file_queue.isEmpty()) {
-//        if (nodeCount++>MAX_NODE_COUNT){return;}
-//        // 取出队列中的第一个节点,构建树节点，同时也用作下一个节点的父类
-//        QTreeWidgetItem *temp_parentNode = file_queue.front();
-//        QDir temp_directory(temp_parentNode->data(0, Qt::UserRole).toString());
-//        //具体地说，这个代码使用entryInfoList函数获取了directory目录下的所有文件和目录的信息，包括隐藏文件和当前目录以及父级目录（"."和".."），并将它们的QFileInfo对象添加到QFileInfoList列表中。
-//        //参数QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot是用来设置entryInfoList函数的选项，其中：
-//        //QDir::Files指示返回文件的信息
-//        //QDir::AllDirs指示返回子目录的信息
-//        //QDir::NoDotAndDotDot指示过滤掉"."和".."目录
-//        QFileInfoList fileList = temp_directory.entryInfoList(QDir::Files | QDir::AllDirs | QDir::NoDotAndDotDot);
-//        int size = fileList.count();
-//        // 队列中删除这个节点
-//        file_queue.dequeue();
-//        // 遍历与当前节点相连的所有节点
-//        for (int i = 0; i < size; i++) {
-//            QFileInfo fileInfo = fileList.at(i);
-//            QString fileName = fileInfo.fileName();
-//            QString fileType = fileInfo.isFile() ? "files" : "folders";
-//            bool is_img = _is_type(fileName,imageTypes);
-//            if (fileType=="files" && is_img){
-//                //下面 设置节点的信息
-//                nodeCount ++;
-//                auto *node = new QTreeWidgetItem(temp_parentNode);
-//                node->setText(0, fileName);
-//                node->setText(1, fileType);
-//                node->setText(2, temp_parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
-//                // 获取文件目录
-//                node->setData(0, Qt::UserRole, fileInfo.filePath());
-//                QString item_type = fileInfo.suffix();
-//                // 添加文件监控
-//                my_watcher->addPath(fileInfo.filePath());
-//                // 添加hash
-//                hash_item.insert(fileInfo.filePath(),node);
-//                // 设置图标
-//                for(auto t: imageTypes){
-//                    if (item_type==t){
-//                        QString qicon = ":ui/images/pic/"+ t +".svg";
-//                        node->setIcon(0, QIcon(qicon));
-//                        break;
-//                    }
-//                }
-//            }
-//            else if (fileType=="folders"){
-//                nodeCount ++;
-//                auto *node = new QTreeWidgetItem(temp_parentNode);
-//                node->setText(0, fileName);
-//                node->setText(1, fileType);
-//                node->setText(2, temp_parentNode->data(0,Qt::UserRole).toString()); //保存父类的路径
-//                // 获取文件目录
-//                node->setData(0, Qt::UserRole, fileInfo.filePath());
-//                node->setIcon(0, QIcon(":ui/images//pic/folder-solid.svg"));
-//                // 添加文件监控
-//                my_watcher->addPath(fileInfo.filePath()); //添加监控，文件夹路径下的变化监控
-//                // 添加hash
-//                hash_item.insert(fileInfo.filePath(),node);
-//                // 是目录，将其加入队列中
-//                file_queue.enqueue(node);
-//            }
-//        }
-//    }
-//}
-//
+void My_Qtreewidget::dragMoveEvent(QDragMoveEvent *event) {
 
+    if (event->mimeData()->hasUrls()) {
+        event->acceptProposedAction();
+    }
+    qDebug()<<"My_Qtreewidget::dragMoveEvent";
+}
 
+void My_Qtreewidget::dropEvent(QDropEvent *event) {
 
+    const QMimeData *mimeData = event->mimeData();
+    if (event->mimeData()->hasUrls()) {
+        QList<QUrl> urlList = mimeData->urls();
+        for (int i = 0; i < urlList.size(); ++i) {
+            QFileInfo fileInfo(urlList.at(i).toLocalFile()); // 创建一个 QFileInfo 对象
+            if (fileInfo.isDir()) {
+                qDebug() << "该路径为一个目录";
+                ProjectDir = fileInfo.filePath();
+                _updata_all_Qtree_dir();
 
+            } else {
+                qDebug() << "该路径不是一个目录";
+                break;
+            }
+        }
+        event->acceptProposedAction();
+    }
+    qDebug()<<"My_Qtreewidget::dropEvent";
+}

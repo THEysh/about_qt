@@ -86,10 +86,10 @@ Load_Pixmap::Load_Pixmap(QMutex &mutex, const QString &path, const QStringList &
 
 void Load_Pixmap::thredrun() {
     qInfo() << "Task started!";
-        mutex.lock();
-        Item_Interface *temp_unique;
-        temp_unique = new C_QPixmapItem(path,imageTypes);
-        mutex.unlock();
-        emit end_of_loading(temp_unique);
+//        mutex.lock();
+//        Item_Interface *temp_unique;
+//        temp_unique = new C_QPixmapItem(path,imageTypes);
+//        mutex.unlock();
+//        emit end_of_loading(temp_unique);
     qInfo() << "Task finished!";
 }

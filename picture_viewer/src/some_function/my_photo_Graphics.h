@@ -36,13 +36,13 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
     void contextMenuEvent(QContextMenuEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
 private:
     void connect_loadphoto();
-    void add_image_information(std::shared_ptr<Item_Interface> temp_unique, const QString photo_path, QTreeWidgetItem* item);
     Item_Interface_Queue item_queue; //存放智能指针的队列（所有图片的指向）
     int item_queue_idx = 0;
     bool is_comparison = false; //对比模式

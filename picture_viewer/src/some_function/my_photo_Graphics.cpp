@@ -9,6 +9,7 @@
 #include "Item_Interface.h"
 #include "qdebug.h"
 #include <memory>
+#include <utility>
 #include "QMouseEvent"
 #include "QMimeData"
 #include "My_Qtreewidget.h"
@@ -35,7 +36,6 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
     setAcceptDrops(true);
     // 设置为拖拽
     this->setDragMode(static_cast<DragMode>(QGraphicsView::ScrollHandDrag | QGraphicsView::RubberBandDrag));
-    //
     connect_loadphoto();
     //初始化背景等等
     show_image_item();
@@ -43,7 +43,6 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
 
 void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
-
     if (!item_queue.empty()){
         item_queue.at(item_queue_idx)->wheelEvent(event,this);
 
@@ -55,7 +54,6 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
 
 void My_Photo_Graphics::resizeEvent(QResizeEvent *event) {
     QGraphicsView::resizeEvent(event);
-
     qDebug()<<"My_Photo_Graphics::resizeEvent:->view siez"<<this->size();
     // 更新背景的尺寸
     QRect new_rect(QPoint(0, 0), this->size());
@@ -89,21 +87,18 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
         //这是一个使用C++11提供的智能指针模板函数std::make_unique()来创建一个指向C_SvgItem对象的unique_ptr，
         // 其中path是作为构造函数参数传递给C_SvgItem的。std::make_unique()可以用于创建可以管理其生命周期的堆分配
         //对象的std::unique_ptr。与直接使用 new 创建对象相比，使用std::make_unique()可以更加安全和方便.
-        temp_unique = std::make_unique<C_SvgItem>(path);
+        temp_unique = std::make_unique<C_SvgItem>(path,item);
         // 加入相关信息
-        add_image_information(temp_unique,path, item);
         item_queue.enqueue(temp_unique);
     }
     else if ((fileInfo.suffix().compare("gif", Qt::CaseInsensitive) == 0)){
         qDebug() << "The file is an gif,load ...";
-        temp_unique = std::make_unique<C_GifItem>(path,this,scene);
-        add_image_information(temp_unique,path, item);
+        temp_unique = std::make_unique<C_GifItem>(path,item);
         item_queue.enqueue(temp_unique);
     }
     else if (imageTypes.contains(fileInfo.suffix(), Qt::CaseInsensitive)) {
         qDebug() << "The file is ipg,png...,load ...";
-        temp_unique = std::make_unique<C_QPixmapItem>(path,imageTypes);
-        add_image_information(temp_unique,path, item);
+        temp_unique = std::make_unique<C_QPixmapItem>(path,imageTypes,item);
         item_queue.enqueue(temp_unique);
     }
     else {
@@ -111,17 +106,11 @@ void My_Photo_Graphics::graphics_load_image(const QString &path, const QStringLi
         return;
     }
     if (!item_queue.empty()){
+        qDebug()<<"item_queue_idx size"<<item_queue_idx;
         item_queue_idx = item_queue.size() - 1;
-        // 更新激活的节点
-
-        if(item_queue.at(item_queue_idx)->photo_item!= nullptr){
-            in_tree->active_item = item_queue.at(item_queue_idx)->photo_item;
-        }
-
     } else{
         item_queue_idx = 0;
     }
-
     qDebug()<<"size_item_queue"<<item_queue.size();
     show_image_item();
 }
@@ -140,7 +129,6 @@ void My_Photo_Graphics::show_image_item() {
 }
 
 My_Photo_Graphics::~My_Photo_Graphics() {
-    // delete other dynamically allocated resources if any
     delete scene;
     delete in_tree;
     qDebug() << "this is : ~My_Photo_Graphics";
@@ -182,6 +170,29 @@ void My_Photo_Graphics::contextMenuEvent(QContextMenuEvent *event){
     menu.exec(event->globalPos());
 }
 
+void My_Photo_Graphics::keyPressEvent(QKeyEvent *event)
+{
+    // 如果用户按下了 Ctrl+C 键，则执行复制操作
+    if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_C) {
+        // 执行复制操作
+        QString copy_path = item_queue.at(item_queue_idx)->photo_path;
+        qDebug()<<"COPYPATH"<<copy_path;
+        QUrl url = QUrl::fromLocalFile(copy_path);
+        // 将 QUrl 对象添加到 QList<QUrl> 中
+        QList<QUrl> copyFiles;
+        copyFiles.push_back(url);
+        // 创建一个 QMimeData 对象，并将 QList<QUrl> 对象设置为它的数据
+        auto *mimeData = new QMimeData;
+        mimeData->setUrls(copyFiles);
+        // 将 QMimeData 对象设置到剪贴板中
+        QClipboard *clipboard = QGuiApplication::clipboard();
+        clipboard->setMimeData(mimeData);
+        // 输出成功提示信息
+        qDebug() << "The file has been copied to the clipboard.";
+    }
+
+}
+
 void My_Photo_Graphics::dragEnterEvent(QDragEnterEvent *event) {
     QGraphicsView::dragEnterEvent(event);
     if (event->mimeData()->hasUrls()) {
@@ -217,9 +228,7 @@ void My_Photo_Graphics::dropEvent(QDropEvent *event) {
     if (event->mimeData()->hasFormat("application/x-qtreewidget-values")) {
         QByteArray encodedData = event->mimeData()->data("application/x-qtreewidget-values");
         QDataStream stream(&encodedData, QIODevice::ReadOnly);
-
         if (!stream.atEnd()) { // 检查数据流是否结束
-
             while (!stream.atEnd()) {
                 QString filetype, filename, path;
                 stream >> filetype >> filename >> path;
@@ -228,9 +237,10 @@ void My_Photo_Graphics::dropEvent(QDropEvent *event) {
                 qDebug() << "stream3" << path;
                 if (filetype== "files"){
                     // 在视角加一张图片，开启对比模式。结束后关闭
+                    QTreeWidgetItem* act_item = in_tree->hash_item.value(path); // 获取激活的树节点
                     item_queue.max_len = item_queue.max_len + 1;
                     is_comparison = true;
-                    graphics_load_image(path, in_tree->imageTypes,in_tree->active_item);
+                    graphics_load_image(path, in_tree->imageTypes,act_item);
                     is_comparison = false;
                 } else{
                     break;
@@ -251,6 +261,7 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
     if (item) {
         // 可以使用 setZValue() 函数来设置项目的 Z 坐标值，从而控制项目的绘制顺序。Z 坐标值越大的项目会被绘制在 Z 坐标值小的项目的上面。
         // 首先使用 foreach 循环遍历当前场景中所有的项目，并计算它们 Z 坐标值的最大值。然后，我们将需要移动到最顶层的项目的 Z 坐标值设置为 maxZValue + 1
+        qDebug()<<"uuid1"<<item->data(0).toString();
         qDebug()<<item->data(0).toString();
         int max_z = 0;
         int old_idx = item_queue_idx;
@@ -261,10 +272,15 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
             bool isEqual = (uuid1==uuid2);
             if (isEqual){
                 item_queue_idx = i;
-                // 更新激活的节点，更新节点的高亮显示
-                if(item_queue.at(item_queue_idx)->photo_item!= nullptr){
-                    in_tree->active_item = item_queue.at(item_queue_idx)->photo_item;
+                qDebug()<<"-------------------item_queue_idx size"<<item_queue.at(i).get();
+                qDebug()<<"-------------------item_queue_idx size"<<item_queue.at(i)->photo_tree_item;
+                // 鼠标点击后，下面是让树节点高亮显示
+                if(item_queue.at(i)->photo_tree_item!= nullptr){
+                    if(in_tree->active_item!= nullptr){in_tree->active_item->setSelected(false);}
+                    in_tree->active_item = item_queue.at(i)->photo_tree_item;
+                    in_tree->active_item->setSelected(true);
                 }
+
             }
         }
         if (old_idx!=item_queue_idx){
@@ -272,18 +288,14 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
             item_queue.max_z_val = item_queue.max_z_val+1;
             item->setZValue(item_queue.max_z_val);
         }
-        qDebug()<<"------------------------"<<item->zValue();
+        qDebug()<<"-------"<<item->zValue();
+
     } else {
         // 点击了背景
         qDebug() << "Clicked on background.";
     }
     // 传递鼠标事件以继续处理。
     QGraphicsView::mousePressEvent(event);
-}
-
-void My_Photo_Graphics::add_image_information(std::shared_ptr<Item_Interface> temp_unique, const QString photo_path, QTreeWidgetItem* item) {
-    temp_unique->photo_path = photo_path;
-    temp_unique->photo_item = item;
 }
 
 void My_Photo_Graphics::connect_loadphoto() {

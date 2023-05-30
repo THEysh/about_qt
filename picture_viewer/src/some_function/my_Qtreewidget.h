@@ -26,6 +26,10 @@ public:
     QStringList imageTypes;
     QMap<QString,QTreeWidgetItem*> hash_item;
     QMimeData *mimeData(const QList<QTreeWidgetItem *> items) const override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
+
 private slots:
     void on_itemClicked(QTreeWidgetItem *item);
     void on_itemExpanded(QTreeWidgetItem *item);
@@ -48,7 +52,7 @@ private:
     void _updata_treewidgetItem(bool is_next);
     void contextMenuEvent(QContextMenuEvent *event) override;
     QString _rag(const QString &qString);
-    void _addSubDirs(QTreeWidgetItem *parentNode, const QString& path);
+
 
 };
 
