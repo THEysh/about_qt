@@ -10,6 +10,8 @@
 #include "qDebug.h"
 #include "Pic_Thread.h"
 #include "QMouseEvent"
+#include "QPointF"
+#include <QVector>
 
 Item_Interface::Item_Interface(const QString &interface_load_path, QTreeWidgetItem* interface_load_item){
     photo_path = interface_load_path;
@@ -46,9 +48,7 @@ void Item_Interface::position_calculation(QGraphicsView *view) {
 }
 
 void Item_Interface::set_z_val(int num) {
-    //设置z轴高度
 }
-
 
 //====================================================================================================
 
@@ -120,6 +120,8 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     int old_height = photo_pixmap_unique->height();
     int new_wid; int new_height;
     // 下面只是view的缩放，不会影响rect
+
+    graphics_pixmapItem_unique->setTransformOriginPoint(graphics_pixmapItem_unique->boundingRect().center());
     if (event->delta() > 0) {
         // 放大，只对pixmapItem场景进行缩放
         graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() * roller_factor);
@@ -211,7 +213,6 @@ void C_SvgItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     // 计算尺寸，让svgItem保持中心位置,SVG图不窗口自适应计算了，只计算中心位置
     position_calculation(view);
     scene->addItem(graphics_svgItem_unique.get()); //将svg条目添加到场景中
-
 }
 
 void C_SvgItem::position_calculation(QGraphicsView *view) {
@@ -231,8 +232,10 @@ void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         qDebug() << "C_SvgItem::show_photo bug";
         return;
     }
+    graphics_svgItem_unique->setTransformOriginPoint(graphics_svgItem_unique->boundingRect().center());
     if (event->delta() > 0) {
-        // 只对pixmapItem场景进行缩放
+        // 将图元的局部坐标系原点位置转换为场景坐标系中的位置，然后将这个位置设置为变换中心点。
+        // 这样就能够以场景坐标系中的指定点为中心进行变换了。
         graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() * roller_factor);
         qDebug()<<"graphics_svgItem_unique->scale();"<<graphics_svgItem_unique->scale();
     } else {
@@ -287,11 +290,9 @@ C_GifItem::C_GifItem(const QString &path, QTreeWidgetItem* item):
         au_movie = std::make_unique<QMovie>(path);
         au_movie->start();
         gif_pixmap = std::make_unique<QPixmap>(QPixmap::fromImage(au_movie->currentImage()));
-
         graphics_gifItem_unique = std::make_unique<QGraphicsPixmapItem>();
         //创建唯一标识符号
         graphics_gifItem_unique->setData(0,uuidSymbol);
-
         graphics_gifItem_unique->setPixmap(*gif_pixmap);
         // 设置为拖拽 ,要在不为nullpter设置拖拽
         graphics_gifItem_unique->setFlags(QGraphicsItem::ItemIsMovable);
@@ -368,6 +369,7 @@ void C_GifItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     if (graphics_gifItem_unique == nullptr){
         qDebug()<<"C_GifItem::wheelEvent bug";
     }
+    graphics_gifItem_unique->setTransformOriginPoint(graphics_gifItem_unique->boundingRect().center());
     if (event->delta() > 0) {  // 缩放
         // 只对pixmapItem场景进行缩放
         graphics_gifItem_unique->setScale(graphics_gifItem_unique->scale() * roller_factor);

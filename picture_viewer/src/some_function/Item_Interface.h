@@ -31,7 +31,6 @@ public: //公共接口
     virtual void resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene);
     virtual void phot_rotate(bool is_right, QGraphicsView *view);
     virtual void set_z_val(int num);
-
 protected:
     double roller_factor = 1.05;
     virtual void position_calculation(QGraphicsView *view);
