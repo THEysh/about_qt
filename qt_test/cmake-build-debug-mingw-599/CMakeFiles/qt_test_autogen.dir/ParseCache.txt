@@ -10,3 +10,8 @@ F:/code/c_code/about_qt/qt_test/A.cpp
 F:/code/c_code/about_qt/qt_test/B.cpp
 F:/code/c_code/about_qt/qt_test/Item_Interface_Queue.cpp
 F:/code/c_code/about_qt/qt_test/treadqt.cpp
+F:/code/c_code/about_qt/qt_test/mainwindow.h
+ mmc:Q_OBJECT
+F:/code/c_code/about_qt/qt_test/mainwindow.cpp
+F:/code/c_code/about_qt/qt_test/mygraphicsview.h
+F:/code/c_code/about_qt/qt_test/mygraphicsview.cpp

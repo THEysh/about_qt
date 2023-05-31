@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_My_Qtreewidget_t {
-    QByteArrayData data[10];
-    char stringdata0[132];
+    QByteArrayData data[9];
+    char stringdata0[117];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,21 +32,20 @@ struct qt_meta_stringdata_My_Qtreewidget_t {
 static const qt_meta_stringdata_My_Qtreewidget_t qt_meta_stringdata_My_Qtreewidget = {
     {
 QT_MOC_LITERAL(0, 0, 14), // "My_Qtreewidget"
-QT_MOC_LITERAL(1, 15, 14), // "on_itemClicked"
-QT_MOC_LITERAL(2, 30, 0), // ""
-QT_MOC_LITERAL(3, 31, 16), // "QTreeWidgetItem*"
-QT_MOC_LITERAL(4, 48, 4), // "item"
-QT_MOC_LITERAL(5, 53, 15), // "on_itemExpanded"
-QT_MOC_LITERAL(6, 69, 16), // "on_itemCollapsed"
-QT_MOC_LITERAL(7, 86, 20), // "on_itemDoubleClicked"
-QT_MOC_LITERAL(8, 107, 14), // "on_fileChanged"
-QT_MOC_LITERAL(9, 122, 9) // "filedPath"
+QT_MOC_LITERAL(1, 15, 15), // "on_itemExpanded"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 16), // "QTreeWidgetItem*"
+QT_MOC_LITERAL(4, 49, 4), // "item"
+QT_MOC_LITERAL(5, 54, 16), // "on_itemCollapsed"
+QT_MOC_LITERAL(6, 71, 20), // "on_itemDoubleClicked"
+QT_MOC_LITERAL(7, 92, 14), // "on_fileChanged"
+QT_MOC_LITERAL(8, 107, 9) // "filedPath"
 
     },
-    "My_Qtreewidget\0on_itemClicked\0\0"
-    "QTreeWidgetItem*\0item\0on_itemExpanded\0"
-    "on_itemCollapsed\0on_itemDoubleClicked\0"
-    "on_fileChanged\0filedPath"
+    "My_Qtreewidget\0on_itemExpanded\0\0"
+    "QTreeWidgetItem*\0item\0on_itemCollapsed\0"
+    "on_itemDoubleClicked\0on_fileChanged\0"
+    "filedPath"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +55,7 @@ static const uint qt_meta_data_My_Qtreewidget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,18 +63,16 @@ static const uint qt_meta_data_My_Qtreewidget[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x08 /* Private */,
-       5,    1,   42,    2, 0x08 /* Private */,
-       6,    1,   45,    2, 0x08 /* Private */,
-       7,    1,   48,    2, 0x08 /* Private */,
-       8,    1,   51,    2, 0x08 /* Private */,
+       1,    1,   34,    2, 0x08 /* Private */,
+       5,    1,   37,    2, 0x08 /* Private */,
+       6,    1,   40,    2, 0x08 /* Private */,
+       7,    1,   43,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, 0x80000000 | 3,    4,
-    QMetaType::Void, QMetaType::QString,    9,
+    QMetaType::Void, QMetaType::QString,    8,
 
        0        // eod
 };
@@ -86,11 +83,10 @@ void My_Qtreewidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         My_Qtreewidget *_t = static_cast<My_Qtreewidget *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_itemClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 1: _t->on_itemExpanded((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 2: _t->on_itemCollapsed((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 3: _t->on_itemDoubleClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
-        case 4: _t->on_fileChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 0: _t->on_itemExpanded((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 1: _t->on_itemCollapsed((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 2: _t->on_itemDoubleClicked((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1]))); break;
+        case 3: _t->on_fileChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -121,13 +117,13 @@ int My_Qtreewidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 4)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 4;
     }
     return _id;
 }

@@ -139,8 +139,8 @@ void My_Qtreewidget::delete_roots(QTreeWidgetItem *item) {
                 my_watcher->removePath(path);
                 hash_item.remove(child->data(0,Qt::UserRole).toString());
                 nodeCount--;
-                delete child;
             }
+            delete child;
         }
     }
 
@@ -330,9 +330,6 @@ void My_Qtreewidget::contextMenuEvent(QContextMenuEvent *event){
 
 void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
 {
-    if (active_item!= nullptr){
-        active_item->setSelected(false);
-    }
     active_item = item;
     active_item->setSelected(true);
     // 如果是图片就激活节点
@@ -475,12 +472,12 @@ void My_Qtreewidget::dropEvent(QDropEvent *event) {
         for (int i = 0; i < urlList.size(); ++i) {
             QFileInfo fileInfo(urlList.at(i).toLocalFile()); // 创建一个 QFileInfo 对象
             if (fileInfo.isDir()) {
-                qDebug() << "该路径为一个目录";
+                qDebug() << "is dir";
                 ProjectDir = fileInfo.filePath();
                 _updata_all_Qtree_dir();
 
             } else {
-                qDebug() << "该路径不是一个目录";
+                qDebug() << "not dir";
                 break;
             }
         }

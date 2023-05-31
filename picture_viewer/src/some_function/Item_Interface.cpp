@@ -121,7 +121,6 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     int new_wid; int new_height;
     // 下面只是view的缩放，不会影响rect
 
-    graphics_pixmapItem_unique->setTransformOriginPoint(graphics_pixmapItem_unique->boundingRect().center());
     if (event->delta() > 0) {
         // 放大，只对pixmapItem场景进行缩放
         graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() * roller_factor);
