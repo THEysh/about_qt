@@ -44,7 +44,31 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(Qtree_Class_UI->sizePolicy().hasHeightForWidth());
         Qtree_Class_UI->setSizePolicy(sizePolicy);
-        Qtree_Class_UI->setStyleSheet(QStringLiteral(""));
+        Qtree_Class_UI->setStyleSheet(QLatin1String("QTreeWidget {\n"
+"  border: none;\n"
+"  background-color: rgb(235,230,236);\n"
+"	font: url(:/ui/images/fonts/Font Awesome 6 Free-Solid-900.otf);\n"
+"}\n"
+"\n"
+"QTreeWidget::item {\n"
+"  color: #333333;\n"
+"}\n"
+"\n"
+"QTreeWidget::item:hover {\n"
+"  background-color:rgb(113,150,159);\n"
+"}\n"
+"\n"
+"QTreeWidget::item:selected {\n"
+"  background-color: rgb(170,160,180);\n"
+"\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"  background-color: #f0f0f0;\n"
+"  color: #333333;\n"
+"\n"
+"}\n"
+""));
         centralwidget = new QWidget(Qtree_Class_UI);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);

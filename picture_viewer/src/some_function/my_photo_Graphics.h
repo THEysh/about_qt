@@ -41,12 +41,14 @@ protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent *event) override;
+
 private:
     void connect_loadphoto();
     Item_Interface_Queue item_queue; //存放智能指针的队列（所有图片的指向）
     int item_queue_idx = 0;
     bool is_comparison = false; //对比模式
     // 创建并启动后台线程
+    QTimer image_timer;
     QThread thread;
     QMutex mutex;
     std::shared_ptr<Load_Image_Intf> arload_image;

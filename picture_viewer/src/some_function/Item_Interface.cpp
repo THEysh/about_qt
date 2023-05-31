@@ -84,20 +84,6 @@ void C_QPixmapItem::click_element() {
 
 void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
     Item_Interface::show_photo(view,scene);
-    qDebug()<<"graphics_pixmapItem_unique->pixmap():"<<graphics_pixmapItem_unique->pixmap();
-    // 根据画面进行位置调整,自适应缩放，展示的一张新图片时候自适应一次
-    int p_width = or_activated_photo_pixmap.width();
-    int p_height = or_activated_photo_pixmap.height();
-    if ((view->width())>p_width && (view->height())>p_height){
-        // 视角大于图片的高, 保持默认
-        // photo_pixmap_unique= std::make_unique<QPixmap>(or_activated_photo_pixmap);
-    }else{
-        // 自适应缩放
-        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(view->width() ,view->height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
-    }
-    graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
-    // 每当指针改变，记录尺寸信息
-    pixmap_rect = graphics_pixmapItem_unique->pixmap().rect();
     // 位置更新
     position_calculation(view);
     scene->addItem(graphics_pixmapItem_unique.get());
@@ -106,6 +92,16 @@ void C_QPixmapItem::show_photo(QGraphicsView *view, QGraphicsScene *scene) {
 
 void C_QPixmapItem::position_calculation(QGraphicsView *view) {
     // 位置更新
+    int p_width = or_activated_photo_pixmap.width();
+    int p_height = or_activated_photo_pixmap.height();
+    if ((view->width())>p_width && (view->height())>p_height){
+        // 视角大于图片的高, 保持默认
+    }else{
+        // 自适应缩放
+        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(view->width() ,view->height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    }
+    graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
+    pixmap_rect = graphics_pixmapItem_unique->pixmap().rect();
     QPointF center = view ->viewport()->rect().center() - pixmap_rect.center();
     qDebug()<<"view center:"<<view ->viewport()->rect().center()<<"pixmap_rect center"<<pixmap_rect.center();
     qDebug()<<"view rect:"<<view ->rect()<<"pixmap_rect"<<pixmap_rect;
@@ -224,6 +220,7 @@ void C_SvgItem::position_calculation(QGraphicsView *view) {
         return;
     }
     QPointF center = view ->viewport()->rect().center() - svg_Rect.center();
+
     qDebug()<<"svgItem center:"<<center;
     graphics_svgItem_unique->setPos(center);
 }

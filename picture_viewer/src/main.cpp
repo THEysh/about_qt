@@ -8,7 +8,6 @@
 #include "ui/ui_file/Qtree_ui.h"
 #include "function.h"
 
-
 void Resource_Registration(){
     QString currentPath = QDir::currentPath();
     // 输出路径
@@ -23,6 +22,7 @@ void Resource_Registration(){
     }
 
 }
+
 bool Generate_qrc(){
 
     QString Project_path = PROJECT_ROOT_DIR ; // 项目路径
@@ -61,15 +61,22 @@ bool Generate_qrc(){
 int main(int argc, char *argv[])
 {
     system("chcp 65001"); //用于解决中文乱码
-    Resource_Registration(); // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）,返回路径,
-    // 已经在cmake添加了add_executable(.qrc)的路径就可以不注册
-    Generate_qrc(); // 生成一个.qrc的脚本
-
     QApplication app(argc, argv);
+    // 获取命令行参数
+    QStringList args = app.arguments();
+    // QApplication::arguments() 用于获取命令行参数。你可以在应用程序启动时获取命令行参数并判断其中是否有文件名或路径，
+    // 如果有，则说明用户可能是通过拖放文件到应用程序图标来启动的，此时你可以获取到这个文件的绝对路径，然后在程序中进行处理。
+    QString openpath = "";
+    if (args.count()>1){
+        // 获取需要打开的目录
+        openpath = args.at(1);
+    }
+    // 注册资源文件（包括图片的rcc文件，这是由qrc转换出来的）,返回路径,已经在cmake添加了add_executable(.qrc)的路径就可以不注册
+    Resource_Registration();
+    Generate_qrc(); // 生成一个.qrc的脚本
     auto *QWidget = new QMainWindow();
-
     Ui_Qtree_Class_UI my_ui{};
-    Inherit_UI my_class(my_ui,QWidget);
+    Inherit_UI my_class(my_ui,QWidget,openpath);
     QWidget->show();
 
     return QApplication::exec();

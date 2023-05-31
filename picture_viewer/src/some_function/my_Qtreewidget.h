@@ -26,16 +26,18 @@ public:
     QStringList imageTypes;
     QMap<QString,QTreeWidgetItem*> hash_item;
     QMimeData *mimeData(const QList<QTreeWidgetItem *> items) const override;
-    void dragEnterEvent(QDragEnterEvent *event) override;
-    void dragMoveEvent(QDragMoveEvent *event) override;
-    void dropEvent(QDropEvent *event) override;
-
-private slots:
+    void _updata_all_Qtree_dir();
     void on_itemClicked(QTreeWidgetItem *item);
+private slots:
     void on_itemExpanded(QTreeWidgetItem *item);
     void on_itemCollapsed(QTreeWidgetItem *item);
     void on_itemDoubleClicked(QTreeWidgetItem *item);
     void on_fileChanged(const QString &filedPath);
+
+protected:
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
 private:
     const int MAX_NODE_COUNT;
     int nodeCount;
@@ -44,7 +46,6 @@ private:
 
     QFuture<void> ar_future;
     void _updata_one_item(QTreeWidgetItem* item, const QString& path);
-    void _updata_all_Qtree_dir();
     void _dir_connect();
     void _add_a_layerDirs(QTreeWidgetItem *parentNode);
     void delete_roots(QTreeWidgetItem *parentNode);

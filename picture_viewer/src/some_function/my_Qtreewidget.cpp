@@ -25,6 +25,7 @@ My_Qtreewidget::My_Qtreewidget(QWidget *parent)
 
 {
     setAcceptDrops(true); // 设置支持接收拖拽事件
+    this->setFocusPolicy(Qt::ClickFocus);
     this->setHeaderHidden(true);
     this->setDragEnabled(true);
     rootNode->setText(0, "双击此处打开目录");
@@ -219,11 +220,11 @@ void My_Qtreewidget::_updata_treewidgetItem(bool is_next){
             siblingItem = active_item->parent()->child(active_item->parent()->childCount()-1);
         }
     }
-
-    active_item->setSelected(false);
+    if (active_item!= nullptr){
+        active_item->setSelected(false);
+    }
     active_item = siblingItem;
     active_item->setSelected(true);
-
 }
 
 QString My_Qtreewidget::_rag(const QString& name){
@@ -333,6 +334,7 @@ void My_Qtreewidget::on_itemClicked(QTreeWidgetItem *item)
         active_item->setSelected(false);
     }
     active_item = item;
+    active_item->setSelected(true);
     // 如果是图片就激活节点
     QString img_path = item->data(0,Qt::UserRole).toString();
     bool is_img = _is_type(img_path, this->imageTypes);

@@ -1,5 +1,8 @@
 <RCC>
 <qresource prefix="/">
+<file>ui/images/fonts/Font Awesome 6 Brands-Regular-400.otf</file>
+<file>ui/images/fonts/Font Awesome 6 Free-Regular-400.otf</file>
+<file>ui/images/fonts/Font Awesome 6 Free-Solid-900.otf</file>
 <file>ui/images/pic/bmp.svg</file>
 <file>ui/images/pic/file-image-solid.svg</file>
 <file>ui/images/pic/file-lines-solid.svg</file>

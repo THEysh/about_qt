@@ -9,11 +9,12 @@
 #include "Item_Interface.h"
 #include "qdebug.h"
 #include <memory>
-#include <utility>
+#include <QtConcurrent/QtConcurrent>
 #include "QMouseEvent"
 #include "QMimeData"
 #include "My_Qtreewidget.h"
 #include "QtMath"
+
 My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         // 定义初始化
         QGraphicsView(parent),
@@ -21,6 +22,7 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
         item_queue(1),
         mutex(),
         arload_image(nullptr),
+        image_timer(new QTimer),
         scene(new QGraphicsScene()){
 
     or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
@@ -45,7 +47,6 @@ void My_Photo_Graphics::wheelEvent(QWheelEvent *event) {
     QGraphicsView::wheelEvent(event);
     if (!item_queue.empty()){
         item_queue.at(item_queue_idx)->wheelEvent(event,this);
-
     } else{
         qDebug()<<"My_Photo_Graphics::wheelEvent";
         return;
@@ -276,9 +277,7 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
                 qDebug()<<"-------------------item_queue_idx size"<<item_queue.at(i)->photo_tree_item;
                 // 鼠标点击后，下面是让树节点高亮显示
                 if(item_queue.at(i)->photo_tree_item!= nullptr){
-                    if(in_tree->active_item!= nullptr){in_tree->active_item->setSelected(false);}
                     in_tree->active_item = item_queue.at(i)->photo_tree_item;
-                    in_tree->active_item->setSelected(true);
                 }
 
             }
@@ -301,5 +300,3 @@ void My_Photo_Graphics::mousePressEvent(QMouseEvent *event) {
 void My_Photo_Graphics::connect_loadphoto() {
 
 }
-
-
