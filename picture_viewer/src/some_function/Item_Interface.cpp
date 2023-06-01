@@ -231,14 +231,22 @@ void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         qDebug() << "C_SvgItem::show_photo bug";
         return;
     }
-    graphics_svgItem_unique->setTransformOriginPoint(graphics_svgItem_unique->boundingRect().center());
+    float s = graphics_svgItem_unique->scale();
+    auto p = graphics_svgItem_unique->mapFromScene(event->posF());
+    auto p2 = graphics_svgItem_unique->mapFromScene(QPointF(0,0));
+    qDebug()<<"event->posF()"<< event->posF();
+    qDebug()<<"p1"<< p*graphics_svgItem_unique->scale();
+    qDebug()<<"p2"<< -p2*graphics_svgItem_unique->scale();
+    qDebug()<<"p3"<< p*graphics_svgItem_unique->scale()-p2*graphics_svgItem_unique->scale();
+    graphics_svgItem_unique->setScale(1);
+    //graphics_svgItem_unique->setTransformOriginPoint(p*graphics_svgItem_unique->scale()-p2*graphics_svgItem_unique->scale());
     if (event->delta() > 0) {
         // 将图元的局部坐标系原点位置转换为场景坐标系中的位置，然后将这个位置设置为变换中心点。
         // 这样就能够以场景坐标系中的指定点为中心进行变换了。
-        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() * roller_factor);
+        graphics_svgItem_unique->setScale(s* roller_factor);
         qDebug()<<"graphics_svgItem_unique->scale();"<<graphics_svgItem_unique->scale();
     } else {
-        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale() / roller_factor);
+        graphics_svgItem_unique->setScale(s / roller_factor);
         qDebug()<<"graphics_svgItem_unique->scale();"<<graphics_svgItem_unique->scale();
     }
 
