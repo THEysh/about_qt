@@ -114,23 +114,16 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
-    // 自适应后，图片尺寸会跟随场景大小，当用户使用滚轮，photo_pixmap的图片展示应该也顺着变大，不然场景的图片永远是模糊的，
-    // 为了放大后图片更清晰的显示，图片的尺寸因子设置比正常的大一些,设置为roller_factor*roller_factor*roller_factor
     int old_wid = photo_pixmap_unique->width();
     int old_height = photo_pixmap_unique->height();
     int new_wid; int new_height;
-    // 下面只是view的缩放，不会影响rect
 
-    if (event->delta() > 0) {
-        // 放大，只对pixmapItem场景进行缩放
-        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() * roller_factor);
-        new_wid = int(old_wid*roller_factor*roller_factor);
-        new_height = int(old_height*roller_factor*roller_factor);
-    } else {
-        // 缩放
-        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() / roller_factor);
-        new_wid = int(old_wid/roller_factor);
-        new_height = int(old_height/roller_factor);
+    if (event->delta() > 0){
+        new_wid = old_wid *roller_factor;
+        new_height = old_height *roller_factor;
+    }else{
+        new_wid = old_wid;
+        new_height = old_height;
     }
     if ((new_wid < or_activated_photo_pixmap.width())&&(new_height < or_activated_photo_pixmap.height())){
         photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(new_wid,new_height,Qt::KeepAspectRatio));
@@ -141,6 +134,16 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
         graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
     }
+    // 设置视角为中心
+    graphics_pixmapItem_unique->setTransformOriginPoint(photo_pixmap_unique->rect().center());
+    if (event->delta() > 0) {
+        // 放大，只对pixmapItem场景进行缩放
+        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() * roller_factor);
+    } else {
+        // 缩放
+        graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() / roller_factor);
+    }
+
 }
 
 void C_QPixmapItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {
@@ -181,6 +184,7 @@ C_SvgItem::C_SvgItem(const QString &path,QTreeWidgetItem* item):
         graphics_svgItem_unique(new QGraphicsSvgItem())
 {
     bool loadResult = svgrender_unique ->load(path); // 加载 SVG 文件
+
     if (loadResult){
         // 设置唯一标识符号
         graphics_svgItem_unique->setData(0,uuidSymbol);
@@ -231,25 +235,30 @@ void C_SvgItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         qDebug() << "C_SvgItem::show_photo bug";
         return;
     }
-    float s = graphics_svgItem_unique->scale();
-    auto p = graphics_svgItem_unique->mapFromScene(event->posF());
-    auto p2 = graphics_svgItem_unique->mapFromScene(QPointF(0,0));
-    qDebug()<<"event->posF()"<< event->posF();
-    qDebug()<<"p1"<< p*graphics_svgItem_unique->scale();
-    qDebug()<<"p2"<< -p2*graphics_svgItem_unique->scale();
-    qDebug()<<"p3"<< p*graphics_svgItem_unique->scale()-p2*graphics_svgItem_unique->scale();
-    graphics_svgItem_unique->setScale(1);
-    //graphics_svgItem_unique->setTransformOriginPoint(p*graphics_svgItem_unique->scale()-p2*graphics_svgItem_unique->scale());
+//    QPointF temp(0,0);
+//    QPointF df(0,0);
+//    if (pr_mou!=temp){
+//        df = event->posF()-pr_mou;
+//    }
+//    auto p = graphics_svgItem_unique->mapFromScene(event->posF());
+//    auto p2 = graphics_svgItem_unique->mapFromScene(QPointF(0,0));
+//    qDebug()<<"event->posF()"<< event->posF();
+//    qDebug()<<"df"<< df;
+//    qDebug()<<"p1"<< p*graphics_svgItem_unique->scale();
+//    qDebug()<<"p2"<< -p2*graphics_svgItem_unique->scale();
+//    qDebug()<<"p3"<< event->posF()+p2*graphics_svgItem_unique->scale();
+//    graphics_svgItem_unique->setScale(1);
+    //graphics_svgItem_unique->setTransformOriginPoint(graphics_svgItem_unique->boundingRect().center());
+    // 获取鼠标在视图中的位置
+    graphics_svgItem_unique->setTransformOriginPoint(graphics_svgItem_unique->boundingRect().center());
     if (event->delta() > 0) {
-        // 将图元的局部坐标系原点位置转换为场景坐标系中的位置，然后将这个位置设置为变换中心点。
-        // 这样就能够以场景坐标系中的指定点为中心进行变换了。
-        graphics_svgItem_unique->setScale(s* roller_factor);
-        qDebug()<<"graphics_svgItem_unique->scale();"<<graphics_svgItem_unique->scale();
+        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale()*roller_factor);
+        qDebug() << "graphics_svgItem_unique->scale();" << graphics_svgItem_unique->scale();
     } else {
-        graphics_svgItem_unique->setScale(s / roller_factor);
-        qDebug()<<"graphics_svgItem_unique->scale();"<<graphics_svgItem_unique->scale();
+        graphics_svgItem_unique->setScale(graphics_svgItem_unique->scale()/roller_factor);
+        qDebug() << "graphics_svgItem_unique->scale();" << graphics_svgItem_unique->scale();
     }
-
+    event->accept();
 }
 
 void C_SvgItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {

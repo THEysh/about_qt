@@ -28,6 +28,7 @@ My_Photo_Graphics::My_Photo_Graphics(QWidget *parent):
     or_background.load(":ui/images/pic_b/wallhaven-nkqrgd.png");
     this->setScene(scene);
     setRenderHint(QPainter::Antialiasing, true);
+    // 以鼠标位置的view缩放
     setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     setResizeAnchor(QGraphicsView::AnchorUnderMouse);
     setInteractive(true);

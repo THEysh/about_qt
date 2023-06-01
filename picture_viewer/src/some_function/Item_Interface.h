@@ -33,6 +33,7 @@ public: //公共接口
     virtual void set_z_val(int num);
 protected:
     double roller_factor = 1.05;
+    QPointF pr_mou;
     virtual void position_calculation(QGraphicsView *view);
 };
 
