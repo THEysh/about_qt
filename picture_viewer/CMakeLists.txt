@@ -25,7 +25,8 @@ find_package(Qt5 COMPONENTS
 # .qrc 是资源文件，包含一些图片，视频资源
 #         src/my_qrc.qrc
 add_executable( picture_viewer
-
+        WIN32
+        src/my_qrc.qrc
         src/main.cpp
         src/ico.rc
         src/function.cpp

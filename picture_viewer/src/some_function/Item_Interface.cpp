@@ -119,8 +119,8 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
     int new_wid; int new_height;
 
     if (event->delta() > 0){
-        new_wid = old_wid *roller_factor;
-        new_height = old_height *roller_factor;
+        new_wid = old_wid *roller_factor*roller_factor*roller_factor;
+        new_height = old_height *roller_factor*roller_factor*roller_factor;
     }else{
         new_wid = old_wid;
         new_height = old_height;
