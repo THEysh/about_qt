@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0631267d-e459-46e2-ab04-f955f180bcd0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/CMakeFiles/picture_viewer.dir/src/some_function/Item_Interface.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/CMakeFiles/picture_viewer.dir/src/some_function/Item_Interface.cpp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/picture_viewer.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/picture_viewer.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../picture_viewer/src/some_function/Item_Interface.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/some_function/Item_Interface.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qt_6/untitled/untitled_zh_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_6/untitled/untitled_zh_CN.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QbVwAvP4BBsKBSEPFPjyv3G1Us" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "F:/code/c_code/about_qt/qt_exam",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0631267d-e459-46e2-ab04-f955f180bcd0" name="Changes" comment="" />
+      <created>1685622503291</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685622503291</updated>
+      <workItem from="1685622504311" duration="12000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
