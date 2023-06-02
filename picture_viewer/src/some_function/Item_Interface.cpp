@@ -134,7 +134,6 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
         graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
     }
-
     // 设置视角为中心
     graphics_pixmapItem_unique->setTransformOriginPoint(photo_pixmap_unique->rect().center());
     if (event->delta() > 0) {
