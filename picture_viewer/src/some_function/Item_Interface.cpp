@@ -145,6 +145,7 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         graphics_pixmapItem_unique->setScale(graphics_pixmapItem_unique->scale() / roller_factor);
     }
 
+
 }
 
 void C_QPixmapItem::resizeEvent(QResizeEvent *event, QGraphicsView *view, QGraphicsScene *scene) {
