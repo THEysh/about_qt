@@ -69,8 +69,7 @@
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfigVersion.cmake",
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5SvgConfig.cmake",
 		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgIconPlugin.cmake",
-		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake",
-		"F:/code/c_code/about_qt/picture_viewer/src/my_qrc.qrc"
+		"F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake"
 	],
 	"CMAKE_SOURCE_DIR" : "F:/code/c_code/about_qt/picture_viewer",
 	"DEP_FILE" : "",

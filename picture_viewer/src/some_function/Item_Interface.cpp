@@ -101,6 +101,7 @@ void C_QPixmapItem::position_calculation(QGraphicsView *view) {
         photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(view->width() ,view->height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
     }
     graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
+    graphics_pixmapItem_unique->setScale(1);
     pixmap_rect = graphics_pixmapItem_unique->pixmap().rect();
     QPointF center = view ->viewport()->rect().center() - pixmap_rect.center();
     qDebug()<<"view center:"<<view ->viewport()->rect().center()<<"pixmap_rect center"<<pixmap_rect.center();
@@ -114,26 +115,25 @@ void C_QPixmapItem::wheelEvent(QWheelEvent *event,QGraphicsView *view) {
         qDebug()<<"C_SvgItem::show_photo bug";
         return;
     }
-    int old_wid = photo_pixmap_unique->width();
-    int old_height = photo_pixmap_unique->height();
-    int new_wid; int new_height;
-
-    if (event->delta() > 0){
-        new_wid = old_wid *roller_factor*roller_factor*roller_factor;
-        new_height = old_height *roller_factor*roller_factor*roller_factor;
-    }else{
-        new_wid = old_wid;
-        new_height = old_height;
-    }
-    if ((new_wid < or_activated_photo_pixmap.width())&&(new_height < or_activated_photo_pixmap.height())){
-        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(new_wid,new_height,Qt::KeepAspectRatio));
-        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
-    } else if(photo_pixmap_unique->rect()==or_activated_photo_pixmap.rect()){
-        //尺寸相等
-    } else{
-        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
-        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
-    }
+//    int old_wid = photo_pixmap_unique->width();
+//    int old_height = photo_pixmap_unique->height();
+//    int new_wid; int new_height;
+//
+//    if (event->delta() > 0){
+//        new_wid = old_wid *roller_factor*roller_factor;
+//        new_height = old_height *roller_factor*roller_factor;
+//    }else{
+//        new_wid = old_wid;
+//        new_height = old_height;
+//    }
+//    if ((new_wid < or_activated_photo_pixmap.width())&&(new_height < or_activated_photo_pixmap.height())){
+//        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap.scaled(new_wid,new_height,Qt::KeepAspectRatio));
+//        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
+//    }
+//    else{
+//        photo_pixmap_unique = std::make_unique<QPixmap>(or_activated_photo_pixmap);
+//        graphics_pixmapItem_unique->setPixmap(*photo_pixmap_unique);
+//    }
     // 设置视角为中心
     graphics_pixmapItem_unique->setTransformOriginPoint(photo_pixmap_unique->rect().center());
     if (event->delta() > 0) {
@@ -225,7 +225,7 @@ void C_SvgItem::position_calculation(QGraphicsView *view) {
         return;
     }
     QPointF center = view ->viewport()->rect().center() - svg_Rect.center();
-
+    graphics_svgItem_unique->setScale(1);
     qDebug()<<"svgItem center:"<<center;
     graphics_svgItem_unique->setPos(center);
 }
@@ -428,6 +428,7 @@ void C_GifItem::position_calculation(QGraphicsView *view) {
     if (graphics_gifItem_unique == nullptr){
         qDebug()<<"C_GifItem::wheelEvent bug";
     }
+    graphics_gifItem_unique->setScale(1);
     QPointF center = (view ->viewport()->rect().center()) - (rect_sig->get_gif_rect().center());
     qDebug()<<"view center:"<<view ->viewport()->rect().center()<<"pixmap_rect center"<< rect_sig->get_gif_rect().center();
     qDebug()<<"view rect:"<<view ->rect()<<"pixmap_rect"<< rect_sig->get_gif_rect();
