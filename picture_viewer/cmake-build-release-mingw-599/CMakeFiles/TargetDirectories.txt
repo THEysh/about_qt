@@ -1,4 +1,0 @@
-F:/code/c_code/about_qt/picture_viewer/cmake-build-release-mingw-599/CMakeFiles/picture_viewer.dir
-F:/code/c_code/about_qt/picture_viewer/cmake-build-release-mingw-599/CMakeFiles/edit_cache.dir
-F:/code/c_code/about_qt/picture_viewer/cmake-build-release-mingw-599/CMakeFiles/rebuild_cache.dir
-F:/code/c_code/about_qt/picture_viewer/cmake-build-release-mingw-599/CMakeFiles/picture_viewer_autogen.dir
