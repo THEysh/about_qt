@@ -32,13 +32,11 @@ protected:
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
     // 创建场景
     QGraphicsScene scene;
     scene.setSceneRect(-200, -200, 400, 400);
     scene.addLine(-200, 0, 200, 0, QPen(Qt::red));
     scene.addLine(0, -200, 0, 200, QPen(Qt::red));
-
     // 创建视图并设置场景
     GraphicsView view;
     view.setScene(&scene);
