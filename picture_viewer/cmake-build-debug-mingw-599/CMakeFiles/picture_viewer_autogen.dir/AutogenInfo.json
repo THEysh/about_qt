@@ -74,7 +74,45 @@
 	"CMAKE_SOURCE_DIR" : "F:/code/c_code/about_qt/picture_viewer",
 	"DEP_FILE" : "",
 	"DEP_FILE_RULE_NAME" : "",
-	"HEADERS" : [],
+	"HEADERS" : 
+	[
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/function.h",
+			"MU",
+			"UVLADIE3JM/moc_function.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/Item_Interface.h",
+			"MU",
+			"UJXWR6GGJZ/moc_Item_Interface.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/Pic_Thread.h",
+			"MU",
+			"UJXWR6GGJZ/moc_Pic_Thread.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_Qtreewidget.h",
+			"MU",
+			"UJXWR6GGJZ/moc_my_Qtreewidget.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_photo_Graphics.h",
+			"MU",
+			"UJXWR6GGJZ/moc_my_photo_Graphics.cpp",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/ui/ui_file/Qtree_ui.h",
+			"MU",
+			"BWLLZGAE4L/moc_Qtree_ui.cpp",
+			null
+		]
+	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
 	"INCLUDE_DIR" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug-mingw-599/picture_viewer_autogen/include",
 	"MOC_COMPILATION_FILE" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug-mingw-599/picture_viewer_autogen/mocs_compilation.cpp",
@@ -131,7 +169,31 @@
 	"QT_VERSION_MAJOR" : 5,
 	"QT_VERSION_MINOR" : 9,
 	"SETTINGS_FILE" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug-mingw-599/CMakeFiles/picture_viewer_autogen.dir/AutogenUsed.txt",
-	"SOURCES" : [],
+	"SOURCES" : 
+	[
+		[ "F:/code/c_code/about_qt/picture_viewer/src/function.cpp", "MU", null ],
+		[ "F:/code/c_code/about_qt/picture_viewer/src/main.cpp", "MU", null ],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/Item_Interface.cpp",
+			"MU",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/Pic_Thread.cpp",
+			"MU",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_Qtreewidget.cpp",
+			"MU",
+			null
+		],
+		[
+			"F:/code/c_code/about_qt/picture_viewer/src/some_function/my_photo_Graphics.cpp",
+			"MU",
+			null
+		]
+	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : [],

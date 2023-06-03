@@ -29,13 +29,13 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 27,
+				"line" : 28,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 44,
+				"line" : 45,
 				"parent" : 0
 			},
 			{
@@ -52,7 +52,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -fdiagnostics-color=always"
+					"fragment" : "-O3 -DNDEBUG -fdiagnostics-color=always"
 				},
 				{
 					"fragment" : "-std=gnu++14"
@@ -74,6 +74,10 @@
 				},
 				{
 					"backtrace" : 2,
+					"define" : "QT_NO_DEBUG"
+				},
+				{
+					"backtrace" : 2,
 					"define" : "QT_SVG_LIB"
 				},
 				{
@@ -85,7 +89,7 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug-mingw-599/picture_viewer_autogen/include"
+					"path" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-release-mingw-599/picture_viewer_autogen/include"
 				},
 				{
 					"backtrace" : 2,
@@ -160,6 +164,10 @@
 				},
 				{
 					"backtrace" : 2,
+					"define" : "QT_NO_DEBUG"
+				},
+				{
+					"backtrace" : 2,
 					"define" : "QT_SVG_LIB"
 				},
 				{
@@ -171,7 +179,7 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-debug-mingw-599/picture_viewer_autogen/include"
+					"path" : "F:/code/c_code/about_qt/picture_viewer/cmake-build-release-mingw-599/picture_viewer_autogen/include"
 				},
 				{
 					"backtrace" : 2,
@@ -229,7 +237,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g",
+				"fragment" : "-O3 -DNDEBUG",
 				"role" : "flags"
 			},
 			{
@@ -238,22 +246,22 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Svgd.a",
+				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Svg.a",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Widgetsd.a",
+				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Widgets.a",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Guid.a",
+				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Gui.a",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Cored.a",
+				"fragment" : "F:\\QT5_9_9\\5.9.9\\mingw53_32\\lib\\libQt5Core.a",
 				"role" : "libraries"
 			},
 			{
@@ -305,7 +313,7 @@
 			"backtrace" : 0,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "cmake-build-debug-mingw-599/picture_viewer_autogen/mocs_compilation.cpp",
+			"path" : "cmake-build-release-mingw-599/picture_viewer_autogen/mocs_compilation.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
