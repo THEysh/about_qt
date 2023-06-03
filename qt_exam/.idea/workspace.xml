@@ -20,7 +20,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="在写图片的居中" />
+    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="测试">
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,7 +64,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "F:/code/c_code/about_qt/qt_exam",
+    "last_opened_file_path": "F:/code/c_code/about_qt/qt_6",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -136,7 +138,7 @@
       <workItem from="1682928402381" duration="1189000" />
       <workItem from="1683900077309" duration="7019000" />
       <workItem from="1685622520012" duration="45000" />
-      <workItem from="1685785385775" duration="1000" />
+      <workItem from="1685785385775" duration="248000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
@@ -250,7 +252,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681461716074</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="测试">
+      <created>1685785398042</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1685785398042</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +289,8 @@
     <MESSAGE value="写了下载url的内容" />
     <MESSAGE value="写了图片查看器的目录部分" />
     <MESSAGE value="在写图片的居中" />
-    <option name="LAST_COMMIT_MESSAGE" value="在写图片的居中" />
+    <MESSAGE value="测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

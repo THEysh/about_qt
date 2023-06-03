@@ -1,2 +1,0 @@
-F:/code/c_code/about_qt/qt_6/first/cmake-build-debug-mingwqt6/CMakeFiles/edit_cache.dir
-F:/code/c_code/about_qt/qt_6/first/cmake-build-debug-mingwqt6/CMakeFiles/rebuild_cache.dir
