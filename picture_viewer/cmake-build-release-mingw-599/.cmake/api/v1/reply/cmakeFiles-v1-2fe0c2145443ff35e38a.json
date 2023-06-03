@@ -282,6 +282,9 @@
 		{
 			"isExternal" : true,
 			"path" : "F:/QT5_9_9/5.9.9/mingw53_32/lib/cmake/Qt5Svg/Qt5Svg_QSvgPlugin.cmake"
+		},
+		{
+			"path" : "src/my_qrc.qrc"
 		}
 	],
 	"kind" : "cmakeFiles",
