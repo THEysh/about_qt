@@ -13,3 +13,16 @@
 1063	1204	7073225199621778	qt_test.exe	37398994f65467fe
 0	203	7074880627870727	build.ninja	38e7fbe0918c0d36
 39	1247	7072513255572013	CMakeFiles/qt_test.dir/mygraphicsview.cpp.obj	86e8d418a293bad5
+1	193	0	CMakeFiles/qt_test_autogen	32bb722412937225
+1	193	0	qt_test_autogen/mocs_compilation.cpp	32bb722412937225
+1	193	0	F:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/CMakeFiles/qt_test_autogen	32bb722412937225
+1	193	0	F:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/qt_test_autogen/mocs_compilation.cpp	32bb722412937225
+196	1132	7074883229308766	CMakeFiles/qt_test.dir/treadqt.cpp.obj	ed38fe91ffd969a1
+194	1160	7074883229568472	CMakeFiles/qt_test.dir/qt_test_autogen/mocs_compilation.cpp.obj	64ec9031a95253c7
+195	1340	7074883231378048	CMakeFiles/qt_test.dir/mygraphicsview.cpp.obj	86e8d418a293bad5
+193	1361	7074883231595985	CMakeFiles/qt_test.dir/main.cpp.obj	7f6f15c134d2db70
+1362	1517	7074883233134909	qt_test.exe	37398994f65467fe
+4	29	0	CMakeFiles/qt_test_autogen	32bb722412937225
+4	29	0	qt_test_autogen/mocs_compilation.cpp	32bb722412937225
+4	29	0	F:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/CMakeFiles/qt_test_autogen	32bb722412937225
+4	29	0	F:/code/c_code/about_qt/qt_test/cmake-build-debug-mingw-599/qt_test_autogen/mocs_compilation.cpp	32bb722412937225
