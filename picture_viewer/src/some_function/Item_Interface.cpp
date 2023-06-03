@@ -428,6 +428,7 @@ void C_GifItem::position_calculation(QGraphicsView *view) {
     if (graphics_gifItem_unique == nullptr){
         qDebug()<<"C_GifItem::wheelEvent bug";
     }
+
     graphics_gifItem_unique->setScale(1);
     QPointF center = (view ->viewport()->rect().center()) - (rect_sig->get_gif_rect().center());
     qDebug()<<"view center:"<<view ->viewport()->rect().center()<<"pixmap_rect center"<< rect_sig->get_gif_rect().center();
