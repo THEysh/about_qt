@@ -20,17 +20,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="在写图片的居中">
-      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/CMakeFiles/picture_viewer.dir/src/some_function/Item_Interface.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/CMakeFiles/picture_viewer.dir/src/some_function/Item_Interface.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/picture_viewer.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/cmake-build-debug-mingw-599/picture_viewer.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../picture_viewer/src/some_function/Item_Interface.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../picture_viewer/src/some_function/Item_Interface.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../qt_6/untitled/untitled_zh_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_6/untitled/untitled_zh_CN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
-    </list>
+    <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="在写图片的居中" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +62,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "F:/code/c_code/about_qt/qt_6/untitled",
+    "last_opened_file_path": "F:/code/c_code/about_qt/qt_exam",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -146,6 +136,7 @@
       <workItem from="1682928402381" duration="1189000" />
       <workItem from="1683900077309" duration="7019000" />
       <workItem from="1685622520012" duration="45000" />
+      <workItem from="1685785385775" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>
