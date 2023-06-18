@@ -1,0 +1,62 @@
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls 2.5
+
+Window {
+    id: window
+    property int index: 1
+
+    height: 480
+    minimumHeight: 300
+    minimumWidth: 300
+    opacity: 1
+    title: qsTr("testqml_2")
+    visible: true
+    width: 720
+    x: -2200
+    y: 700
+
+    My_item {
+        id: item1
+
+        Rectangle {
+            id: rect1
+            anchors.centerIn: parent
+            width: 100
+            height: 100
+            color: "green"
+        }
+    }
+
+    function move(but){
+        // js的代码
+        but.x = Math.random()*(window.width-but.width)
+        but.y = Math.random()*(window.height-but.height)
+        console.log("函数 move")
+        switch(Math.ceil(Math.random()*3)){
+            case 0 :{but.text = "0"}break;
+            case 1 :{but.text = "1"}break;
+            case 2 :{but.text = "2"}break;
+            case 3 :{but.text = "3"}break;
+        }
+    }
+
+    Button{
+        id:but1
+        x:item1.width + 10
+        width: 100
+        height: 100
+        text: "按钮"
+        background: Rectangle{
+            radius: 10
+            color: "#123456"
+        }
+        onPressed: {
+            color: "#000000"
+        }
+
+        onClicked: {
+            move(but1)
+        }
+    }
+}

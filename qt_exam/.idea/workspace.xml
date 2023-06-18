@@ -21,7 +21,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b58349a7-50a9-45de-b8ce-36dd32482225" name="Changes" comment="测试">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug-mingw-599/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug-mingw-599/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../qt_test/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../qt_test/cmake-build-debug-mingw-599/Testing/Temporary/LastTest.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +143,7 @@
       <workItem from="1683900077309" duration="7019000" />
       <workItem from="1685622520012" duration="45000" />
       <workItem from="1685785385775" duration="248000" />
+      <workItem from="1686991763666" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1680514977165</created>

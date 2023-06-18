@@ -1,0 +1,7 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource>
+        <file>img/img.png</file>
+        <file>img/wallhaven1.jpg</file>
+        <file>qml/testqml_1.qml</file>
+    </qresource>
+</RCC>
