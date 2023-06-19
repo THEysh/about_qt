@@ -1,0 +1,5 @@
+F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/project_qml.dir
+F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/edit_cache.dir
+F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/rebuild_cache.dir
+F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/project_qml_autogen_timestamp_deps.dir
+F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/project_qml_autogen.dir

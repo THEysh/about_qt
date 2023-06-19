@@ -1,0 +1,6 @@
+"F:\CLion\CLion 2022.3.3\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=F:/CLion/CLion 2022.3.3/bin/ninja/win/x64/ninja.exe" -G Ninja -S F:\code\c_code\about_qt\qt_6\qml_fitst_projiect -B F:\code\c_code\about_qt\qt_6\qml_fitst_projiect\cmake-build-debug-mingw-qt_6_mingw1120
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: F:/code/c_code/about_qt/qt_6/qml_fitst_projiect/cmake-build-debug-mingw-qt_6_mingw1120

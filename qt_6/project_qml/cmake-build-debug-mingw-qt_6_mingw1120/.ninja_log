@@ -1,0 +1,14 @@
+# ninja log v5
+1	116	7087033941394312	project_qml_autogen/timestamp	9abbbc09419422a9
+1	116	7087033941394312	project_qml_autogen/mocs_compilation.cpp	9abbbc09419422a9
+1	116	7087033941394312	F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/project_qml_autogen/timestamp	9abbbc09419422a9
+1	116	7087033941394312	F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/project_qml_autogen/mocs_compilation.cpp	9abbbc09419422a9
+116	144	7087033941964448	CMakeFiles/project_qml.dir/project_qml_autogen/mocs_compilation.cpp.obj	ebb0ac1251ac1756
+117	1821	7087033958724792	CMakeFiles/project_qml.dir/main.cpp.obj	9fc8c2b24b6c6565
+1823	1926	7087033959755023	project_qml.exe	7159ef10e2f1b164
+5	75	7087041021437359	project_qml_autogen/timestamp	9abbbc09419422a9
+5	75	7087041021437359	project_qml_autogen/mocs_compilation.cpp	9abbbc09419422a9
+5	75	7087041021437359	F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/project_qml_autogen/timestamp	9abbbc09419422a9
+5	75	7087041021437359	F:/code/c_code/about_qt/qt_6/project_qml/cmake-build-debug-mingw-qt_6_mingw1120/project_qml_autogen/mocs_compilation.cpp	9abbbc09419422a9
+76	2008	7087041040771693	CMakeFiles/project_qml.dir/main.cpp.obj	9fc8c2b24b6c6565
+2008	2120	7087041041871939	project_qml.exe	7159ef10e2f1b164
