@@ -7,6 +7,7 @@
 #include <QResource>
 #include <QProcess>
 #include "src/code/QML_Reloader.h"
+
 void pross_qrc_command(QString &qrc_path){
     // 创建 QProcess 对象
     QProcess process;
