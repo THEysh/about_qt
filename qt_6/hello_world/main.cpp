@@ -35,6 +35,7 @@ void pross_qrc_command(QString &qrc_path){
     }
 }
 
+
 int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     QString qrc_path = R"(F:\code\c_code\about_qt\qt_6\hello_world\src\the_qrc.qrc)";
