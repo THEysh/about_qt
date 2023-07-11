@@ -1,47 +1,25 @@
-#include <QGraphicsView>
-#include <QWheelEvent>
-#include <QApplication>
-#include <QMainWindow>
-#include "QGraphicsRectItem"
-class GraphicsView : public QGraphicsView
-{
-public:
-    GraphicsView(QWidget *parent = nullptr) : QGraphicsView(parent) {
-        setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-        setResizeAnchor(QGraphicsView::AnchorUnderMouse);
+#include <iostream>
+#include <cmath>
+#include <QVector>
+
+class Vector2D {
+    // 构造函数
+    Vector2D(double angle = 0.0, double v = 0.0) : angle(angle), v(v) {}
+    // 将速度垂直分解
+    QVector<Vector2D> velocity_decomposing(double horizontal_angle) {
+        int integer_part = static_cast<int>(horizontal_angle);
+        double decimal_part = horizontal_angle - static_cast<double>(integer_part); // 转为int和小数部分
+        double vertical_angle = (integer_part+90) % 360 + decimal_part;
     }
-
-protected:
-    void wheelEvent(QWheelEvent *event) override
-    {
-        // 获取当前的缩放比例
-        qreal scaleFactor = transform().m11();
-
-        // 根据滚轮的滚动方向调整缩放比例
-        if (event->delta() > 0)
-            scaleFactor *= 1.1;
-        else
-            scaleFactor /= 1.1;
-
-        // 设置新的缩放比例
-        setTransform(QTransform::fromScale(scaleFactor, scaleFactor));
-        // 停止事件传播
-        event->accept();
-    }
+private:
+    double angle;
+    double v;
 };
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    // 创建场景
-    QGraphicsScene scene;
-    scene.setSceneRect(-200, -200, 400, 400);
-    scene.addLine(-200, 0, 200, 0, QPen(Qt::red));
-    scene.addLine(0, -200, 0, 200, QPen(Qt::red));
-    // 创建视图并设置场景
-    GraphicsView view;
-    view.setScene(&scene);
 
-    // 显示视图
-    view.show();
+int main() {
+    // 创建两个速度向量对象
+    Vector2D v1(0, 1.0);  // 向量v1的x分量和y分量分别为1.0
 
-    return a.exec();}
+
+    return 0;
+}

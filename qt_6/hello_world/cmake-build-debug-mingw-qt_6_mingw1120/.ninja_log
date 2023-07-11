@@ -55,3 +55,9 @@
 4	84	7087927710342520	F:/code/c_code/about_qt/qt_6/hello_world/cmake-build-debug-mingw-qt_6_mingw1120/hello_world_autogen/mocs_compilation.cpp	8cc789912faeb342
 87	3062	7087927740116543	CMakeFiles/hello_world.dir/main.cpp.obj	2ebe71c6ebac2996
 3062	3242	7087927741887161	hello_world.exe	e1b03b623db3cff0
+7	103	7106845184077569	hello_world_autogen/timestamp	8cc789912faeb342
+7	103	7106845184077569	hello_world_autogen/mocs_compilation.cpp	8cc789912faeb342
+7	103	7106845184077569	F:/code/c_code/about_qt/qt_6/hello_world/cmake-build-debug-mingw-qt_6_mingw1120/hello_world_autogen/timestamp	8cc789912faeb342
+7	103	7106845184077569	F:/code/c_code/about_qt/qt_6/hello_world/cmake-build-debug-mingw-qt_6_mingw1120/hello_world_autogen/mocs_compilation.cpp	8cc789912faeb342
+106	3575	7106845218788727	CMakeFiles/hello_world.dir/main.cpp.obj	2ebe71c6ebac2996
+3575	3863	7106845221641552	hello_world.exe	e1b03b623db3cff0
