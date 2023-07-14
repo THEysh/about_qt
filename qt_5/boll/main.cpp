@@ -42,7 +42,7 @@ public:
             // 使用左上角坐标 (x, y)、宽度和高度创建矩形。将其用于圆的绘制
             QRectF ball_rect(x,y,2*radius,2*radius);
             double angle = get_random(0.0, 360.0);
-            double v = get_random(200.0,1000.0);
+            double v = get_random(500.0,1000.0);
             auto ball_v = Velocity2D(angle,v);
             balls.add_ball(ball_rect, ball_v);
         }

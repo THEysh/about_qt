@@ -4,7 +4,11 @@
 
 #include "Object_category.h"
 #include <utility>
+void Object_category::create_objects(QRectF rect, Velocity2D ball_v) {
+    polygon_object = new Ball_class(rect, std::move(ball_v));
+}
 
+// ------------------------------------------------------------------
 Ball_class :: ~Ball_class() {
     balls.clear();  // 清空 balls 容器
 }
@@ -15,7 +19,9 @@ Ball_class :: Ball_class(Ball* const ball) : Object_category(), balls()
 {
     balls.push_back(ball);
 }
-
+Ball_class::Ball_class(QRectF rect, Velocity2D ball_v) {
+    balls.push_back(new Ball(rect,std::move(ball_v)));
+}
 Ball_class :: Ball_class(QVector<Ball*>& some_balls) : Object_category(), balls()
 {
     balls.append(some_balls);
@@ -42,6 +48,7 @@ Ball& Ball_class :: operator[](int index) {
         throw std :: out_of_range("Ball_class:: 索引越界！");
     }
 }
+
 
 
 //---------------------------------------------------------------------------------------------
@@ -152,3 +159,4 @@ QPointF& Rect_boundary:: operator[](int index){
 int Rect_boundary::size() {
     return polygon.size();
 }
+

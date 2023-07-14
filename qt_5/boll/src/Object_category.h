@@ -12,6 +12,8 @@
 
 
 class Object_category : public QObject {
+public:
+    void create_objects(QRectF rect, Velocity2D ball_v);  // 纯虚函数，用于创建子类对象
     template<typename T1>
     T1 get_objects(){
         return T1();
@@ -20,14 +22,16 @@ class Object_category : public QObject {
     T2& operator[](int index) {
         return T2();
     }
-
     virtual int size(){}
+private:
+    Object_category* polygon_object = nullptr;
 };
 
 class Ball_class : public Object_category{
 public:
     ~Ball_class() override;
     Ball_class();
+    Ball_class(QRectF rect, Velocity2D ball_v);
     explicit Ball_class(Ball* ball);
     explicit Ball_class(QVector<Ball*>& some_balls);
     void add_ball(QRectF rect, Velocity2D ball_v);
