@@ -121,18 +121,18 @@ void Collision :: collision_calculation(double dt, Ball &ball, Rect_boundary &bo
         auto dy = v_xy[1].get_v()*dt;
         QPointF dpf(dx, dy);
         ball.coordinate_change_df(dpf);
-        for (int i=0; i < bound.polygon.size(); i++){
+        for (int i=0; i < bound.size(); i++){
             QVector2D p1, p2;
-            if (i == bound.polygon.size()-1){
-                p1.setX(static_cast<float>(bound.polygon[i].x()));
-                p1.setY(static_cast<float>(bound.polygon[i].y()));
-                p2.setX(static_cast<float>(bound.polygon[0].x()));
-                p2.setY(static_cast<float>(bound.polygon[0].y()));
+            if (i == bound.size()-1){
+                p1.setX(static_cast<float>(bound[i].x()));
+                p1.setY(static_cast<float>(bound[i].y()));
+                p2.setX(static_cast<float>(bound[0].x()));
+                p2.setY(static_cast<float>(bound[0].y()));
             }else{
-                p1.setX(static_cast<float>(bound.polygon[i].x()));
-                p1.setY(static_cast<float>(bound.polygon[i].y()));
-                p2.setX(static_cast<float>(bound.polygon[i+1].x()));
-                p2.setY(static_cast<float>(bound.polygon[i+1].y()));
+                p1.setX(static_cast<float>(bound[i].x()));
+                p1.setY(static_cast<float>(bound[i].y()));
+                p2.setX(static_cast<float>(bound[i+1].x()));
+                p2.setY(static_cast<float>(bound[i+1].y()));
             }
             // 描写 球体,线段的碰撞
             collision_calculation(dt, ball, p1, p2);

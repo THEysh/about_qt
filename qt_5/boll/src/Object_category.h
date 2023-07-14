@@ -9,13 +9,24 @@
 #include <QQueue>
 #include "Collision.h"
 
+
+
 class Object_category : public QObject {
 
 };
 
 class Ball_class : public Object_category{
 public:
+    ~Ball_class();
     Ball_class();
+    explicit Ball_class(Ball* ball);
+    Ball_class(QVector<Ball*>& some_balls);
+    void add_ball(const QRectF rect, Velocity2D ball_v);
+    QVector<Ball*>& get_all_ball();
+    Ball& operator[](int index);
+    int size();
+private:
+    QVector<Ball*> balls;
 };
 
 // --------------------------------------------------------------------
@@ -33,7 +44,7 @@ public:
 
     Ball(QRectF rect, Velocity2D ball_v);
 
-    void coordinate_change_df(QPointF &dpf);
+    void coordinate_change_df(const QPointF &dpf);
 
     void set_v(Velocity2D &v);
 
@@ -46,14 +57,31 @@ private:
 // --------------------------------------------------------------------
 
 class Polygon_boundary_class : public Object_category{
-
+public:
+    ~Polygon_boundary_class() override;
+    Polygon_boundary_class();
+    explicit Polygon_boundary_class(Rect_boundary* rect_bound);
+    explicit Polygon_boundary_class(QVector<Rect_boundary*>& some_rect_bounds);
+    void add_rect_polygon(Rect_boundary* rect_bound);
+    void add_rect_polygon(const QVector<QPointF*>& coordinates);
+    QVector<Rect_boundary*>& get_rect_polygons();
+    Rect_boundary& operator[](int index);
+    int size();
+private:
+    QVector<Rect_boundary *> rect_polygons;
 };
+
+// --------------------------------------------------------------------
 
 class Rect_boundary : public Polygon_boundary_class {
 public:
-    QPolygonF polygon;
-    explicit Rect_boundary(const QVector<QPointF*>& coordinates);
     ~Rect_boundary() override;
+    explicit Rect_boundary(const QVector<QPointF*>& coordinates);
+    QPolygonF& get_polygon();
+    QPointF& operator[](int index);
+    int size();
+private:
+    QPolygonF polygon;
 };
 
 #endif //BOLL_OBJECT_CATEGORY_H

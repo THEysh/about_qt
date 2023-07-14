@@ -3,8 +3,45 @@
 //
 
 #include "Object_category.h"
-Ball_class :: Ball_class(){};
+#include <utility>
 
+Ball_class::~Ball_class() {
+    balls.clear();  // 清空 balls 容器
+}
+
+Ball_class::Ball_class() : Object_category(), balls(){}
+
+Ball_class::Ball_class(Ball* const ball) : Object_category(), balls()
+{
+    balls.push_back(ball);
+}
+
+Ball_class::Ball_class(QVector<Ball*>& some_balls) : Object_category(), balls()
+{
+    balls.append(some_balls);
+}
+
+void Ball_class::add_ball(const QRectF rect, Velocity2D ball_v) {
+    balls.push_back(new Ball(rect,std::move(ball_v)));
+}
+
+QVector<Ball*>& Ball_class :: get_all_ball(){
+    return balls;
+}
+
+int Ball_class::size() {
+    return balls.size();
+}
+
+Ball& Ball_class::operator[](int index) {
+    if (index >= 0 && index < balls.size()) {
+        return *balls[index];
+    } else {
+        throw std::out_of_range("Ball_class:: 索引越界！");
+    }
+}
+
+// ----------------------------------------
 Ball :: Ball(const QRectF rect, Velocity2D ball_v):
         ball_rect(rect),
         rad(rect.width()/2),
@@ -14,7 +51,7 @@ Ball :: Ball(const QRectF rect, Velocity2D ball_v):
     ball_cent = rect.center();
 }
 
-void Ball :: coordinate_change_df(QPointF &dpf){
+void Ball :: coordinate_change_df(const QPointF &dpf){
     ball_rect.translate(dpf);
     ball_cent = ball_rect.center();
     trace_push(ball_cent);
@@ -41,6 +78,47 @@ void Ball :: trace_push(QPointF &p){
     }
 }
 
+// ----------------------------------------------------------
+Polygon_boundary_class::~Polygon_boundary_class(){
+    rect_polygons.clear();
+}
+Polygon_boundary_class::Polygon_boundary_class() {
+
+}
+
+Polygon_boundary_class::Polygon_boundary_class(Rect_boundary *rect_bound) {
+    rect_polygons.push_back(rect_bound);
+}
+
+Polygon_boundary_class::Polygon_boundary_class(QVector<Rect_boundary *>& some_rect_bounds) {
+    rect_polygons.append(some_rect_bounds);
+}
+
+void Polygon_boundary_class::add_rect_polygon(Rect_boundary *rect_bound) {
+    rect_polygons.push_back(rect_bound);
+}
+
+void Polygon_boundary_class::add_rect_polygon(const QVector<QPointF *> &coordinates) {
+    rect_polygons.push_back(new Rect_boundary(coordinates));
+}
+
+QVector<Rect_boundary *> &Polygon_boundary_class::get_rect_polygons() {
+    return rect_polygons;
+}
+
+Rect_boundary &Polygon_boundary_class::operator[](int index) {
+    if (index >= 0 && index < rect_polygons.size()) {
+        return *rect_polygons[index];
+    } else {
+        throw std::out_of_range("Polygon_boundary_class:: 索引越界！");
+    }
+}
+
+int Polygon_boundary_class::size(){
+    return rect_polygons.size();
+}
+
+//  --------------------------------------------------------------------------------------------
 Rect_boundary :: Rect_boundary(const QVector<QPointF*>& coordinates) {
     for (auto c : coordinates){
         polygon<<*c;
@@ -51,4 +129,20 @@ Rect_boundary::~Rect_boundary() {
     for (auto point : polygon) {
         delete &point;
     }
+}
+
+QPolygonF &Rect_boundary::get_polygon() {
+    return polygon;
+}
+QPointF& Rect_boundary:: operator[](int index){
+    if (index >= 0 && index < polygon.size()) {
+        return polygon[index];
+    } else {
+        throw std::out_of_range("Rect_boundary:: 索引越界！");
+    }
+}
+
+
+int Rect_boundary::size() {
+    return polygon.size();
 }

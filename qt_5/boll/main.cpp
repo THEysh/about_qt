@@ -20,13 +20,17 @@ public:
             QWidget(parent),
             interval(15),
             collision(),
-            bound(QVector<QPointF*>{
-                    new QPointF(0, 0),
-                    new QPointF(0, 800),
-                    new QPointF(800, 800),
-                    new QPointF(1200, 400),
-                    new QPointF(800, 0),
-            }){
+            balls(),
+            rect_bounds()
+    {
+        QVector<QPointF*> rect_polygon{
+                new QPointF(0, 0),
+                new QPointF(0, 800),
+                new QPointF(800, 800),
+                new QPointF(1200, 400),
+                new QPointF(800, 0),
+        };
+        rect_bounds.add_rect_polygon(rect_polygon);
         this->resize(800,800);
         // 设置计时器更新帧数
         timer.setInterval(interval);
@@ -41,13 +45,13 @@ public:
             double angle = get_random(0.0, 360.0);
             double v = get_random(200.0,1000.0);
             auto ball_v = Velocity2D(angle,v);
-            balls.push_back(new Ball(ball_rect, ball_v));
+            balls.add_ball(ball_rect, ball_v);
         }
         QObject::connect(&timer, &QTimer::timeout, [&]() {
             // qDebug() << "定时器触发，当前时间：" << QTime::currentTime().toString("hh:mm:ss");
             double dt =  static_cast<double>(interval) / static_cast<double>(1000);
             for (int i = 0; i<balls.size(); i++){
-                collision.collision_calculation(dt, *(balls[i]), bound);
+                collision.collision_calculation(dt, balls[i], rect_bounds[0]);
             }
             update();
         });
@@ -58,8 +62,9 @@ protected:
     QTimer timer;
     int interval;
     Collision collision;
-    Rect_boundary bound;
-    QVector<Ball*> balls;
+
+    Polygon_boundary_class rect_bounds;
+    Ball_class balls;
 
     void paintEvent(QPaintEvent *event) override {
         Q_UNUSED(event);
@@ -71,11 +76,10 @@ protected:
         // 绘制边界
 
         painter.setBrush(Qt::black); // 设置填充颜色为蓝色
-        painter.drawPolygon(bound.polygon);
-
+        painter.drawPolygon(rect_bounds[0].get_polygon());
 
         // 绘制圆
-        for (auto ball:balls) {
+        for (auto ball:balls.get_all_ball()) {
             painter.setPen(pen);
             painter.setBrush(ball->color);
             // 计算圆的位置和大小
