@@ -18,8 +18,7 @@
 //  ------>
 //   2 | 1
 
-
-class ball;
+class Ball;
 class Rect_boundary;
 
 // -----------------------------------------------------------------------
@@ -61,9 +60,9 @@ class Collision : public QObject{
 public:
     double restitution = 1;
     Collision();
-    void collision_calculation(double dt, ball &ball, Rect_boundary &bound) const;
+    void collision_calculation(double dt, Ball &ball, Rect_boundary &bound) const;
 
-    void collision_calculation(double dt, ball &ball, QVector2D &p1, QVector2D &p2) const;
+    void collision_calculation(double dt, Ball &ball, QVector2D &p1, QVector2D &p2) const;
 
     static std::pair<double, QPointF> ShortestDistance_point(const QVector2D& p1, const QVector2D& p2, const QVector2D& point);
 

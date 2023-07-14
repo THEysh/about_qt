@@ -41,7 +41,7 @@ public:
             double angle = get_random(0.0, 360.0);
             double v = get_random(200.0,1000.0);
             auto ball_v = Velocity2D(angle,v);
-            balls.push_back(new ball(ball_rect, ball_v));
+            balls.push_back(new Ball(ball_rect, ball_v));
         }
         QObject::connect(&timer, &QTimer::timeout, [&]() {
             // qDebug() << "定时器触发，当前时间：" << QTime::currentTime().toString("hh:mm:ss");
@@ -59,7 +59,7 @@ protected:
     int interval;
     Collision collision;
     Rect_boundary bound;
-    QVector<ball*> balls;
+    QVector<Ball*> balls;
 
     void paintEvent(QPaintEvent *event) override {
         Q_UNUSED(event);
@@ -69,25 +69,24 @@ protected:
         pen.setWidth(5);
         painter.setPen(pen);
         // 绘制边界
-        QPolygon polygon;
-        for (auto p:bound.coordinates){
-            polygon<<p->toPoint();
-        }
+
         painter.setBrush(Qt::black); // 设置填充颜色为蓝色
-        painter.drawPolygon(polygon);
+        painter.drawPolygon(bound.polygon);
+
+
         // 绘制圆
         for (auto ball:balls) {
+            painter.setPen(pen);
             painter.setBrush(ball->color);
             // 计算圆的位置和大小
             painter.drawEllipse(ball->ball_rect);
             painter.drawPoint(ball->ball_cent);
-            if (ball->trace_queue.size()==ball->len_trace_queue){
-                for (int i = 0; i < ball->len_trace_queue; ++i) {
-                    pen.setWidth(10);
-                    painter.setPen(pen);
+            if (ball->trace_queue.size() <= ball->len_trace_queue){
+                for (int i = 0; i < ball->trace_queue.size(); ++i) {
+                    QPen temp_pen(ball->color);
+                    temp_pen.setWidth(8);
+                    painter.setPen(temp_pen);
                     painter.drawPoint(ball->trace_queue[i]);
-                    pen.setWidth(5);
-                    painter.setPen(pen);
                 }
             }
 

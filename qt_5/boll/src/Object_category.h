@@ -13,9 +13,14 @@ class Object_category : public QObject {
 
 };
 
+class Ball_class : public Object_category{
+public:
+    Ball_class();
+};
+
 // --------------------------------------------------------------------
 
-class ball: public QObject{
+class Ball : public Ball_class{
 public:
     QRectF ball_rect;
     QPointF ball_cent;
@@ -24,51 +29,31 @@ public:
     QColor color;
     double m;
     QQueue<QPointF> trace_queue;
-    int len_trace_queue = 10;
-    ball(const QRectF rect, Velocity2D ball_v):
-            ball_rect(rect),
-            rad(rect.width()/2),
-            m(rect.width()/2),
-            ball_v(std::move(ball_v)),
-            color(generateRandomColor()){
-        ball_cent = rect.center();
-    }
+    int len_trace_queue = 40;
 
-    void coordinate_change_df(QPointF &dpf){
-        ball_rect.translate(dpf);
-        ball_cent = ball_rect.center();
-        trace_push(ball_cent);
-    }
+    Ball(QRectF rect, Velocity2D ball_v);
 
-    void set_v(Velocity2D &v){
-        ball_v = v;
-    }
+    void coordinate_change_df(QPointF &dpf);
+
+    void set_v(Velocity2D &v);
 
 private:
-    static QColor generateRandomColor()
-    {
-        int red = qrand() % 256;
-        int green = qrand() % 256;
-        int blue = qrand() % 256;
-        return QColor::fromRgb(red, green, blue);
-    }
+    static QColor generateRandomColor();
 
-    void trace_push(QPointF &p){
-        if (trace_queue.size() == len_trace_queue){
-            trace_queue.dequeue();
-            trace_queue.enqueue(p);
-        } else{
-            trace_queue.enqueue(p);
-        }
-    }
+    void trace_push(QPointF &p);
 };
 
 // --------------------------------------------------------------------
-class Rect_boundary : public QObject {
+
+class Polygon_boundary_class : public Object_category{
+
+};
+
+class Rect_boundary : public Polygon_boundary_class {
 public:
-    QVector<QPointF*> coordinates;
-    explicit Rect_boundary(QVector<QPointF*> coordinates) : coordinates(std::move(coordinates)) {
-    }
+    QPolygonF polygon;
+    explicit Rect_boundary(const QVector<QPointF*>& coordinates);
+    ~Rect_boundary() override;
 };
 
 #endif //BOLL_OBJECT_CATEGORY_H

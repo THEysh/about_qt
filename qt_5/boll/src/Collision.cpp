@@ -115,31 +115,31 @@ void Velocity2D :: show_log() const{
 
 Collision::Collision(){}
 
-void Collision :: collision_calculation(double dt, ball &ball, Rect_boundary &bound) const {
+void Collision :: collision_calculation(double dt, Ball &ball, Rect_boundary &bound) const {
         auto v_xy = ball.ball_v.horizontal_decomposition();
         auto dx = v_xy[0].get_v()*dt;
         auto dy = v_xy[1].get_v()*dt;
         QPointF dpf(dx, dy);
         ball.coordinate_change_df(dpf);
-        for (int i=0; i < bound.coordinates.size(); i++){
+        for (int i=0; i < bound.polygon.size(); i++){
             QVector2D p1, p2;
-            if (i == bound.coordinates.size()-1){
-                p1.setX(static_cast<float>(bound.coordinates[i]->x()));
-                p1.setY(static_cast<float>(bound.coordinates[i]->y()));
-                p2.setX(static_cast<float>(bound.coordinates[0]->x()));
-                p2.setY(static_cast<float>(bound.coordinates[0]->y()));
+            if (i == bound.polygon.size()-1){
+                p1.setX(static_cast<float>(bound.polygon[i].x()));
+                p1.setY(static_cast<float>(bound.polygon[i].y()));
+                p2.setX(static_cast<float>(bound.polygon[0].x()));
+                p2.setY(static_cast<float>(bound.polygon[0].y()));
             }else{
-                p1.setX(static_cast<float>(bound.coordinates[i]->x()));
-                p1.setY(static_cast<float>(bound.coordinates[i]->y()));
-                p2.setX(static_cast<float>(bound.coordinates[i+1]->x()));
-                p2.setY(static_cast<float>(bound.coordinates[i+1]->y()));
+                p1.setX(static_cast<float>(bound.polygon[i].x()));
+                p1.setY(static_cast<float>(bound.polygon[i].y()));
+                p2.setX(static_cast<float>(bound.polygon[i+1].x()));
+                p2.setY(static_cast<float>(bound.polygon[i+1].y()));
             }
             // 描写 球体,线段的碰撞
             collision_calculation(dt, ball, p1, p2);
         }
     }
 
-void Collision :: collision_calculation(double dt, ball &ball, QVector2D &p1, QVector2D &p2) const{
+void Collision :: collision_calculation(double dt, Ball &ball, QVector2D &p1, QVector2D &p2) const{
         QVector2D ball_cent_vector2d(static_cast<float>(ball.ball_cent.x()),static_cast<float>(ball.ball_cent.y()));
         double distance; QPointF footPoint;
         std::tie(distance, footPoint) = ShortestDistance_point(p1, p2, ball_cent_vector2d);
