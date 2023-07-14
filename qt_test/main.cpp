@@ -1,65 +1,81 @@
 #include <iostream>
-
-// 父类
-class Parent {
+// 基类
+class Base {
 public:
-    virtual ~Parent() {}
-    virtual void foo() = 0; // 纯虚函数
-
-    // 创建子类对象的工厂方法
-    static Parent* createChild(int type);
-
-    // 其他父类的成员函数
+    virtual void print() {
+        std::cout << "Base::print()" << std::endl;
+    }
 };
 
-// 子类1
-class Child1 : public Parent {
+// 派生类
+class Derived : public Base {
 public:
-    void foo() override {
-        std::cout << "Child1" << std::endl;
+    void print(double value) {
+        std::cout << "Derived::print(int): " << value << std::endl;
     }
-
-    // 其他子类1的成员函数
 };
 
-// 子类2
-class Child2 : public Parent {
+// 抽象产品类
+class Product {
 public:
-    void foo() override {
-        std::cout << "Child2" << std::endl;
-    }
-
-    // 其他子类2的成员函数
+    virtual void use() = 0;
 };
 
-// 在父类中实现创建子类对象的工厂方法
-Parent* Parent::createChild(int type) {
-    Parent* child = nullptr;
-
-    switch (type) {
-        case 1:
-            child = new Child1();
-            break;
-        case 2:
-            child = new Child2();
-            break;
-        default:
-            // 错误处理
-            break;
+// 具体产品类 A
+class ConcreteProductA : public Product {
+public:
+    void use() override {
+        std::cout << "Using ConcreteProductA" << std::endl;
     }
+};
 
-    return child;
-}
+// 具体产品类 B
+class ConcreteProductB : public Product {
+public:
+    void use() override {
+        std::cout << "Using ConcreteProductB" << std::endl;
+    }
+};
+
+// 工厂类
+class Factory {
+public:
+    // 创建产品的方法
+    virtual Product* createProduct() = 0;
+};
+
+// 具体工厂类 A，用于创建产品 A
+class ConcreteFactoryA : public Factory {
+public:
+    Product* createProduct() override {
+        return new ConcreteProductA();
+    }
+};
+
+// 具体工厂类 B，用于创建产品 B
+class ConcreteFactoryB : public Factory {
+public:
+    Product* createProduct() override {
+        return new ConcreteProductB();
+    }
+};
 
 int main() {
-    Parent* child1 = Parent::createChild(1);
-    child1->foo(); // 通过父类指针调用子类1的函数
+    // 使用具体工厂类 A 创建产品
+    Factory* factoryA = new ConcreteFactoryA();
+    Product* productA = factoryA->createProduct();
+    productA->use();
 
-    Parent* child2 = Parent::createChild(2);
-    child2->foo(); // 通过父类指针调用子类2的函数
+    // 使用具体工厂类 B 创建产品
+    Factory* factoryB = new ConcreteFactoryB();
+    Product* productB = factoryB->createProduct();
+    productB->use();
 
-    delete child1;
-    delete child2;
+    delete factoryA;
+    delete productA;
+
+    delete factoryB;
+    delete productB;
 
     return 0;
 }

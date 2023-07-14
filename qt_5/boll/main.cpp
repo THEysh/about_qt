@@ -44,7 +44,7 @@ public:
             double angle = get_random(0.0, 360.0);
             double v = get_random(500.0,1000.0);
             auto ball_v = Velocity2D(angle,v);
-            balls.add_ball(ball_rect, ball_v);
+            balls.add_object(ball_rect, ball_v);
         }
         QObject::connect(&timer, &QTimer::timeout, [&]() {
             // qDebug() << "定时器触发，当前时间：" << QTime::currentTime().toString("hh:mm:ss");

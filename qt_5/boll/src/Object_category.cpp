@@ -4,8 +4,20 @@
 
 #include "Object_category.h"
 #include <utility>
-void Object_category::create_objects(QRectF rect, Velocity2D ball_v) {
-    polygon_object = new Ball_class(rect, std::move(ball_v));
+Object_category:: ~Object_category() {
+    delete polygon_object;
+    // 根据需要删除其他类型的子类对象
+}
+void Object_category::add_object() {
+    if (polygon_object != nullptr){
+        polygon_object->add_object();
+    }
+}
+
+int Object_category::size() {
+    if (polygon_object != nullptr){
+        polygon_object->size();
+    }
 }
 
 // ------------------------------------------------------------------
@@ -27,10 +39,10 @@ Ball_class :: Ball_class(QVector<Ball*>& some_balls) : Object_category(), balls(
     balls.append(some_balls);
 }
 
-void Ball_class :: add_ball(const QRectF rect, Velocity2D ball_v) {
+void Ball_class :: add_object(const QRectF rect, Velocity2D ball_v) {
     balls.push_back(new Ball(rect,std::move(ball_v)));
 }
-void Ball_class :: add_ball(Ball *ball) {
+void Ball_class :: add_object(Ball *ball) {
     balls.push_back(ball);
 }
 QVector<Ball*>& Ball_class :: get_objects(){
@@ -159,4 +171,3 @@ QPointF& Rect_boundary:: operator[](int index){
 int Rect_boundary::size() {
     return polygon.size();
 }
-
