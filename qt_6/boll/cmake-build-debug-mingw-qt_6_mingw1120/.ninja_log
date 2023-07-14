@@ -1,0 +1,20 @@
+# ninja log v5
+2	109	7106971522374877	boll_autogen/timestamp	e442e7516c5f7dfd
+2	109	7106971522374877	boll_autogen/mocs_compilation.cpp	e442e7516c5f7dfd
+2	109	7106971522374877	F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/boll_autogen/timestamp	e442e7516c5f7dfd
+2	109	7106971522374877	F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/boll_autogen/mocs_compilation.cpp	e442e7516c5f7dfd
+110	141	7106971522925024	CMakeFiles/boll.dir/boll_autogen/mocs_compilation.cpp.obj	6cde1a0113e11874
+111	1688	7106971538386992	CMakeFiles/boll.dir/main.cpp.obj	1a2ea5aec75ba792
+1690	1796	7106971539447263	boll.exe	a94dcc2b638cc840
+5	75	7106971673380087	boll_autogen/timestamp	e442e7516c5f7dfd
+5	75	7106971673380087	boll_autogen/mocs_compilation.cpp	e442e7516c5f7dfd
+5	75	7106971673380087	F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/boll_autogen/timestamp	e442e7516c5f7dfd
+5	75	7106971673380087	F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/boll_autogen/mocs_compilation.cpp	e442e7516c5f7dfd
+76	6375	7106971736365750	CMakeFiles/boll.dir/main.cpp.obj	1a2ea5aec75ba792
+6378	6512	7106971737716103	boll.exe	a94dcc2b638cc840
+5	81	7106971831341351	boll_autogen/timestamp	e442e7516c5f7dfd
+5	81	7106971831341351	boll_autogen/mocs_compilation.cpp	e442e7516c5f7dfd
+5	81	7106971831341351	F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/boll_autogen/timestamp	e442e7516c5f7dfd
+5	81	7106971831341351	F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/boll_autogen/mocs_compilation.cpp	e442e7516c5f7dfd
+83	5944	7106971889970524	CMakeFiles/boll.dir/main.cpp.obj	1a2ea5aec75ba792
+5944	6081	7106971891315664	boll.exe	a94dcc2b638cc840

@@ -1,0 +1,5 @@
+F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/boll.dir
+F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/edit_cache.dir
+F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/rebuild_cache.dir
+F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/boll_autogen_timestamp_deps.dir
+F:/code/c_code/about_qt/qt_6/boll/cmake-build-debug-mingw-qt_6_mingw1120/CMakeFiles/boll_autogen.dir

@@ -145,26 +145,27 @@ int main(int argc, char *argv[]) {
 
     label.resize(700,700);
     label.show();
+    // 创建一个QTransform对象
+    QTransform tran;
 
-    qreal x = v * qCos(qDegreesToRadians(angle));    // 使用 qCos 函数计算 x 坐标
-    qreal y = v * qSin(qDegreesToRadians(angle));    // 使用 qSin 函数计算 y 坐标
-    y = -y;
-    qDebug() << "直角坐标表示：";
-    qDebug() << "x 坐标：" << x;
-    qDebug() << "y 坐标：" << y;
+    // 定义一个待变换的点
+    QPointF point(5, -5);
+    // 设置平移变换
+    tran.translate(5, 5);
+    tran.scale(1,-1);
+    // 应用变换到点上
+    QPointF transformedPoint = tran.map(point);
 
-    QPointF p1(0, 0); // 极坐标原点 P1 的坐标
-    QPointF p2(1, 1); // 向量 P2 的坐标
-
-    // 使用 QLineF 类创建线段对象，表示从 P1 到 P2 的线段
-    QLineF line(p1, p2);
-
-    qreal length = line.length(); // 获取线段的长度，即向量的模长
-    qreal rangle = line.angle();   // 获取线段的角度，即向量相对 x 轴的方向角
-
-    qDebug() << "向量的极坐标表示：";
-    qDebug() << "长度：" << length;
-    qDebug() << "角度：" << rangle;
+    qDebug() << "原始点：" << point;
+    qDebug() << "变换后的点：" << transformedPoint;
+    for (int i =0 ;i <100;i++){
+        QPointF tempp1(rand()%10,rand()%10);
+        QPointF tempp2(rand()%10,rand()%10);
+        QLineF l1(tempp1,tempp2);
+        QLineF l2(tempp2,tempp1);
+        double remainder = std::fmod(l2.angle()+180, 360);
+        qDebug() << "ddd：" << l1.angle()<< l2.angle()<<  remainder;
+    }
 
 
     return a.exec();

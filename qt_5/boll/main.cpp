@@ -2,6 +2,7 @@
 #include <QTime>
 #include <QVector>
 #include "src/Collision.h"
+#include "src/Object_category.h"
 #include <QtWidgets>
 #include <random>
 
@@ -17,19 +18,20 @@ class CustomWidget : public QWidget {
 public:
     CustomWidget(QWidget *parent = nullptr) :
             QWidget(parent),
-            interval(10),
+            interval(15),
             collision(),
             bound(QVector<QPointF*>{
                     new QPointF(0, 0),
                     new QPointF(0, 800),
                     new QPointF(800, 800),
+                    new QPointF(1200, 400),
                     new QPointF(800, 0),
             }){
         this->resize(800,800);
         // 设置计时器更新帧数
         timer.setInterval(interval);
         // 创建小球
-        for(int i = 1; i < 2; i++){
+        for(int i = 1; i <5; i++){
             // 使用 push_back 函数添加对象
             double radius = get_random(15.0,40.0);
             double x = get_random(0.0, 800 - 2*radius);
@@ -37,15 +39,15 @@ public:
             // 使用左上角坐标 (x, y)、宽度和高度创建矩形。将其用于圆的绘制
             QRectF ball_rect(x,y,2*radius,2*radius);
             double angle = get_random(0.0, 360.0);
-            double v = get_random(400.0,1000.0);
+            double v = get_random(200.0,1000.0);
             auto ball_v = Velocity2D(angle,v);
             balls.push_back(new ball(ball_rect, ball_v));
         }
         QObject::connect(&timer, &QTimer::timeout, [&]() {
             // qDebug() << "定时器触发，当前时间：" << QTime::currentTime().toString("hh:mm:ss");
             double dt =  static_cast<double>(interval) / static_cast<double>(1000);
-            for (auto ball:balls){
-                collision.collision_calculation(dt, ball, &bound);
+            for (int i = 0; i<balls.size(); i++){
+                collision.collision_calculation(dt, *(balls[i]), bound);
             }
             update();
         });
@@ -66,7 +68,6 @@ protected:
         QPen pen(Qt::darkCyan);
         pen.setWidth(5);
         painter.setPen(pen);
-
         // 绘制边界
         QPolygon polygon;
         for (auto p:bound.coordinates){
@@ -80,9 +81,8 @@ protected:
             // 计算圆的位置和大小
             painter.drawEllipse(ball->ball_rect);
             painter.drawPoint(ball->ball_cent);
-
-            if (ball->trace_queue.size()==2){
-                for (int i = 0; i < 2; ++i) {
+            if (ball->trace_queue.size()==ball->len_trace_queue){
+                for (int i = 0; i < ball->len_trace_queue; ++i) {
                     pen.setWidth(10);
                     painter.setPen(pen);
                     painter.drawPoint(ball->trace_queue[i]);
