@@ -12,19 +12,29 @@
 
 
 class Object_category : public QObject {
+    template<typename T1>
+    T1 get_objects(){
+        return T1();
+    }
+    template<typename T2>
+    T2& operator[](int index) {
+        return T2();
+    }
 
+    virtual int size(){}
 };
 
 class Ball_class : public Object_category{
 public:
-    ~Ball_class();
+    ~Ball_class() override;
     Ball_class();
     explicit Ball_class(Ball* ball);
-    Ball_class(QVector<Ball*>& some_balls);
-    void add_ball(const QRectF rect, Velocity2D ball_v);
-    QVector<Ball*>& get_all_ball();
+    explicit Ball_class(QVector<Ball*>& some_balls);
+    void add_ball(QRectF rect, Velocity2D ball_v);
+    void add_ball(Ball *ball);
+    QVector<Ball*>& get_objects();
     Ball& operator[](int index);
-    int size();
+    int size() override;
 private:
     QVector<Ball*> balls;
 };
@@ -64,9 +74,9 @@ public:
     explicit Polygon_boundary_class(QVector<Rect_boundary*>& some_rect_bounds);
     void add_rect_polygon(Rect_boundary* rect_bound);
     void add_rect_polygon(const QVector<QPointF*>& coordinates);
-    QVector<Rect_boundary*>& get_rect_polygons();
+    QVector<Rect_boundary*>& get_objects();
     Rect_boundary& operator[](int index);
-    int size();
+    int size() override;
 private:
     QVector<Rect_boundary *> rect_polygons;
 };
@@ -79,7 +89,7 @@ public:
     explicit Rect_boundary(const QVector<QPointF*>& coordinates);
     QPolygonF& get_polygon();
     QPointF& operator[](int index);
-    int size();
+    int size() override;
 private:
     QPolygonF polygon;
 };

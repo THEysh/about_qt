@@ -16,7 +16,7 @@ T get_random(T min, T max){
 
 class CustomWidget : public QWidget {
 public:
-    CustomWidget(QWidget *parent = nullptr) :
+    explicit CustomWidget(QWidget *parent = nullptr) :
             QWidget(parent),
             interval(15),
             collision(),
@@ -27,7 +27,6 @@ public:
                 new QPointF(0, 0),
                 new QPointF(0, 800),
                 new QPointF(800, 800),
-                new QPointF(1200, 400),
                 new QPointF(800, 0),
         };
         rect_bounds.add_rect_polygon(rect_polygon);
@@ -74,12 +73,10 @@ protected:
         pen.setWidth(5);
         painter.setPen(pen);
         // 绘制边界
-
         painter.setBrush(Qt::black); // 设置填充颜色为蓝色
         painter.drawPolygon(rect_bounds[0].get_polygon());
-
         // 绘制圆
-        for (auto ball:balls.get_all_ball()) {
+        for (auto ball:balls.get_objects()) {
             painter.setPen(pen);
             painter.setBrush(ball->color);
             // 计算圆的位置和大小
